@@ -12,11 +12,14 @@ export const NavigationLink = ({
   url,
 }: NavigationLinkProps): JSX.Element => {
   return (
-    <li>
-      <img src={url} alt="img" />
-      <Link to={link}>
+    <Link
+      to={link}
+      className={title === 'Notifications' ? 'notification-link' : ''}
+    >
+      <li>
+        <img src={url} alt="img" />
         <h3>{title}</h3>
-      </Link>
-    </li>
+      </li>
+    </Link>
   );
 };
