@@ -1,11 +1,14 @@
 .main-navigation {
   display: flex;
+  position: fixed;
+  top: 0;
   flex-direction: column;
   border-right: 1px solid gray;
   min-height: 100vh;
   padding: 1.5rem;
   width: 20%;
   justify-content: space-between;
+  background-color: white;
 }
 
 a {
@@ -85,7 +88,6 @@ li:hover,
   }
   .logo-desktop {
     display: block;
-    position: relative;
   }
   .logo-mobile {
     display: none;
@@ -112,8 +114,13 @@ li:hover,
   }
 
   .notification-link {
-    position: absolute;
-    top: -1540%;
+    position: fixed;
+    top: 1.5%;
     right: 0;
+    padding: 0;
+  }
+
+  li:hover {
+    background-color: #f8fafc;
   }
 }
