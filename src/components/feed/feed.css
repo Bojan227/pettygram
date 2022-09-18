@@ -1,0 +1,49 @@
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  justify-content: center;
+  padding: 55px;
+  align-items: center;
+  gap: 40px;
+}
+
+.card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+.user-section {
+  border-bottom: 1px solid #e2e8f0;
+}
+.buttons-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.comment-form {
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+.comment-form > input {
+  width: 80%;
+  border: 0;
+  padding: 8px;
+}
+.comment-form > button {
+  width: 20%;
+  border: 0;
+  background-color: inherit;
+  color: blue;
+  cursor: pointer;
+}
+p {
+  color: #475569;
+}
+section {
+  padding: 18px;
+}
