@@ -1,12 +1,18 @@
-export const LikeButton = () => {
+type LikeButtonProps = {
+  like: Boolean;
+  toggleLike: any;
+};
+
+export const LikeButton = ({ like, toggleLike }: LikeButtonProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill={`${like ? 'red' : 'none'}`}
       viewBox="0 0 24 24"
       strokeWidth={1.1}
       stroke="currentColor"
-      style={{ width: '32px' }}
+      style={{ width: '32px', cursor: 'pointer' }}
+      onClick={toggleLike}
     >
       <path
         strokeLinecap="round"
@@ -25,7 +31,7 @@ export const Details = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      style={{ width: '32px' }}
+      style={{ width: '32px', cursor: 'pointer' }}
     >
       <path
         strokeLinecap="round"
