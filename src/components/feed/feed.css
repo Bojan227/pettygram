@@ -3,15 +3,19 @@
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
+
   justify-content: center;
   padding: 55px;
   align-items: center;
+  margin-left: 20%;
   gap: 40px;
 }
 
 .card {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
+  background-color: white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .user-section {
   border-bottom: 1px solid #e2e8f0;
