@@ -1,9 +1,7 @@
 import useUserContenxt from './useUserContext';
 
 export default function useLogin() {
-  const context = useUserContenxt();
-
-  //   console.log(context);
+  const userContext = useUserContenxt();
 
   const login = async (username: string, password: string) => {
     try {
@@ -19,6 +17,10 @@ export default function useLogin() {
       });
 
       const json = await user.json();
+
+      userContext?.dispatch({ type: 'LOGIN', payload: json.user });
+      localStorage.setItem('user', JSON.stringify(json.user));
+
       console.dir(json);
     } catch (error) {
       console.log(error);
