@@ -20,6 +20,7 @@ export default function useLogin() {
 
       userContext?.dispatch({ type: 'LOGIN', payload: json.user });
       localStorage.setItem('user', JSON.stringify(json.user));
+      document.cookie = 'token' + '=' + (json.token || '') + '; path=/';
 
       console.dir(json);
     } catch (error) {

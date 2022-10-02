@@ -4,7 +4,7 @@ interface UserContextInterface {
   user: { username: string; firstName: string; lastName: string };
   dispatch: (action: {
     type: string;
-    payload: { username: string; firstName: string; lastName: string };
+    payload: { username: string; firstName: string; lastName: string } | string;
   }) => void;
 }
 
@@ -32,8 +32,11 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   });
 
   useEffect(() => {
-    const userState: { username: string; firstName: string; lastName: string } =
-      JSON.parse(localStorage.getItem('user') || '');
+    const userState = JSON.parse(`${localStorage.getItem('user')}`);
+
+    const token = document.cookie.split('=')[1];
+
+    console.log(token);
 
     if (userState) {
       dispatch({
