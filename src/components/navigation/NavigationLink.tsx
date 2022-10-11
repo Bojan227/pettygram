@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 type NavigationLinkProps = {
   title: string;
   link: string;
-  url: string;
+  url: string | undefined;
 };
 
 export const NavigationLink = ({

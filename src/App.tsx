@@ -13,16 +13,16 @@ function App() {
   console.log(userContext?.user);
   return (
     <div className="App">
-      {userContext && <NavigationBar />}
-      {/* <Signup /> */}
+      {userContext?.user && <NavigationBar />}
+
       <Routes>
         <Route
           path="/"
-          element={userContext ? <FeedContainer /> : <Signup />}
+          element={userContext?.user ? <FeedContainer /> : <Signup />}
         />
         <Route
           path="login"
-          element={userContext ? <Navigate to="/" /> : <Login />}
+          element={userContext?.user ? <Navigate to="/" /> : <Login />}
         />
       </Routes>
     </div>

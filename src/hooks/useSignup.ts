@@ -22,9 +22,15 @@ export default function useSignup() {
   }: SignupProps) => {
     setIsLoading(true);
 
+    if (!image) {
+      setError('You must provide an image');
+      return;
+    }
+
     const reader: any = new FileReader();
     reader.readAsDataURL(image);
     reader.onloadend = () => {
+      console.log(reader.result);
       uploadWithImage(reader.result);
     };
 
@@ -46,6 +52,7 @@ export default function useSignup() {
 
         const json = await res.json();
 
+        console.log(json);
         setMessage(json.message);
         setError('');
       } catch (err) {

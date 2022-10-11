@@ -1,10 +1,22 @@
 import { createContext, useReducer, useEffect } from 'react';
 
 interface UserContextInterface {
-  user: { username: string; firstName: string; lastName: string };
+  user: {
+    username: string;
+    firstName: string;
+    lastName: string;
+    imageUrl: string;
+  };
   dispatch: (action: {
     type: string;
-    payload: { username: string; firstName: string; lastName: string } | string;
+    payload:
+      | {
+          username: string;
+          firstName: string;
+          lastName: string;
+          imageUrl: string;
+        }
+      | string;
   }) => void;
 }
 

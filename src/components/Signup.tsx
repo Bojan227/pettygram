@@ -17,11 +17,6 @@ export default function Signup() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (!image) {
-      setErrorMessage('You must provide an image');
-      return;
-    }
-
     await signup({ username, password, firstName, lastName, image });
   };
 
@@ -31,9 +26,9 @@ export default function Signup() {
     }
   };
 
-  if (isLoading) {
-    return <h1>Spinner .......</h1>;
-  }
+  // if (isLoading) {
+  //   return <h1>Spinner .......</h1>;
+  // }
 
   return (
     <div>
