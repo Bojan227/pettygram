@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { FeedContainer } from './components/feed/FeedContainer';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { NavigationBar } from './components/navigation/NavigationBar';
+import { Profile } from './components/profile/Profile';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import useUserContenxt from './hooks/useUserContext';
@@ -10,7 +11,6 @@ import useUserContenxt from './hooks/useUserContext';
 function App() {
   const userContext = useUserContenxt();
 
-  console.log(userContext?.user);
   return (
     <div className="App">
       {userContext?.user && <NavigationBar />}
@@ -24,6 +24,7 @@ function App() {
           path="login"
           element={userContext?.user ? <Navigate to="/" /> : <Login />}
         />
+        <Route path="profile" element={userContext?.user && <Profile />} />
       </Routes>
     </div>
   );

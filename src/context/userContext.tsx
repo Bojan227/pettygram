@@ -48,8 +48,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
     const token = document.cookie.split('=')[1];
 
-    console.log(token);
-
     if (userState) {
       dispatch({
         type: 'LOGIN',

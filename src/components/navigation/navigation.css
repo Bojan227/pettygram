@@ -2,6 +2,7 @@
   display: flex;
   position: fixed;
   top: 0;
+  left: 0;
   flex-direction: column;
   border-right: 1px solid gray;
   min-height: 100vh;

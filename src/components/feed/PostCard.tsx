@@ -30,9 +30,10 @@ export const PostCard = ({
         <h2>{createdBy}</h2>
       </section>
       <div className="images-section">
-        {images.map((url) => {
+        {images.map((url, i) => {
           return (
             <img
+              key={i}
               src={url}
               alt="img"
               style={{ width: '450px', height: '450px' }}
