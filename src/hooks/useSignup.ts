@@ -5,7 +5,7 @@ type SignupProps = {
   password: string;
   firstName: string;
   lastName: string;
-  image: string;
+  image: File | null | Blob;
 };
 
 export default function useSignup() {
@@ -22,31 +22,39 @@ export default function useSignup() {
   }: SignupProps) => {
     setIsLoading(true);
 
-    try {
-      const res = await fetch('http://localhost:4000/user/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-          firstName,
-          lastName,
-          image,
-        }),
-      });
+    const reader: any = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onloadend = () => {
+      uploadWithImage(reader.result);
+    };
 
-      const json = await res.json();
+    const uploadWithImage = async (img: string) => {
+      try {
+        const res = await fetch('http://localhost:4000/user/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username,
+            password,
+            firstName,
+            lastName,
+            image: img,
+          }),
+        });
 
-      setMessage(json.message);
-      setError('');
-    } catch (err) {
-      setError('Something went wrong');
-      setMessage('');
-    } finally {
-      setIsLoading(false);
-    }
+        const json = await res.json();
+
+        setMessage(json.message);
+        setError('');
+      } catch (err) {
+        setError('Something went wrong');
+        setMessage('');
+      } finally {
+        setIsLoading(false);
+      }
+    };
   };
 
   return {

@@ -1,6 +1,7 @@
 import TextField from './TextField';
 import useSignup from '../hooks/useSignup';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Signup() {
   const { signup, isLoading, error, message } = useSignup();
@@ -8,12 +9,26 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState<File | null>(null);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  console.log(image);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    if (!image) {
+      setErrorMessage('You must provide an image');
+      return;
+    }
+
     await signup({ username, password, firstName, lastName, image });
+  };
+
+  const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    if (evt.target.files != null) {
+      setImage(evt.target.files[0]);
+    }
   };
 
   if (isLoading) {
@@ -22,6 +37,13 @@ export default function Signup() {
 
   return (
     <div>
+      <h2>
+        Already have an account{' '}
+        <Link to="login">
+          <span>Sign in</span>
+        </Link>
+      </h2>
+
       <form
         onSubmit={handleSubmit}
         style={{
@@ -29,6 +51,7 @@ export default function Signup() {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          gap: '20px',
         }}
       >
         Username
@@ -52,6 +75,8 @@ export default function Signup() {
           value={lastName}
           onChange={(lastName) => setLastName(lastName)}
         />
+        Upload Profile Picture
+        <input type="file" name="img" onChange={(e) => handleImageUpload(e)} />
         <button type="submit">Sign up</button>
       </form>
       {error && <h5>{error}</h5>}
