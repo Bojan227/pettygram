@@ -1,6 +1,7 @@
 import { LikeButton, Details } from './SvgsContainer';
 import { CommentForm } from './CommentForm';
 import { useState } from 'react';
+import me from '../navigation/images/me.jpg';
 type PostCardProps = {
   createdBy: string;
   images: string[];
@@ -25,6 +26,7 @@ export const PostCard = ({
   return (
     <div className="card">
       <section className="user-section">
+        <img src={me} />
         <h2>{createdBy}</h2>
       </section>
       <div className="images-section">

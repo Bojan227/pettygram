@@ -10,7 +10,12 @@ export const CommentForm = () => {
         onChange={(e) => setComment(e.target.value)}
         placeholder="Add a comment..."
       />
-      <button disabled={!comment ? true : false}>Post</button>
+      <button
+        disabled={!comment ? true : false}
+        style={{ opacity: `${!comment ? '0.2' : '1'}`, fontSize: '1.1rem' }}
+      >
+        Post
+      </button>
     </form>
   );
 };

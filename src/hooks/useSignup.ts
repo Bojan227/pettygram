@@ -23,7 +23,7 @@ export default function useSignup() {
     setIsLoading(true);
 
     try {
-      const res = await fetch('/user/signup', {
+      const res = await fetch('http://localhost:4000/user/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,8 +40,10 @@ export default function useSignup() {
       const json = await res.json();
 
       setMessage(json.message);
+      setError('');
     } catch (err) {
       setError('Something went wrong');
+      setMessage('');
     } finally {
       setIsLoading(false);
     }

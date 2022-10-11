@@ -6,6 +6,8 @@ export default function Logout() {
   const logout = () => {
     localStorage.removeItem('user');
     userContext?.dispatch({ type: 'LOGOUT', payload: '' });
+    document.cookie =
+      'token' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   };
 
   return { logout };

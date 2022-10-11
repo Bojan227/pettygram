@@ -9,7 +9,7 @@ export const LikeButton = ({ like, toggleLike }: LikeButtonProps) => {
       xmlns="http://www.w3.org/2000/svg"
       fill={`${like ? 'red' : 'none'}`}
       viewBox="0 0 24 24"
-      strokeWidth={1.1}
+      strokeWidth={1.5}
       stroke="currentColor"
       style={{ width: '32px', cursor: 'pointer' }}
       onClick={toggleLike}

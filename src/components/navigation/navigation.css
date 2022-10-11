@@ -50,7 +50,12 @@ li:hover,
   display: none;
 }
 
-@media (max-width: 1000px) {
+.profile-link > li > img {
+  border-radius: 50%;
+  width: 40px;
+}
+
+@media (max-width: 1150px) {
   .main-navigation {
     width: 100px;
   }
@@ -82,6 +87,7 @@ li:hover,
     flex-direction: row;
     width: 100%;
     min-height: 10%;
+    border-right: none;
     background-color: #f8fafc;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
       rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;

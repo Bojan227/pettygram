@@ -14,7 +14,10 @@ export const NavigationLink = ({
   return (
     <Link
       to={link}
-      className={title === 'Notifications' ? 'notification-link' : ''}
+      className={
+        (title === 'Notifications' ? 'notification-link' : '') ||
+        (title === 'Profile' ? 'profile-link' : '')
+      }
     >
       <li>
         <img src={url} alt="img" />
