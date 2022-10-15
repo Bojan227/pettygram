@@ -24,7 +24,7 @@ export const PostCard = ({
   };
 
   return (
-    <div className="card">
+    <div className="border border-solid border-[#e2e8f0] shadow-[rgba(99, 99, 99, 0.2) 0px 2px 8px 0px] bg-white rounded-lg">
       <section className="user-section">
         <img src={me} />
         <h2>{createdBy}</h2>

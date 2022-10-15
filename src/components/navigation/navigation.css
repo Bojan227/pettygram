@@ -56,6 +56,97 @@ li:hover,
   width: 40px;
 }
 
+.footer-menu-section {
+  display: none;
+  position: absolute;
+  padding: 10px;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  top: -120px;
+  left: 0;
+  width: 250px;
+  border-radius: 12px;
+  text-align: center;
+  z-index: 1000;
+}
+.footer-menu-section > a {
+  width: 100%;
+  height: 30%;
+  color: aliceblue;
+}
+.footer-menu-section > a:hover {
+  background-color: blanchedalmond;
+  color: black;
+}
+.drop-container {
+  /* display: none; */
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.drop-div {
+  background-color: white;
+  z-index: 10000;
+  display: flex;
+  width: 55%;
+  height: 65%;
+  flex-direction: column;
+  align-items: center;
+}
+.drop-div > :nth-child(1) {
+  flex: 0.5;
+}
+.share-container {
+  display: flex;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  width: 85%;
+  height: 65%;
+}
+.share-container > img {
+  width: 60%;
+}
+
+.share-container > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #f8fafc;
+  padding: 25px;
+  gap: 15px;
+  width: 100%;
+  z-index: 10000;
+}
+.share-container > div > textarea {
+  padding: 2px;
+  height: 100px;
+  width: 100%;
+  flex: 1;
+}
+.user-info {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.user-info > img {
+  width: 38px;
+  border-radius: 50%;
+}
+.share-container > div > button {
+  padding: 5px;
+  color: blue;
+  font-size: 1.1rem;
+}
 @media (max-width: 1150px) {
   .main-navigation {
     width: 100px;
@@ -80,6 +171,11 @@ li:hover,
   }
   .logo-mobile {
     display: block;
+  }
+
+  .footer-menu-section {
+    top: -70px;
+    left: 80px;
   }
 }
 

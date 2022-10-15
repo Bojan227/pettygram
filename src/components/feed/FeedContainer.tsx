@@ -2,7 +2,7 @@ import { PostCard } from './PostCard';
 import './feed.css';
 export const FeedContainer = () => {
   return (
-    <main className="feed-container">
+    <main className="flex flex-col justify-center items-center p-11 gap-10 w-full min-h-screen ml-32">
       <PostCard
         createdBy="Bojan"
         images={[

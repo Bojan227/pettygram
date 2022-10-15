@@ -12,11 +12,8 @@ export default function Signup() {
   const [image, setImage] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
 
-  console.log(image);
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
     await signup({ username, password, firstName, lastName, image });
   };
 
@@ -26,9 +23,9 @@ export default function Signup() {
     }
   };
 
-  // if (isLoading) {
-  //   return <h1>Spinner .......</h1>;
-  // }
+  if (isLoading) {
+    return <h1>Spinner .......</h1>;
+  }
 
   return (
     <div>

@@ -11,8 +11,10 @@ import useUserContenxt from './hooks/useUserContext';
 function App() {
   const userContext = useUserContenxt();
 
+  console.log(userContext?.user);
+
   return (
-    <div className="App">
+    <div className="flex bg-stone-50 justify-center">
       {userContext?.user && <NavigationBar />}
 
       <Routes>

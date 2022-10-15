@@ -37,14 +37,13 @@ function Tagged() {
 
 export const ProfileNav = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const Wrapp = navData[selectedIndex].component as React.ElementType;
   return (
     <div className="profile-nav">
       {navData.map((data, i) => {
         const { label, href } = data;
 
         return (
-          <>
+          <div key={i}>
             <Link
               key={label}
               to={href}
@@ -53,8 +52,7 @@ export const ProfileNav = () => {
             >
               <p>{label}</p>
             </Link>
-            {/* <Wrapp /> */}
-          </>
+          </div>
         );
       })}
     </div>

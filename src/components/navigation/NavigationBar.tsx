@@ -6,9 +6,13 @@ import instagram from './images/instagram-text-icon.png';
 import instagramMobile from './images/insta-icon-mobile.png';
 import './navigation.css';
 import useUserContenxt from '../../hooks/useUserContext';
+import { useState } from 'react';
+import { FooterMenu } from './FooterMenu';
+import { CreatePost } from './CreatePost';
 
 export const NavigationBar = () => {
   const userContext = useUserContenxt();
+  const [toggleMore, setToggleMore] = useState(false);
 
   return (
     <nav className="main-navigation">
@@ -33,17 +37,6 @@ export const NavigationBar = () => {
           <ul className="links-section">
             {navData.map((data) => {
               const { title, url, link } = data;
-              if (title === 'Profile') {
-                return (
-                  <NavigationLink
-                    key={title}
-                    title={title}
-                    url={userContext?.user.imageUrl}
-                    link={link}
-                  />
-                );
-              }
-
               return (
                 <NavigationLink
                   key={title}
@@ -57,10 +50,21 @@ export const NavigationBar = () => {
         </section>
       </div>
 
-      <section className="footer-nav">
-        <img src={menu} alt="menu" />
-        <h3>More</h3>
+      <section
+        className="footer-nav"
+        style={{ position: 'relative' }}
+        onClick={() => setToggleMore(!toggleMore)}
+      >
+        <div
+          className="more-section"
+          style={{ display: 'flex', alignItems: 'center', gap: '15px' }}
+        >
+          <img src={menu} alt="menu" />
+          <h3>More</h3>
+        </div>
+        <FooterMenu toggleMore={toggleMore} />
       </section>
+      <CreatePost />
     </nav>
   );
 };

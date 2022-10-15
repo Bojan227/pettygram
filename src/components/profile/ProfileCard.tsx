@@ -1,5 +1,3 @@
-import { ProfileNav } from './ProfileNav';
-
 type ProfileCardProps = {
   url: string | undefined;
   user: {

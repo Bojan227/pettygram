@@ -3,8 +3,3 @@
   margin: 0;
   box-sizing: border-box;
 }
-.App {
-  display: flex;
-  background-color: #f4f4f5;
-  justify-content: center;
-}

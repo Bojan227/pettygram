@@ -1,23 +1,15 @@
 import { createContext, useReducer, useEffect } from 'react';
 
+type UserType = {
+  username: string;
+  firstName: string;
+  lastName: string;
+  imageUrl: string;
+};
+
 interface UserContextInterface {
-  user: {
-    username: string;
-    firstName: string;
-    lastName: string;
-    imageUrl: string;
-  };
-  dispatch: (action: {
-    type: string;
-    payload:
-      | {
-          username: string;
-          firstName: string;
-          lastName: string;
-          imageUrl: string;
-        }
-      | string;
-  }) => void;
+  user: UserType;
+  dispatch: (action: { type: string; payload: UserType | string }) => void;
 }
 
 interface UserContextProviderProps {

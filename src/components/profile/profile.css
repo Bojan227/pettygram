@@ -9,9 +9,6 @@ a {
   text-decoration: none;
   padding: 10px;
 }
-a.active {
-  border-top: 2px solid #334155;
-}
 
 .profile-card {
   display: flex;
