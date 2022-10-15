@@ -12,7 +12,9 @@ export const CommentForm = () => {
       />
       <button
         disabled={!comment ? true : false}
-        style={{ opacity: `${!comment ? '0.2' : '1'}`, fontSize: '1.1rem' }}
+        style={{
+          color: `${!comment ? 'rgba(1,1,122, 0.2)' : 'rgb(1,1,122)'}`,
+        }}
       >
         Post
       </button>

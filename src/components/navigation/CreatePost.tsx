@@ -34,6 +34,12 @@ export const CreatePost = ({
     console.log('wtf');
   };
 
+  const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    if (evt.target.files != null) {
+      setFiles([...evt.target.files]);
+    }
+  };
+
   return (
     <div
       className="drop-container"
@@ -53,7 +59,13 @@ export const CreatePost = ({
         >
           <h1 className="p-4">Create new post</h1>
           <h1>Drag Photos and videos here</h1>
-          <input type="file" />
+          <input
+            onChange={(e) => handleImageUpload(e)}
+            type="file"
+            id="actual-btn"
+          />
+
+          <label htmlFor="actual-btn">Choose File</label>
         </div>
       )}
       {files && (

@@ -91,12 +91,13 @@ li:hover,
   height: 100%;
 }
 .drop-div {
-  background-color: white;
+  background-color: white !important;
   display: flex;
   width: 55%;
   height: 65%;
   flex-direction: column;
   align-items: center;
+  z-index: 10000 !important;
 }
 .drop-div > :nth-child(1) {
   flex: 0.5;
@@ -142,6 +143,25 @@ li:hover,
   color: blue;
   font-size: 1.1rem;
 }
+#actual-btn {
+  visibility: hidden;
+}
+
+label {
+  background-color: skyblue;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+#file-chosen {
+  margin-left: 0.3rem;
+  font-family: sans-serif;
+}
+
 @media (max-width: 1150px) {
   .main-navigation {
     width: 100px;
