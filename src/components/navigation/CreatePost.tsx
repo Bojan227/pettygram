@@ -1,5 +1,6 @@
 import { DragEvent, useState } from 'react';
 import useUserContenxt from '../../hooks/useUserContext';
+import useCreatePost from '../../hooks/useCreatePost';
 
 interface CreatePostProps {
   toggleCreatePost: boolean;
@@ -14,7 +15,14 @@ export const CreatePost = ({
   const [caption, setCaption] = useState('');
   const userContext = useUserContenxt();
 
-  console.log(files);
+  const { createpost, isLoading, message, error } = useCreatePost();
+
+  const handleSubmit = async () => {
+    if (files) {
+      await createpost(caption, files[0]);
+    }
+  };
+
   const onDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.stopPropagation();
     e.preventDefault();
@@ -86,7 +94,7 @@ export const CreatePost = ({
               onChange={(e) => setCaption(e.target.value)}
               placeholder="Write a caption..."
             />
-            <button>Share</button>
+            <button onClick={handleSubmit}>Share</button>
           </div>
         </div>
       )}

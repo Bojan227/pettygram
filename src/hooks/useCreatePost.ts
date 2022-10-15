@@ -1,31 +1,18 @@
 import { useState } from 'react';
 
-type SignupProps = {
-  username: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  image: File | null | Blob;
-};
+// type CreatePostProps = {
+//   text: string | undefined;
+//   image: {};
+// };
 
-export default function useSignup() {
+export default function useCreatePost() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-  const signup = async ({
-    username,
-    password,
-    firstName,
-    lastName,
-    image,
-  }: SignupProps) => {
+  const createpost = async (text: string, image: File) => {
+    console.log(document.cookie.split('=')[1]);
     setIsLoading(true);
-
-    if (!image) {
-      setError('You must provide an image');
-      return;
-    }
 
     const reader: any = new FileReader();
     reader.readAsDataURL(image);
@@ -36,22 +23,21 @@ export default function useSignup() {
 
     const uploadWithImage = async (img: string) => {
       try {
-        const res = await fetch('http://localhost:4000/user/signup', {
+        const res = await fetch('http://localhost:4000/posts/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${document.cookie.split('=')[1]}`,
           },
           body: JSON.stringify({
-            username,
-            password,
-            firstName,
-            lastName,
+            text,
             image: img,
           }),
         });
 
         const json = await res.json();
 
+        console.log(json);
         setMessage(json.message);
         setError('');
       } catch (err) {
@@ -64,7 +50,7 @@ export default function useSignup() {
   };
 
   return {
-    signup,
+    createpost,
     isLoading,
     error,
     message,

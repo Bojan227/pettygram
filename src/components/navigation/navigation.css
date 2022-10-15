@@ -111,6 +111,7 @@ li:hover,
 }
 .share-container > img {
   width: 60%;
+  background-color: black;
 }
 
 .share-container > div {
