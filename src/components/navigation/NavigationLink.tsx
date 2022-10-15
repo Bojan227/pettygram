@@ -4,12 +4,14 @@ type NavigationLinkProps = {
   title: string;
   link: string;
   url: string | undefined;
+  toggleCreatePost: () => void;
 };
 
 export const NavigationLink = ({
   title,
   link,
   url,
+  toggleCreatePost,
 }: NavigationLinkProps): JSX.Element => {
   return (
     <Link
@@ -18,6 +20,7 @@ export const NavigationLink = ({
         (title === 'Notifications' ? 'notification-link' : '') ||
         (title === 'Profile' ? 'profile-link' : '')
       }
+      onClick={() => title === 'Create' && toggleCreatePost()}
     >
       <li>
         <img src={url} alt="img" />

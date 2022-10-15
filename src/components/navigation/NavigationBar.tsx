@@ -13,6 +13,8 @@ import { CreatePost } from './CreatePost';
 export const NavigationBar = () => {
   const userContext = useUserContenxt();
   const [toggleMore, setToggleMore] = useState(false);
+  const [toggleCreatePost, setToggleCreatePost] = useState(false);
+  console.log(toggleCreatePost);
 
   return (
     <nav className="main-navigation">
@@ -43,6 +45,9 @@ export const NavigationBar = () => {
                   title={title}
                   url={url}
                   link={link}
+                  toggleCreatePost={() =>
+                    setToggleCreatePost(!toggleCreatePost)
+                  }
                 />
               );
             })}
@@ -64,7 +69,7 @@ export const NavigationBar = () => {
         </div>
         <FooterMenu toggleMore={toggleMore} />
       </section>
-      <CreatePost />
+      <CreatePost {...{ toggleCreatePost, setToggleCreatePost }} />
     </nav>
   );
 };

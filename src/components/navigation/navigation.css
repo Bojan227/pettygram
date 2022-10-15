@@ -80,7 +80,6 @@ li:hover,
   color: black;
 }
 .drop-container {
-  /* display: none; */
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
   display: flex;
@@ -93,7 +92,6 @@ li:hover,
 }
 .drop-div {
   background-color: white;
-  z-index: 10000;
   display: flex;
   width: 55%;
   height: 65%;
@@ -105,7 +103,6 @@ li:hover,
 }
 .share-container {
   display: flex;
-  z-index: 10000;
   display: flex;
   justify-content: center;
   width: 85%;
@@ -118,13 +115,10 @@ li:hover,
 .share-container > div {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
   background-color: #f8fafc;
   padding: 25px;
   gap: 15px;
   width: 100%;
-  z-index: 10000;
 }
 .share-container > div > textarea {
   padding: 2px;
@@ -135,11 +129,12 @@ li:hover,
 .user-info {
   display: flex;
   gap: 15px;
+  color: black;
   align-items: center;
 }
 
 .user-info > img {
-  width: 38px;
+  width: 32px;
   border-radius: 50%;
 }
 .share-container > div > button {

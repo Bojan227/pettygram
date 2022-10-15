@@ -1,7 +1,15 @@
 import { DragEvent, useState } from 'react';
 import useUserContenxt from '../../hooks/useUserContext';
 
-export const CreatePost = () => {
+interface CreatePostProps {
+  toggleCreatePost: boolean;
+  setToggleCreatePost: (toggleCreatePost: boolean) => void;
+}
+
+export const CreatePost = ({
+  toggleCreatePost,
+  setToggleCreatePost,
+}: CreatePostProps) => {
   const [files, setFiles] = useState<File[] | null>(null);
   const [caption, setCaption] = useState('');
   const userContext = useUserContenxt();
@@ -27,13 +35,21 @@ export const CreatePost = () => {
   };
 
   return (
-    <div className="drop-container">
+    <div
+      className="drop-container"
+      style={{ display: `${!toggleCreatePost ? 'none' : ''}` }}
+      onClick={(e) => {
+        e.stopPropagation();
+        setToggleCreatePost(false);
+      }}
+    >
       {!files && (
         <div
           className="drop-div"
           onDragOver={(e) => onDragOver(e)}
           onDragEnter={(e) => onDragEnter(e)}
           onDrop={(e) => handleDrop(e)}
+          onClick={(e) => e.stopPropagation()}
         >
           <h1 className="p-4">Create new post</h1>
           <h1>Drag Photos and videos here</h1>
@@ -41,7 +57,7 @@ export const CreatePost = () => {
         </div>
       )}
       {files && (
-        <div className="share-container">
+        <div className="share-container" onClick={(e) => e.stopPropagation()}>
           {files && <img src={URL.createObjectURL(files[0])} />}
           <div>
             <div className="user-info">
@@ -49,8 +65,10 @@ export const CreatePost = () => {
                 src={userContext?.user.imageUrl}
                 alt={userContext?.user.username}
               />
-              <h3>{userContext?.user.username}</h3>
+
+              <h4>{userContext?.user.username}</h4>
             </div>
+
             <textarea
               value={caption}
               onChange={(e) => setCaption(e.target.value)}
