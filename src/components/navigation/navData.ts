@@ -11,5 +11,5 @@ export const navData = [
   { title: 'Messages', url: send, link: 'inbox' },
   { title: 'Notifications', url: notifications, link: '/' },
   { title: 'Create', url: create, link: '/' },
-  { title: 'Profile', url: '', link: 'profile' },
+  { title: 'Profile', url: 'profile', link: 'profile' },
 ];

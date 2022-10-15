@@ -37,7 +37,6 @@ export default function useCreatePost() {
 
         const json = await res.json();
 
-        console.log(json);
         setMessage(json.message);
         setError('');
       } catch (err) {

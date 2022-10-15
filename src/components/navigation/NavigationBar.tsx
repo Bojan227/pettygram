@@ -5,13 +5,12 @@ import menu from './images/menu.png';
 import instagram from './images/instagram-text-icon.png';
 import instagramMobile from './images/insta-icon-mobile.png';
 import './navigation.css';
-import useUserContenxt from '../../hooks/useUserContext';
 import { useState } from 'react';
 import { FooterMenu } from './FooterMenu';
 import { CreatePost } from './CreatePost';
 
 export const NavigationBar = () => {
-  const userContext = useUserContenxt();
+ 
   const [toggleMore, setToggleMore] = useState(false);
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
   console.log(toggleCreatePost);

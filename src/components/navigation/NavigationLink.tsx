@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import useUserContext from '../../hooks/useUserContext';
 
 type NavigationLinkProps = {
   title: string;
@@ -13,6 +14,8 @@ export const NavigationLink = ({
   url,
   toggleCreatePost,
 }: NavigationLinkProps): JSX.Element => {
+  const userContext = useUserContext();
+
   return (
     <Link
       to={link}
@@ -23,7 +26,11 @@ export const NavigationLink = ({
       onClick={() => title === 'Create' && toggleCreatePost()}
     >
       <li>
-        <img src={url} alt="img" />
+        <img
+          src={`${url === 'profile' ? userContext?.user.imageUrl : url}`}
+          alt="img"
+        />
+
         <h3>{title}</h3>
       </li>
     </Link>
