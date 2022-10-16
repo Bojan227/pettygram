@@ -3,11 +3,16 @@ import { CommentForm } from './CommentForm';
 import { useState } from 'react';
 import me from '../navigation/images/me.jpg';
 type PostCardProps = {
-  createdBy: string;
-  images: string[];
-  likes: number;
+  createdBy: {
+    imageUrl: string;
+    username: string;
+    _id: string;
+  };
+  images: string;
+  likes: string[];
   description: string;
   createdAt: string;
+  updateLike: () => void;
 };
 
 export const PostCard = ({
@@ -16,21 +21,21 @@ export const PostCard = ({
   likes,
   description,
   createdAt,
+  updateLike,
 }: PostCardProps): JSX.Element => {
-  const [like, setLike] = useState(false);
-
-  const toggleLike = () => {
-    setLike((prev) => !prev);
-  };
-
   return (
     <div className="border border-solid border-[#e2e8f0] shadow-[rgba(99, 99, 99, 0.2) 0px 2px 8px 0px] bg-white rounded-lg">
       <section className="user-section">
-        <img src={me} />
-        <h2>{createdBy}</h2>
+        <img src={createdBy.imageUrl} />
+        <h2>{createdBy.username}</h2>
       </section>
       <div className="images-section">
-        {images.map((url, i) => {
+        <img
+          src={images}
+          alt="img"
+          style={{ width: '450px', height: '450px' }}
+        />
+        {/* {images.map((url, i) => {
           return (
             <img
               key={i}
@@ -39,15 +44,15 @@ export const PostCard = ({
               style={{ width: '450px', height: '450px' }}
             />
           );
-        })}
+        })} */}
       </div>
 
       <section className="buttons-section">
-        <LikeButton like={like} toggleLike={toggleLike} />
+        <LikeButton likes={likes} updateLike={updateLike} />
         <Details />
       </section>
       <section className="likes-section">
-        <h4>{`${likes} ${likes === 1 ? 'like' : 'likes'}`}</h4>
+        <h4>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'}`}</h4>
       </section>
 
       <section className="description-section">

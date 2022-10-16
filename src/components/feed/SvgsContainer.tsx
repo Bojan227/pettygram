@@ -1,18 +1,25 @@
+import useUserContenxt from '../../hooks/useUserContext';
+import useUserContext from '../../hooks/useUserContext';
+
 type LikeButtonProps = {
-  like: Boolean;
-  toggleLike: any;
+  updateLike: () => void;
+  likes: String[];
 };
 
-export const LikeButton = ({ like, toggleLike }: LikeButtonProps) => {
+export const LikeButton = ({ updateLike, likes }: LikeButtonProps) => {
+  const userContext = useUserContenxt();
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={`${like ? 'red' : 'none'}`}
+      fill={`${
+        likes.find((id) => id === userContext?.user._id) ? 'red' : 'none'
+      }`}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
       style={{ width: '32px', cursor: 'pointer' }}
-      onClick={toggleLike}
+      onClick={updateLike}
     >
       <path
         strokeLinecap="round"

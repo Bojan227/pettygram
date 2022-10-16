@@ -1,4 +1,5 @@
 import { DragEvent, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import useUserContenxt from '../../hooks/useUserContext';
 import useCreatePost from '../../hooks/useCreatePost';
 
@@ -20,6 +21,9 @@ export const CreatePost = ({
   const handleSubmit = async () => {
     if (files) {
       await createpost(caption, files[0]);
+      setFiles(null);
+      setCaption('');
+      setToggleCreatePost(false);
     }
   };
 
@@ -98,6 +102,7 @@ export const CreatePost = ({
           </div>
         </div>
       )}
+      {message && <Navigate to="/" />}
     </div>
   );
 };

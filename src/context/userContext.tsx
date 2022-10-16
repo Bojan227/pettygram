@@ -5,6 +5,7 @@ type UserType = {
   firstName: string;
   lastName: string;
   imageUrl: string;
+  _id: string;
 };
 
 interface UserContextInterface {
