@@ -1,25 +1,26 @@
 import { LikeButton, Details } from './SvgsContainer';
 import { CommentForm } from './CommentForm';
-import { useState } from 'react';
-import me from '../navigation/images/me.jpg';
+
 type PostCardProps = {
   createdBy: {
     imageUrl: string;
     username: string;
     _id: string;
   };
-  images: string;
+  // images: string;
   likes: string[];
-  description: string;
+  imageUrl: string;
+  text: string;
   createdAt: string;
   updateLike: () => void;
 };
 
 export const PostCard = ({
   createdBy,
-  images,
+  // images,
+  imageUrl,
   likes,
-  description,
+  text,
   createdAt,
   updateLike,
 }: PostCardProps): JSX.Element => {
@@ -31,7 +32,7 @@ export const PostCard = ({
       </section>
       <div className="images-section">
         <img
-          src={images}
+          src={imageUrl}
           alt="img"
           style={{ width: '450px', height: '450px' }}
         />
@@ -56,7 +57,7 @@ export const PostCard = ({
       </section>
 
       <section className="description-section">
-        <p>{description}</p>
+        <p>{text}</p>
       </section>
 
       <section>
