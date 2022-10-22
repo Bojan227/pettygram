@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // import { LikeButton, Details } from './feed/SvgContainer';
 import { CommentForm } from '../feed/CommentForm';
 import { CommentsContainer } from './CommentsContainer';
@@ -26,8 +26,9 @@ export const PostDetails = () => {
 
   const [post, setPost] = useState<PostCardProps | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const [_, setCommentMessage] = useState('');
+  const [commentMessage, setCommentMessage] = useState('');
 
+  console.log(commentMessage);
   useEffect(() => {
     const getPost = async () => {
       setIsLoading(true);
@@ -80,7 +81,10 @@ export const PostDetails = () => {
           <div className="description-section">
             <h1>{post?.text}</h1>
           </div>
-          <CommentsContainer commentNotification={setCommentMessage} />
+          <CommentsContainer
+            commentNotification={setCommentMessage}
+            commentMessage={commentMessage}
+          />
         </div>
 
         <div className="buttons-section-details">

@@ -4,6 +4,7 @@ import { CommentsCard } from './CommentsCard';
 
 type CommentsContainerProps = {
   commentNotification: (value: string) => void;
+  commentMessage: string;
 };
 
 interface Comments {
@@ -20,6 +21,7 @@ interface Comments {
 
 export const CommentsContainer = ({
   commentNotification,
+  commentMessage,
 }: CommentsContainerProps) => {
   const { id } = useParams();
   const [comments, setComments] = useState<Comments[] | undefined>([]);
@@ -36,8 +38,12 @@ export const CommentsContainer = ({
       }
     };
 
+    console.log('comment here');
+
     getComments();
-  }, [() => commentNotification]);
+
+    return () => commentNotification('');
+  }, [commentMessage]);
 
   return (
     <div className="comments-container">

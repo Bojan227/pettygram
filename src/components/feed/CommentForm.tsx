@@ -29,6 +29,7 @@ export const CommentForm = ({
 
       const json = await res.json();
 
+
       commentNotification!(json.message);
 
       setErrorMessage(json?.error);
