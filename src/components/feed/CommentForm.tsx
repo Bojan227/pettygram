@@ -2,9 +2,13 @@ import { useState } from 'react';
 
 interface CommentFormProps {
   postId: string;
+  commentNotification?: (comment: string) => void;
 }
 
-export const CommentForm = ({ postId }: CommentFormProps) => {
+export const CommentForm = ({
+  postId,
+  commentNotification,
+}: CommentFormProps) => {
   const [comment, setComment] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -24,6 +28,8 @@ export const CommentForm = ({ postId }: CommentFormProps) => {
       });
 
       const json = await res.json();
+
+      commentNotification!(json.message);
 
       setErrorMessage(json?.error);
     } catch (error) {

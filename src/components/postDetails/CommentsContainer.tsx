@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CommentsCard } from './CommentsCard';
 
+type CommentsContainerProps = {
+  commentNotification: (value: string) => void;
+};
+
 interface Comments {
   comment: string;
   post: string;
@@ -14,7 +18,9 @@ interface Comments {
   likes: number;
 }
 
-export const CommentsContainer = () => {
+export const CommentsContainer = ({
+  commentNotification,
+}: CommentsContainerProps) => {
   const { id } = useParams();
   const [comments, setComments] = useState<Comments[] | undefined>([]);
 
@@ -31,7 +37,7 @@ export const CommentsContainer = () => {
     };
 
     getComments();
-  }, []);
+  }, [() => commentNotification]);
 
   return (
     <div className="comments-container">

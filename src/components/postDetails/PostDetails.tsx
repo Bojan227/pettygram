@@ -26,6 +26,7 @@ export const PostDetails = () => {
 
   const [post, setPost] = useState<PostCardProps | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [_, setCommentMessage] = useState('');
 
   useEffect(() => {
     const getPost = async () => {
@@ -79,7 +80,7 @@ export const PostDetails = () => {
           <div className="description-section">
             <h1>{post?.text}</h1>
           </div>
-          <CommentsContainer />
+          <CommentsContainer commentNotification={setCommentMessage} />
         </div>
 
         <div className="buttons-section-details">
@@ -97,7 +98,7 @@ export const PostDetails = () => {
           {/* {`${likes} ${likes === 1 ? 'like' : 'likes'} `}
           <h5>{createdAt}</h5> */}
         </section>
-        <CommentForm postId={id!} />
+        <CommentForm postId={id!} commentNotification={setCommentMessage} />
       </section>
       <Link to="/">
         <h3 className="back-btn">X</h3>
