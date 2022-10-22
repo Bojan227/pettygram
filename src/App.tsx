@@ -7,6 +7,7 @@ import { Profile } from './components/profile/Profile';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import useUserContenxt from './hooks/useUserContext';
+import { PostDetails } from './components/postDetails/PostDetails';
 
 function App() {
   const userContext = useUserContenxt();
@@ -27,6 +28,8 @@ function App() {
           element={userContext?.user ? <Navigate to="/" /> : <Login />}
         />
         <Route path="profile" element={userContext?.user && <Profile />} />
+
+        <Route path="/p/:id" element={<PostDetails />} />
       </Routes>
     </div>
   );

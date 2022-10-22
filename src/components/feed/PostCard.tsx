@@ -52,7 +52,7 @@ export const PostCard = ({
 
       <section className="buttons-section">
         <LikeButton likes={likes} updateLike={updateLike} />
-        <Details />
+        <Details postId={_id} />
       </section>
       <section className="likes-section">
         <h4>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'}`}</h4>
