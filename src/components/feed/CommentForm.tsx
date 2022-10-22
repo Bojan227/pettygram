@@ -1,10 +1,41 @@
 import { useState } from 'react';
 
-export const CommentForm = () => {
+interface CommentFormProps {
+  postId: string;
+}
+
+export const CommentForm = ({ postId }: CommentFormProps) => {
   const [comment, setComment] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const createComment = async (e: any) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('http://localhost:4000/comments/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${document.cookie.split('=')[1]}`,
+        },
+        body: JSON.stringify({
+          comment,
+          post: postId,
+        }),
+      });
+
+      const json = await res.json();
+
+      setErrorMessage(json?.error);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setComment('');
+    }
+  };
 
   return (
-    <form className="comment-form">
+    <form className="comment-form" onSubmit={createComment}>
+      {errorMessage}
       <input
         value={comment}
         onChange={(e) => setComment(e.target.value)}

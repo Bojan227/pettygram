@@ -13,6 +13,7 @@ type PostCardProps = {
   text: string;
   createdAt: string;
   updateLike: () => void;
+  _id: string;
 };
 
 export const PostCard = ({
@@ -22,6 +23,7 @@ export const PostCard = ({
   likes,
   text,
   createdAt,
+  _id,
   updateLike,
 }: PostCardProps): JSX.Element => {
   return (
@@ -67,7 +69,7 @@ export const PostCard = ({
       <section>
         <p>{createdAt}</p>
       </section>
-      <CommentForm />
+      <CommentForm {...{ postId: _id }} />
     </div>
   );
 };
