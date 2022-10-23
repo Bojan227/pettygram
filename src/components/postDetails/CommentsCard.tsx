@@ -54,8 +54,8 @@ export const CommentsCard = ({
           }}
         />
       </section>
-      <section style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-        <p>{createdAt}</p>
+      <section className="comment-card-info">
+        <p>1d</p>
         <p>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'} `}</p>
       </section>
     </div>

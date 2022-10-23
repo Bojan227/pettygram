@@ -12,7 +12,7 @@ import { PostDetails } from './components/postDetails/PostDetails';
 
 function App() {
   const userContext = useUserContenxt();
-  const { posts, getPosts, updateLike, error, isLoading } = useGetPosts();
+  const { posts, getPosts, error, isLoading, setPosts } = useGetPosts();
 
   useEffect(() => {
     getPosts();
@@ -27,7 +27,7 @@ function App() {
           path="/"
           element={
             userContext?.user ? (
-              posts && <FeedContainer {...{ posts, updateLike, error }} />
+              posts && <FeedContainer {...{ posts, setPosts, error }} />
             ) : (
               <Signup />
             )
@@ -42,7 +42,7 @@ function App() {
         {posts && (
           <Route
             path="/p/:id"
-            element={<PostDetails {...{ posts, updateLike, isLoading }} />}
+            element={<PostDetails {...{ posts, setPosts, isLoading }} />}
           />
         )}
       </Routes>

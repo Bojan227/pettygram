@@ -1,5 +1,7 @@
 import { LikeButton, Details } from './SvgsContainer';
 import { CommentForm } from './CommentForm';
+import useUpdateLike from '../../hooks/useUpdateLike';
+import { Dispatch, SetStateAction } from 'react';
 import { Post } from '../../hooks/useGetPosts';
 
 type PostCardProps = {
@@ -13,7 +15,7 @@ type PostCardProps = {
   imageUrl: string;
   text: string;
   createdAt: string;
-  updateLike: () => void;
+  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
   _id: string;
 };
 
@@ -25,8 +27,10 @@ export const PostCard = ({
   text,
   createdAt,
   _id,
-  updateLike,
+  setPosts,
 }: PostCardProps): JSX.Element => {
+  const { updateLike } = useUpdateLike();
+
   return (
     <div className="border border-solid border-[#e2e8f0] shadow-[rgba(99, 99, 99, 0.2) 0px 2px 8px 0px] bg-white rounded-lg">
       <section className="user-section">
@@ -52,7 +56,17 @@ export const PostCard = ({
       </div>
 
       <section className="buttons-section">
-        <LikeButton likes={likes} updateLike={updateLike} />
+        <LikeButton
+          likes={likes}
+          updateLike={() =>
+            updateLike({
+              url: 'http://localhost:4000/posts/',
+              likes,
+              setState: setPosts,
+              _id,
+            })
+          }
+        />
         <Details postId={_id} />
       </section>
       <section className="likes-section">

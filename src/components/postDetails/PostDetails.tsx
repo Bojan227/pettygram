@@ -3,23 +3,25 @@ import { useEffect, useState } from 'react';
 import { LikeButton, Details } from '../feed/SvgsContainer';
 import { CommentForm } from '../feed/CommentForm';
 import { CommentsContainer } from './CommentsContainer';
+import { Dispatch, SetStateAction } from 'react';
 import { Post } from '../../hooks/useGetPosts';
+import useUpdateLike from '../../hooks/useUpdateLike';
 
 import './postDetails.css';
 
 interface PostDetailsProps {
   posts: Post[];
-  updateLike: (id: string, userId: string) => void;
+  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
   isLoading: boolean;
 }
 
 export const PostDetails = ({
   posts,
-  updateLike,
+  setPosts,
   isLoading,
 }: PostDetailsProps) => {
   const { id } = useParams();
-
+  const { updateLike } = useUpdateLike();
   const [post, setPost] = useState<Post | undefined>(undefined);
   const [commentMessage, setCommentMessage] = useState('');
 
@@ -70,10 +72,17 @@ export const PostDetails = ({
         <div className="buttons-section-details">
           <LikeButton
             likes={post?.likes!}
-            updateLike={() => updateLike(post?._id!, post?.createdBy._id!)}
+            updateLike={() =>
+              updateLike({
+                url: 'http://localhost:4000/posts/',
+                likes: post?.likes!,
+                setState: setPosts,
+                _id: id!,
+              })
+            }
           />
 
-          {/* <Details size={24} /> */}
+          <Details postId={post?._id} />
         </div>
         <section className="likes-info">
           {`${post?.likes.length} ${

@@ -64,3 +64,22 @@
   flex-direction: column;
   gap: 10px;
 }
+.buttons-section-details {
+  display: flex;
+  gap: 5px;
+}
+.commments-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.comments-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-card-info {
+  display: flex;
+  gap: 10px;
+}

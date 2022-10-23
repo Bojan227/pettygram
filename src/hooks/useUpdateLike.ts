@@ -21,7 +21,7 @@ export default function useUpdateLike() {
         },
         body: JSON.stringify({
           _id,
-          like: !likes.find((id) => id === userContext?.user._id),
+          like: !likes?.find((id) => id === userContext?.user._id),
           userId: userContext?.user._id,
         }),
       });
