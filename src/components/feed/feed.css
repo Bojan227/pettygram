@@ -19,6 +19,19 @@
   align-items: center;
   gap: 15px;
 }
+
+.description-section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+.description-section > img {
+  width: 32px;
+  border-radius: 50%;
+}
+
 .comment-form {
   border-top: 1px solid #e2e8f0;
   display: flex;

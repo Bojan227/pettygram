@@ -4,6 +4,7 @@ import useUpdateLike from '../../hooks/useUpdateLike';
 import useUserContenxt from '../../hooks/useUserContext';
 import { LikeButton } from '../feed/SvgsContainer';
 import { Comments } from './CommentsContainer';
+import { formatDistanceToNow } from 'date-fns';
 
 type CommentsCardProps = {
   createdBy: {
@@ -55,7 +56,10 @@ export const CommentsCard = ({
         />
       </section>
       <section className="comment-card-info">
-        <p>1d</p>
+        {createdAt && (
+          <h5>{formatDistanceToNow(new Date(createdAt).getTime())}</h5>
+        )}
+
         <p>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'} `}</p>
       </section>
     </div>

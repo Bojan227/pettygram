@@ -3,6 +3,7 @@ import { CommentForm } from './CommentForm';
 import useUpdateLike from '../../hooks/useUpdateLike';
 import { Dispatch, SetStateAction } from 'react';
 import { Post } from '../../hooks/useGetPosts';
+import { formatDistanceToNow } from 'date-fns';
 
 type PostCardProps = {
   createdBy: {
@@ -74,6 +75,8 @@ export const PostCard = ({
       </section>
 
       <section className="description-section">
+        <img src={createdBy.imageUrl} />
+        <h2>{createdBy.username}</h2>
         <p>{text}</p>
       </section>
 
@@ -82,7 +85,9 @@ export const PostCard = ({
       </section>
 
       <section>
-        <p>{createdAt}</p>
+        {createdAt && (
+          <h5>{formatDistanceToNow(new Date(createdAt).getTime())}</h5>
+        )}
       </section>
       <CommentForm {...{ postId: _id }} />
     </div>

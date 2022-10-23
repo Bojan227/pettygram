@@ -6,6 +6,7 @@ import { CommentsContainer } from './CommentsContainer';
 import { Dispatch, SetStateAction } from 'react';
 import { Post } from '../../hooks/useGetPosts';
 import useUpdateLike from '../../hooks/useUpdateLike';
+import { formatDistanceToNow } from 'date-fns';
 
 import './postDetails.css';
 
@@ -59,8 +60,10 @@ export const PostDetails = ({
           <img src={post?.createdBy.imageUrl} />
           <h2>{post?.createdBy.username}</h2>
         </div>
-        <div style={{ overflowY: 'scroll', flex: '1' }}>
+        <div className="caption-comments">
           <div className="caption-section">
+            <img src={post?.createdBy.imageUrl} />
+            <h2>{post?.createdBy.username}</h2>
             <h1>{post?.text}</h1>
           </div>
           <CommentsContainer
@@ -88,7 +91,9 @@ export const PostDetails = ({
           {`${post?.likes.length} ${
             post?.likes.length === 1 ? 'like' : 'likes'
           } `}
-          <h5>{post?.createdAt}</h5>
+          {post && (
+            <h5>{formatDistanceToNow(new Date(post?.createdAt).getTime())}</h5>
+          )}
         </section>
         <CommentForm postId={id!} commentNotification={setCommentMessage} />
       </section>

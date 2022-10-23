@@ -8,19 +8,20 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
+  position: relative;
 }
 
 .details-info-section {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 30%;
+  width: 35%;
   background-color: white;
 }
 
 .post-details > * {
   z-index: 10000;
-  height: 60vh;
+  height: 90vh;
   flex: 0 0 auto;
 }
 
@@ -46,17 +47,33 @@
 }
 
 .back-btn {
-  position: fixed;
-  right: 5;
-  top: 50px;
+  position: absolute;
+
+  right: 12px;
+  top: 10px;
   display: block;
   color: white;
   font-size: 1.2rem;
 }
+.caption-comments {
+  overflow-y: auto;
+  flex: 1;
+}
+.comment-form {
+  height: 8%;
+  width: 100%;
+}
 
 .caption-section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
   padding: 10px;
   margin-bottom: 30px;
+}
+.caption-section > img {
+  width: 32px;
+  border-radius: 50%;
 }
 
 .likes-info {
@@ -71,7 +88,6 @@
 .commments-card {
   display: flex;
   flex-direction: column;
-  padding: 0;
 }
 .comments-info {
   display: flex;
