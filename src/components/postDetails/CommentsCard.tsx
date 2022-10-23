@@ -1,5 +1,9 @@
 // import { LikeButton } from './feed/SvgContainer';
-import { useState } from 'react';
+import { SetStateAction, Dispatch } from 'react';
+import useUpdateLike from '../../hooks/useUpdateLike';
+import useUserContenxt from '../../hooks/useUserContext';
+import { LikeButton } from '../feed/SvgsContainer';
+import { Comments } from './CommentsContainer';
 
 type CommentsCardProps = {
   createdBy: {
@@ -9,7 +13,9 @@ type CommentsCardProps = {
   };
   comment: string;
   createdAt: string;
-  likes: number;
+  likes: string[];
+  _id: string;
+  setComments: Dispatch<SetStateAction<Comments[] | undefined>>;
 };
 
 export const CommentsCard = ({
@@ -17,7 +23,12 @@ export const CommentsCard = ({
   comment,
   createdAt,
   likes,
+  _id,
+  setComments,
 }: CommentsCardProps) => {
+  const userContext = useUserContenxt();
+  const { updateLike } = useUpdateLike();
+
   return (
     <div className="commments-card">
       <section className="comments-info">
@@ -30,11 +41,22 @@ export const CommentsCard = ({
           <p style={{ fontWeight: 'bold' }}>{createdBy.username}</p>
           <p>{comment}</p>
         </div>
-        {/* <LikeButton color={like} toggleLike={toggleLike} size={18} /> */}
+        <LikeButton
+          {...{
+            likes,
+            updateLike: () =>
+              updateLike({
+                url: 'http://localhost:4000/comments/',
+                likes,
+                setState: setComments,
+                _id,
+              }),
+          }}
+        />
       </section>
       <section style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
         <p>{createdAt}</p>
-        <p>{`${likes} ${likes === 1 ? 'like' : 'likes'} `}</p>
+        <p>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'} `}</p>
       </section>
     </div>
   );

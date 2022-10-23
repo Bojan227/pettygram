@@ -7,7 +7,7 @@ type CommentsContainerProps = {
   commentMessage: string;
 };
 
-interface Comments {
+export interface Comments {
   comment: string;
   post: string;
   createdBy: {
@@ -16,7 +16,8 @@ interface Comments {
     imageUrl: string;
   };
   createdAt: string;
-  likes: number;
+  likes: string[];
+  _id: string;
 }
 
 export const CommentsContainer = ({
@@ -26,6 +27,7 @@ export const CommentsContainer = ({
   const { id } = useParams();
   const [comments, setComments] = useState<Comments[] | undefined>([]);
 
+  console.log(comments);
   useEffect(() => {
     const getComments = async () => {
       try {
@@ -47,7 +49,7 @@ export const CommentsContainer = ({
     <div className="comments-container">
       {comments &&
         comments.map((comment, i) => {
-          return <CommentsCard key={i} {...{ ...comment }} />;
+          return <CommentsCard key={i} {...{ ...comment, setComments }} />;
         })}
     </div>
   );
