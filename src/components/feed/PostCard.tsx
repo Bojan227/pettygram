@@ -1,5 +1,6 @@
 import { LikeButton, Details } from './SvgsContainer';
 import { CommentForm } from './CommentForm';
+import { Post } from '../../hooks/useGetPosts';
 
 type PostCardProps = {
   createdBy: {

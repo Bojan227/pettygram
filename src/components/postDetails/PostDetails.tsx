@@ -1,51 +1,31 @@
 import { Link, useParams } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
-// import { LikeButton, Details } from './feed/SvgContainer';
+import { useEffect, useState } from 'react';
+import { LikeButton, Details } from '../feed/SvgsContainer';
 import { CommentForm } from '../feed/CommentForm';
 import { CommentsContainer } from './CommentsContainer';
+import { Post } from '../../hooks/useGetPosts';
 
 import './postDetails.css';
 
-interface PostCardProps {
-  createdBy: {
-    imageUrl: string;
-    username: string;
-    _id: string;
-  };
-  // images: string;
-  likes: string[];
-  imageUrl: string;
-  imageId: string;
-  text: string;
-  createdAt: string;
-  _id: string;
+interface PostDetailsProps {
+  posts: Post[];
+  updateLike: (id: string, userId: string) => void;
+  isLoading: boolean;
 }
 
-export const PostDetails = () => {
+export const PostDetails = ({
+  posts,
+  updateLike,
+  isLoading,
+}: PostDetailsProps) => {
   const { id } = useParams();
 
-  const [post, setPost] = useState<PostCardProps | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(false);
+  const [post, setPost] = useState<Post | undefined>(undefined);
   const [commentMessage, setCommentMessage] = useState('');
 
-  console.log(commentMessage);
   useEffect(() => {
-    const getPost = async () => {
-      setIsLoading(true);
-      try {
-        const res = await fetch(`http://localhost:4000/posts/${id}`);
-        const json = await res.json();
-
-        setPost(json);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getPost();
-  }, []);
+    setPost(posts?.find((post) => post._id === id));
+  }, [posts]);
 
   if (isLoading) {
     return <h1>Loading .....</h1>;
@@ -78,7 +58,7 @@ export const PostDetails = () => {
           <h2>{post?.createdBy.username}</h2>
         </div>
         <div style={{ overflowY: 'scroll', flex: '1' }}>
-          <div className="description-section">
+          <div className="caption-section">
             <h1>{post?.text}</h1>
           </div>
           <CommentsContainer
@@ -88,19 +68,18 @@ export const PostDetails = () => {
         </div>
 
         <div className="buttons-section-details">
-          {/* <LikeButton color={like} toggleLike={toggleLike} size={24} />
-          <Details size={24} /> */}
+          <LikeButton
+            likes={post?.likes!}
+            updateLike={() => updateLike(post?._id!, post?.createdBy._id!)}
+          />
+
+          {/* <Details size={24} /> */}
         </div>
-        <section
-          style={{
-            padding: '10px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-          }}
-        >
-          {/* {`${likes} ${likes === 1 ? 'like' : 'likes'} `}
-          <h5>{createdAt}</h5> */}
+        <section className="likes-info">
+          {`${post?.likes.length} ${
+            post?.likes.length === 1 ? 'like' : 'likes'
+          } `}
+          <h5>{post?.createdAt}</h5>
         </section>
         <CommentForm postId={id!} commentNotification={setCommentMessage} />
       </section>

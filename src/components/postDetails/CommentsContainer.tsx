@@ -38,8 +38,6 @@ export const CommentsContainer = ({
       }
     };
 
-    console.log('comment here');
-
     getComments();
 
     return () => commentNotification('');

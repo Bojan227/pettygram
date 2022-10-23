@@ -29,7 +29,7 @@
   gap: 10px;
   align-items: center;
   border-bottom: 1px solid #e2e8f0;
-  padding: 10px;
+  padding-bottom: 25px;
 }
 .user-section-details > img {
   border-radius: 50%;
@@ -40,4 +40,27 @@
   align-items: center;
   justify-content: center;
   width: 55%;
+}
+.details-images-section > img {
+  height: 95%;
+}
+
+.back-btn {
+  position: fixed;
+  right: 5;
+  top: 50px;
+  display: block;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.caption-section {
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.likes-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

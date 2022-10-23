@@ -22,6 +22,11 @@ export const CommentsCard = ({
     <div className="commments-card">
       <section className="comments-info">
         <div style={{ display: 'flex', gap: '15px' }}>
+          <img
+            src={createdBy.imageUrl}
+            alt="img"
+            style={{ width: '32px', borderRadius: '50%' }}
+          />
           <p style={{ fontWeight: 'bold' }}>{createdBy.username}</p>
           <p>{comment}</p>
         </div>

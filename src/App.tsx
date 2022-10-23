@@ -4,6 +4,7 @@ import { FeedContainer } from './components/feed/FeedContainer';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { NavigationBar } from './components/navigation/NavigationBar';
 import { Profile } from './components/profile/Profile';
+import { useGetPosts } from './hooks/useGetPosts';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import useUserContenxt from './hooks/useUserContext';
@@ -11,8 +12,11 @@ import { PostDetails } from './components/postDetails/PostDetails';
 
 function App() {
   const userContext = useUserContenxt();
+  const { posts, getPosts, updateLike, error, isLoading } = useGetPosts();
 
-  console.log(userContext?.user);
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   return (
     <div className="flex bg-stone-50 justify-center">
@@ -21,7 +25,13 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={userContext?.user ? <FeedContainer /> : <Signup />}
+          element={
+            userContext?.user ? (
+              posts && <FeedContainer {...{ posts, updateLike, error }} />
+            ) : (
+              <Signup />
+            )
+          }
         />
         <Route
           path="login"
@@ -29,7 +39,12 @@ function App() {
         />
         <Route path="profile" element={userContext?.user && <Profile />} />
 
-        <Route path="/p/:id" element={<PostDetails />} />
+        {posts && (
+          <Route
+            path="/p/:id"
+            element={<PostDetails {...{ posts, updateLike, isLoading }} />}
+          />
+        )}
       </Routes>
     </div>
   );
