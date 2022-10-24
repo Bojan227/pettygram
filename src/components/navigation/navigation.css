@@ -233,13 +233,35 @@ label {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
+  .links-section > * {
+    padding: 0;
+  }
+
   .notification-link {
     position: fixed;
-    top: 1.5%;
+    top: 4%;
     right: 0;
     padding: 0;
   }
 
+  li:hover {
+    background-color: #f8fafc;
+  }
+}
+
+@media (max-width: 370px) {
+  .logo-desktop {
+    display: block;
+  }
+  .logo-mobile {
+    display: none;
+  }
+  .footer-nav {
+    display: none;
+  }
+  .links-section > * {
+    padding: 1px;
+  }
   li:hover {
     background-color: #f8fafc;
   }

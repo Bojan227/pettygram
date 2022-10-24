@@ -12,7 +12,7 @@
   border-radius: 8px;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  width: 75%;
+  width: 55%;
 }
 .user-section {
   display: flex;
@@ -90,7 +90,7 @@ section {
   }
 
   .card {
-    width: 70%;
+    width: 80%;
   }
 }
 
