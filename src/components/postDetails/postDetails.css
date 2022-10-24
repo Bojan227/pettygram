@@ -21,7 +21,7 @@
 
 .post-details > * {
   z-index: 10000;
-  height: 90vh;
+  height: 85vh;
   flex: 0 0 auto;
 }
 
@@ -98,4 +98,34 @@
 .comment-card-info {
   display: flex;
   gap: 10px;
+}
+
+@media (max-width: 920px) {
+  .post-details > * {
+    height: 65vh;
+  }
+  .details-images-section {
+    width: 50%;
+  }
+  .details-info-section {
+    width: 45%;
+    margin-left: 2px;
+  }
+}
+
+@media (max-width: 620px) {
+  .post-details {
+    justify-content: flex-start;
+  }
+  .post-details > * {
+    height: 90vh;
+    flex: 0 0 auto;
+  }
+  .details-images-section {
+    display: none;
+  }
+  .details-info-section {
+    width: 100%;
+    margin-left: 2px;
+  }
 }
