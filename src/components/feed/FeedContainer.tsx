@@ -15,7 +15,7 @@ export const FeedContainer = ({
   error,
 }: FeedContainerProps) => {
   return (
-    <main className="flex flex-col justify-center items-center p-11 gap-10 w-full min-h-screen ml-32">
+    <main className="feed-container">
       {error && <h1>{error}</h1>}
       {posts?.map((post, i) => {
         return <PostCard key={i} {...post} setPosts={setPosts} />;

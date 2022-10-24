@@ -33,17 +33,13 @@ export const PostCard = ({
   const { updateLike } = useUpdateLike();
 
   return (
-    <div className="border border-solid border-[#e2e8f0] shadow-[rgba(99, 99, 99, 0.2) 0px 2px 8px 0px] bg-white rounded-lg">
+    <div className="card">
       <section className="user-section">
         <img src={createdBy.imageUrl} />
         <h2>{createdBy.username}</h2>
       </section>
       <div className="images-section">
-        <img
-          src={imageUrl}
-          alt="img"
-          style={{ width: '450px', height: '450px' }}
-        />
+        <img src={imageUrl} alt="img" />
         {/* {images.map((url, i) => {
           return (
             <img

@@ -10,7 +10,6 @@ export default function Signup() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [image, setImage] = useState<File | null>(null);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
