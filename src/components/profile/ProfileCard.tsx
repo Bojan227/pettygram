@@ -1,11 +1,6 @@
+import useUserContenxt from '../../hooks/useUserContext';
+
 type ProfileCardProps = {
-  url: string | undefined;
-  user: {
-    username: string | undefined;
-    firstName: string | undefined;
-    lastName: string | undefined;
-    imageUrl?: string | undefined;
-  };
   info: {
     posts: number;
     followers: number;
@@ -13,13 +8,19 @@ type ProfileCardProps = {
   };
 };
 
-export const ProfileCard = ({ url, user, info }: ProfileCardProps) => {
+export const ProfileCard = ({ info }: ProfileCardProps) => {
+  const userContext = useUserContenxt();
+
   return (
     <div className="profile-card">
-      <img src={url} alt="img" style={{ width: '75px' }} />
+      <img
+        src={userContext?.user.imageUrl}
+        alt="img"
+        style={{ width: '75px' }}
+      />
       <div className="info-profile">
         <div style={{ justifyContent: 'space-between' }}>
-          <h1>{user.username}</h1>
+          <h1>{userContext?.user.username}</h1>
           <button>Edit Profile</button>
         </div>
 
@@ -28,7 +29,9 @@ export const ProfileCard = ({ url, user, info }: ProfileCardProps) => {
           <h3>{info.followers} followers</h3>
           <h3>{info.following} following</h3>
         </div>
-        <h2>{user.firstName + ' ' + user.lastName}</h2>
+        <h2>
+          {userContext?.user.firstName + ' ' + userContext?.user.lastName}
+        </h2>
       </div>
     </div>
   );
