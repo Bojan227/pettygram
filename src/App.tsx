@@ -8,6 +8,7 @@ import { useGetPosts } from './hooks/useGetPosts';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import useUserContenxt from './hooks/useUserContext';
+import { PostsContainer } from './components/profile/PostsContainer';
 import { PostDetails } from './components/postDetails/PostDetails';
 
 function App() {
@@ -37,7 +38,17 @@ function App() {
           path="login"
           element={userContext?.user ? <Navigate to="/" /> : <Login />}
         />
-        <Route path="profile" element={userContext?.user && <Profile />} />
+        <Route path="profile" element={userContext?.user && <Profile />}>
+          <Route path="/profile" element={<PostsContainer tab="posts" />} />
+          <Route
+            path="/profile/saved"
+            element={<PostsContainer tab="saved" />}
+          />
+          <Route
+            path="/profile/tagged"
+            element={<PostsContainer tab="tagged" />}
+          />
+        </Route>
 
         {posts && (
           <Route

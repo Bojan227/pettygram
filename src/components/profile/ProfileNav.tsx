@@ -5,51 +5,26 @@ const navData = [
   {
     label: 'POSTS',
     href: '/profile',
-    component: PostsContainer,
   },
-  { label: 'SAVED', href: 'saved', component: Saved },
-  { label: 'TAGGED', href: 'tagged', component: Tagged },
+  { label: 'SAVED', href: 'saved' },
+  { label: 'TAGGED', href: 'tagged' },
 ];
-
-function PostsContainer() {
-  return (
-    <div>
-      <h1>Hello</h1>
-    </div>
-  );
-}
-
-function Saved() {
-  return (
-    <div>
-      <h1>Saved</h1>
-    </div>
-  );
-}
-
-function Tagged() {
-  return (
-    <div>
-      <h1>Tagged</h1>
-    </div>
-  );
-}
 
 export const ProfileNav = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+
   return (
     <div className="profile-nav">
       {navData.map((data, i) => {
         const { label, href } = data;
 
         return (
-          <div key={i}>
-            <Link
-              key={label}
-              to={href}
-              onClick={() => setSelectedIndex(i)}
-              className={selectedIndex === i ? 'active' : ''}
-            >
+          <div
+            key={i}
+            onClick={() => setSelectedIndex(i)}
+            className={selectedIndex === i ? 'active' : ''}
+          >
+            <Link to={href}>
               <p>{label}</p>
             </Link>
           </div>
