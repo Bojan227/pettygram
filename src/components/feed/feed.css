@@ -6,6 +6,7 @@
   width: 100%;
   min-height: 100vh;
   position: relative;
+  z-index: 10000;
 }
 
 .card {
@@ -14,6 +15,9 @@
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   width: 55%;
+}
+.card > a {
+  padding: 0;
 }
 .user-section {
   display: flex;
@@ -35,10 +39,14 @@
   display: flex;
   gap: 15px;
   align-items: center;
-
   margin-bottom: 30px;
 }
-.description-section > img {
+.description-section > a > div {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.description-section > a > div > img {
   width: 32px;
   border-radius: 50%;
 }
@@ -71,6 +79,8 @@ section {
 
 .suggested-users {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   right: 10%;
   border: 1px solid black;
   min-height: 40vh;
@@ -95,6 +105,18 @@ section {
 }
 
 @media (max-width: 1156px) {
+  .suggested-users {
+    display: none;
+  }
+  .suggested-header {
+    display: none;
+  }
+
+  .users-container {
+    flex-direction: column;
+    gap: 0;
+  }
+
   .feed-container {
     width: 100%;
     margin-left: 15%;

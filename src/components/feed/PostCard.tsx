@@ -1,4 +1,5 @@
 import { LikeButton, Details } from './SvgsContainer';
+import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentForm';
 import useUpdateLike from '../../hooks/useUpdateLike';
 import { Dispatch, SetStateAction } from 'react';
@@ -34,10 +35,12 @@ export const PostCard = ({
 
   return (
     <div className="card">
-      <section className="user-section">
-        <img src={createdBy.imageUrl} />
-        <h2>{createdBy.username}</h2>
-      </section>
+      <Link to={`/profile/${createdBy._id}`}>
+        <section className="user-section">
+          <img src={createdBy.imageUrl} />
+          <h2>{createdBy.username}</h2>
+        </section>
+      </Link>
       <div className="images-section">
         <img src={imageUrl} alt="img" />
         {/* {images.map((url, i) => {
@@ -71,13 +74,19 @@ export const PostCard = ({
       </section>
 
       <section className="description-section">
-        <img src={createdBy.imageUrl} />
-        <h2>{createdBy.username}</h2>
+        <Link to={`/profile/${createdBy._id}`}>
+          <div>
+            <img src={createdBy.imageUrl} />
+            <h2>{createdBy.username}</h2>
+          </div>
+        </Link>
         <p>{text}</p>
       </section>
 
       <section>
-        <p>View all comments </p>
+        <Link to={`/p/${_id}`}>
+          <p>View all comments</p>
+        </Link>
       </section>
 
       <section>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useUserContenxt from '../hooks/useUserContext';
 
-interface User {
+export interface User {
   _id: string;
   username: string;
   firstName: string;

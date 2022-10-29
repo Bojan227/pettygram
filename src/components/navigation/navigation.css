@@ -11,6 +11,7 @@
   justify-content: space-between;
   background-color: white;
   align-items: center;
+  z-index: 10000;
 }
 
 a {
@@ -53,8 +54,9 @@ li:hover,
 }
 
 .profile-link > li > img {
-  border-radius: 10px;
-  width: 32px;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
 }
 
 .footer-menu-section {

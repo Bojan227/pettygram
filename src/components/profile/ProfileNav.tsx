@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const navData = [
   {
     label: 'POSTS',
-    href: '/profile',
+    href: 'profile',
   },
   { label: 'SAVED', href: 'saved' },
   { label: 'TAGGED', href: 'tagged' },
@@ -24,7 +24,7 @@ export const ProfileNav = () => {
             onClick={() => setSelectedIndex(i)}
             className={selectedIndex === i ? 'active' : ''}
           >
-            <Link to={href}>
+            <Link to={href === 'profile' ? '' : href}>
               <p>{label}</p>
             </Link>
           </div>

@@ -4,6 +4,7 @@ import send from './images/send.png';
 import create from './images/plus-circle.png';
 import notifications from './images/cards-heart-outline.png';
 import me from './images/me.jpg';
+import useUserContenxt from '../../hooks/useUserContext';
 
 export const navData = [
   { title: 'Home', url: home, link: '/' },
@@ -11,5 +12,9 @@ export const navData = [
   { title: 'Messages', url: send, link: 'inbox' },
   { title: 'Notifications', url: notifications, link: '/' },
   { title: 'Create', url: create, link: '/' },
-  { title: 'Profile', url: 'profile', link: 'profile' },
+  {
+    title: 'Profile',
+    url: 'profile',
+    link: 'profile',
+  },
 ];

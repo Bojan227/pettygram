@@ -18,7 +18,7 @@ export const NavigationLink = ({
 
   return (
     <Link
-      to={link}
+      to={link !== 'profile' ? link : `${link}/${userContext?.user._id}`}
       className={
         (title === 'Notifications' ? 'notification-link' : '') ||
         (title === 'Profile' ? 'profile-link' : '')

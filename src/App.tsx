@@ -38,14 +38,20 @@ function App() {
           path="login"
           element={userContext?.user ? <Navigate to="/" /> : <Login />}
         />
-        <Route path="profile" element={userContext?.user && <Profile />}>
-          <Route path="/profile" element={<PostsContainer tab="posts" />} />
+        <Route
+          path="profile/:userId/"
+          element={userContext?.user && <Profile />}
+        >
           <Route
-            path="/profile/saved"
+            path="/profile/:userId/"
+            element={<PostsContainer tab="posts" />}
+          />
+          <Route
+            path="/profile/:userId/saved"
             element={<PostsContainer tab="saved" />}
           />
           <Route
-            path="/profile/tagged"
+            path="/profile/:userId/tagged"
             element={<PostsContainer tab="tagged" />}
           />
         </Route>

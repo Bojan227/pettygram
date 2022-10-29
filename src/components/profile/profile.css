@@ -22,6 +22,8 @@ a {
 
 .profile-card > img {
   border-radius: 50%;
+  width: 72px;
+  height: 72px;
 }
 .info-profile {
   display: flex;
