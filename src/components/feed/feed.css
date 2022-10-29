@@ -5,6 +5,7 @@
   margin-left: 40%;
   width: 100%;
   min-height: 100vh;
+  position: relative;
 }
 
 .card {
@@ -66,6 +67,31 @@ p {
 }
 section {
   padding: 12px;
+}
+
+.suggested-users {
+  position: absolute;
+  right: 10%;
+  border: 1px solid black;
+  min-height: 40vh;
+  width: 30%;
+  border-radius: 10px;
+}
+
+.users-container {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 5px;
+}
+
+.users-container > :nth-child(3) {
+  flex: 1;
+}
+
+.suggested-header {
+  padding: 2px;
+  border-bottom: 1px solid gray;
 }
 
 @media (max-width: 1156px) {

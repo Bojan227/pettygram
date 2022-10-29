@@ -10,10 +10,8 @@ import { FooterMenu } from './FooterMenu';
 import { CreatePost } from './CreatePost';
 
 export const NavigationBar = () => {
- 
   const [toggleMore, setToggleMore] = useState(false);
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
-  console.log(toggleCreatePost);
 
   return (
     <nav className="main-navigation">

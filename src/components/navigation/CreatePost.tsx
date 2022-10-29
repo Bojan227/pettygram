@@ -41,9 +41,6 @@ export const CreatePost = ({
     e.stopPropagation();
 
     setFiles([...e.dataTransfer.files]);
-
-    console.log(e);
-    console.log('wtf');
   };
 
   const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {

@@ -20,8 +20,6 @@ export const useGetPosts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const userContext = useUserContenxt();
-
   const getPosts = async () => {
     setIsLoading(true);
     try {

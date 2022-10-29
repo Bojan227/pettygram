@@ -1,14 +1,6 @@
 import useUserContenxt from '../../hooks/useUserContext';
 
-type ProfileCardProps = {
-  info: {
-    posts: number;
-    followers: number;
-    following: number;
-  };
-};
-
-export const ProfileCard = ({ info }: ProfileCardProps) => {
+export const ProfileCard = () => {
   const userContext = useUserContenxt();
 
   return (
@@ -20,9 +12,9 @@ export const ProfileCard = ({ info }: ProfileCardProps) => {
       />
       <div className="info-profile">
         <div className="info-followers">
-          <h4>{info.posts} posts</h4>
-          <h4>{info.followers} followers</h4>
-          <h4>{info.following} following</h4>
+          {/* <h4>{info.posts} posts</h4> */}
+          <h4>{userContext?.user.followers.length} followers</h4>
+          <h4>{userContext?.user.following.length} following</h4>
         </div>
         <h2>
           {userContext?.user.firstName + ' ' + userContext?.user.lastName}

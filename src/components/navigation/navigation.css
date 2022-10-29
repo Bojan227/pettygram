@@ -53,8 +53,8 @@ li:hover,
 }
 
 .profile-link > li > img {
-  border-radius: 50%;
-  width: 40px;
+  border-radius: 10px;
+  width: 32px;
 }
 
 .footer-menu-section {

@@ -6,6 +6,8 @@ type UserType = {
   lastName: string;
   imageUrl: string;
   _id: string;
+  followers: [string];
+  following: [string];
 };
 
 interface UserContextInterface {
@@ -38,8 +40,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
   useEffect(() => {
     const userState = JSON.parse(`${localStorage.getItem('user')}`);
-
-    const token = document.cookie.split('=')[1];
 
     if (userState) {
       dispatch({
