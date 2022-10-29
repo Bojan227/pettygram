@@ -54,9 +54,49 @@ a {
   width: 70%;
   margin-top: 40px;
   min-height: 100vh;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 0.5fr));
+  gap: 8px;
 }
 
-.active {
+.posts-container .active {
   border-top: 2px solid black;
+}
+
+.info-followers {
+  text-align: center;
+}
+
+@media (max-width: 753px) {
+  .profile-container {
+    display: flex;
+    align-items: center;
+    margin-top: 30%;
+    padding: 0;
+    width: 100%;
+    min-height: 60vh;
+  }
+
+  .profile-card {
+    width: 100%;
+    gap: 35px;
+  }
+  .info-followers {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .profile-card {
+    margin-top: 10%;
+    gap: 25px;
+  }
+
+  .profile-nav {
+    width: 100%;
+  }
+
+  .posts-container {
+    justify-content: center;
+  }
 }

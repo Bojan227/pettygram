@@ -13,14 +13,23 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
         );
 
         const data = await res.json();
-        setData([data]);
+
+        console.log(data);
+        setData([...data]);
       } catch (error) {
         console.log(error);
       }
     };
 
     getDatasByUserId();
-  }, []);
+  }, [tab]);
 
-  return <div className="posts-container">{JSON.stringify(data)}</div>;
+  return (
+    <div className="posts-container">
+      {data &&
+        data.map(({ imageUrl }) => {
+          return <img src={imageUrl} />;
+        })}
+    </div>
+  );
 };

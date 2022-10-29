@@ -19,15 +19,10 @@ export const ProfileCard = ({ info }: ProfileCardProps) => {
         style={{ width: '75px' }}
       />
       <div className="info-profile">
-        <div style={{ justifyContent: 'space-between' }}>
-          <h1>{userContext?.user.username}</h1>
-          <button>Edit Profile</button>
-        </div>
-
         <div className="info-followers">
-          <h3>{info.posts} posts</h3>
-          <h3>{info.followers} followers</h3>
-          <h3>{info.following} following</h3>
+          <h4>{info.posts} posts</h4>
+          <h4>{info.followers} followers</h4>
+          <h4>{info.following} following</h4>
         </div>
         <h2>
           {userContext?.user.firstName + ' ' + userContext?.user.lastName}
