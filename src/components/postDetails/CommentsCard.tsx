@@ -5,6 +5,7 @@ import useUserContenxt from '../../hooks/useUserContext';
 import { LikeButton } from '../feed/SvgsContainer';
 import { Comments } from './CommentsContainer';
 import { formatDistanceToNow } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 type CommentsCardProps = {
   createdBy: {
@@ -33,13 +34,17 @@ export const CommentsCard = ({
   return (
     <div className="commments-card">
       <section className="comments-info">
-        <div style={{ display: 'flex', gap: '15px' }}>
-          <img
-            src={createdBy.imageUrl}
-            alt="img"
-            style={{ width: '32px', borderRadius: '50%' }}
-          />
-          <p style={{ fontWeight: 'bold' }}>{createdBy.username}</p>
+        <div className="flex items-center gap-8">
+          <Link to={`/profile/${createdBy._id}`}>
+            <div className="flex items-center gap-5">
+              <img
+                src={createdBy.imageUrl}
+                alt="img"
+                style={{ width: '32px', height: '52px', borderRadius: '50%' }}
+              />
+              <p style={{ fontWeight: 'bold' }}>{createdBy.username}</p>
+            </div>
+          </Link>
           <p>{comment}</p>
         </div>
         <LikeButton

@@ -9,6 +9,7 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
   position: relative;
+  z-index: 10000;
 }
 
 .details-info-section {
@@ -71,7 +72,14 @@
   padding: 10px;
   margin-bottom: 30px;
 }
-.caption-section > img {
+
+.caption-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.caption-info > img {
   width: 32px;
   border-radius: 50%;
 }

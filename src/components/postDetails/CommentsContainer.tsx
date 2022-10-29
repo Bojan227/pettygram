@@ -27,7 +27,6 @@ export const CommentsContainer = ({
   const { id } = useParams();
   const [comments, setComments] = useState<Comments[] | undefined>([]);
 
-  console.log(comments);
   useEffect(() => {
     const getComments = async () => {
       try {

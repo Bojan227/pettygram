@@ -56,14 +56,22 @@ export const PostDetails = ({
         {post && <img src={post.imageUrl} alt="image" />}
       </section>
       <section className="details-info-section">
-        <div className="user-section-details">
-          <img src={post?.createdBy.imageUrl} />
-          <h2>{post?.createdBy.username}</h2>
+        <div>
+          <Link to={`/profile/${post?.createdBy._id}`}>
+            <div className="user-section-details">
+              <img src={post?.createdBy.imageUrl} />
+              <h2>{post?.createdBy.username}</h2>
+            </div>
+          </Link>
         </div>
         <div className="caption-comments">
           <div className="caption-section">
-            <img src={post?.createdBy.imageUrl} />
-            <h2>{post?.createdBy.username}</h2>
+            <Link to={`/profile/${post?.createdBy._id}`}>
+              <div className="caption-info">
+                <img src={post?.createdBy.imageUrl} />
+                <h2>{post?.createdBy.username}</h2>
+              </div>
+            </Link>
             <h1>{post?.text}</h1>
           </div>
           <CommentsContainer

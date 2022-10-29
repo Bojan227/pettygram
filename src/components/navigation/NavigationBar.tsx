@@ -57,10 +57,7 @@ export const NavigationBar = () => {
         style={{ position: 'relative' }}
         onClick={() => setToggleMore(!toggleMore)}
       >
-        <div
-          className="more-section"
-          style={{ display: 'flex', alignItems: 'center', gap: '15px' }}
-        >
+        <div className="flex items-center gap-8">
           <img src={menu} alt="menu" />
           <h3>More</h3>
         </div>
