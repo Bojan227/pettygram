@@ -56,6 +56,8 @@ export const CreatePost = ({
       onClick={(e) => {
         e.stopPropagation();
         setToggleCreatePost(false);
+        setFiles(null);
+        setCaption('');
       }}
     >
       {!files && (

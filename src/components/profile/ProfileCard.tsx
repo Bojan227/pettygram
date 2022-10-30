@@ -6,10 +6,11 @@ export const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const { userId } = useParams();
 
+  console.log(userInfo);
+
   useEffect(() => {
     const getUserInfo = async () => {
       const res = await fetch(`http://localhost:4000/user/${userId}`);
-
       const json = await res.json();
 
       setUserInfo(json);
