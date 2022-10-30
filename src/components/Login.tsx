@@ -40,7 +40,7 @@ export default function Login() {
         />
         <button
           type="submit"
-          disabled={!username && !password ? true : false}
+          disabled={!username || !password ? true : false}
           style={{
             color: `${
               !username || !password ? 'rgba(255,255,255, 0.3)' : 'white'

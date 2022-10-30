@@ -11,6 +11,8 @@ export default function Signup() {
   const [lastName, setLastName] = useState('');
   const [image, setImage] = useState<File | null>(null);
 
+  console.log(image);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     await signup({ username, password, firstName, lastName, image });
@@ -27,55 +29,80 @@ export default function Signup() {
   }
 
   return (
-    <div>
-      <h2>
-        Already have an account{' '}
-        <Link to="login">
-          <span>Sign in</span>
-        </Link>
-      </h2>
-
+    <div
+      className="flex flex-col items-center justify-center min-h-screen 
+      bg-gradient-to-b from-[#405DE6] via-[#5851DB] to-[#FD1D1D] "
+    >
       <form
         onSubmit={handleSubmit}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '20px',
-        }}
+        className="flex flex-col w-1/3 justify-center items-center gap-6 grow text-white"
       >
         Username
         <TextField
-          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
+          className={'bg-[#e1306c] rounded-lg p-2  w-full'}
           value={username}
           onChange={(username) => setUsername(username)}
         />
         Password
         <input
           type="password"
-          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
+          className={'bg-[#e1306c] rounded-lg p-2 w-full'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         First Name
         <TextField
-          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
+          className={'bg-[#e1306c] rounded-lg p-2  w-full'}
           value={firstName}
           onChange={(firstname) => setFirstName(firstname)}
         />
         Last Name
         <TextField
-          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
+          className={'bg-[#e1306c] rounded-lg p-2  w-full'}
           value={lastName}
           onChange={(lastName) => setLastName(lastName)}
         />
         Upload Profile Picture
-        <input type="file" name="img" onChange={(e) => handleImageUpload(e)} />
-        <button type="submit">Sign up</button>
+        <input
+          onChange={(e) => handleImageUpload(e)}
+          type="file"
+          name="img"
+          id="actual-btn"
+          style={{ display: 'none' }}
+        />
+        <label htmlFor="actual-btn" className="bg-[#405de6]">
+          Choose File
+        </label>
+        <button
+          type="submit"
+          disabled={
+            !username || !password || !firstName || !lastName || !image
+              ? true
+              : false
+          }
+          style={{
+            color: `${
+              !username || !password || !firstName || !lastName || !image
+                ? 'rgba(255,255,255, 0.3)'
+                : 'white'
+            }`,
+          }}
+          className="border border-white  w-full p-2 my-4 rounded-lg"
+        >
+          Log In
+        </button>
       </form>
       {error && <h5>{error}</h5>}
       {message && <h5>{message}</h5>}
+
+      <footer className="border-solid border-t-2 border-white  p-5 w-full text-center text-white">
+        <h1>
+          Already have an account{' '}
+          <Link to="login">
+            <span>Sign in</span>
+          </Link>
+        </h1>
+      </footer>
     </div>
   );
 }
