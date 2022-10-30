@@ -1,4 +1,5 @@
 import { PostCard } from './PostCard';
+import { Link } from 'react-router-dom';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useGetUsers } from '../../hooks/useGetUsers';
 import useUserContenxt from '../../hooks/useUserContext';
@@ -22,8 +23,6 @@ export const FeedContainer = ({
     getUsers();
   }, []);
 
-  console.log(users);
-
   return (
     <main className="feed-container">
       {error && <h1>{error}</h1>}
@@ -39,9 +38,13 @@ export const FeedContainer = ({
           .map(({ imageUrl, firstName, lastName, _id }) => {
             return (
               <div className="users-container" key={_id}>
-                <img src={imageUrl} style={{ width: '42px' }} />
-                <h4>{firstName}</h4>
-                <h4>{lastName}</h4>
+                <Link to={`/profile/${_id}`}>
+                  <div className="flex items-center grow gap-1">
+                    <img src={imageUrl} className="w-14 h-20" />
+                    <h4>{firstName}</h4>
+                    <h4>{lastName}</h4>
+                  </div>
+                </Link>
                 <button>Follow</button>
               </div>
             );

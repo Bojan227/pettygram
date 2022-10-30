@@ -20,7 +20,11 @@ function App() {
   }, []);
 
   return (
-    <div className="flex bg-stone-50 justify-center">
+    <div
+      className={`${
+        userContext?.user ? 'flex bg-stone-50 justify-center' : ''
+      }`}
+    >
       {userContext?.user && <NavigationBar />}
 
       <Routes>

@@ -1,6 +1,8 @@
 import TextField from './TextField';
 import { useState } from 'react';
 import useLogin from '../hooks/useLogin';
+import instagramLogo from './navigation/images/instagram-text-icon.png';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const { login } = useLogin();
@@ -13,36 +15,50 @@ export default function Login() {
     await login(username, password);
   };
 
-  //   if (isLoading) {
-  //     return <h1>Spinner .......</h1>;
-  //   }
-
   return (
-    <div>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen 
+    bg-gradient-to-b from-[#405DE6] via-[#5851DB] to-[#FD1D1D] "
+    >
       <form
         onSubmit={handleSubmit}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+        className="flex flex-col justify-center items-center text-white gap-2 grow"
       >
-        Username
+        <img src={instagramLogo} className="my-8" />
+        <h1>Username</h1>
         <TextField
+          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
           value={username}
           onChange={(username) => setUsername(username)}
         />
-        Password
+        <h1>Password</h1>
         <input
+          className="bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button
+          type="submit"
+          disabled={!username && !password ? true : false}
+          style={{
+            color: `${
+              !username || !password ? 'rgba(255,255,255, 0.3)' : 'white'
+            }`,
+          }}
+          className="border border-white sm:w-3/5 w-5/6 p-2 my-4 rounded-lg"
+        >
+          Log In
+        </button>
       </form>
       {/* {error && <h5>{error}</h5>}
       {message && <h5>{message}</h5>} */}
+
+      <footer className="border-solid border-t-2 border-white  p-5 w-full text-center">
+        <h1>
+          Don't have an account?<Link to="/">Sign up.</Link>
+        </h1>
+      </footer>
     </div>
   );
 }

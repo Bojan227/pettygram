@@ -1,11 +1,13 @@
 type TextFieldProps = {
   value: string;
   onChange: (value: string) => void;
+  className: string;
 };
 
 export default function TextField({
   value,
   onChange = () => {},
+  className = '',
 }: TextFieldProps) {
   return (
     <>
@@ -13,6 +15,7 @@ export default function TextField({
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        className={className}
       />
     </>
   );

@@ -47,22 +47,26 @@ export default function Signup() {
       >
         Username
         <TextField
+          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
           value={username}
           onChange={(username) => setUsername(username)}
         />
         Password
         <input
           type="password"
+          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         First Name
         <TextField
+          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
           value={firstName}
           onChange={(firstname) => setFirstName(firstname)}
         />
         Last Name
         <TextField
+          className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}
           value={lastName}
           onChange={(lastName) => setLastName(lastName)}
         />
