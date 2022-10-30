@@ -21,7 +21,7 @@ export const NavigationBar = () => {
             <img
               src={instagram}
               alt="instagram-logo"
-              style={{ maxWidth: '120px', padding: '10px' }}
+              style={{ maxWidth: '160px', padding: '10px' }}
             />
           </Link>
           <Link className="logo-mobile" to="/">

@@ -39,7 +39,7 @@ export const FeedContainer = ({
             return (
               <div className="users-container" key={_id}>
                 <Link to={`/profile/${_id}`}>
-                  <div className="flex items-center grow gap-1">
+                  <div className="flex items-center gap-1">
                     <img src={imageUrl} className="w-14 h-20" />
                     <h4>{firstName}</h4>
                     <h4>{lastName}</h4>

@@ -80,10 +80,10 @@ section {
   position: absolute;
   display: flex;
   flex-direction: column;
-  right: 10%;
+  right: 5%;
   border: 1px solid black;
   min-height: 40vh;
-  width: 30%;
+  width: 35%;
   border-radius: 10px;
 }
 
@@ -94,7 +94,7 @@ section {
   padding: 5px;
 }
 
-.users-container > :nth-child(3) {
+.users-container > :nth-child(1) {
   flex: 1;
 }
 
@@ -132,7 +132,7 @@ section {
   .feed-container {
     width: 100%;
     margin-left: 0;
-    margin-top: 30%;
+    margin-top: 50%;
     align-items: center;
   }
 
@@ -145,7 +145,7 @@ section {
   .feed-container {
     width: 100%;
     margin-left: 0;
-    margin-top: 60%;
+    margin-top: 80%;
     align-items: center;
   }
 
