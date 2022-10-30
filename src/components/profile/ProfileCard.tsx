@@ -4,9 +4,10 @@ import { User } from '../../hooks/useGetUsers';
 
 export const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState<User | null>(null);
+  const [userPosts, setUserPosts] = useState<any | null>(null);
   const { userId } = useParams();
 
-  console.log(userInfo);
+  console.log(userPosts);
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -16,7 +17,15 @@ export const ProfileCard = () => {
       setUserInfo(json);
     };
 
+    const getUserPosts = async () => {
+      const res = await fetch(`http://localhost:4000/posts/${userId}`);
+      const json = await res.json();
+
+      setUserPosts([...json]);
+    };
+
     getUserInfo();
+    getUserPosts();
   }, [userId]);
 
   return (
@@ -24,7 +33,9 @@ export const ProfileCard = () => {
       <img src={userInfo?.imageUrl} alt="img" />
       <div className="info-profile">
         <div className="info-followers">
-          {/* <h4>{info.posts} posts</h4> */}
+          <h4>
+            {userPosts?.length} {userPosts?.length === 1 ? 'post' : 'posts'}
+          </h4>
           <h4>{userInfo?.followers.length} followers</h4>
           <h4>{userInfo?.following.length} following</h4>
         </div>

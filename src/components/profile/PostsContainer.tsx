@@ -6,28 +6,31 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
   const { userId } = useParams();
 
   useEffect(() => {
-    const getDatasByUserId = async () => {
+    const getDataByUserId = async () => {
       try {
         const res = await fetch(`http://localhost:4000/${tab}/${userId}`);
         const data = await res.json();
 
-        console.log(data);
-        setData([data]);
+        setData([...data]);
       } catch (error) {
         console.log(error);
       }
     };
 
-    getDatasByUserId();
+    getDataByUserId();
   }, [tab, userId]);
 
   return (
     <div className="posts-container">
-      {JSON.stringify(data)}
-      {/* {data &&
-        data.map(({ imageUrl }) => {
-          return <img src={imageUrl} />;
-        })} */}
+      {data?.length === 0 && tab !== 'saved' && <h1>Create your first post</h1>}
+      {data?.length === 0 && tab === 'saved' && (
+        <h1>You haven't saved any post</h1>
+      )}
+
+      {data &&
+        data.map(({ imageUrl }, i) => {
+          return <img key={i} src={imageUrl} />;
+        })}
     </div>
   );
 };
