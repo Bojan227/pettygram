@@ -15,6 +15,11 @@ interface UserContextInterface {
   dispatch: (action: { type: string; payload: UserType | string }) => void;
 }
 
+type ActionType =
+  | { type: 'LOGIN'; payload: UserType }
+  | { type: 'LOGOUT'; payload: null }
+  | { type: 'UPDATE'; payload: string };
+
 // type ActionsMap = {
 //   LOGIN: UserType;
 //   LOGOUT: null;
@@ -33,7 +38,7 @@ interface UserContextProviderProps {
 }
 export const UserContext = createContext<UserContextInterface | null>(null);
 
-export const userReducer = (state: any, action: any) => {
+export const userReducer = (state: any, action: ActionType) => {
   const { type, payload } = action;
 
   console.log(state, action.payload);
@@ -66,7 +71,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   useEffect(() => {
     const userState = JSON.parse(`${localStorage.getItem('user')}`);
 
-    console.log('user here');
     if (userState) {
       dispatch({
         type: 'LOGIN',
