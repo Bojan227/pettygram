@@ -1,31 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { User } from '../../hooks/useGetUsers';
+import { UserType } from '../../context/userContext';
+import { Post } from '../../hooks/useGetPosts';
+import { useFollow } from '../../hooks/useFollow';
+import useUserContext from '../../hooks/useUserContext';
+import { useGetData } from '../../hooks/useGetData';
 
 export const ProfileCard = () => {
-  const [userInfo, setUserInfo] = useState<User | null>(null);
-  const [userPosts, setUserPosts] = useState<any | null>(null);
+  const [userInfo, setUserInfo] = useState<UserType | null>(null);
+  const [userPosts, setUserPosts] = useState<Post[] | null>(null);
   const { userId } = useParams();
-
-  console.log(userPosts);
+  const { changeFollowStatus } = useFollow();
+  const { getData } = useGetData();
+  const userContext = useUserContext();
 
   useEffect(() => {
-    const getUserInfo = async () => {
-      const res = await fetch(`http://localhost:4000/user/${userId}`);
-      const json = await res.json();
-
-      setUserInfo(json);
-    };
-
-    const getUserPosts = async () => {
-      const res = await fetch(`http://localhost:4000/posts/${userId}`);
-      const json = await res.json();
-
-      setUserPosts([...json]);
-    };
-
-    getUserInfo();
-    getUserPosts();
+    getData({
+      url: `http://localhost:4000/user/${userId}`,
+      setState: setUserInfo,
+    });
+    getData({
+      url: `http://localhost:4000/posts/${userId}`,
+      setState: setUserPosts,
+    });
   }, [userId]);
 
   return (
@@ -36,10 +33,36 @@ export const ProfileCard = () => {
           <h4>
             {userPosts?.length} {userPosts?.length === 1 ? 'post' : 'posts'}
           </h4>
-          <h4>{userInfo?.followers.length} followers</h4>
-          <h4>{userInfo?.following.length} following</h4>
+          <h4>{userInfo?.followers?.length} followers</h4>
+          <h4>{userInfo?.following?.length} following</h4>
         </div>
         <h2>{userInfo?.firstName + ' ' + userInfo?.lastName}</h2>
+        {userContext?.user._id === userId ? (
+          ''
+        ) : (
+          <button
+            className="follow-btn"
+            onClick={() => {
+              changeFollowStatus(userInfo?._id!);
+              setUserInfo((prevInfo) => {
+                return {
+                  ...prevInfo,
+                  followers: prevInfo?.followers?.includes(
+                    userContext?.user._id!
+                  )
+                    ? prevInfo.followers.filter(
+                        (id) => id !== userContext?.user._id
+                      )
+                    : [...prevInfo?.followers!, userContext?.user._id],
+                };
+              });
+            }}
+          >
+            {userContext?.user?.following?.includes(userId!)
+              ? 'Unfollow'
+              : 'Follow'}
+          </button>
+        )}
       </div>
     </div>
   );
