@@ -29,7 +29,9 @@ export const FeedContainer = ({
   const filteredUsers = users?.filter(
     (user) =>
       user._id !== userContext?.user._id &&
-      !userContext?.user?.following?.find(({ _id }) => _id === user._id)
+      !userContext?.user?.following?.find(
+        (userToFollow) => userToFollow?._id === user._id
+      )
   );
 
   // const filteredUsers = useMemo(
