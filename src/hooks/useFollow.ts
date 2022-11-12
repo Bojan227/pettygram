@@ -7,6 +7,7 @@ export const useFollow = () => {
   const userContext = useUserContext();
 
   const changeFollowStatus = async (userId: string) => {
+    console.log(userId);
     const res = await fetch(`http://localhost:4000/user/`, {
       method: 'PUT',
       headers: {
@@ -17,10 +18,10 @@ export const useFollow = () => {
         userId,
       }),
     });
-    const { user, id, error } = await res.json();
 
+    const { user, newUser, error } = await res.json();
     if (res.ok) {
-      userContext?.dispatch({ type: 'UPDATE', payload: id });
+      userContext?.dispatch({ type: 'UPDATE', payload: { userId, newUser } });
       localStorage.setItem('user', JSON.stringify(user));
     } else {
       setErrorMessage(error);
