@@ -1,13 +1,14 @@
 import { createContext, useReducer, useEffect } from 'react';
 
 export type UserType = {
-  username: string | undefined;
-  firstName: string | undefined;
-  lastName: string | undefined;
-  imageUrl: string | undefined;
-  _id: string | undefined;
-  followers: (UserType | undefined)[];
-  following: (UserType | undefined)[];
+  _id?: string | undefined;
+  username?: string | undefined;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  imageUrl?: string | undefined;
+  followers?: (UserType | undefined)[];
+  following?: (UserType | undefined)[];
+  imageId?: string;
 };
 
 interface UserContextInterface {
@@ -17,8 +18,8 @@ interface UserContextInterface {
 
 type ActionType =
   | { type: 'LOGIN'; payload: UserType }
-  | { type: 'LOGOUT'; payload: null }
-  | { type: 'UPDATE'; payload: { userId: string; newUser: UserType } };
+  | { type: 'LOGOUT'; payload: undefined | string }
+  | { type: 'UPDATE'; payload: { userId: string; updatedUser: UserType } };
 
 interface UserContextProviderProps {
   children: JSX.Element[] | JSX.Element;
@@ -37,11 +38,13 @@ export const userReducer = (state: any, action: ActionType) => {
       return {
         user: {
           ...state.user,
-          following: state.user.following?.includes(action.payload.userId)
+          following: state.user.following?.find(
+            ({ _id }: { _id: string }) => _id === action.payload.userId
+          )
             ? state.user.following?.filter(
                 ({ _id }: { _id: string }) => _id !== action.payload.userId
               )
-            : [...state.user.following, action.payload.newUser],
+            : [...state.user.following, action.payload.updatedUser],
         },
       };
     default:
