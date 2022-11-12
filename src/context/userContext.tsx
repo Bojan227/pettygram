@@ -1,37 +1,24 @@
 import { createContext, useReducer, useEffect } from 'react';
 
-type UserType = {
-  username: string;
-  firstName: string;
-  lastName: string;
-  imageUrl: string;
-  _id: string;
-  followers: [string];
-  following: [string];
+export type UserType = {
+  username: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  imageUrl: string | undefined;
+  _id: string | undefined;
+  followers: (UserType | undefined)[];
+  following: (UserType | undefined)[];
 };
 
 interface UserContextInterface {
   user: UserType;
-  dispatch: (action: { type: string; payload: UserType | string }) => void;
+  dispatch: (action: ActionType) => void;
 }
 
 type ActionType =
   | { type: 'LOGIN'; payload: UserType }
   | { type: 'LOGOUT'; payload: null }
-  | { type: 'UPDATE'; payload: string };
-
-// type ActionsMap = {
-//   LOGIN: UserType;
-//   LOGOUT: null;
-//   UPDATE: string;
-// };
-
-// type Actions = {
-//   [Key in keyof ActionsMap]: {
-//     type: Key;
-//     payload: ActionsMap[Key];
-//   };
-// }[keyof ActionsMap];
+  | { type: 'UPDATE'; payload: { userId: string; newUser: UserType } };
 
 interface UserContextProviderProps {
   children: JSX.Element[] | JSX.Element;
@@ -41,7 +28,6 @@ export const UserContext = createContext<UserContextInterface | null>(null);
 export const userReducer = (state: any, action: ActionType) => {
   const { type, payload } = action;
 
-  console.log(state, action.payload);
   switch (type) {
     case 'LOGIN':
       return { user: payload };
@@ -51,11 +37,11 @@ export const userReducer = (state: any, action: ActionType) => {
       return {
         user: {
           ...state.user,
-          following: state.user.following?.includes(action.payload)
+          following: state.user.following?.includes(action.payload.userId)
             ? state.user.following?.filter(
-                (_id: string) => _id !== action.payload
+                ({ _id }: { _id: string }) => _id !== action.payload.userId
               )
-            : [...state.user.following, action.payload],
+            : [...state.user.following, action.payload.newUser],
         },
       };
     default:
