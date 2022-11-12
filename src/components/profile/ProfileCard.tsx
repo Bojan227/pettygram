@@ -7,7 +7,7 @@ import useUserContext from '../../hooks/useUserContext';
 import { useGetData } from '../../hooks/useGetData';
 
 export const ProfileCard = () => {
-  const [userInfo, setUserInfo] = useState<UserType | null>(null);
+  const [userInfo, setUserInfo] = useState<UserType>();
   const [userPosts, setUserPosts] = useState<Post[] | null>(null);
   const { userId } = useParams();
   const { changeFollowStatus } = useFollow();
@@ -33,7 +33,10 @@ export const ProfileCard = () => {
           <h4>
             {userPosts?.length} {userPosts?.length === 1 ? 'post' : 'posts'}
           </h4>
-          <h4>{userInfo?.followers?.length} followers</h4>
+          <h4>
+            {userInfo?.followers?.length}{' '}
+            {userInfo?.followers?.length === 1 ? 'follower' : 'followers'}
+          </h4>
           <h4>{userInfo?.following?.length} following</h4>
         </div>
         <h2>{userInfo?.firstName + ' ' + userInfo?.lastName}</h2>
@@ -47,18 +50,22 @@ export const ProfileCard = () => {
               setUserInfo((prevInfo) => {
                 return {
                   ...prevInfo,
-                  followers: prevInfo?.followers?.includes(
-                    userContext?.user._id!
+                  followers: prevInfo?.followers?.find(
+                    (userToFollow) =>
+                      userToFollow?._id === userContext?.user._id!
                   )
                     ? prevInfo.followers.filter(
-                        (id) => id !== userContext?.user._id
+                        (userToFollow) =>
+                          userToFollow?._id !== userContext?.user._id
                       )
-                    : [...prevInfo?.followers!, userContext?.user._id],
+                    : [...prevInfo?.followers!, userContext?.user],
                 };
               });
             }}
           >
-            {userContext?.user?.following?.includes(userId!)
+            {userContext?.user?.following?.find(
+              (userToFollow) => userToFollow?._id === userId!
+            )
               ? 'Unfollow'
               : 'Follow'}
           </button>
