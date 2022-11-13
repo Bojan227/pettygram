@@ -27,13 +27,20 @@ export const UserCard = ({
           <h4>{lastName}</h4>
         </div>
       </Link>
-      <button onClick={() => changeFollowStatus(_id!)}>
-        {userContext?.user?.following?.find(
-          (userToFollow) => userToFollow?._id === _id!
-        )
-          ? 'Unfollow'
-          : 'Follow'}
-      </button>
+      {userContext?.user._id === _id ? null : (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            changeFollowStatus(_id!);
+          }}
+        >
+          {userContext?.user?.following?.find(
+            (userToFollow) => userToFollow?._id === _id!
+          )
+            ? 'Unfollow'
+            : 'Follow'}
+        </button>
+      )}
     </div>
   );
 };
