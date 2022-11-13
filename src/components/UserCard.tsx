@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useFollow } from '../hooks/useFollow';
+import useUserContext from '../hooks/useUserContext';
 
 interface UserCardProps {
   _id?: string | undefined;
@@ -15,17 +16,24 @@ export const UserCard = ({
   imageUrl,
 }: UserCardProps) => {
   const { changeFollowStatus } = useFollow();
+  const userContext = useUserContext();
 
   return (
     <div className="users-container" key={_id}>
       <Link to={`/profile/${_id}`}>
         <div className="flex items-center gap-1">
-          <img src={imageUrl} className="w-14 h-20" />
+          <img src={imageUrl} />
           <h4>{firstName}</h4>
           <h4>{lastName}</h4>
         </div>
       </Link>
-      <button onClick={() => changeFollowStatus(_id!)}>Follow</button>
+      <button onClick={() => changeFollowStatus(_id!)}>
+        {userContext?.user?.following?.find(
+          (userToFollow) => userToFollow?._id === _id!
+        )
+          ? 'Unfollow'
+          : 'Follow'}
+      </button>
     </div>
   );
 };
