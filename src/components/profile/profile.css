@@ -22,8 +22,9 @@ a {
 
 .profile-card > img {
   border-radius: 50%;
-  width: 85px;
-  height: 92px;
+  width: 135px;
+  height: 100px;
+  object-fit: scale-down;
 }
 .info-profile {
   display: flex;
@@ -102,4 +103,51 @@ a {
   .posts-container {
     justify-content: center;
   }
+}
+
+.users-container-list {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  z-index: 10;
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.users-list-content {
+  background-color: white;
+  color: black;
+  z-index: 1000;
+  width: 25%;
+  border-radius: 12px;
+  max-height: 45%;
+  overflow-y: auto;
+}
+
+.users-list-content > :nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid grey;
+  z-index: 1500;
+}
+.users-list-content > :nth-child(1) > :nth-child(2) {
+  cursor: pointer;
+}
+
+.users-container > button {
+  border: 1px solid grey;
+  border-radius: 12px;
+  padding: 5px 22px;
+  cursor: pointer;
+}
+
+.users-container > a > div > img {
+  width: 60px;
+  height: 65px;
+  border-radius: 10%;
 }
