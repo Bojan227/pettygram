@@ -86,7 +86,6 @@ export const PostDetails = ({
             updateLike={() =>
               updateLike({
                 url: 'http://localhost:4000/posts/',
-                likes: post?.likes!,
                 setState: setPosts,
                 _id: id!,
               })

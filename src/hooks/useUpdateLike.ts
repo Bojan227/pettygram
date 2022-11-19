@@ -1,17 +1,13 @@
 import { Dispatch, SetStateAction } from 'react';
-import useUserContenxt from './useUserContext';
 
 interface updateLikeProps {
   url: string;
-  likes: string[];
   setState: Dispatch<SetStateAction<any[] | undefined>>;
   _id: string;
 }
 
 export default function useUpdateLike() {
-  const userContext = useUserContenxt();
-
-  const updateLike = async ({ url, likes, setState, _id }: updateLikeProps) => {
+  const updateLike = async ({ url, setState, _id }: updateLikeProps) => {
     try {
       const res = await fetch(url, {
         method: 'PUT',
@@ -20,9 +16,7 @@ export default function useUpdateLike() {
           Authorization: `Bearer ${document.cookie.split('=')[1]}`,
         },
         body: JSON.stringify({
-          _id,
-          like: !likes?.find((id) => id === userContext?.user._id),
-          userId: userContext?.user._id,
+          postId: _id,
         }),
       });
 

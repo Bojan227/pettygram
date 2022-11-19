@@ -1,4 +1,4 @@
-import { LikeButton, Details } from './SvgsContainer';
+import { LikeButton, Details, Bookmark } from './SvgsContainer';
 import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentForm';
 import useUpdateLike from '../../hooks/useUpdateLike';
@@ -61,13 +61,13 @@ export const PostCard = ({
           updateLike={() =>
             updateLike({
               url: 'http://localhost:4000/posts/',
-              likes,
               setState: setPosts,
               _id,
             })
           }
         />
         <Details postId={_id} />
+        <Bookmark />
       </section>
       <section className="likes-section">
         <h4>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'}`}</h4>

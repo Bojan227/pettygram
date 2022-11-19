@@ -1,7 +1,6 @@
 // import { LikeButton } from './feed/SvgContainer';
 import { SetStateAction, Dispatch } from 'react';
 import useUpdateLike from '../../hooks/useUpdateLike';
-import useUserContenxt from '../../hooks/useUserContext';
 import { LikeButton } from '../feed/SvgsContainer';
 import { Comments } from './CommentsContainer';
 import { formatDistanceToNow } from 'date-fns';
@@ -28,7 +27,6 @@ export const CommentsCard = ({
   _id,
   setComments,
 }: CommentsCardProps) => {
-  const userContext = useUserContenxt();
   const { updateLike } = useUpdateLike();
 
   return (
@@ -53,7 +51,6 @@ export const CommentsCard = ({
             updateLike: () =>
               updateLike({
                 url: 'http://localhost:4000/comments/',
-                likes,
                 setState: setComments,
                 _id,
               }),
