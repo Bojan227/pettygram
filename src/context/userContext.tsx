@@ -1,4 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react';
+import { Post } from '../hooks/useGetPosts';
 
 export type UserType = {
   _id?: string | undefined;
@@ -8,6 +9,7 @@ export type UserType = {
   imageUrl?: string | undefined;
   followers?: (UserType | undefined)[];
   following?: (UserType | undefined)[];
+  saved?: Post[];
   imageId?: string;
 };
 
@@ -19,7 +21,14 @@ interface UserContextInterface {
 type ActionType =
   | { type: 'LOGIN'; payload: UserType }
   | { type: 'LOGOUT'; payload: undefined | string }
-  | { type: 'UPDATE'; payload: { userId: string; updatedUser: UserType } };
+  | {
+      type: 'UPDATE_FOLLOWING';
+      payload: { userId: string; updatedUser: UserType };
+    }
+  | {
+      type: 'UPDATE_SAVED';
+      payload: { postId: string; post: Post };
+    };
 
 interface UserContextProviderProps {
   children: JSX.Element[] | JSX.Element;
@@ -34,7 +43,7 @@ export const userReducer = (state: any, action: ActionType) => {
       return { user: payload };
     case 'LOGOUT':
       return { user: null };
-    case 'UPDATE':
+    case 'UPDATE_FOLLOWING':
       return {
         user: {
           ...state.user,
@@ -45,6 +54,19 @@ export const userReducer = (state: any, action: ActionType) => {
                 ({ _id }: { _id: string }) => _id !== action.payload.userId
               )
             : [...state.user.following, action.payload.updatedUser],
+        },
+      };
+    case 'UPDATE_SAVED':
+      return {
+        user: {
+          ...state.user,
+          saved: state.user.saved?.find(
+            ({ _id }: { _id: string }) => _id === action.payload.postId
+          )
+            ? state.user.saved?.filter(
+                ({ _id }: { _id: string }) => _id !== action.payload.postId
+              )
+            : [...state.user.saved, action.payload.post],
         },
       };
     default:
