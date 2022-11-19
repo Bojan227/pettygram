@@ -22,7 +22,7 @@ export const useFollow = () => {
 
     if (res.ok) {
       userContext?.dispatch({
-        type: 'UPDATE',
+        type: 'UPDATE_FOLLOWING',
         payload: { userId, updatedUser },
       });
       localStorage.setItem('user', JSON.stringify(user));
