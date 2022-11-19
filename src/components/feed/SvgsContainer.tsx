@@ -1,5 +1,6 @@
 import useUserContenxt from '../../hooks/useUserContext';
 import { Link } from 'react-router-dom';
+import useUpdateSaved from '../../hooks/useUpdateSaved';
 
 type LikeButtonProps = {
   updateLike: () => void;
@@ -52,15 +53,24 @@ export const Details = ({ postId }: { postId?: string }) => {
   );
 };
 
-export const Bookmark = () => {
+export const Bookmark = ({ postId }: { postId: string }) => {
+  const userContext = useUserContenxt();
+  const { updateSaved } = useUpdateSaved();
+
+  console.log(userContext?.user.saved);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill={`${
+        userContext?.user?.saved?.find(({ _id }) => _id === postId)
+          ? 'black'
+          : 'none'
+      }`}
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
       style={{ width: '32px', cursor: 'pointer' }}
+      onClick={() => updateSaved({ postId })}
     >
       <path
         strokeLinecap="round"
