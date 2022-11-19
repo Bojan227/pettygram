@@ -5,6 +5,7 @@ import useUpdateLike from '../../hooks/useUpdateLike';
 import { Dispatch, SetStateAction } from 'react';
 import { Post } from '../../hooks/useGetPosts';
 import { formatDistanceToNow } from 'date-fns';
+import useUserContext from '../../hooks/useUserContext';
 
 type PostCardProps = {
   createdBy: {
@@ -32,6 +33,7 @@ export const PostCard = ({
   setPosts,
 }: PostCardProps): JSX.Element => {
   const { updateLike } = useUpdateLike();
+  const userContext = useUserContext();
 
   return (
     <div className="card">
@@ -67,7 +69,11 @@ export const PostCard = ({
           }
         />
         <Details postId={_id} />
-        <Bookmark postId={_id} />
+        {userContext?.user._id !== createdBy._id ? (
+          <Bookmark postId={_id} />
+        ) : (
+          ''
+        )}
       </section>
       <section className="likes-section">
         <h4>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'}`}</h4>

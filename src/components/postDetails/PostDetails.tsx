@@ -7,6 +7,8 @@ import { Dispatch, SetStateAction } from 'react';
 import { Post } from '../../hooks/useGetPosts';
 import useUpdateLike from '../../hooks/useUpdateLike';
 import { formatDistanceToNow } from 'date-fns';
+import { Bookmark } from '../feed/SvgsContainer';
+import useUserContext from '../../hooks/useUserContext';
 
 import './postDetails.css';
 
@@ -25,6 +27,7 @@ export const PostDetails = ({
   const { updateLike } = useUpdateLike();
   const [post, setPost] = useState<Post | undefined>(undefined);
   const [commentMessage, setCommentMessage] = useState('');
+  const userContext = useUserContext();
 
   useEffect(() => {
     setPost(posts?.find((post) => post._id === id));
@@ -92,7 +95,12 @@ export const PostDetails = ({
             }
           />
 
-          <Details postId={post?._id} />
+          <Details />
+          {userContext?.user._id !== post?.createdBy._id ? (
+            <Bookmark postId={post?._id!} />
+          ) : (
+            ''
+          )}
         </div>
         <section className="likes-info">
           {`${post?.likes.length} ${

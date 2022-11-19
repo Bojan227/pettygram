@@ -92,6 +92,10 @@
 .buttons-section-details {
   display: flex;
   gap: 5px;
+  width: 100%;
+}
+.buttons-section-details > :nth-child(2) {
+  flex: 1;
 }
 .commments-card {
   display: flex;
