@@ -2,6 +2,7 @@ import { DragEvent, useState } from 'react';
 import { Dispatch, SetStateAction } from 'react';
 import { Post } from '../../hooks/useGetPosts';
 import { Navigate } from 'react-router-dom';
+import { ShareButton } from '../buttons/ShareButton';
 import useUserContenxt from '../../hooks/useUserContext';
 import useCreatePost from '../../hooks/useCreatePost';
 
@@ -105,7 +106,15 @@ export const CreatePost = ({
               onChange={(e) => setCaption(e.target.value)}
               placeholder="Write a caption..."
             />
-            <button onClick={handleSubmit}>Share</button>
+            <ShareButton
+              disabled={caption ? false : true}
+              onClick={handleSubmit}
+              className={`border border-teal-400 rounded-xl py-1 px-5 cursor-pointer ${
+                caption ? 'text-zinc-900' : 'text-zinc-300'
+              } `}
+            >
+              Share
+            </ShareButton>
           </div>
         </div>
       )}
