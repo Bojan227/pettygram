@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CommentButton } from '../buttons/CommentButton';
 
 interface CommentFormProps {
   postId: string;
@@ -29,7 +30,6 @@ export const CommentForm = ({
 
       const json = await res.json();
 
-
       commentNotification!(json.message);
 
       setErrorMessage(json?.error);
@@ -48,14 +48,12 @@ export const CommentForm = ({
         onChange={(e) => setComment(e.target.value)}
         placeholder="Add a comment..."
       />
-      <button
-        disabled={!comment ? true : false}
-        style={{
-          color: `${!comment ? 'rgba(1,1,122, 0.2)' : 'rgb(1,1,122)'}`,
-        }}
+      <CommentButton
+        disabled={comment ? false : true}
+        className={comment ? 'text-zinc-900' : 'text-slate-300'}
       >
         Post
-      </button>
+      </CommentButton>
     </form>
   );
 };
