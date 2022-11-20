@@ -31,11 +31,12 @@
   gap: 10px;
   align-items: center;
   border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 .user-section-details > img {
   border-radius: 50%;
   width: 45px;
+  height: 45px;
 }
 .details-images-section {
   display: flex;
@@ -45,6 +46,7 @@
 }
 .details-images-section > img {
   height: 95%;
+  width: 95%;
 }
 
 .back-btn {
@@ -81,6 +83,7 @@
 
 .caption-info > img {
   width: 32px;
+  height: 32px;
   border-radius: 50%;
 }
 
@@ -105,6 +108,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.comments-info > div > a > div > img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
 }
 
 .comment-card-info {

@@ -32,14 +32,10 @@ export const CommentsCard = ({
   return (
     <div className="commments-card">
       <section className="comments-info">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4">
           <Link to={`/profile/${createdBy._id}`}>
             <div className="flex items-center gap-5">
-              <img
-                src={createdBy.imageUrl}
-                alt="img"
-                style={{ width: '32px', height: '52px', borderRadius: '50%' }}
-              />
+              <img src={createdBy.imageUrl} alt="img" />
               <p style={{ fontWeight: 'bold' }}>{createdBy.username}</p>
             </div>
           </Link>
