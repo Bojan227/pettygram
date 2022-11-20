@@ -25,7 +25,7 @@ function App() {
         userContext?.user ? 'flex bg-stone-50 justify-center' : ''
       }`}
     >
-      {userContext?.user && <NavigationBar />}
+      {userContext?.user && <NavigationBar {...{ setPosts }} />}
 
       <Routes>
         <Route

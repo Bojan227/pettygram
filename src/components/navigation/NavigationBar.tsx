@@ -1,4 +1,6 @@
 import { NavigationLink } from './NavigationLink';
+import { Dispatch, SetStateAction } from 'react';
+import { Post } from '../../hooks/useGetPosts';
 import { Link } from 'react-router-dom';
 import { navData } from './navData';
 import menu from './images/menu.png';
@@ -9,7 +11,11 @@ import { useState } from 'react';
 import { FooterMenu } from './FooterMenu';
 import { CreatePost } from './CreatePost';
 
-export const NavigationBar = () => {
+export const NavigationBar = ({
+  setPosts,
+}: {
+  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
+}) => {
   const [toggleMore, setToggleMore] = useState(false);
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
 
@@ -63,7 +69,7 @@ export const NavigationBar = () => {
         </div>
         <FooterMenu toggleMore={toggleMore} />
       </section>
-      <CreatePost {...{ toggleCreatePost, setToggleCreatePost }} />
+      <CreatePost {...{ toggleCreatePost, setToggleCreatePost, setPosts }} />
     </nav>
   );
 };

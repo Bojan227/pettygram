@@ -1,4 +1,6 @@
 import { DragEvent, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+import { Post } from '../../hooks/useGetPosts';
 import { Navigate } from 'react-router-dom';
 import useUserContenxt from '../../hooks/useUserContext';
 import useCreatePost from '../../hooks/useCreatePost';
@@ -6,11 +8,13 @@ import useCreatePost from '../../hooks/useCreatePost';
 interface CreatePostProps {
   toggleCreatePost: boolean;
   setToggleCreatePost: (toggleCreatePost: boolean) => void;
+  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
 }
 
 export const CreatePost = ({
   toggleCreatePost,
   setToggleCreatePost,
+  setPosts,
 }: CreatePostProps) => {
   const [files, setFiles] = useState<File[] | null>(null);
   const [caption, setCaption] = useState('');
@@ -18,9 +22,13 @@ export const CreatePost = ({
 
   const { createpost, isLoading, message, error } = useCreatePost();
 
+  if (isLoading) {
+    return <h1>Loading....</h1>;
+  }
+
   const handleSubmit = async () => {
     if (files) {
-      await createpost(caption, files[0]);
+      await createpost(caption, files[0], setPosts);
       setFiles(null);
       setCaption('');
       setToggleCreatePost(false);

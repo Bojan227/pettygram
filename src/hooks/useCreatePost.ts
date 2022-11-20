@@ -1,23 +1,21 @@
-import { useState } from 'react';
-
-// type CreatePostProps = {
-//   text: string | undefined;
-//   image: {};
-// };
+import { useState, Dispatch, SetStateAction } from 'react';
+import { Post } from './useGetPosts';
 
 export default function useCreatePost() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-  const createpost = async (text: string, image: File) => {
-    console.log(document.cookie.split('=')[1]);
+  const createpost = async (
+    text: string,
+    image: File,
+    setPosts: Dispatch<SetStateAction<Post[] | undefined>>
+  ) => {
     setIsLoading(true);
 
     const reader: any = new FileReader();
     reader.readAsDataURL(image);
     reader.onloadend = () => {
-      console.log(reader.result);
       uploadWithImage(reader.result);
     };
 
@@ -35,13 +33,11 @@ export default function useCreatePost() {
           }),
         });
 
-        const json = await res.json();
+        const post = await res.json();
 
-        setMessage(json.message);
-        setError('');
+        setPosts((prevPosts) => [...prevPosts!, post]);
       } catch (err) {
         setError('Something went wrong');
-        setMessage('');
       } finally {
         setIsLoading(false);
       }
