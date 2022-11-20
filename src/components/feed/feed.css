@@ -6,6 +6,8 @@
   width: 100%;
   min-height: 100vh;
   position: relative;
+  gap: 25px;
+  margin-bottom: 10%;
 }
 
 .card {
@@ -27,6 +29,7 @@
 .user-section > img {
   border-radius: 50%;
   width: 45px;
+  height: 45px;
 }
 .buttons-section {
   display: flex;
@@ -49,7 +52,8 @@
   align-items: center;
 }
 .description-section > a > div > img {
-  width: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
 }
 
@@ -92,14 +96,14 @@ section {
   overflow-y: auto;
 }
 
-.users-container {
+.users-container-profile {
   display: flex;
   align-items: center;
   gap: 3px;
   padding: 5px;
 }
 
-.users-container > :nth-child(1) {
+.users-container-profile-profile > :nth-child(1) {
   flex: 1;
 }
 
@@ -113,7 +117,7 @@ section {
     top: -200px;
     left: 70px;
     flex-direction: row;
-    min-height: 1vh;
+    min-height: 15vh;
     width: 85%;
     padding: 5px;
     overflow-y: none;
@@ -124,24 +128,22 @@ section {
     border: 0;
   }
 
-  .users-container {
+  .users-container-profile {
     flex-direction: column;
     gap: 0;
     padding: 1px;
   }
 
-  .users-container > a > div {
+  .users-container-profile > a > div {
     flex-direction: column;
     gap: 0;
-  }
-  .users-container > button {
-    padding: 2px 8px;
   }
 
   .feed-container {
     width: 100%;
     margin-left: 15%;
     margin-top: 30%;
+
     align-items: center;
   }
 
@@ -158,15 +160,16 @@ section {
     width: 90%;
   }
 
-  .users-container > button {
+  .users-container-profile > button {
     font-size: 0.7rem;
   }
 
   .feed-container {
     width: 100%;
     margin-left: 0;
-    margin-top: 70%;
+    margin-top: 75%;
     align-items: center;
+    padding-bottom: 20px;
   }
 
   .card {

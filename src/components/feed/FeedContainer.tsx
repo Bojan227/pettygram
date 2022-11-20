@@ -35,9 +35,9 @@ export const FeedContainer = ({
   return (
     <main className="feed-container">
       {error && <h1>{error}</h1>}
-      {posts?.map((post, i) => {
-        return <PostCard key={i} {...post} setPosts={setPosts} />;
-      })}
+      {posts?.map((post, i) => (
+        <PostCard key={i} {...post} setPosts={setPosts} />
+      ))}
       <div className="suggested-users">
         <div className="suggested-header">
           <h1>Discover People</h1>
