@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useFollow } from '../hooks/useFollow';
 import useUserContext from '../hooks/useUserContext';
-
+import { FollowButton } from './buttons/FollowButton';
+import { MouseEvent } from 'react';
 interface UserCardProps {
   _id?: string | undefined;
   firstName?: string | undefined;
@@ -19,7 +20,7 @@ export const UserCard = ({
   const userContext = useUserContext();
 
   return (
-    <div className="users-container" key={_id}>
+    <div className="users-container-profile" key={_id}>
       <Link to={`/profile/${_id}`}>
         <div className="flex items-center gap-1">
           <img src={imageUrl} />
@@ -28,8 +29,8 @@ export const UserCard = ({
         </div>
       </Link>
       {userContext?.user._id === _id ? null : (
-        <button
-          onClick={(e) => {
+        <FollowButton
+          onClick={(e: MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
             changeFollowStatus(_id!);
           }}
@@ -39,7 +40,7 @@ export const UserCard = ({
           )
             ? 'Unfollow'
             : 'Follow'}
-        </button>
+        </FollowButton>
       )}
     </div>
   );
