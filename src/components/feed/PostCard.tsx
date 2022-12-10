@@ -2,29 +2,12 @@ import { LikeButton, Details, Bookmark } from './SvgsContainer';
 import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentForm';
 import useUpdateLike from '../../hooks/useUpdateLike';
-import { Dispatch, SetStateAction } from 'react';
-import { Post } from '../../hooks/useGetPosts';
+import { PostCardProps } from './types/feedTypes';
 import { formatDistanceToNow } from 'date-fns';
 import useUserContext from '../../hooks/useUserContext';
 
-type PostCardProps = {
-  createdBy: {
-    imageUrl: string;
-    username: string;
-    _id: string;
-  };
-  // images: string;
-  likes: string[];
-  imageUrl: string;
-  text: string;
-  createdAt: string;
-  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
-  _id: string;
-};
-
 export const PostCard = ({
   createdBy,
-  // images,
   imageUrl,
   likes,
   text,
@@ -45,18 +28,7 @@ export const PostCard = ({
       </Link>
       <div className="images-section">
         <img src={imageUrl} alt="img" />
-        {/* {images.map((url, i) => {
-          return (
-            <img
-              key={i}
-              src={url}
-              alt="img"
-              style={{ width: '450px', height: '450px' }}
-            />
-          );
-        })} */}
       </div>
-
       <section className="buttons-section">
         <LikeButton
           likes={likes}

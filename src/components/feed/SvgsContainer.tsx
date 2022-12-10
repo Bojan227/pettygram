@@ -1,11 +1,7 @@
 import useUserContenxt from '../../hooks/useUserContext';
 import { Link } from 'react-router-dom';
 import useUpdateSaved from '../../hooks/useUpdateSaved';
-
-type LikeButtonProps = {
-  updateLike: () => void;
-  likes: String[];
-};
+import { LikeButtonProps } from './types/feedTypes';
 
 export const LikeButton = ({ updateLike, likes }: LikeButtonProps) => {
   const userContext = useUserContenxt();
@@ -78,7 +74,7 @@ export const Bookmark = ({ postId }: { postId: string }) => {
     </svg>
   );
 };
-export const Edit = ({ onClick }: { onClick: () => void }) => {
+export const Edit = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +83,6 @@ export const Edit = ({ onClick }: { onClick: () => void }) => {
       strokeWidth="1.5"
       stroke="currentColor"
       className="w-6 h-6 cursor-pointer"
-      onClick={onClick}
     >
       <path
         strokeLinecap="round"

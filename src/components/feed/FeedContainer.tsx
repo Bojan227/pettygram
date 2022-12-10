@@ -1,16 +1,10 @@
 import { PostCard } from './PostCard';
-import { Dispatch, SetStateAction, useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useGetUsers } from '../../hooks/useGetUsers';
 import useUserContext from '../../hooks/useUserContext';
 import './feed.css';
-import { Post } from '../../hooks/useGetPosts';
+import { FeedContainerProps } from './types/feedTypes';
 import { UserCard } from '../UserCard';
-
-interface FeedContainerProps {
-  posts: Post[];
-  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
-  error: string;
-}
 
 export const FeedContainer = ({
   posts,
