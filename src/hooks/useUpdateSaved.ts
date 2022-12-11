@@ -1,3 +1,4 @@
+import fetcher from '../api/fetcher';
 import useUserContext from './useUserContext';
 
 interface updateSavedProps {
@@ -9,7 +10,7 @@ export default function useUpdateSaved() {
 
   const updateSaved = async ({ postId }: updateSavedProps) => {
     try {
-      const res = await fetch('http://localhost:4000/saved/', {
+      const { user, post } = await fetcher('http://localhost:4000/saved/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -19,8 +20,6 @@ export default function useUpdateSaved() {
           postId,
         }),
       });
-
-      const { user, post } = await res.json();
 
       userContext?.dispatch({
         type: 'UPDATE_SAVED',

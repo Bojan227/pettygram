@@ -1,14 +1,13 @@
+import fetcher from '../api/fetcher';
+
 interface UseGetDataProps {
   url: string;
   setState: React.Dispatch<React.SetStateAction<any | null>>;
 }
 
-//not implemented
 export const useGetData = () => {
   const getData = async ({ url, setState }: UseGetDataProps) => {
-    const res = await fetch(url);
-    const json = await res.json();
-
+    const json = await fetcher(url);
     setState(json);
   };
 

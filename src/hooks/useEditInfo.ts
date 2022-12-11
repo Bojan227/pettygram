@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import fetcher from '../api/fetcher';
 import useUserContenxt from './useUserContext';
 
 export default function useEditInfo() {
@@ -14,7 +15,7 @@ export default function useEditInfo() {
   ) => {
     setIsLoading(true);
     try {
-      const user = await fetch('http://localhost:4000/user/edit', {
+      const updatedUser = await fetcher('http://localhost:4000/user/edit', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -26,8 +27,6 @@ export default function useEditInfo() {
           lastName,
         }),
       });
-
-      const updatedUser = await user.json();
 
       userContext?.dispatch({ type: 'LOGIN', payload: updatedUser });
       localStorage.setItem('user', JSON.stringify(updatedUser));

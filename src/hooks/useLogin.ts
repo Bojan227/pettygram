@@ -1,3 +1,4 @@
+import fetcher from '../api/fetcher';
 import useUserContenxt from './useUserContext';
 
 export default function useLogin() {
@@ -5,7 +6,7 @@ export default function useLogin() {
 
   const login = async (username: string, password: string) => {
     try {
-      const user = await fetch('http://localhost:4000/user/login', {
+      const json = await fetcher('http://localhost:4000/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -15,10 +16,6 @@ export default function useLogin() {
           password,
         }),
       });
-
-      const json = await user.json();
-
-      console.log(json.user);
 
       userContext?.dispatch({ type: 'LOGIN', payload: json.user });
       localStorage.setItem('user', JSON.stringify(json.user));

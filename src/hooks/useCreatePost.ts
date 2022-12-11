@@ -1,5 +1,6 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import { Post } from './useGetPosts';
+import { Post } from '../components/feed/types/feedTypes';
+import fetcher from '../api/fetcher';
 
 export default function useCreatePost() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +22,7 @@ export default function useCreatePost() {
 
     const uploadWithImage = async (img: string) => {
       try {
-        const res = await fetch('http://localhost:4000/posts/', {
+        const post = await fetcher('http://localhost:4000/posts/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -32,8 +33,6 @@ export default function useCreatePost() {
             image: img,
           }),
         });
-
-        const post = await res.json();
 
         setPosts((prevPosts) => [...prevPosts!, post]);
       } catch (err) {

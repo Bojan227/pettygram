@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import fetcher from '../api/fetcher';
 
 interface updateLikeProps {
   url: string;
@@ -9,7 +10,7 @@ interface updateLikeProps {
 export default function useUpdateLike() {
   const updateLike = async ({ url, setState, _id }: updateLikeProps) => {
     try {
-      const res = await fetch(url, {
+      const json = await fetcher(url, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -19,9 +20,6 @@ export default function useUpdateLike() {
           postId: _id,
         }),
       });
-
-      const json = await res.json();
-      console.log(json);
 
       setState((prevState) => {
         return prevState?.map((state) => {

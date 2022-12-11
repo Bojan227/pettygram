@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import fetcher from '../api/fetcher';
 
 type SignupProps = {
   username: string;
@@ -36,7 +37,7 @@ export default function useSignup() {
 
     const uploadWithImage = async (img: string) => {
       try {
-        const res = await fetch('http://localhost:4000/user/signup', {
+        const json = await fetcher('http://localhost:4000/user/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -49,8 +50,6 @@ export default function useSignup() {
             image: img,
           }),
         });
-
-        const json = await res.json();
 
         setMessage(json.message);
         setError('');

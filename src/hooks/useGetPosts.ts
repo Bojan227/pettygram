@@ -1,32 +1,17 @@
 import { useState } from 'react';
-import useUserContenxt from '../hooks/useUserContext';
-
-export interface Post {
-  _id: string;
-  text: string;
-  imageUrl: string;
-  imageId: string;
-  createdAt: string;
-  likes: [string];
-  createdBy: {
-    imageUrl: string;
-    username: string;
-    _id: string;
-  };
-}
+import { Post } from '../components/feed/types/feedTypes';
+import fetcher from '../api/fetcher';
 
 export const useGetPosts = () => {
-  const [posts, setPosts] = useState<Post[]>();
+  const [posts, setPosts] = useState<Post[] | undefined>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   const getPosts = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/posts/');
-      const json = await res.json();
-
-      setPosts([...json]);
+      const json = await fetcher('http://localhost:4000/posts/');
+      setPosts(json);
     } catch (error) {
       setError('No posts available');
     } finally {

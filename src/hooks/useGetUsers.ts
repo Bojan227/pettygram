@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import fetcher from '../api/fetcher';
 import { UserType } from '../context/userContext';
 
 export const useGetUsers = () => {
@@ -10,9 +11,7 @@ export const useGetUsers = () => {
     setIsLoading(true);
 
     try {
-      const res = await fetch('http://localhost:4000/user/');
-      const json = await res.json();
-
+      const json = await fetcher('http://localhost:4000/user/');
       setUsers([...json]);
     } catch (error) {
       setError('No posts available');
