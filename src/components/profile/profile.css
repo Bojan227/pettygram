@@ -22,9 +22,8 @@ a {
 
 .profile-card > img {
   border-radius: 50%;
-  width: 135px;
-  height: 100px;
-  object-fit: scale-down;
+  width: 125px;
+  height: 125px;
 }
 .info-profile {
   display: flex;
@@ -101,8 +100,9 @@ a {
 }
 
 .users-container-profile > a > div > img {
-  width: 40px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
 }
 .users-container-profile {
   display: flex;
@@ -113,6 +113,31 @@ a {
 
 .users-list-content {
   width: 25%;
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  gap: 10px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30%;
+  width: 35%;
+  gap: 15px;
+}
+.edit-form > input {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid black;
 }
 
 @media (max-width: 1150px) {
@@ -146,6 +171,9 @@ a {
 
   .users-container-profile > button {
     font-size: 0.9rem;
+  }
+  .edit-form {
+    margin-left: 0%;
   }
 }
 

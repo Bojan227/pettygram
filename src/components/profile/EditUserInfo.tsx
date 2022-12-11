@@ -2,7 +2,8 @@ import { FormEvent, useEffect, useState } from 'react';
 import useUserContext from '../../hooks/useUserContext';
 import TextField from '../TextField';
 import useEditInfo from '../../hooks/useEditInfo';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import Button from '../buttons/Button';
 
 export const EditInfo = () => {
   const [username, setUsername] = useState('');
@@ -25,8 +26,11 @@ export const EditInfo = () => {
   if (isLoading) <h1>Loading....</h1>;
 
   return (
-    <div>
+    <div className="edit-container">
       <h3>{error}</h3>
+      <Link to={`/profile/${userContext?.user._id}`}>
+        <Button className="primary-btn">Back to profile</Button>
+      </Link>
       <form className="edit-form" onSubmit={handleSubmit}>
         Username
         <TextField
@@ -46,7 +50,7 @@ export const EditInfo = () => {
           value={lastName}
           onChange={(lastName) => setLastName(lastName)}
         />
-        <button>Edit Information</button>
+        <Button className="primary-btn">Edit</Button>
       </form>
       {message && <Navigate to={`/profile/${userContext?.user._id}`} />}
     </div>
