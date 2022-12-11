@@ -38,13 +38,13 @@ export const EditInfo = () => {
         <TextField
           className="fistName"
           value={firstName}
-          onChange={(firstName) => setUsername(firstName)}
+          onChange={(firstName) => setFirstName(firstName)}
         />
         Last Name
         <TextField
           className="lastName"
           value={lastName}
-          onChange={(lastName) => setUsername(lastName)}
+          onChange={(lastName) => setLastName(lastName)}
         />
         <button>Edit Information</button>
       </form>
