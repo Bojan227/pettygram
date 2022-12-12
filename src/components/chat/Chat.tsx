@@ -23,21 +23,22 @@ export default function Chat({
   const [chatData, setChatData] = useState<ChatType[] | undefined>([]);
   const userContext = useUserContext();
 
-  console.log(chatData);
-
   useEffect(() => {
     const getChat = async () => {
-      const res = await fetch('http://localhost:4000/chat');
+      const res = await fetch(
+        `http://localhost:4000/chat?author=${userContext?.user._id}&receiver=${selectedUser?._id}`
+      );
       const json = await res.json();
 
       setChatData(json);
     };
-    getChat();
+    if (selectedUser?._id) {
+      getChat();
+    }
   }, [selectedUser?._id]);
 
   useEffect(() => {
     socket.on('receive_message', (data: ChatType) => {
-      console.log(data);
       setChatData((prev) => [...prev!, data]);
     });
   }, [socket]);
