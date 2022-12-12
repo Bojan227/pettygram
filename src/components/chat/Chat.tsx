@@ -6,9 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface ChatType {
   message: string;
-  author: string;
+  author: string | undefined;
   time: string;
   room: string;
+  receiver: string | undefined;
 }
 
 export default function Chat({
@@ -22,8 +23,21 @@ export default function Chat({
   const [chatData, setChatData] = useState<ChatType[] | undefined>([]);
   const userContext = useUserContext();
 
+  console.log(chatData);
+
+  useEffect(() => {
+    const getChat = async () => {
+      const res = await fetch('http://localhost:4000/chat');
+      const json = await res.json();
+
+      setChatData(json);
+    };
+    getChat();
+  }, [selectedUser?._id]);
+
   useEffect(() => {
     socket.on('receive_message', (data: ChatType) => {
+      console.log(data);
       setChatData((prev) => [...prev!, data]);
     });
   }, [socket]);
@@ -33,7 +47,8 @@ export default function Chat({
       const messageData = {
         room: '24',
         message: currentMessage,
-        author: userContext?.user?.username!,
+        receiver: selectedUser?._id,
+        author: userContext?.user?._id,
         time:
           new Date(Date.now()).getHours() +
           ':' +
