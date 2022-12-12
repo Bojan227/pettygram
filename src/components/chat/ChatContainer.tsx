@@ -1,25 +1,33 @@
 import useUserContext from '../../hooks/useUserContext';
 import { UserType } from '../../context/userContext';
-import { useState } from 'react';
-import TextField from '../TextField';
+import { useEffect, useState } from 'react';
+import socketClient from 'socket.io-client';
+import Chat from './Chat';
 import './chat.css';
+import ChatHeader from './ChatHeader';
 
 export default function ChatContainer() {
-  const [currentMessage, setCurrentMessage] = useState('');
   const [selectedUser, setSelectedUser] = useState<UserType>();
+  const socket: any = socketClient('http://localhost:4000/');
   const userContext = useUserContext();
 
-  console.log(userContext?.user.following);
+  useEffect(() => {
+    if (selectedUser?._id) {
+      socket.emit('join_room', '24');
+    }
+  }, [selectedUser?._id]);
 
   return (
     <div className="chat-container">
-      <div className="chat-header">{userContext?.user.username}</div>
+      <div className="chat-header">{userContext?.user?.username}</div>
       <div className="chat-users">
         {userContext?.user?.following?.map((user, i) => {
           return (
             <div
               className="user-card"
-              onClick={() => setSelectedUser(user)}
+              onClick={() => {
+                setSelectedUser(user);
+              }}
               key={i}
             >
               <img src={user?.imageUrl} />
@@ -29,23 +37,8 @@ export default function ChatContainer() {
           );
         })}
       </div>
-      <div className="private-chat-header">
-        <img src={selectedUser?.imageUrl} />
-        <h1>{selectedUser?.firstName}</h1>
-        <h1>{selectedUser?.lastName}</h1>
-      </div>
-      {selectedUser ? (
-        <div className="chat">
-          <div className="messages">messages...</div>
-          <TextField
-            className="chat"
-            value={currentMessage}
-            onChange={(currentMessage) => setCurrentMessage(currentMessage)}
-          />
-        </div>
-      ) : (
-        <div className="empty-chat">Your messages</div>
-      )}
+      <ChatHeader {...{ selectedUser }} />
+      <Chat {...{ socket, selectedUser }} />
     </div>
   );
 }
