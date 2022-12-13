@@ -5,9 +5,11 @@ import socketClient from 'socket.io-client';
 import Chat from './Chat';
 import './chat.css';
 import ChatHeader from './ChatHeader';
+import ChatUser from './ChatUser';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function ChatContainer() {
-  const [selectedUser, setSelectedUser] = useState<UserType>();
+  const [selectedUser, setSelectedUser] = useState<UserType | undefined>();
   const socket: any = socketClient('http://localhost:4000/');
   const userContext = useUserContext();
 
@@ -21,21 +23,13 @@ export default function ChatContainer() {
     <div className="chat-container">
       <div className="chat-header">{userContext?.user?.username}</div>
       <div className="chat-users">
-        {userContext?.user?.following?.map((user, i) => {
-          return (
-            <div
-              className="user-card"
-              onClick={() => {
-                setSelectedUser(user);
-              }}
-              key={i}
-            >
-              <img src={user?.imageUrl} />
-              <p>{user?.firstName}</p>
-              <p>{user?.lastName}</p>
-            </div>
-          );
-        })}
+        {userContext?.user?.following?.map((user) => (
+          <ChatUser
+            key={uuidv4()}
+            {...{ ...user, selectedUser }}
+            setSelectedUser={() => setSelectedUser(user)}
+          />
+        ))}
       </div>
       <ChatHeader {...{ selectedUser }} />
       <Chat {...{ socket, selectedUser }} />
