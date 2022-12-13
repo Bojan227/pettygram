@@ -18,6 +18,9 @@
 .chat-users {
   grid-column: 1 / 2;
   border: 1px solid #d1d5db;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat {
@@ -34,6 +37,7 @@
   justify-content: center;
 }
 .chat > .messages {
+  gap: 10px;
   flex: 1;
 }
 .private-chat-header {
@@ -42,11 +46,34 @@
   border: 1px solid #d1d5db;
 }
 
+.user-card {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  padding: 5px 25px;
+}
+
+.user-card:hover {
+  background-color: #d1d5db;
+  cursor: pointer;
+}
+.user-card.active {
+  background-color: #d1d5db;
+}
+
+.user-card > div {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
 .user-card > img,
 .private-chat-header > img {
-  width: 32px;
-}
-input {
-  background-color: black;
-  color: white;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
 }
