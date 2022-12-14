@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import fetcher from '../api/fetcher';
+import { token } from '../constants/cookie';
 
 interface updateLikeProps {
   url: string;
@@ -14,7 +15,7 @@ export default function useUpdateLike() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${document.cookie.split('=')[1]}`,
+          Authorization: token,
         },
         body: JSON.stringify({
           postId: _id,

@@ -3,6 +3,7 @@ import useUserContext from './useUserContext';
 import { UserType } from '../context/userContext';
 import { useEffect, useState } from 'react';
 import { useAddChatData } from '../context/chatDataContext';
+import { token } from '../constants/cookie';
 
 export default function useGetChatHistory(selectedUser: UserType | undefined) {
   const userContext = useUserContext();
@@ -25,13 +26,7 @@ export default function useGetChatHistory(selectedUser: UserType | undefined) {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${
-              document.cookie
-                .split(';')
-                .map((value) => value.trim())
-                .filter((value) => value.split('=')[0] === 'token')
-                .map((value) => value.split('=')[1])[0]
-            }`,
+            Authorization: token,
           },
         }
       );

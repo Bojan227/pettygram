@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import fetcher from '../api/fetcher';
 import useUserContext from './useUserContext';
+import { token } from '../constants/cookie';
 
 export const useFollow = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -14,7 +15,7 @@ export const useFollow = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${document.cookie.split('=')[1]}`,
+          Authorization: token,
         },
         body: JSON.stringify({
           userId,

@@ -1,5 +1,6 @@
 import fetcher from '../api/fetcher';
 import useUserContext from './useUserContext';
+import { token } from '../constants/cookie';
 
 interface updateSavedProps {
   postId: string;
@@ -14,7 +15,7 @@ export default function useUpdateSaved() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${document.cookie.split('=')[1]}`,
+          Authorization: token,
         },
         body: JSON.stringify({
           postId,
