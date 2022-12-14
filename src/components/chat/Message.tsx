@@ -1,11 +1,7 @@
-import { UserType } from '../../context/userContext';
 import useUserContext from '../../hooks/useUserContext';
-
-type MessageProps = {
-  message: string | undefined;
-  senderId: string | undefined;
-  selectedUser: UserType | undefined;
-};
+import { MessageProps } from './types';
+import { useEffect, useRef } from 'react';
+import { useChatData } from '../../context/chatDataContext';
 
 export default function Message({
   message,
@@ -13,11 +9,19 @@ export default function Message({
   selectedUser,
 }: MessageProps) {
   const userContext = useUserContext();
+  const chatData = useChatData();
+  const bottomRef = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatData]);
+
   return (
     <div
       className={`chat-box ${
         userContext?.user._id === senderId ? 'user' : 'guest'
       }`}
+      ref={bottomRef}
     >
       <h3>{message}</h3>
       <p>
