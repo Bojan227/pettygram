@@ -26,6 +26,7 @@
 .chat {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   grid-column: 2/2;
   grid-row: 2/2;
   border: 1px solid #d1d5db;
@@ -37,8 +38,13 @@
   justify-content: center;
 }
 .chat > .messages {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+  max-height: 550px;
   flex: 1;
+  overflow: hidden;
+  overflow-y: auto;
 }
 .private-chat-header {
   grid-column: 2/2;
@@ -76,4 +82,18 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
+}
+
+.chat-box {
+  padding: 10px 25px;
+  border-radius: 8px;
+}
+.chat-box.user {
+  align-self: flex-start;
+  background-color: #86efac;
+}
+
+.chat-box.guest {
+  align-self: flex-end;
+  background-color: #f87171;
 }

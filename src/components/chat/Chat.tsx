@@ -3,13 +3,17 @@ import { UserType } from '../../context/userContext';
 import TextField from '../TextField';
 import useUserContext from '../../hooks/useUserContext';
 import { v4 as uuidv4 } from 'uuid';
+import { useChatData } from '../../context/chatDataContext';
+import { useAddMessage } from '../../context/chatDataContext';
+import useGetChatHistory from '../../hooks/useGetChatHistory';
+import Message from './Message';
 
-interface ChatType {
+export interface ChatType {
   message: string;
-  author: string | undefined;
+  senderId: string | undefined;
   time: string;
-  room: string;
-  receiver: string | undefined;
+  receiverId: string | undefined;
+  members: (string | undefined)[];
 }
 
 export default function Chat({
@@ -19,56 +23,76 @@ export default function Chat({
   selectedUser: UserType | undefined;
   socket: any;
 }) {
+  const chatData = useChatData();
+  const addMessage = useAddMessage();
   const [currentMessage, setCurrentMessage] = useState('');
-  const [chatData, setChatData] = useState<ChatType[] | undefined>([]);
   const userContext = useUserContext();
+  const { isLoading, error } = useGetChatHistory(selectedUser);
 
   useEffect(() => {
-    const getChat = async () => {
-      const res = await fetch(
-        `http://localhost:4000/chat?author=${userContext?.user._id}&receiver=${selectedUser?._id}`
-      );
-      const json = await res.json();
-
-      setChatData(json);
-    };
-    if (selectedUser?._id) {
-      getChat();
-    }
-  }, [selectedUser?._id]);
-
-  useEffect(() => {
-    socket.on('receive_message', (data: ChatType) => {
-      setChatData((prev) => [...prev!, data]);
-    });
-  }, [socket]);
+    socket.emit('add_user', { userId: userContext?.user?._id });
+  }, []);
 
   const sendMessage = async () => {
     if (currentMessage) {
       const messageData = {
-        room: '24',
         message: currentMessage,
-        receiver: selectedUser?._id,
-        author: userContext?.user?._id,
+        receiverId: selectedUser?._id,
+        senderId: userContext?.user?._id,
+        members: [userContext?.user?._id, selectedUser?._id],
         time:
           new Date(Date.now()).getHours() +
           ':' +
           new Date(Date.now()).getMinutes(),
       };
+
       await socket.emit('send_message', messageData);
-      setChatData((prevData) => [...prevData!, messageData]);
+
+      await fetch('http://localhost:4000/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${
+            document.cookie
+              .split(';')
+              .map((value) => value.trim())
+              .filter((value) => value.split('=')[0] === 'token')
+              .map((value) => value.split('=')[1])[0]
+          }`,
+        },
+        body: JSON.stringify(messageData),
+      });
+      addMessage(messageData);
       setCurrentMessage('');
     }
   };
+
+  useEffect(() => {
+    const addNewMessage = (data: ChatType) => {
+      addMessage(data);
+    };
+
+    socket.on('receive_message', addNewMessage);
+
+    return () => socket.off('receive_message', addNewMessage);
+  }, []);
+
+  if (isLoading) return <h1>Loading.....</h1>;
 
   return (
     <>
       {selectedUser ? (
         <div className="chat">
           <div className="messages">
-            {chatData?.map(({ message }, i) => {
-              return <h1 key={uuidv4()}>{message}</h1>;
-            })}
+            {chatData &&
+              chatData?.map(({ message, senderId }, i) => {
+                return (
+                  <Message
+                    key={uuidv4()}
+                    {...{ selectedUser, message, senderId }}
+                  />
+                );
+              })}
           </div>
           <TextField
             className="chat"
