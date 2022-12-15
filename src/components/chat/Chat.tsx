@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { UserType } from '../../context/userContext';
 import TextField from '../TextField';
 import useUserContext from '../../hooks/useUserContext';
@@ -6,15 +6,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { useChatData } from '../../context/chatDataContext';
 import { useAddMessage } from '../../context/chatDataContext';
 import useGetChatHistory from '../../hooks/useGetChatHistory';
+import useCreateMessage from '../../hooks/useCreateMessage';
 import Message from './Message';
-
-export interface ChatType {
-  message: string;
-  senderId: string | undefined;
-  time: string;
-  receiverId: string | undefined;
-  members: (string | undefined)[];
-}
+import { ChatType } from '../../context/chatDataContext';
 
 export default function Chat({
   selectedUser,
@@ -28,10 +22,22 @@ export default function Chat({
   const [currentMessage, setCurrentMessage] = useState('');
   const userContext = useUserContext();
   const { isLoading, error } = useGetChatHistory(selectedUser);
+  const { createMessage, errorMessage } = useCreateMessage();
 
   useEffect(() => {
-    socket.emit('add_user', { userId: userContext?.user?._id });
+    if (userContext?.user._id) {
+      socket.emit('add_user', { userId: userContext?.user?._id });
+    }
   }, []);
+
+  useEffect(() => {
+    socket.on('receive_message', (data: ChatType) => {
+      addMessage(data);
+    });
+    return () => {
+      socket.off('receive_message');
+    };
+  }, [socket, selectedUser?._id]);
 
   const sendMessage = async () => {
     if (currentMessage) {
@@ -48,34 +54,11 @@ export default function Chat({
 
       await socket.emit('send_message', messageData);
 
-      await fetch('http://localhost:4000/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${
-            document.cookie
-              .split(';')
-              .map((value) => value.trim())
-              .filter((value) => value.split('=')[0] === 'token')
-              .map((value) => value.split('=')[1])[0]
-          }`,
-        },
-        body: JSON.stringify(messageData),
-      });
+      await createMessage(messageData);
       addMessage(messageData);
       setCurrentMessage('');
     }
   };
-
-  useEffect(() => {
-    const addNewMessage = (data: ChatType) => {
-      addMessage(data);
-    };
-
-    socket.on('receive_message', addNewMessage);
-
-    return () => socket.off('receive_message', addNewMessage);
-  }, []);
 
   if (isLoading) return <h1>Loading.....</h1>;
 
@@ -84,15 +67,14 @@ export default function Chat({
       {selectedUser ? (
         <div className="chat">
           <div className="messages">
-            {chatData &&
-              chatData?.map(({ message, senderId }, i) => {
-                return (
-                  <Message
-                    key={uuidv4()}
-                    {...{ selectedUser, message, senderId }}
-                  />
-                );
-              })}
+            {chatData?.map(({ message, senderId }, i) => {
+              return (
+                <Message
+                  key={uuidv4()}
+                  {...{ selectedUser, message, senderId, index: i }}
+                />
+              );
+            })}
           </div>
           <TextField
             className="chat"
