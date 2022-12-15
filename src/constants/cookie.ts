@@ -1,7 +1,7 @@
+const index = document.cookie
+  .split('; ')
+  .findIndex((value) => value.includes('token'));
+
 export const token = `Bearer ${
-  document.cookie
-    .split(';')
-    .map((value) => value.trim())
-    .filter((value) => value.split('=')[0] === 'token')
-    .map((value) => value.split('=')[1])[0]
+  document.cookie.split('; ')[index].split('=')[1]
 }`;
