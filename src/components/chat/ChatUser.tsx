@@ -1,12 +1,4 @@
-import { UserType } from '../../context/userContext';
-
-interface ChatUserProps {
-  imageUrl?: string | undefined;
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  setSelectedUser: () => void;
-  selectedUser: UserType | undefined;
-}
+import { ChatUserProps } from './types';
 
 export default function ChatUser({
   imageUrl,
