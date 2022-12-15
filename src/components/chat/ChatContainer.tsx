@@ -14,10 +14,8 @@ export default function ChatContainer() {
   const userContext = useUserContext();
 
   useEffect(() => {
-    if (selectedUser?._id) {
-      socket.emit('join_room', '24');
-    }
-  }, [selectedUser?._id]);
+    return () => socket.emit('remove_user', { userId: userContext?.user?._id });
+  }, []);
 
   return (
     <div className="chat-container">
@@ -32,7 +30,7 @@ export default function ChatContainer() {
         ))}
       </div>
       <ChatHeader {...{ selectedUser }} />
-      <Chat {...{ socket, selectedUser }} />
+      {selectedUser && <Chat {...{ socket, selectedUser }} />}
     </div>
   );
 }
