@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { UserType } from '../../context/userContext';
 import TextField from '../TextField';
 import useUserContext from '../../hooks/useUserContext';
@@ -53,7 +53,6 @@ export default function Chat({
       };
 
       await socket.emit('send_message', messageData);
-
       await createMessage(messageData);
       addMessage(messageData);
       setCurrentMessage('');
@@ -76,12 +75,20 @@ export default function Chat({
               );
             })}
           </div>
-          <TextField
-            className="chat"
-            value={currentMessage}
-            onChange={(currentMessage) => setCurrentMessage(currentMessage)}
-          />
-          <button onClick={sendMessage}>Send</button>
+          <div className="send-container">
+            <TextField
+              className="chat-input"
+              value={currentMessage}
+              onChange={(currentMessage) => setCurrentMessage(currentMessage)}
+            />
+            {currentMessage ? (
+              <button className="send-btn" onClick={sendMessage}>
+                Send
+              </button>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       ) : (
         <div className="empty-chat">Your messages</div>
