@@ -8,16 +8,21 @@
   border: 1px solid #d1d5db;
   height: 80vh;
   width: 60%;
+  font-size: 1.2rem;
 }
 
 .chat-header {
   grid-column: 1/1;
   grid-row: 1/0;
-  height: 10px;
+  height: 100%;
+  text-align: center;
+  padding: 10px;
 }
 .chat-users {
   grid-column: 1 / 2;
   border: 1px solid #d1d5db;
+  max-height: 100%;
+  overflow-y: auto;
   padding: 8px;
   display: flex;
   flex-direction: column;
@@ -47,6 +52,10 @@
   overflow-y: auto;
 }
 .private-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 15px;
   grid-column: 2/2;
   grid-row: 1/2;
   border: 1px solid #d1d5db;
@@ -60,7 +69,7 @@
   border: 1px solid #d1d5db;
   border-radius: 8px;
 
-  padding: 5px 25px;
+  padding: 15px 25px;
 }
 
 .user-card:hover {
@@ -79,8 +88,8 @@
 
 .user-card > img,
 .private-chat-header > img {
-  width: 52px;
-  height: 52px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
 }
 
