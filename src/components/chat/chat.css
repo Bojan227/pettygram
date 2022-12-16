@@ -87,24 +87,33 @@
 }
 
 .user-card > img,
-.private-chat-header > img {
-  width: 42px;
-  height: 42px;
+.private-chat-header > img,
+.chat-box > img {
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
 }
 
 .chat-box {
+  display: flex;
+  gap: 20px;
+  align-items: center;
   padding: 10px 25px;
   border-radius: 8px;
 }
+
+.chat-box > h3 {
+  border: 1px solid #d1d5db;
+  padding: 10px 30px;
+  border-radius: 15px;
+}
+
 .chat-box.user {
-  align-self: flex-start;
-  background-color: #86efac;
+  align-self: flex-end;
 }
 
 .chat-box.guest {
-  align-self: flex-end;
-  background-color: #f87171;
+  align-self: flex-start;
 }
 
 .send-container {
