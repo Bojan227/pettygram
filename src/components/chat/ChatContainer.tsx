@@ -20,7 +20,7 @@ export default function ChatContainer() {
   return (
     <div className="chat-container">
       <div className="chat-header">{userContext?.user?.username}</div>
-      <div className="chat-users">
+      <div className={`chat-users ${selectedUser?._id ? 'disabled' : ''}`}>
         {userContext?.user?.following?.map((user) => (
           <ChatUser
             key={uuidv4()}
@@ -29,7 +29,7 @@ export default function ChatContainer() {
           />
         ))}
       </div>
-      <ChatHeader {...{ selectedUser }} />
+      <ChatHeader {...{ selectedUser, setSelectedUser, socket }} />
       {selectedUser && <Chat {...{ socket, selectedUser }} />}
     </div>
   );

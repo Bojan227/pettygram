@@ -23,8 +23,14 @@ export default function Message({
       }`}
       ref={bottomRef}
     >
-      <img src={userContext?.user.imageUrl} />
-      <h3>{message}</h3>
+      <img
+        src={
+          userContext?.user._id === senderId
+            ? userContext?.user.imageUrl
+            : selectedUser?.imageUrl
+        }
+      />
+      <h4>{message}</h4>
     </div>
   );
 }

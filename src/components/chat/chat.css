@@ -6,7 +6,7 @@
   grid-template-columns: 2fr 4fr;
   grid-template-rows: 0.2fr 3fr;
   border: 1px solid #d1d5db;
-  height: 80vh;
+  height: 85vh;
   width: 60%;
   font-size: 1.2rem;
 }
@@ -60,6 +60,9 @@
   grid-row: 1/2;
   border: 1px solid #d1d5db;
 }
+.private-chat-header > button {
+  display: none;
+}
 
 .user-card {
   display: flex;
@@ -102,7 +105,7 @@
   border-radius: 8px;
 }
 
-.chat-box > h3 {
+.chat-box > h4 {
   border: 1px solid #d1d5db;
   padding: 10px 30px;
   border-radius: 15px;
@@ -136,4 +139,66 @@
   cursor: pointer;
   color: #0ea5e9;
   font-size: 1.1rem;
+}
+
+@media (max-width: 1150px) {
+  .chat-container {
+    margin-left: 15%;
+    width: 80%;
+  }
+}
+
+@media (max-width: 880px) {
+  .chat-container {
+    margin-left: 20%;
+    font-size: 1rem;
+    width: 80%;
+  }
+  .chat-users {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 750px) {
+  .chat-container {
+    margin-top: 200px;
+    margin-left: 0%;
+    font-size: 1rem;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border: 0;
+  }
+  .chat-header {
+    display: none;
+  }
+
+  .private-chat-header > button.activated {
+    display: block;
+    font-size: 1.8rem;
+  }
+
+  .chat {
+    display: none;
+  }
+  .chat-users {
+    display: flex;
+    border-radius: 8px;
+    max-height: 70vh;
+    overflow-y: auto;
+    height: 80vh;
+    width: 100%;
+  }
+
+  .chat-users.disabled {
+    display: none;
+  }
+  .chat.activated {
+    display: flex;
+    height: 80%;
+    width: 100%;
+    max-height: 90vh;
+    border-top: 0;
+  }
 }

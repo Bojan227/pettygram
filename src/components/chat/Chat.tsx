@@ -64,7 +64,9 @@ export default function Chat({
   return (
     <>
       {selectedUser ? (
-        <div className="chat">
+        <div className={`chat ${selectedUser._id ? 'activated' : ''} `}>
+          
+
           <div className="messages">
             {chatData?.map(({ message, senderId }, i) => {
               return (
