@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect } from 'react';
-import { Post } from '../hooks/useGetPosts';
+import { Post } from '../components/feed/types/feedTypes';
+import useLogout from '../hooks/useLogout';
 
 export type UserType = {
   _id?: string | undefined;
@@ -78,11 +79,25 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [state, dispatch] = useReducer(userReducer, {
     user: null,
   });
+  const { logout } = useLogout();
 
   useEffect(() => {
     const userState = JSON.parse(`${localStorage.getItem('user')}`);
+    // const index = document.cookie
+    //   ?.split('; ')
+    //   ?.findIndex((value) => value?.includes('token'));
 
-    if (userState) {
+    // const token = `Bearer ${
+    //   document?.cookie?.split('; ')[index]?.split('=')[1] || undefined
+    // }`;
+    if (
+      !document.cookie
+        ?.split('; ')
+        ?.find((value) => value?.includes('token'))
+        ?.split('=')[1]
+    ) {
+      logout();
+    } else if (userState) {
       dispatch({
         type: 'LOGIN',
         payload: userState,
