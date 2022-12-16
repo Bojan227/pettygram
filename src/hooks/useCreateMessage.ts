@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ChatType } from '../context/chatDataContext';
-import { token } from '../constants/cookie';
 export default function useCreateMessage() {
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -10,7 +9,12 @@ export default function useCreateMessage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token,
+          Authorization: `Bearer ${
+            document.cookie
+              ?.split('; ')
+              ?.find((value) => value?.includes('token'))
+              ?.split('=')[1]
+          }`,
         },
         body: JSON.stringify(messageData),
       });

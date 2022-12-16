@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import fetcher from '../api/fetcher';
 import useUserContenxt from './useUserContext';
-import { token } from '../constants/cookie';
 
 export default function useEditInfo() {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +19,12 @@ export default function useEditInfo() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token,
+          Authorization: `Bearer ${
+            document.cookie
+              ?.split('; ')
+              ?.find((value) => value?.includes('token'))
+              ?.split('=')[1]
+          }`,
         },
         body: JSON.stringify({
           username,

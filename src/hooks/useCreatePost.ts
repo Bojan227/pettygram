@@ -1,7 +1,6 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import { Post } from '../components/feed/types/feedTypes';
 import fetcher from '../api/fetcher';
-import { token } from '../constants/cookie';
 
 export default function useCreatePost() {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +26,12 @@ export default function useCreatePost() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: token,
+            Authorization: `Bearer ${
+              document.cookie
+                ?.split('; ')
+                ?.find((value) => value?.includes('token'))
+                ?.split('=')[1]
+            }`,
           },
           body: JSON.stringify({
             text,
