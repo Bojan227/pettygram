@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { UserType } from '../../context/userContext';
-import { Post } from '../../hooks/useGetPosts';
 import { useFollow } from '../../hooks/useFollow';
 import useUserContext from '../../hooks/useUserContext';
 import { useGetData } from '../../hooks/useGetData';
 import { UsersListContainer } from './UsersListContainer';
+import { Edit } from '../feed/SvgsContainer';
+import { Post } from '../feed/types/feedTypes';
 
 export const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState<UserType>();
@@ -59,6 +60,11 @@ export const ProfileCard = () => {
           <h4 onClick={() => setShowFollowing(true)}>
             {userInfo?.following?.length} following
           </h4>
+          {userContext?.user._id === userInfo?._id && (
+            <Link to={`/edit`}>
+              <Edit />
+            </Link>
+          )}
         </div>
         <h2>{userInfo?.firstName + ' ' + userInfo?.lastName}</h2>
         {userContext?.user._id === userId ? (
