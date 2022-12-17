@@ -1,19 +1,35 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { Post } from '../feed/types/feedTypes';
+import fetcher from '../../api/fetcher';
 
 export const PostsContainer = ({ tab }: { tab: string }) => {
-  const [data, setData] = useState<any[] | null>([]);
+  const [data, setData] = useState<Post[] | null>([]);
+  const [error, setError] = useState('');
   const { userId } = useParams();
 
   useEffect(() => {
     const getDataByUserId = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/${tab}/${userId}`);
-        const data = await res.json();
-
-        setData([...data]);
+        const data = await fetcher(
+          `http://localhost:4000/${tab}/${tab === 'saved' ? '' : userId}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${
+                document.cookie
+                  ?.split('; ')
+                  ?.find((value) => value?.includes('token'))
+                  ?.split('=')[1]
+              }`,
+            },
+          }
+        );
+        setData(data);
       } catch (error) {
-        console.log(error);
+        if (error instanceof Error) {
+          setError(error.message);
+        }
       }
     };
 
@@ -28,9 +44,14 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
       )}
 
       {data &&
-        data.map(({ imageUrl }, i) => {
-          return <img key={i} src={imageUrl} />;
+        data.map(({ imageUrl, _id }, i) => {
+          return (
+            <Link key={i} to={`/p/${_id}`}>
+              <img src={imageUrl} />
+            </Link>
+          );
         })}
+      {error && <h1>{error}</h1>}
     </div>
   );
 };

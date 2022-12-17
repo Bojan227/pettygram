@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import useUserContext from '../../hooks/useUserContext';
 
 const navData = [
   {
@@ -7,15 +8,19 @@ const navData = [
     href: 'profile',
   },
   { label: 'SAVED', href: 'saved' },
-  { label: 'TAGGED', href: 'tagged' },
 ];
 
 export const ProfileNav = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const { userId } = useParams();
+  const userContext = useUserContext();
+
+  const filterNavData =
+    userId === userContext?.user._id ? navData : navData.slice(0, 1);
 
   return (
     <div className="profile-nav">
-      {navData.map((data, i) => {
+      {filterNavData.map((data, i) => {
         const { label, href } = data;
 
         return (
