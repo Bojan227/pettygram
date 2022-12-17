@@ -1,24 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CommentsCard } from './CommentsCard';
-
-type CommentsContainerProps = {
-  commentNotification: (value: string) => void;
-  commentMessage: string;
-};
-
-export interface Comments {
-  comment: string;
-  post: string;
-  createdBy: {
-    _id: string;
-    username: string;
-    imageUrl: string;
-  };
-  createdAt: string;
-  likes: string[];
-  _id: string;
-}
+import { Comments, CommentsContainerProps } from './types';
 
 export const CommentsContainer = ({
   commentNotification,

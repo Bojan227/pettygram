@@ -1,23 +1,9 @@
 // import { LikeButton } from './feed/SvgContainer';
-import { SetStateAction, Dispatch } from 'react';
 import useUpdateLike from '../../hooks/useUpdateLike';
 import { LikeButton } from '../feed/SvgsContainer';
-import { Comments } from './CommentsContainer';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
-
-type CommentsCardProps = {
-  createdBy: {
-    _id: string;
-    imageUrl: string;
-    username: string;
-  };
-  comment: string;
-  createdAt: string;
-  likes: string[];
-  _id: string;
-  setComments: Dispatch<SetStateAction<Comments[] | undefined>>;
-};
+import { CommentsCardProps } from './types';
 
 export const CommentsCard = ({
   createdBy,
@@ -57,7 +43,6 @@ export const CommentsCard = ({
         {createdAt && (
           <h5>{formatDistanceToNow(new Date(createdAt).getTime())}</h5>
         )}
-
         <p>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'} `}</p>
       </section>
     </div>
