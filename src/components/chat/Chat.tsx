@@ -8,24 +8,23 @@ import { useAddMessage } from '../../context/chatDataContext';
 import useGetChatHistory from '../../hooks/useGetChatHistory';
 import Message from './Message';
 import { ChatType } from '../../context/chatDataContext';
+import { socket } from '../../constants/socket';
 
 export default function Chat({
   selectedUser,
-  socket,
 }: {
   selectedUser: UserType | undefined;
-  socket: any;
 }) {
   const chatData = useChatData();
   const addMessage = useAddMessage();
   const userContext = useUserContext();
   const { isLoading, error } = useGetChatHistory(selectedUser);
 
-  useEffect(() => {
-    if (userContext?.user._id) {
-      socket.emit('add_user', { userId: userContext?.user?._id });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (userContext?.user._id) {
+  //     socket.emit('add_user', { userId: userContext?.user?._id });
+  //   }
+  // }, []);
 
   useEffect(() => {
     socket.on('receive_message', (data: ChatType) => {

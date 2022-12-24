@@ -1,17 +1,12 @@
 import { UserType } from '../../context/userContext';
-import useUserContext from '../../hooks/useUserContext';
 
 export default function ChatHeader({
   selectedUser,
   setSelectedUser,
-  socket,
 }: {
   selectedUser: UserType | undefined;
   setSelectedUser: React.Dispatch<React.SetStateAction<UserType | undefined>>;
-  socket: any;
 }) {
-  const userContext = useUserContext();
-
   return (
     <div className="private-chat-header">
       {selectedUser && (
@@ -19,7 +14,6 @@ export default function ChatHeader({
           <button
             onClick={() => {
               setSelectedUser(undefined);
-              socket.emit('remove_user', { userId: userContext?.user?._id });
             }}
             className={selectedUser._id ? 'activated' : ''}
           >

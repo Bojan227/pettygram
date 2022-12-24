@@ -1,7 +1,6 @@
 import useUserContext from '../../hooks/useUserContext';
 import { UserType } from '../../context/userContext';
-import { useEffect, useState } from 'react';
-import socketClient from 'socket.io-client';
+import { useState } from 'react';
 import Chat from './Chat';
 import './chat.css';
 import ChatHeader from './ChatHeader';
@@ -10,12 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function ChatContainer() {
   const [selectedUser, setSelectedUser] = useState<UserType | undefined>();
-  const socket: any = socketClient('http://localhost:4000/');
   const userContext = useUserContext();
-
-  useEffect(() => {
-    return () => socket.emit('remove_user', { userId: userContext?.user?._id });
-  }, []);
 
   return (
     <div className="chat-container">
@@ -29,8 +23,8 @@ export default function ChatContainer() {
           />
         ))}
       </div>
-      <ChatHeader {...{ selectedUser, setSelectedUser, socket }} />
-      {selectedUser && <Chat {...{ socket, selectedUser }} />}
+      <ChatHeader {...{ selectedUser, setSelectedUser }} />
+      {selectedUser && <Chat {...{ selectedUser }} />}
     </div>
   );
 }

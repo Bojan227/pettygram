@@ -6,6 +6,7 @@ export interface ChatUserProps {
   lastName?: string | undefined;
   setSelectedUser: () => void;
   selectedUser: UserType | undefined;
+  _id?: string | undefined;
 }
 
 export type MessageProps = {
@@ -13,4 +14,9 @@ export type MessageProps = {
   senderId: string | undefined;
   selectedUser: UserType | undefined;
   index: number;
+};
+
+export type OnlineUsersData = {
+  userId: string;
+  socketId: string;
 };

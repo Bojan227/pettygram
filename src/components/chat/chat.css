@@ -71,7 +71,6 @@
   justify-content: flex-start;
   border: 1px solid #d1d5db;
   border-radius: 8px;
-
   padding: 15px 25px;
 }
 
@@ -82,19 +81,35 @@
 .user-card.active {
   background-color: #d1d5db;
 }
-
-.user-card > div {
+.user-card > div > :nth-child(1) {
   display: flex;
   gap: 2px;
   align-items: center;
 }
 
+.user-card > div > :nth-child(2) {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
 .user-card > img,
 .private-chat-header > img,
 .chat-box > img {
-  width: 38px;
-  height: 38px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
+}
+.green-circle::before {
+  content: '';
+  border-radius: 50%;
+}
+.green-circle::before {
+  width: 10px;
+  height: 10px;
+  display: block;
+  background-color: green;
 }
 
 .chat-box {
