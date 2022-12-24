@@ -10,6 +10,9 @@ import Login from './components/Login';
 import useUserContenxt from './hooks/useUserContext';
 import { PostsContainer } from './components/profile/PostsContainer';
 import { PostDetails } from './components/postDetails/PostDetails';
+import { EditInfo } from './components/profile/EditUserInfo';
+import ChatContainer from './components/chat/ChatContainer';
+import NotificationsContainer from './components/notifications/NotificationsContainer';
 
 function App() {
   const userContext = useUserContenxt();
@@ -17,12 +20,12 @@ function App() {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [userContext?.user?.username]);
 
   return (
     <div
       className={`${
-        userContext?.user ? 'flex bg-stone-50 justify-center' : ''
+        userContext?.user ? 'flex bg-stone-50 justify-center min-h-screen' : ''
       }`}
     >
       {userContext?.user && <NavigationBar {...{ setPosts }} />}
@@ -66,6 +69,11 @@ function App() {
             element={<PostDetails {...{ posts, setPosts, isLoading }} />}
           />
         )}
+        <Route path="/edit" element={<EditInfo />} />
+        {userContext?.user && (
+          <Route path="/inbox" element={<ChatContainer />} />
+        )}
+        <Route path="notifications" element={<NotificationsContainer />} />
       </Routes>
     </div>
   );
