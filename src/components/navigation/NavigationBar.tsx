@@ -1,6 +1,6 @@
 import { NavigationLink } from './NavigationLink';
 import { Dispatch, SetStateAction } from 'react';
-import { Post } from '../../hooks/useGetPosts';
+import { Post } from '../feed/types/feedTypes';
 import { Link } from 'react-router-dom';
 import { navData } from './navData';
 import menu from './images/menu.png';
@@ -40,20 +40,13 @@ export const NavigationBar = ({
         </section>
         <section>
           <ul className="links-section">
-            {navData.map((data) => {
-              const { title, url, link } = data;
-              return (
-                <NavigationLink
-                  key={title}
-                  title={title}
-                  url={url}
-                  link={link}
-                  toggleCreatePost={() =>
-                    setToggleCreatePost(!toggleCreatePost)
-                  }
-                />
-              );
-            })}
+            {navData.map(({ title, url, link }) => (
+              <NavigationLink
+                {...{ title, url, link }}
+                key={title}
+                toggleCreatePost={() => setToggleCreatePost(!toggleCreatePost)}
+              />
+            ))}
           </ul>
         </section>
       </div>

@@ -1,6 +1,6 @@
 import { DragEvent, useState } from 'react';
 import { Dispatch, SetStateAction } from 'react';
-import { Post } from '../../hooks/useGetPosts';
+import { Post } from '../feed/types/feedTypes';
 import { Navigate } from 'react-router-dom';
 import { ShareButton } from '../buttons/ShareButton';
 import useUserContenxt from '../../hooks/useUserContext';

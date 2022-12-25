@@ -6,7 +6,7 @@
   flex-direction: column;
   border-right: 1px solid gray;
   min-height: 100vh;
-  padding: 1.5rem;
+  padding: 1.3rem;
   width: 20%;
   justify-content: space-between;
   background-color: white;
@@ -42,21 +42,15 @@ li:hover,
   justify-content: center;
 }
 
-.links-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-}
-
 .logo-mobile {
   display: none;
 }
 
-.profile-link > li > img {
+.profile-link > li > div > img,
+.links-section > a > li > div > img {
   border-radius: 50%;
-  width: 45px;
-  height: 50px;
+  width: 34px;
+  height: 34px;
 }
 
 .footer-menu-section {
@@ -108,7 +102,6 @@ li:hover,
 }
 .share-container {
   display: flex;
-  display: flex;
   justify-content: center;
   width: 85%;
   height: 65%;
@@ -145,8 +138,6 @@ li:hover,
   border-radius: 50%;
 }
 .share-container > div > button {
-  padding: 5px;
-  color: blue;
   font-size: 1.1rem;
 }
 #actual-btn {
@@ -166,6 +157,20 @@ label {
 #file-chosen {
   margin-left: 0.3rem;
   font-family: sans-serif;
+}
+
+.links-section > a > li > div {
+  position: relative;
+}
+
+.notification-msg {
+  position: absolute;
+  z-index: 10;
+  background-color: #dc2626;
+  padding: 4px;
+  border-radius: 50%;
+  top: -5px;
+  right: 0;
 }
 
 @media (max-width: 1150px) {
@@ -227,7 +232,7 @@ label {
     align-items: flex-start;
   }
   .links-section {
-    flex-direction: row;
+    display: flex;
     justify-content: space-evenly;
     position: fixed;
     bottom: 0;
