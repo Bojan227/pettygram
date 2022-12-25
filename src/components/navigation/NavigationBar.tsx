@@ -1,11 +1,9 @@
 import { NavigationLink } from './NavigationLink';
 import { Dispatch, SetStateAction } from 'react';
 import { Post } from '../feed/types/feedTypes';
-import { Link } from 'react-router-dom';
 import { navData } from './navData';
 import menu from './images/menu.png';
-import instagram from './images/instagram-text-icon.png';
-import instagramMobile from './images/insta-icon-mobile.png';
+import LogoContainer from './LogoContainer';
 import './navigation.css';
 import { useState } from 'react';
 import { FooterMenu } from './FooterMenu';
@@ -20,24 +18,9 @@ export const NavigationBar = ({
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
 
   return (
-    <nav className="main-navigation">
+    <nav className="main-navigation" onClick={() => setToggleMore(false)}>
       <div className="header-nav">
-        <section>
-          <Link className="logo-desktop" to="/">
-            <img
-              src={instagram}
-              alt="instagram-logo"
-              style={{ maxWidth: '160px', padding: '10px' }}
-            />
-          </Link>
-          <Link className="logo-mobile" to="/">
-            <img
-              src={instagramMobile}
-              alt="instagram-logo"
-              style={{ maxWidth: '120px', padding: '10px' }}
-            />
-          </Link>
-        </section>
+        <LogoContainer />
         <section>
           <ul className="links-section">
             {navData.map(({ title, url, link }) => (
@@ -50,11 +33,13 @@ export const NavigationBar = ({
           </ul>
         </section>
       </div>
-
       <section
         className="footer-nav"
         style={{ position: 'relative' }}
-        onClick={() => setToggleMore(!toggleMore)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setToggleMore(!toggleMore);
+        }}
       >
         <div className="flex items-center gap-8">
           <img src={menu} alt="menu" />
