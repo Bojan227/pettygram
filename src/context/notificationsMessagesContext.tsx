@@ -3,20 +3,20 @@ import { ChatType } from './chatDataContext';
 
 type ActionType =
   | { type: 'ADD_MESSAGE'; payload: ChatType }
-  | { type: 'DELETE_MESSAGES' };
+  | { type: 'DELETE_MESSAGES'; payload: string };
 
 type NotificationsMenagerResult = ReturnType<typeof NotificationsManager>;
 
 const NotificationsContext = createContext<NotificationsMenagerResult>({
   newMessages: [],
-  addMessage: () => {},
-  deleteMessages: () => {},
+  addNotificationMessage: () => {},
+  deleteNewMessages: () => {},
 });
 
 function NotificationsManager(initialData: ChatType[]): {
   newMessages: ChatType[];
-  addMessage: (message: ChatType) => void;
-  deleteMessages: () => void;
+  addNotificationMessage: (message: ChatType) => void;
+  deleteNewMessages: (userId: string) => void;
 } {
   const [newMessages, dispatch] = useReducer(
     (messagesState: ChatType[], action: ActionType) => {
@@ -24,7 +24,9 @@ function NotificationsManager(initialData: ChatType[]): {
         case 'ADD_MESSAGE':
           return [...messagesState, action.payload];
         case 'DELETE_MESSAGES':
-          return [];
+          return messagesState.filter(
+            ({ senderId }) => senderId !== action.payload
+          );
         default:
           return messagesState;
       }
@@ -32,15 +34,15 @@ function NotificationsManager(initialData: ChatType[]): {
     initialData
   );
 
-  const addMessage = useCallback((message: ChatType) => {
+  const addNotificationMessage = useCallback((message: ChatType) => {
     dispatch({ type: 'ADD_MESSAGE', payload: message });
   }, []);
 
-  const deleteMessages = useCallback(() => {
-    dispatch({ type: 'DELETE_MESSAGES' });
+  const deleteNewMessages = useCallback((userId: string) => {
+    dispatch({ type: 'DELETE_MESSAGES', payload: userId });
   }, []);
 
-  return { newMessages, addMessage, deleteMessages };
+  return { newMessages, addNotificationMessage, deleteNewMessages };
 }
 
 export const NotificationsProvider: React.FunctionComponent<{
@@ -62,13 +64,13 @@ export const useNewMessages = (): ChatType[] => {
 };
 
 export const useAddNotificationMessage =
-  (): NotificationsMenagerResult['addMessage'] => {
-    const { addMessage } = useContext(NotificationsContext);
-    return addMessage;
+  (): NotificationsMenagerResult['addNotificationMessage'] => {
+    const { addNotificationMessage } = useContext(NotificationsContext);
+    return addNotificationMessage;
   };
 
 export const useDeleteNotificationMessages =
-  (): NotificationsMenagerResult['deleteMessages'] => {
-    const { deleteMessages } = useContext(NotificationsContext);
-    return deleteMessages;
+  (): NotificationsMenagerResult['deleteNewMessages'] => {
+    const { deleteNewMessages } = useContext(NotificationsContext);
+    return deleteNewMessages;
   };
