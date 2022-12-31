@@ -36,7 +36,7 @@ export default function ChatUser({
       }`}
       onClick={() => {
         setSelectedUser();
-        deleteNewMessages();
+        deleteNewMessages(_id!);
       }}
     >
       <img src={imageUrl} />

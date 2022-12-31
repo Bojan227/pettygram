@@ -7,7 +7,6 @@ export interface ChatType {
   receiverId: string | undefined;
   members: (string | undefined)[];
 }
-
 type ActionType =
   | { type: 'ADD'; chatHistory: ChatType[] }
   | { type: 'ADD_NEW'; message: ChatType };
