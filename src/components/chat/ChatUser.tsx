@@ -2,7 +2,8 @@ import { ChatUserProps } from './types';
 import { socket } from '../../constants/socket';
 import { useEffect, useState } from 'react';
 import { OnlineUsersData } from './types';
-
+import { useNewMessages } from '../../context/notificationsMessagesContext';
+import { useDeleteNotificationMessages } from '../../context/notificationsMessagesContext';
 export default function ChatUser({
   imageUrl,
   firstName,
@@ -12,7 +13,8 @@ export default function ChatUser({
   selectedUser,
 }: ChatUserProps) {
   const [onlineUsers, setOnlineUsers] = useState<OnlineUsersData[]>([]);
-  console.log(onlineUsers);
+  const newMessages = useNewMessages();
+  const deleteNewMessages = useDeleteNotificationMessages();
   useEffect(() => {
     socket.emit('getOnlineUsers');
   }, [socket, selectedUser?._id]);
@@ -32,7 +34,10 @@ export default function ChatUser({
       className={`user-card ${
         selectedUser?.firstName === firstName && 'active'
       }`}
-      onClick={setSelectedUser}
+      onClick={() => {
+        setSelectedUser();
+        deleteNewMessages();
+      }}
     >
       <img src={imageUrl} />
       <div>
@@ -44,7 +49,13 @@ export default function ChatUser({
         {onlineUsers.find(({ userId }) => userId === _id) ? (
           <div>
             <div className="green-circle"></div>
-            <p>Active now</p>
+            {newMessages.find(({ senderId }) =>
+              onlineUsers.find(({ userId }) => userId === senderId)
+            ) ? (
+              <p className="new-message">Sent you a message</p>
+            ) : (
+              <p>Active now</p>
+            )}
           </div>
         ) : null}
       </div>

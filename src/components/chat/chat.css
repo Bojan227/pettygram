@@ -156,6 +156,9 @@
   font-size: 1.1rem;
 }
 
+.new-message {
+  font-weight: 900;
+}
 @media (max-width: 1150px) {
   .chat-container {
     margin-left: 15%;

@@ -27,6 +27,7 @@ export default function Chat({
   // }, []);
 
   useEffect(() => {
+    socket.off('notification_message');
     socket.on('receive_message', (data: ChatType) => {
       addMessage(data);
     });
