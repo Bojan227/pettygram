@@ -32,6 +32,7 @@ export const PostCard = ({
       <section className="buttons-section">
         <LikeButton
           likes={likes}
+          receiverId={createdBy._id}
           updateLike={() =>
             updateLike({
               url: 'http://localhost:4000/posts/',

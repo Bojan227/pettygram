@@ -2,8 +2,13 @@ import useUserContenxt from '../../hooks/useUserContext';
 import { Link } from 'react-router-dom';
 import useUpdateSaved from '../../hooks/useUpdateSaved';
 import { LikeButtonProps } from './types/feedTypes';
+import { socket } from '../../constants/socket';
 
-export const LikeButton = ({ updateLike, likes }: LikeButtonProps) => {
+export const LikeButton = ({
+  updateLike,
+  likes,
+  receiverId,
+}: LikeButtonProps) => {
   const userContext = useUserContenxt();
 
   return (
@@ -16,7 +21,15 @@ export const LikeButton = ({ updateLike, likes }: LikeButtonProps) => {
       strokeWidth={1.5}
       stroke="currentColor"
       style={{ width: '32px', cursor: 'pointer' }}
-      onClick={updateLike}
+      onClick={() => {
+        updateLike();
+        socket.emit('send_like', {
+          senderId: userContext?.user._id,
+          action: 'like',
+          receiverId,
+          message: `${userContext?.user._id} liked your post!`,
+        });
+      }}
     >
       <path
         strokeLinecap="round"
