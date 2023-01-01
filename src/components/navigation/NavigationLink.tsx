@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { socket } from '../../constants/socket';
-import { ChatType } from '../../context/chatDataContext';
 import useUserContext from '../../hooks/useUserContext';
+import { useNewMessages } from '../../context/notificationsMessagesContext';
 
 type NavigationLinkProps = {
   title: string;
@@ -18,17 +16,13 @@ export const NavigationLink = ({
   toggleCreatePost,
 }: NavigationLinkProps): JSX.Element => {
   const userContext = useUserContext();
-  const [newMessages, setNewMessages] = useState<ChatType[]>([]);
-  useEffect(() => {
-    socket.on('receive_message', (data: ChatType) => {
-      console.log(data);
-      setNewMessages((prev) => [...prev, data]);
-    });
-    return () => {
-      socket.off('receive_message');
-    };
-  }, [socket]);
 
+  const newMessages = useNewMessages();
+  const uniqueMessages = [
+    ...new Set(newMessages.map(({ senderId }) => senderId)),
+  ];
+
+  console.log(uniqueMessages);
   return (
     <Link
       to={link === 'profile' ? `${link}/${userContext?.user._id}` : link}
@@ -36,10 +30,7 @@ export const NavigationLink = ({
         (title === 'Notifications' ? 'notification-link' : '') ||
         (title === 'Profile' ? 'profile-link' : '')
       }
-      onClick={() =>
-        (title === 'Create' && toggleCreatePost()) ||
-        (title === 'Messages' && setNewMessages([]))
-      }
+      onClick={() => title === 'Create' && toggleCreatePost()}
     >
       <li>
         <div>
@@ -48,8 +39,8 @@ export const NavigationLink = ({
             alt="img"
           />
           {title === 'Messages' &&
-            (newMessages.length === 0 ? null : (
-              <div className="notification-msg">{newMessages.length}</div>
+            (uniqueMessages.length === 0 ? null : (
+              <div className="notification-msg">{uniqueMessages.length}</div>
             ))}
         </div>
         <h3>{title}</h3>

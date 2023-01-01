@@ -6,9 +6,6 @@ import './feed.css';
 import { FeedContainerProps } from './types/feedTypes';
 import { UserCard } from '../UserCard';
 import { socket } from '../../constants/socket';
-import { ChatType } from '../../context/chatDataContext';
-import { useAddNotificationMessage } from '../../context/notificationsMessagesContext';
-import { useNewMessages } from '../../context/notificationsMessagesContext';
 
 export const FeedContainer = ({
   posts,
@@ -17,7 +14,6 @@ export const FeedContainer = ({
 }: FeedContainerProps) => {
   const { getUsers, isLoading, users } = useGetUsers();
   const userContext = useUserContext();
-  const addNotificationMessage = useAddNotificationMessage();
 
   useEffect(() => {
     getUsers();
@@ -27,16 +23,6 @@ export const FeedContainer = ({
     if (userContext?.user._id) {
       socket.emit('add_user', { userId: userContext?.user?._id });
     }
-  }, []);
-
-  useEffect(() => {
-    socket.on('notification_message', (data: ChatType) => {
-      console.log(data);
-      addNotificationMessage(data);
-    });
-    return () => {
-      socket.off('notification_message');
-    };
   }, []);
 
   const filteredUsers = users?.filter(

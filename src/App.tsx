@@ -13,6 +13,7 @@ import { PostDetails } from './components/postDetails/PostDetails';
 import { EditInfo } from './components/profile/EditUserInfo';
 import ChatContainer from './components/chat/ChatContainer';
 import NotificationsContainer from './components/notifications/NotificationsContainer';
+import NotificationMessagesWrapper from './components/NotificationMessagesWrapper';
 
 function App() {
   const userContext = useUserContenxt();
@@ -35,7 +36,11 @@ function App() {
           path="/"
           element={
             userContext?.user ? (
-              posts && <FeedContainer {...{ posts, setPosts, error }} />
+              posts && (
+                <NotificationMessagesWrapper>
+                  <FeedContainer {...{ posts, setPosts, error }} />
+                </NotificationMessagesWrapper>
+              )
             ) : (
               <Signup />
             )
@@ -47,7 +52,13 @@ function App() {
         />
         <Route
           path="profile/:userId/"
-          element={userContext?.user && <Profile />}
+          element={
+            userContext?.user && (
+              <NotificationMessagesWrapper>
+                <Profile />
+              </NotificationMessagesWrapper>
+            )
+          }
         >
           <Route
             path="/profile/:userId/"
