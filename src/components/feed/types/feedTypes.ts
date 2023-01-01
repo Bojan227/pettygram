@@ -36,4 +36,5 @@ export interface Post {
 export type LikeButtonProps = {
   updateLike: () => void;
   likes: String[];
+  receiverId: string;
 };
