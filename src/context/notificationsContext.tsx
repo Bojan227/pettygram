@@ -4,7 +4,7 @@ type ActionType =
   | { type: 'ADD_NOTIFICATION'; payload: Notification }
   | { type: 'DELETE_NOTIFICATIONS' };
 
-interface Notification {
+export interface Notification {
   senderId: string;
   message: string;
   receiverId: string;
