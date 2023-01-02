@@ -1,4 +1,5 @@
 import { SetStateAction, Dispatch } from 'react';
+import { Post } from '../../feed/types/feedTypes';
 
 export type CommentsContainerProps = {
   commentNotification: (value: string) => void;
@@ -30,3 +31,9 @@ export type CommentsCardProps = {
   _id: string;
   setComments: Dispatch<SetStateAction<Comments[] | undefined>>;
 };
+
+export interface PostDetailsProps {
+  posts: Post[];
+  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
+  isLoading: boolean;
+}
