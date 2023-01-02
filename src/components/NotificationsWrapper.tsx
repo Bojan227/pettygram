@@ -10,13 +10,13 @@ export default function NotificationsWrapper({
 }) {
   const addNotification = useAddNotification();
   useEffect(() => {
-    socket.on('receive_like', (data: Notification) => {
+    socket.on('receive_notification', (data: Notification) => {
       console.log(data);
       addNotification(data);
     });
 
     return () => {
-      socket.off('receive_like');
+      socket.off('receive_notification');
     };
   }, []);
 
