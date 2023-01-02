@@ -10,24 +10,23 @@ export const LikeButton = ({
   receiverId,
 }: LikeButtonProps) => {
   const userContext = useUserContenxt();
+  const isLiked = likes?.find((id) => id === userContext?.user._id);
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={`${
-        likes?.find((id) => id === userContext?.user._id) ? 'red' : 'none'
-      }`}
+      fill={`${isLiked ? 'red' : 'none'}`}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
       style={{ width: '32px', cursor: 'pointer' }}
       onClick={() => {
         updateLike();
-        socket.emit('send_like', {
+        socket.emit('send_notification', {
           senderId: userContext?.user._id,
           action: 'like',
           receiverId,
-          message: `${userContext?.user._id} liked your post!`,
+          message: `${isLiked ? 'disliked' : 'liked'} your post!`,
         });
       }}
     >
