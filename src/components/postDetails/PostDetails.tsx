@@ -3,20 +3,13 @@ import { useEffect, useState } from 'react';
 import { LikeButton, Details } from '../feed/SvgsContainer';
 import { CommentForm } from '../feed/CommentForm';
 import { CommentsContainer } from './CommentsContainer';
-import { Dispatch, SetStateAction } from 'react';
-import { Post } from '../../hooks/useGetPosts';
+import { PostDetailsProps } from './types';
+import { Post } from '../feed/types/feedTypes';
 import useUpdateLike from '../../hooks/useUpdateLike';
 import { formatDistanceToNow } from 'date-fns';
 import { Bookmark } from '../feed/SvgsContainer';
 import useUserContext from '../../hooks/useUserContext';
-
 import './postDetails.css';
-
-interface PostDetailsProps {
-  posts: Post[];
-  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
-  isLoading: boolean;
-}
 
 export const PostDetails = ({
   posts,
@@ -86,6 +79,7 @@ export const PostDetails = ({
         <div className="buttons-section-details">
           <LikeButton
             likes={post?.likes!}
+            receiverId={post?.createdBy._id!}
             updateLike={() =>
               updateLike({
                 url: 'http://localhost:4000/posts/',
