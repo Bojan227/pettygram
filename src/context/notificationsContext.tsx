@@ -1,14 +1,16 @@
 import { createContext, useCallback, useReducer, useContext } from 'react';
+import { UserType } from './userContext';
 
 type ActionType =
   | { type: 'ADD_NOTIFICATION'; payload: Notification }
-  | { type: 'DELETE_NOTIFICATIONS' };
+  | { type: 'FILTER_NOTIFICATIONS' };
 
 export interface Notification {
-  senderId: string;
+  senderId: UserType;
   message: string;
   receiverId: string;
   action: 'like' | 'follow';
+  read: boolean;
 }
 
 type NotificationsManagerResult = ReturnType<typeof notificationsManager>;
@@ -16,21 +18,21 @@ type NotificationsManagerResult = ReturnType<typeof notificationsManager>;
 const NotificationsContext = createContext<NotificationsManagerResult>({
   notifications: [],
   addNotification: () => {},
-  deleteNotifications: () => {},
+  filterNotifications: () => {},
 });
 
 function notificationsManager(initialData: Notification[]): {
   notifications: Notification[];
   addNotification: (notification: Notification) => void;
-  deleteNotifications: () => void;
+  filterNotifications: () => void;
 } {
   const [notifications, dispatch] = useReducer(
     (state: Notification[], action: ActionType) => {
       switch (action.type) {
         case 'ADD_NOTIFICATION':
           return [...state, action.payload];
-        case 'DELETE_NOTIFICATIONS':
-          return [];
+        case 'FILTER_NOTIFICATIONS':
+          return state.map((notification) => ({ ...notification, read: true }));
         default:
           return state;
       }
@@ -42,11 +44,11 @@ function notificationsManager(initialData: Notification[]): {
     dispatch({ type: 'ADD_NOTIFICATION', payload: notification });
   }, []);
 
-  const deleteNotifications = useCallback(() => {
-    dispatch({ type: 'DELETE_NOTIFICATIONS' });
+  const filterNotifications = useCallback(() => {
+    dispatch({ type: 'FILTER_NOTIFICATIONS' });
   }, []);
 
-  return { notifications, addNotification, deleteNotifications };
+  return { notifications, addNotification, filterNotifications };
 }
 
 export const NotificationsProvider: React.FunctionComponent<{
@@ -72,8 +74,8 @@ export const useAddNotification =
     return addNotification;
   };
 
-export const useDeleteNotifications =
-  (): NotificationsManagerResult['deleteNotifications'] => {
-    const { deleteNotifications } = useContext(NotificationsContext);
-    return deleteNotifications;
+export const useFilterNotifications =
+  (): NotificationsManagerResult['filterNotifications'] => {
+    const { filterNotifications } = useContext(NotificationsContext);
+    return filterNotifications;
   };
