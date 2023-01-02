@@ -1,13 +1,14 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
 import { ChatType } from './chatDataContext';
+import { UserType } from './userContext';
 
 type ActionType =
   | { type: 'ADD_MESSAGE'; payload: ChatType }
   | { type: 'DELETE_MESSAGES'; payload: string };
 
-type NotificationsMenagerResult = ReturnType<typeof NotificationsManager>;
+type NotificationsManagerResult = ReturnType<typeof NotificationsManager>;
 
-const NotificationsContext = createContext<NotificationsMenagerResult>({
+const NotificationsContext = createContext<NotificationsManagerResult>({
   newMessages: [],
   addNotificationMessage: () => {},
   deleteNewMessages: () => {},
@@ -45,7 +46,24 @@ function NotificationsManager(initialData: ChatType[]): {
   return { newMessages, addNotificationMessage, deleteNewMessages };
 }
 
-export const NotificationsProvider: React.FunctionComponent<{
+export const useNewMessages = (): ChatType[] => {
+  const { newMessages } = useContext(NotificationsContext);
+  return newMessages;
+};
+
+export const useAddNotificationMessage =
+  (): NotificationsManagerResult['addNotificationMessage'] => {
+    const { addNotificationMessage } = useContext(NotificationsContext);
+    return addNotificationMessage;
+  };
+
+export const useDeleteNotificationMessages =
+  (): NotificationsManagerResult['deleteNewMessages'] => {
+    const { deleteNewMessages } = useContext(NotificationsContext);
+    return deleteNewMessages;
+  };
+
+export const NotificationMessagesProvider: React.FunctionComponent<{
   initialNotificationsData: ChatType[];
   children: React.ReactNode;
 }> = ({ initialNotificationsData, children }) => {
@@ -57,20 +75,3 @@ export const NotificationsProvider: React.FunctionComponent<{
     </NotificationsContext.Provider>
   );
 };
-
-export const useNewMessages = (): ChatType[] => {
-  const { newMessages } = useContext(NotificationsContext);
-  return newMessages;
-};
-
-export const useAddNotificationMessage =
-  (): NotificationsMenagerResult['addNotificationMessage'] => {
-    const { addNotificationMessage } = useContext(NotificationsContext);
-    return addNotificationMessage;
-  };
-
-export const useDeleteNotificationMessages =
-  (): NotificationsMenagerResult['deleteNewMessages'] => {
-    const { deleteNewMessages } = useContext(NotificationsContext);
-    return deleteNewMessages;
-  };
