@@ -1,0 +1,15 @@
+.notifications-container {
+  display: flex;
+  margin-left: 30%;
+  flex-direction: column;
+  gap: 15px;
+  padding: 25px;
+  min-height: 100vh;
+}
+
+.notification-card {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
