@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import useUserContext from '../../hooks/useUserContext';
 import MessagesNavContainer from './MessagesNavContainer';
 import NotificaitonsNavContainer from './NotificationsNavContainer';
+import { useFilterNotifications } from '../../context/notificationsContext';
 
 type NavigationLinkProps = {
   title: string;
@@ -17,6 +18,7 @@ export const NavigationLink = ({
   toggleCreatePost,
 }: NavigationLinkProps): JSX.Element => {
   const userContext = useUserContext();
+  const filterNotifications = useFilterNotifications();
 
   return (
     <Link
@@ -25,7 +27,10 @@ export const NavigationLink = ({
         (title === 'Notifications' ? 'notification-link' : '') ||
         (title === 'Profile' ? 'profile-link' : '')
       }
-      onClick={() => title === 'Create' && toggleCreatePost()}
+      onClick={() =>
+        (title === 'Create' && toggleCreatePost()) ||
+        (title === 'Notifications' && filterNotifications())
+      }
     >
       <li>
         <div>
