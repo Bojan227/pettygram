@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import useUserContext from '../../hooks/useUserContext';
-import { useNewMessages } from '../../context/notificationsMessagesContext';
+import MessagesNavContainer from './MessagesNavContainer';
+import NotificaitonsNavContainer from './NotificationsNavContainer';
 
 type NavigationLinkProps = {
   title: string;
@@ -17,12 +18,6 @@ export const NavigationLink = ({
 }: NavigationLinkProps): JSX.Element => {
   const userContext = useUserContext();
 
-  const newMessages = useNewMessages();
-  const uniqueMessages = [
-    ...new Set(newMessages.map(({ senderId }) => senderId)),
-  ];
-
-  console.log(uniqueMessages);
   return (
     <Link
       to={link === 'profile' ? `${link}/${userContext?.user._id}` : link}
@@ -38,10 +33,8 @@ export const NavigationLink = ({
             src={`${url === 'profile' ? userContext?.user.imageUrl : url}`}
             alt="img"
           />
-          {title === 'Messages' &&
-            (uniqueMessages.length === 0 ? null : (
-              <div className="notification-msg">{uniqueMessages.length}</div>
-            ))}
+          {title === 'Messages' && <MessagesNavContainer />}
+          {title === 'Notifications' && <NotificaitonsNavContainer />}
         </div>
         <h3>{title}</h3>
       </li>
