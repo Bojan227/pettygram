@@ -11,14 +11,17 @@ export default function NotificationMessagesWrapper({
   const addNotificationMessage = useAddNotificationMessage();
   useEffect(() => {
     socket.on('notification_message', (data: ChatType) => {
-      console.log(data);
       addNotificationMessage(data);
     });
-    console.log();
+
     return () => {
       socket.off('notification_message');
     };
   }, []);
 
-  return <main>{children}</main>;
+  return (
+    <main className="flex bg-stone-50 justify-center min-h-screen">
+      {children}
+    </main>
+  );
 }
