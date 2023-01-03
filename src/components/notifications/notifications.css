@@ -41,3 +41,12 @@
   height: 48px;
   border-radius: 50%;
 }
+
+@media (max-width: 755px) {
+  .notifications-container.active {
+    top: 0;
+    left: 0;
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+  }
+}
