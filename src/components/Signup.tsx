@@ -87,7 +87,7 @@ export default function Signup() {
           }}
           className="border border-white  w-full p-2 my-4 rounded-lg"
         >
-          Log In
+          Register
         </button>
       </form>
       {error && <h5>{error}</h5>}
