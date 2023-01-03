@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FeedContainer } from './components/feed/FeedContainer';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { NavigationBar } from './components/navigation/NavigationBar';
@@ -14,10 +14,12 @@ import { EditInfo } from './components/profile/EditUserInfo';
 import ChatContainer from './components/chat/ChatContainer';
 import NotificationsContainer from './components/notifications/NotificationsContainer';
 import NotificationMessagesWrapper from './components/NotificationMessagesWrapper';
+import NotificationsWrapper from './components/NotificationsWrapper';
 
 function App() {
   const userContext = useUserContenxt();
   const { posts, getPosts, error, isLoading, setPosts } = useGetPosts();
+  const [toggleNotifications, setToggleNotifications] = useState(false);
 
   useEffect(() => {
     getPosts();
@@ -28,8 +30,13 @@ function App() {
       className={`${
         userContext?.user ? 'flex bg-stone-50 justify-center min-h-screen' : ''
       }`}
+      onClick={() => setToggleNotifications(false)}
     >
-      {userContext?.user && <NavigationBar {...{ setPosts }} />}
+      {userContext?.user && (
+        <NavigationBar
+          {...{ setPosts, toggleNotifications, setToggleNotifications }}
+        />
+      )}
 
       <Routes>
         <Route
@@ -37,9 +44,11 @@ function App() {
           element={
             userContext?.user ? (
               posts && (
-                <NotificationMessagesWrapper>
-                  <FeedContainer {...{ posts, setPosts, error }} />
-                </NotificationMessagesWrapper>
+                <NotificationsWrapper>
+                  <NotificationMessagesWrapper>
+                    <FeedContainer {...{ posts, setPosts, error }} />
+                  </NotificationMessagesWrapper>
+                </NotificationsWrapper>
               )
             ) : (
               <Signup />
@@ -84,7 +93,7 @@ function App() {
         {userContext?.user && (
           <Route path="/inbox" element={<ChatContainer />} />
         )}
-        <Route path="notifications" element={<NotificationsContainer />} />
+        {/* <Route path="notifications" element={<NotificationsContainer />} /> */}
       </Routes>
     </div>
   );

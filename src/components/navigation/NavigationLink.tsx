@@ -10,6 +10,7 @@ type NavigationLinkProps = {
   link: string;
   url: string | undefined;
   toggleCreatePost: () => void;
+  toggleNotifications: () => void;
 };
 
 export const NavigationLink = ({
@@ -17,6 +18,7 @@ export const NavigationLink = ({
   link,
   url,
   toggleCreatePost,
+  toggleNotifications,
 }: NavigationLinkProps): JSX.Element => {
   const userContext = useUserContext();
   const filterNotifications = useFilterNotifications();
@@ -29,10 +31,14 @@ export const NavigationLink = ({
         (title === 'Notifications' ? 'notification-link' : '') ||
         (title === 'Profile' ? 'profile-link' : '')
       }
-      onClick={() =>
+      onClick={(e) =>
         (title === 'Create' && toggleCreatePost()) ||
         (title === 'Notifications' &&
-          (filterNotifications(), updateNotifications(userContext?.user._id!)))
+          (filterNotifications(),
+          updateNotifications(userContext?.user._id!),
+          toggleNotifications(),
+          e.stopPropagation(),
+          e.preventDefault()))
       }
     >
       <li>

@@ -8,17 +8,28 @@ import './navigation.css';
 import { useState } from 'react';
 import { FooterMenu } from './FooterMenu';
 import { CreatePost } from './CreatePost';
+import NotificationsContainer from '../notifications/NotificationsContainer';
 
 export const NavigationBar = ({
   setPosts,
+  toggleNotifications,
+  setToggleNotifications,
 }: {
   setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
+  toggleNotifications: boolean;
+  setToggleNotifications: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [toggleMore, setToggleMore] = useState(false);
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
 
   return (
-    <nav className="main-navigation" onClick={() => setToggleMore(false)}>
+    <nav
+      className="main-navigation"
+      onClick={() => {
+        setToggleMore(false);
+        setToggleNotifications(false);
+      }}
+    >
       <div className="header-nav">
         <LogoContainer />
         <section>
@@ -28,6 +39,9 @@ export const NavigationBar = ({
                 {...{ title, url, link }}
                 key={title}
                 toggleCreatePost={() => setToggleCreatePost(!toggleCreatePost)}
+                toggleNotifications={() =>
+                  setToggleNotifications(!toggleNotifications)
+                }
               />
             ))}
           </ul>
@@ -48,6 +62,7 @@ export const NavigationBar = ({
         <FooterMenu toggleMore={toggleMore} />
       </section>
       <CreatePost {...{ toggleCreatePost, setToggleCreatePost, setPosts }} />
+      <NotificationsContainer {...{ toggleNotifications }} />
     </nav>
   );
 };

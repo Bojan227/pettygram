@@ -10,8 +10,8 @@ export default function NotificationCard({
   message,
 }: NotificatonCardProps) {
   return (
-    <div className="notification-card">
-      <img width="32px" src={imageUrl} />
+    <div onClick={(e) => e.stopPropagation()} className="notification-card">
+      <img src={imageUrl} />
       <p>{username}</p>
       <p>{message}</p>
     </div>
