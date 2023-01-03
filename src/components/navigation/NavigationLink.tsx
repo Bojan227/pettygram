@@ -3,6 +3,7 @@ import useUserContext from '../../hooks/useUserContext';
 import MessagesNavContainer from './MessagesNavContainer';
 import NotificaitonsNavContainer from './NotificationsNavContainer';
 import { useFilterNotifications } from '../../context/notificationsContext';
+import useUpdateNotifications from '../../hooks/useUpdateNotifications';
 
 type NavigationLinkProps = {
   title: string;
@@ -19,6 +20,7 @@ export const NavigationLink = ({
 }: NavigationLinkProps): JSX.Element => {
   const userContext = useUserContext();
   const filterNotifications = useFilterNotifications();
+  const { updateNotifications } = useUpdateNotifications();
 
   return (
     <Link
@@ -29,7 +31,8 @@ export const NavigationLink = ({
       }
       onClick={() =>
         (title === 'Create' && toggleCreatePost()) ||
-        (title === 'Notifications' && filterNotifications())
+        (title === 'Notifications' &&
+          (filterNotifications(), updateNotifications(userContext?.user._id!)))
       }
     >
       <li>
