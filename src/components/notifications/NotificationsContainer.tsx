@@ -1,5 +1,4 @@
 import { useNotifications } from '../../context/notificationsContext';
-import { Dispatch, SetStateAction } from 'react';
 import NotificationCard from './NotificationCard';
 import { v4 as uuidv4 } from 'uuid';
 import './notifications.css';
