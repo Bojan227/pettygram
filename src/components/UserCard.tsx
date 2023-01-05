@@ -3,6 +3,7 @@ import { useFollow } from '../hooks/useFollow';
 import useUserContext from '../hooks/useUserContext';
 import { FollowButton } from './buttons/FollowButton';
 import { MouseEvent } from 'react';
+import { socket } from '../constants/socket';
 interface UserCardProps {
   _id?: string | undefined;
   firstName?: string | undefined;
@@ -18,6 +19,9 @@ export const UserCard = ({
 }: UserCardProps) => {
   const { changeFollowStatus } = useFollow();
   const userContext = useUserContext();
+  const isFollowed = userContext?.user?.following?.find(
+    (id) => id === userContext.user._id
+  );
 
   return (
     <div className="users-container-profile" key={_id}>
@@ -33,6 +37,16 @@ export const UserCard = ({
           onClick={(e: MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
             changeFollowStatus(_id!);
+            socket.emit('send_notification', {
+              senderId: userContext?.user._id,
+              action: 'follow',
+              receiverId: _id,
+              message: `${
+                isFollowed
+                  ? 'is not following you anymore!'
+                  : 'started following you!'
+              }`,
+            });
           }}
         >
           {userContext?.user?.following?.find(
