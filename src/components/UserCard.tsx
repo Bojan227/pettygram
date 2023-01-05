@@ -19,7 +19,9 @@ export const UserCard = ({
 }: UserCardProps) => {
   const { changeFollowStatus } = useFollow();
   const userContext = useUserContext();
-  const isFollowed = userContext?.user?.following?.find((id) => id === _id);
+  const isFollowed = userContext?.user?.following?.find(
+    (user) => user?._id === _id
+  );
 
   return (
     <div className="users-container-profile" key={_id}>

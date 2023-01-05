@@ -16,7 +16,7 @@ export const ProfileCard = () => {
   const [showFollowing, setShowFollowing] = useState<boolean>(false);
   const userContext = useUserContext();
   const isFollowed = userContext?.user?.following?.find(
-    (id) => id === userInfo?._id
+    (user) => user?._id === userInfo?._id
   );
 
   const { userId } = useParams();
@@ -32,7 +32,7 @@ export const ProfileCard = () => {
       url: `http://localhost:4000/posts/${userId}`,
       setState: setUserPosts,
     });
-  }, [userId, userContext?.user.following]);
+  }, [userId, userContext?.user.following?.length]);
 
   return (
     <div className="profile-card">
