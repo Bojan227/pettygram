@@ -7,17 +7,21 @@ import { useGetData } from '../../hooks/useGetData';
 import { UsersListContainer } from './UsersListContainer';
 import { Edit } from '../feed/SvgsContainer';
 import { Post } from '../feed/types/feedTypes';
+import { socket } from '../../constants/socket';
 
 export const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState<UserType>();
   const [userPosts, setUserPosts] = useState<Post[] | null>(null);
   const [showFollowers, setShowFollowers] = useState<boolean>(false);
   const [showFollowing, setShowFollowing] = useState<boolean>(false);
+  const userContext = useUserContext();
+  const isFollowed = userContext?.user?.following?.find(
+    (id) => id === userInfo?._id
+  );
 
   const { userId } = useParams();
   const { changeFollowStatus } = useFollow();
   const { getData } = useGetData();
-  const userContext = useUserContext();
 
   useEffect(() => {
     getData({
@@ -87,6 +91,16 @@ export const ProfileCard = () => {
                       )
                     : [...prevInfo?.followers!, userContext?.user],
                 };
+              });
+              socket.emit('send_notification', {
+                senderId: userContext?.user._id,
+                action: 'follow',
+                receiverId: userInfo?._id,
+                message: `${
+                  isFollowed
+                    ? 'is not following you anymore!'
+                    : 'started following you!'
+                }`,
               });
             }}
           >
