@@ -8,6 +8,7 @@ import { UsersListContainer } from './UsersListContainer';
 import { Edit } from '../feed/SvgsContainer';
 import { Post } from '../feed/types/feedTypes';
 import { socket } from '../../constants/socket';
+import default_insta from '../../assets/default_insta.jpg';
 
 export const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState<UserType>();
@@ -51,7 +52,7 @@ export const ProfileCard = () => {
         />
       )}
 
-      <img src={userInfo?.imageUrl} alt="img" />
+      <img src={userInfo?.imageUrl || default_insta} alt="img" />
       <div className="info-profile">
         <div className="info-followers">
           <h4>

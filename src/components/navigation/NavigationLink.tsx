@@ -4,6 +4,7 @@ import MessagesNavContainer from './MessagesNavContainer';
 import NotificaitonsNavContainer from './NotificationsNavContainer';
 import { useFilterNotifications } from '../../context/notificationsContext';
 import useUpdateNotifications from '../../hooks/useUpdateNotifications';
+import default_insta from '../../assets/default_insta.jpg';
 
 type NavigationLinkProps = {
   title: string;
@@ -44,7 +45,11 @@ export const NavigationLink = ({
       <li>
         <div>
           <img
-            src={`${url === 'profile' ? userContext?.user.imageUrl : url}`}
+            src={`${
+              url === 'profile'
+                ? userContext?.user.imageUrl || default_insta
+                : url
+            }`}
             alt="img"
           />
           {title === 'Messages' && <MessagesNavContainer />}

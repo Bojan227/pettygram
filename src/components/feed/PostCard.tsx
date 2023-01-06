@@ -5,6 +5,7 @@ import useUpdateLike from '../../hooks/useUpdateLike';
 import { PostCardProps } from './types/feedTypes';
 import { formatDistanceToNow } from 'date-fns';
 import useUserContext from '../../hooks/useUserContext';
+import default_insta from '../../assets/default_insta.jpg';
 
 export const PostCard = ({
   createdBy,
@@ -22,7 +23,7 @@ export const PostCard = ({
     <div className="card">
       <Link to={`/profile/${createdBy._id}`}>
         <section className="user-section">
-          <img src={createdBy.imageUrl} />
+          <img src={createdBy.imageUrl || default_insta} />
           <h2>{createdBy.username}</h2>
         </section>
       </Link>
@@ -55,7 +56,7 @@ export const PostCard = ({
       <section className="description-section">
         <Link to={`/profile/${createdBy._id}`}>
           <div>
-            <img src={createdBy.imageUrl} />
+            <img src={createdBy.imageUrl || default_insta} />
             <h2>{createdBy.username}</h2>
           </div>
         </Link>
