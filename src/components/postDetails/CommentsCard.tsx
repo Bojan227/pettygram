@@ -4,6 +4,7 @@ import { LikeButton } from '../feed/SvgsContainer';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { CommentsCardProps } from './types';
+import default_insta from '../../assets/default_insta.jpg';
 
 export const CommentsCard = ({
   createdBy,
@@ -21,7 +22,7 @@ export const CommentsCard = ({
         <div className="flex items-center gap-4">
           <Link to={`/profile/${createdBy._id}`}>
             <div className="flex items-center gap-5">
-              <img src={createdBy.imageUrl} alt="img" />
+              <img src={createdBy.imageUrl || default_insta} alt="img" />
               <p style={{ fontWeight: 'bold' }}>{createdBy.username}</p>
             </div>
           </Link>

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { OnlineUsersData } from './types';
 import { useNewMessages } from '../../context/notificationsMessagesContext';
 import { useDeleteNotificationMessages } from '../../context/notificationsMessagesContext';
+import default_insta from '../../assets/default_insta.jpg';
+
 export default function ChatUser({
   imageUrl,
   firstName,
@@ -39,7 +41,7 @@ export default function ChatUser({
         deleteNewMessages(_id!);
       }}
     >
-      <img src={imageUrl} />
+      <img src={imageUrl || default_insta} />
       <div>
         <div>
           <p>{firstName}</p>

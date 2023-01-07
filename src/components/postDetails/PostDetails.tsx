@@ -10,6 +10,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { Bookmark } from '../feed/SvgsContainer';
 import useUserContext from '../../hooks/useUserContext';
 import './postDetails.css';
+import default_insta from '../../assets/default_insta.jpg';
 
 export const PostDetails = ({
   posts,
@@ -55,7 +56,7 @@ export const PostDetails = ({
         <div>
           <Link to={`/profile/${post?.createdBy._id}`}>
             <div className="user-section-details">
-              <img src={post?.createdBy.imageUrl} />
+              <img src={post?.createdBy.imageUrl || default_insta} />
               <h2>{post?.createdBy.username}</h2>
             </div>
           </Link>
@@ -64,7 +65,7 @@ export const PostDetails = ({
           <div className="caption-section">
             <Link to={`/profile/${post?.createdBy._id}`}>
               <div className="caption-info">
-                <img src={post?.createdBy.imageUrl} />
+                <img src={post?.createdBy.imageUrl || default_insta} />
                 <h2>{post?.createdBy.username}</h2>
               </div>
             </Link>

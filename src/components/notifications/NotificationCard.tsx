@@ -3,6 +3,7 @@ type NotificatonCardProps = {
   username?: string;
   message: string;
 };
+import default_insta from '../../assets/default_insta.jpg';
 
 export default function NotificationCard({
   imageUrl,
@@ -11,7 +12,7 @@ export default function NotificationCard({
 }: NotificatonCardProps) {
   return (
     <div onClick={(e) => e.stopPropagation()} className="notification-card">
-      <img src={imageUrl} />
+      <img src={imageUrl || default_insta} />
       <p>{username}</p>
       <p>{message}</p>
     </div>

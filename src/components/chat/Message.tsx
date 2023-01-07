@@ -2,6 +2,7 @@ import useUserContext from '../../hooks/useUserContext';
 import { MessageProps } from './types';
 import { useEffect, useRef } from 'react';
 import { useChatData } from '../../context/chatDataContext';
+import default_insta from '../../assets/default_insta.jpg';
 
 export default function Message({
   message,
@@ -26,8 +27,8 @@ export default function Message({
       <img
         src={
           userContext?.user._id === senderId
-            ? userContext?.user.imageUrl
-            : selectedUser?.imageUrl
+            ? userContext?.user.imageUrl || default_insta
+            : selectedUser?.imageUrl || default_insta
         }
       />
       <h4>{message}</h4>
