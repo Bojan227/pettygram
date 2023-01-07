@@ -2,20 +2,19 @@ import { useState } from 'react';
 import fetcher from '../api/fetcher';
 import useUserContext from './useUserContext';
 
-export default function useDeleteProfilePicture() {
-  const [deleteMessage, setDeleteMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoadingDeleteState, setIsLoading] = useState(false);
+export default function useUpdateProfilePicture() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const userContext = useUserContext();
 
-  const deleteProfilePicture = async (pictureId: string) => {
-    console.log(pictureId);
+  const updateProfilePicture = async (newImage: string) => {
     try {
       setIsLoading(true);
       const { message, updatedUser } = await fetcher(
         'http://localhost:4000/user/photo',
         {
-          method: 'DELETE',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${
@@ -26,25 +25,20 @@ export default function useDeleteProfilePicture() {
             }`,
           },
           body: JSON.stringify({
-            pictureId,
+            newImage,
           }),
         }
       );
-      setDeleteMessage(message);
+      setMessage(message);
       userContext?.dispatch({ type: 'LOGIN', payload: updatedUser });
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        setError(error.message);
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  return {
-    deleteProfilePicture,
-    deleteMessage,
-    errorMessage,
-    isLoadingDeleteState,
-  };
+  return { updateProfilePicture, isLoading, message, error };
 }
