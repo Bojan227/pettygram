@@ -9,6 +9,7 @@ export default function useUpdateProfilePicture() {
   const userContext = useUserContext();
 
   const updateProfilePicture = async (newImage: string) => {
+    console.log(newImage);
     try {
       setIsLoading(true);
       const { message, updatedUser } = await fetcher(
@@ -31,6 +32,7 @@ export default function useUpdateProfilePicture() {
       );
       setMessage(message);
       userContext?.dispatch({ type: 'LOGIN', payload: updatedUser });
+      localStorage.setItem('user', JSON.stringify(updatedUser));
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

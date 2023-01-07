@@ -30,8 +30,10 @@ export default function useDeleteProfilePicture() {
           }),
         }
       );
+      console.log(updatedUser);
       setDeleteMessage(message);
       userContext?.dispatch({ type: 'LOGIN', payload: updatedUser });
+      localStorage.setItem('user', JSON.stringify(updatedUser));
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
