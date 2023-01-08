@@ -7,11 +7,12 @@ type ActionType =
   | { type: 'FILTER_NOTIFICATIONS' };
 
 export interface Notification {
-  senderId: UserType;
+  sender: UserType;
   message: string;
-  receiverId: string;
+  receiver: string;
   action: 'like' | 'follow';
   read: boolean;
+  createdAt: string;
 }
 
 type NotificationsManagerResult = ReturnType<typeof notificationsManager>;
