@@ -17,8 +17,11 @@ export default function NotificationsContainer({
       }`}
     >
       <h1>Notifications</h1>
-      {notifications.map(({ message, sender }) => (
-        <NotificationCard key={uuidv4()} {...{ ...sender, message }} />
+      {notifications.map(({ message, sender, createdAt }) => (
+        <NotificationCard
+          key={uuidv4()}
+          {...{ ...sender, message, createdAt }}
+        />
       ))}
     </div>
   );
