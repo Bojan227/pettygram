@@ -45,6 +45,9 @@
   height: 48px;
   border-radius: 50%;
 }
+.notification-content {
+  width: 50%;
+}
 @media (max-width: 1350px) {
   .notifications-container.active {
     left: calc(100% - 80px);

@@ -17,9 +17,13 @@ export default function NotificationCard({
   return (
     <div onClick={(e) => e.stopPropagation()} className="notification-card">
       <img src={imageUrl || default_insta} />
-      <p>{username}</p>
-      <p>{message}</p>
-      <p>{createdAt && formatDistanceToNow(new Date(createdAt).getTime())}</p>
+      <div className="notification-content">
+        <p>
+          {`${username} ${message} ${
+            createdAt ? formatDistanceToNow(new Date(createdAt).getTime()) : ''
+          }`}
+        </p>
+      </div>
     </div>
   );
 }
