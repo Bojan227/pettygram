@@ -15,6 +15,7 @@ import ChatContainer from './components/chat/ChatContainer';
 import NotificationsContainer from './components/notifications/NotificationsContainer';
 import NotificationMessagesWrapper from './components/NotificationMessagesWrapper';
 import NotificationsWrapper from './components/NotificationsWrapper';
+import ExploreContainer from './components/explore/ExploreContainer';
 
 function App() {
   const userContext = useUserContenxt();
@@ -26,12 +27,7 @@ function App() {
   }, [userContext?.user?.username]);
 
   return (
-    <div
-      className={`${
-        userContext?.user ? 'flex bg-stone-50 justify-center min-h-screen' : ''
-      }`}
-      onClick={() => setToggleNotifications(false)}
-    >
+    <div onClick={() => setToggleNotifications(false)}>
       {userContext?.user && (
         <NavigationBar
           {...{ setPosts, toggleNotifications, setToggleNotifications }}
@@ -93,7 +89,9 @@ function App() {
         {userContext?.user && (
           <Route path="/inbox" element={<ChatContainer />} />
         )}
-        {/* <Route path="notifications" element={<NotificationsContainer />} /> */}
+        {posts && (
+          <Route path="/explore" element={<ExploreContainer posts={posts} />} />
+        )}
       </Routes>
     </div>
   );
