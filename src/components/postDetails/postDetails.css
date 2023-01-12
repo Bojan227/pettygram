@@ -51,7 +51,7 @@
 
 .back-btn {
   position: absolute;
-
+  cursor: pointer;
   right: 12px;
   top: 10px;
   display: block;

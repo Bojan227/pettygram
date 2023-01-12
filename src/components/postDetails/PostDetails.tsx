@@ -11,6 +11,7 @@ import { Bookmark } from '../feed/SvgsContainer';
 import useUserContext from '../../hooks/useUserContext';
 import './postDetails.css';
 import default_insta from '../../assets/default_insta.jpg';
+import { useNavigate } from 'react-router-dom';
 
 export const PostDetails = ({
   posts,
@@ -22,6 +23,7 @@ export const PostDetails = ({
   const [post, setPost] = useState<Post | undefined>(undefined);
   const [commentMessage, setCommentMessage] = useState('');
   const userContext = useUserContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPost(posts?.find((post) => post._id === id));
@@ -107,9 +109,10 @@ export const PostDetails = ({
         </section>
         <CommentForm postId={id!} commentNotification={setCommentMessage} />
       </section>
-      <Link to="/">
-        <h3 className="back-btn">X</h3>
-      </Link>
+
+      <h3 onClick={() => navigate(-1)} className="back-btn">
+        X
+      </h3>
     </div>
   );
 };
