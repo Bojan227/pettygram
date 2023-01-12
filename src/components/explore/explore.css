@@ -17,7 +17,7 @@
   align-items: right;
   min-height: 100vh;
   background-color: #e5e5e5;
-  cursor: pointer;
+
   justify-content: center;
   overflow-y: auto;
 }
@@ -25,6 +25,7 @@
 .card-explore {
   padding: 0;
   margin: 15px 10px;
+  cursor: pointer;
 }
 .card-explore:hover {
   transform: scale(1.02);
@@ -33,7 +34,7 @@
 
 .card-explore > a > img {
   object-fit: cover;
-  height: 100%;
+  height: 85%;
   border-radius: var(--card_border_radius);
 }
 .card_small {
@@ -57,10 +58,27 @@
 
 @media (max-width: 750px) {
   .explore-container {
-    margin-top: 20%;
+    margin-top: 18%;
     width: 100%;
     margin-left: 0;
     padding: 0;
     margin-bottom: 10%;
+    grid-template-columns: repeat(auto-fill, 350px);
+  }
+}
+
+@media (max-width: 570px) {
+  .explore-container {
+    margin-top: 25%;
+    grid-template-columns: repeat(auto-fill, 280px);
+  }
+}
+
+@media (max-width: 450px) {
+  .explore-container {
+    margin-top: 32%;
+  }
+  .card-explore > a > img {
+    height: 75%;
   }
 }
