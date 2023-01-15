@@ -24,6 +24,10 @@ export const CreatePost = ({
     }
   };
 
+  const handleRemoveFile = (index: number) => {
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
   return (
     <div
       className="drop-container"
@@ -39,7 +43,9 @@ export const CreatePost = ({
       )}
       {files.length !== 0 && (
         <div className="share-container" onClick={(e) => e.stopPropagation()}>
-          <ImagesContainer {...{ files, handleImageUpload }} />
+          <ImagesContainer
+            {...{ files, handleImageUpload, handleRemoveFile }}
+          />
           <CaptionContainer {...{ files, setPosts }} />
         </div>
       )}
