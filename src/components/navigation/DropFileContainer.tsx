@@ -1,5 +1,6 @@
 import { DragEvent } from 'react';
 import { Dispatch, SetStateAction } from 'react';
+import FileInput from '../FileInput';
 
 export default function DropFileContainer({
   handleImageUpload,
@@ -34,13 +35,7 @@ export default function DropFileContainer({
     >
       <h1 className="p-4">Create new post</h1>
       <h1>Drag Photos and videos here</h1>
-      <input
-        onChange={(e) => handleImageUpload(e)}
-        type="file"
-        id="actual-btn"
-      />
-
-      <label htmlFor="actual-btn">Choose File</label>
+      <FileInput {...{ handleImageUpload, title: 'Choose File' }} />
     </div>
   );
 }
