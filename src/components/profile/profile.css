@@ -139,6 +139,9 @@ a {
   border-radius: 8px;
   border: 1px solid black;
 }
+.posts-container > a > img {
+  width: 350px;
+}
 
 @media (max-width: 1150px) {
   .users-list-content {

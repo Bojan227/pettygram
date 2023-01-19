@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Post } from '../feed/types/feedTypes';
 import fetcher from '../../api/fetcher';
+import CarouselSlider from '../feed/CarouselSlider';
 
 export const PostsContainer = ({ tab }: { tab: string }) => {
   const [data, setData] = useState<Post[] | null>([]);
   const [error, setError] = useState('');
   const { userId } = useParams();
 
+  console.log(data);
   useEffect(() => {
     const getDataByUserId = async () => {
       try {
@@ -47,7 +49,7 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
         data.map(({ imageUrl, _id }, i) => {
           return (
             <Link key={i} to={`/p/${_id}`}>
-              <img src={imageUrl} />
+              <img src={imageUrl[0]} alt="user-image" />
             </Link>
           );
         })}
