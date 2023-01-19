@@ -7,7 +7,7 @@ export type PostCardProps = {
     _id: string;
   };
   likes: string[];
-  imageUrl: string;
+  imageUrl: [string];
   text: string;
   createdAt: string;
   setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
@@ -23,8 +23,8 @@ export interface FeedContainerProps {
 export interface Post {
   _id: string;
   text: string;
-  imageUrl: string;
-  imageId: string;
+  imageUrl: [string];
+  imageId: [string];
   createdAt: string;
   likes: [string];
   createdBy: {
@@ -36,5 +36,5 @@ export interface Post {
 export type LikeButtonProps = {
   updateLike: () => void;
   likes: String[];
-  receiverId: string;
+  receiverId?: string;
 };
