@@ -13,6 +13,7 @@ import default_insta from '../../assets/default_insta.jpg';
 import { useNavigate } from 'react-router-dom';
 import CarouselSlider from '../feed/CarouselSlider';
 import CaptionContainer from './CaptionContainer';
+import ButtonsContainer from './ButtonsContainer';
 
 export const PostDetails = ({
   posts,
@@ -59,26 +60,7 @@ export const PostDetails = ({
             {...{ ...post, commentMessage, setCommentMessage }}
           />
         )}
-        <div className="buttons-section-details">
-          <LikeButton
-            likes={post?.likes!}
-            receiverId={post?.createdBy._id!}
-            updateLike={() =>
-              updateLike({
-                url: 'http://localhost:4000/posts/',
-                setState: setPosts,
-                _id: id!,
-              })
-            }
-          />
-
-          <Details />
-          {userContext?.user._id !== post?.createdBy._id ? (
-            <Bookmark postId={post?._id!} />
-          ) : (
-            ''
-          )}
-        </div>
+        {post && <ButtonsContainer {...{ ...post!, id, setPosts }} />}
         <section className="likes-info">
           {`${post?.likes.length} ${
             post?.likes.length === 1 ? 'like' : 'likes'
