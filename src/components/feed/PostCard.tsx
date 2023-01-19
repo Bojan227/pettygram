@@ -6,6 +6,7 @@ import { PostCardProps } from './types/feedTypes';
 import { formatDistanceToNow } from 'date-fns';
 import useUserContext from '../../hooks/useUserContext';
 import default_insta from '../../assets/default_insta.jpg';
+import CarouselSlider from './CarouselSlider';
 
 export const PostCard = ({
   createdBy,
@@ -27,9 +28,7 @@ export const PostCard = ({
           <h2>{createdBy.username}</h2>
         </section>
       </Link>
-      <div className="images-section">
-        <img src={imageUrl} alt="img" />
-      </div>
+      <CarouselSlider {...{ images: imageUrl }} />
       <section className="buttons-section">
         <LikeButton
           likes={likes}
