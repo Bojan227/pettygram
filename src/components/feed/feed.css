@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   margin-top: 10%;
-  margin-left: 40%;
-  width: 100%;
+  margin-left: 10%;
+  width: 60%;
   min-height: 100vh;
   position: relative;
   gap: 25px;
@@ -15,7 +15,7 @@
   border-radius: 8px;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  width: 55%;
+  width: 100%;
 }
 .card > a {
   padding: 0;
@@ -87,11 +87,12 @@ section {
   position: absolute;
   display: flex;
   flex-direction: column;
-  right: 1%;
+  right: -80%;
   border: 1px solid grey;
   min-height: 40vh;
-  width: 40%;
+  max-height: 40vh;
   border-radius: 10px;
+  width: 70%;
   gap: 4px;
   overflow-y: auto;
 }
@@ -110,6 +111,30 @@ section {
 .suggested-header {
   padding: 2px;
   border-bottom: 1px solid gray;
+}
+
+.carousel-slider {
+  position: relative;
+}
+
+.carousel-slider > img {
+  width: 700px;
+  height: 350px;
+}
+
+.carousel-slider > :nth-child(2) {
+  position: absolute;
+  top: 40%;
+  z-index: 1000;
+  left: 10px;
+  cursor: pointer;
+}
+.carousel-slider > :nth-child(3) {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  z-index: 1000;
+  cursor: pointer;
 }
 
 @media (max-width: 1156px) {
