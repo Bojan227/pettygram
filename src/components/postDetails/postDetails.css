@@ -42,11 +42,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 55%;
+  width: 50%;
 }
-.details-images-section > img {
-  height: 95%;
-  width: 95%;
+.details-images-section > div > img {
+  height: 100%;
+  width: 100%;
 }
 
 .back-btn {
