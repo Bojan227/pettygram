@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Post } from '../feed/types/feedTypes';
 import fetcher from '../../api/fetcher';
-import CarouselSlider from '../feed/CarouselSlider';
+import ImageOverlay from './ImageOverlay';
 
 export const PostsContainer = ({ tab }: { tab: string }) => {
   const [data, setData] = useState<Post[] | null>([]);
   const [error, setError] = useState('');
   const { userId } = useParams();
+  const [showOverlay, setShowOverlay] = useState(false);
 
-  console.log(data);
   useEffect(() => {
     const getDataByUserId = async () => {
       try {
@@ -46,10 +46,16 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
       )}
 
       {data &&
-        data.map(({ imageUrl, _id }, i) => {
+        data.map(({ imageUrl, likes, _id }, i) => {
           return (
             <Link key={i} to={`/p/${_id}`}>
-              <img src={imageUrl[0]} alt="user-image" />
+              <div
+                className="profile-post-image"
+                onMouseEnter={() => setShowOverlay(true)}
+              >
+                <img src={imageUrl[0]} alt="user-image" />
+                <ImageOverlay {...{ showOverlay, setShowOverlay, likes }} />
+              </div>
             </Link>
           );
         })}
