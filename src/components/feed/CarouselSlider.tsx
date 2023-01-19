@@ -18,16 +18,20 @@ export default function CarouselSlider({ images }: { images: string[] }) {
   return (
     <div className="carousel-slider">
       <img src={images[currentImage]} alt="user-image" />
-      <ArrowLeftCircleIcon
-        color="#d1d5db"
-        onClick={() => previousImage()}
-        width="32px"
-      />
-      <ArrowRightCircleIcon
-        color="#d1d5db"
-        onClick={() => nextImage()}
-        width="32px"
-      />
+      {images.length > 1 && (
+        <ArrowLeftCircleIcon
+          color="#d1d5db"
+          onClick={() => previousImage()}
+          width="32px"
+        />
+      )}
+      {images.length > 1 && (
+        <ArrowRightCircleIcon
+          color="#d1d5db"
+          onClick={() => nextImage()}
+          width="32px"
+        />
+      )}
     </div>
   );
 }

@@ -125,7 +125,6 @@ section {
 .carousel-slider > :nth-child(2) {
   position: absolute;
   top: 40%;
-  z-index: 1000;
   left: 10px;
   cursor: pointer;
 }
@@ -133,7 +132,6 @@ section {
   position: absolute;
   top: 40%;
   right: 10px;
-  z-index: 1000;
   cursor: pointer;
 }
 
