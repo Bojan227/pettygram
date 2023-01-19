@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 25px;
   min-height: 100vh;
+  max-height: 100vh;
   margin-left: 30%;
   top: 0;
   left: calc(100% - 120px);
@@ -15,6 +16,7 @@
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   transform: translateX(-1000px);
   transition: transform 1s ease-out;
+  overflow-y: auto;
 }
 .notifications-container > h1 {
   font-weight: 900;
