@@ -15,7 +15,7 @@ export default function ExploreCard({
       }`}
     >
       <Link to={`/p/${_id}`}>
-        <img src={imageUrl} />
+        <img src={imageUrl[0]} />
       </Link>
     </div>
   );
