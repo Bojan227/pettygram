@@ -2,7 +2,6 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LikeButton, Details } from '../feed/SvgsContainer';
 import { CommentForm } from '../feed/CommentForm';
-import { CommentsContainer } from './CommentsContainer';
 import { PostDetailsProps } from './types';
 import { Post } from '../feed/types/feedTypes';
 import useUpdateLike from '../../hooks/useUpdateLike';
@@ -12,6 +11,8 @@ import useUserContext from '../../hooks/useUserContext';
 import './postDetails.css';
 import default_insta from '../../assets/default_insta.jpg';
 import { useNavigate } from 'react-router-dom';
+import CarouselSlider from '../feed/CarouselSlider';
+import CaptionContainer from './CaptionContainer';
 
 export const PostDetails = ({
   posts,
@@ -42,17 +43,7 @@ export const PostDetails = ({
           backgroundColor: 'black',
         }}
       >
-        {/* {images.map((url) => {
-          return (
-            <img
-              key={url}
-              src={url}
-              alt="img"
-              style={{ width: '100%', height: '100%' }}
-            />
-          );
-        })} */}
-        {post && <img src={post.imageUrl} alt="image" />}
+        {post && <CarouselSlider {...{ images: post?.imageUrl }} />}
       </section>
       <section className="details-info-section">
         <div>
@@ -63,22 +54,11 @@ export const PostDetails = ({
             </div>
           </Link>
         </div>
-        <div className="caption-comments">
-          <div className="caption-section">
-            <Link to={`/profile/${post?.createdBy._id}`}>
-              <div className="caption-info">
-                <img src={post?.createdBy.imageUrl || default_insta} />
-                <h2>{post?.createdBy.username}</h2>
-              </div>
-            </Link>
-            <h1>{post?.text}</h1>
-          </div>
-          <CommentsContainer
-            commentNotification={setCommentMessage}
-            commentMessage={commentMessage}
+        {post && (
+          <CaptionContainer
+            {...{ ...post, commentMessage, setCommentMessage }}
           />
-        </div>
-
+        )}
         <div className="buttons-section-details">
           <LikeButton
             likes={post?.likes!}
