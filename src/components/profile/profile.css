@@ -123,21 +123,29 @@ a {
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  gap: 10px;
+  gap: 25px;
+  margin-left: 10%;
 }
 
 .edit-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-left: 30%;
   width: 35%;
   gap: 15px;
 }
-.edit-form > input {
+
+.edit-form > div {
+  display: flex;
+  gap: 25px;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-form > div > input {
   padding: 10px 15px;
-  border-radius: 8px;
   border: 1px solid black;
 }
 
@@ -160,6 +168,68 @@ a {
   gap: 15px;
   backdrop-filter: blur(6px);
   color: white;
+}
+
+.profile-image {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-image > img {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+}
+.profile-image > div > :nth-child(2) {
+  color: #22d3ee;
+  cursor: pointer;
+}
+.profile-image > div > :nth-child(2):hover {
+  color: #312e81;
+}
+
+.change-photo {
+  display: none;
+}
+
+.change-photo.active {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.9;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.change-photo.active > div {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid white;
+  align-items: center;
+  background-color: #f4f4f5;
+  color: black;
+  font-weight: 900;
+  width: 30%;
+  z-index: 10000;
+}
+
+.change-photo.active > div > * {
+  padding: 25px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.change-photo.active > div > *:hover {
+  background-color: #e0f2fe;
 }
 
 @media (max-width: 1150px) {

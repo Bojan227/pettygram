@@ -28,31 +28,34 @@ export const EditInfo = () => {
 
   return (
     <div className="edit-container">
-      <h3>{error}</h3>
-      <Link to={`/profile/${userContext?.user._id}`}>
-        <Button className="primary-btn">Back to profile</Button>
-      </Link>
+      {error && <h3>{error}</h3>}
       <UploadProfilePicture />
       <form className="edit-form" onSubmit={handleSubmit}>
-        Username
-        <TextField
-          className="username"
-          value={username}
-          onChange={(username) => setUsername(username)}
-        />
-        First Name
-        <TextField
-          className="fistName"
-          value={firstName}
-          onChange={(firstName) => setFirstName(firstName)}
-        />
-        Last Name
-        <TextField
-          className="lastName"
-          value={lastName}
-          onChange={(lastName) => setLastName(lastName)}
-        />
-        <Button className="primary-btn">Edit</Button>
+        <div>
+          <h2>Username</h2>
+          <TextField
+            className="username"
+            value={username}
+            onChange={(username) => setUsername(username)}
+          />
+        </div>
+        <div>
+          <h2>First Name</h2>
+          <TextField
+            className="fistName"
+            value={firstName}
+            onChange={(firstName) => setFirstName(firstName)}
+          />
+        </div>
+        <div>
+          <h2>Last Name</h2>
+          <TextField
+            className="lastName"
+            value={lastName}
+            onChange={(lastName) => setLastName(lastName)}
+          />
+        </div>
+        <Button className="primary-btn">Submit</Button>
       </form>
       {message && <Navigate to={`/profile/${userContext?.user._id}`} />}
     </div>
