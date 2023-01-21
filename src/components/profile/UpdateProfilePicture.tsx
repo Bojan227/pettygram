@@ -43,8 +43,8 @@ export default function UploadProfilePicture() {
           />
         ))}
       <div>
-        <h3>{userContext?.user.username}</h3>
-        <h3 onClick={() => setShowModal(true)}>Change profile photo</h3>
+        <h4>{userContext?.user.username}</h4>
+        <h4 onClick={() => setShowModal(true)}>Change profile photo</h4>
         {image && (
           <button
             onClick={() => {

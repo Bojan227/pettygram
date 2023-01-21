@@ -132,16 +132,15 @@ a {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 35%;
+  width: 45%;
   gap: 15px;
 }
 
 .edit-form > div {
   display: flex;
-  gap: 25px;
-  width: 80%;
+  width: 70%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .edit-form > div > input {
@@ -236,6 +235,12 @@ a {
   .users-list-content {
     width: 40%;
   }
+  .edit-form > div {
+    width: 100%;
+  }
+  .edit-form {
+    width: 40%;
+  }
 }
 
 @media (max-width: 753px) {
@@ -264,8 +269,12 @@ a {
   .users-container-profile > button {
     font-size: 0.9rem;
   }
+
+  .edit-container {
+    margin-left: 0;
+  }
   .edit-form {
-    margin-left: 0%;
+    width: 70%;
   }
 }
 
@@ -290,5 +299,8 @@ a {
 
   .users-container-profile > button {
     font-size: 0.7rem;
+  }
+  .edit-form > div {
+    flex-direction: column;
   }
 }
