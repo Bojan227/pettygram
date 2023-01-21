@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { UserType } from '../../context/userContext';
-import { useFollow } from '../../hooks/useFollow';
 import useUserContext from '../../hooks/useUserContext';
 import { useGetData } from '../../hooks/useGetData';
 import { UsersListContainer } from './UsersListContainer';
 import { Edit } from '../feed/SvgsContainer';
 import { Post } from '../feed/types/feedTypes';
-import { socket } from '../../constants/socket';
 import default_insta from '../../assets/default_insta.jpg';
+import FollowButtonContainer from './FollowButtonContainer';
 
 export const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState<UserType>();
@@ -16,12 +15,8 @@ export const ProfileCard = () => {
   const [showFollowers, setShowFollowers] = useState<boolean>(false);
   const [showFollowing, setShowFollowing] = useState<boolean>(false);
   const userContext = useUserContext();
-  const isFollowed = userContext?.user?.following?.find(
-    (user) => user?._id === userInfo?._id
-  );
 
   const { userId } = useParams();
-  const { changeFollowStatus } = useFollow();
   const { getData } = useGetData();
 
   useEffect(() => {
@@ -75,42 +70,7 @@ export const ProfileCard = () => {
         {userContext?.user._id === userId ? (
           ''
         ) : (
-          <button
-            className="follow-btn"
-            onClick={() => {
-              changeFollowStatus(userInfo?._id!);
-              setUserInfo((prevInfo) => {
-                return {
-                  ...prevInfo,
-                  followers: prevInfo?.followers?.find(
-                    (userToFollow) =>
-                      userToFollow?._id === userContext?.user._id!
-                  )
-                    ? prevInfo.followers.filter(
-                        (userToFollow) =>
-                          userToFollow?._id !== userContext?.user._id
-                      )
-                    : [...prevInfo?.followers!, userContext?.user],
-                };
-              });
-              socket.emit('send_notification', {
-                senderId: userContext?.user._id,
-                action: 'follow',
-                receiverId: userInfo?._id,
-                message: `${
-                  isFollowed
-                    ? 'is not following you anymore!'
-                    : 'started following you!'
-                }`,
-              });
-            }}
-          >
-            {userContext?.user?.following?.find(
-              (userToFollow) => userToFollow?._id === userId!
-            )
-              ? 'Unfollow'
-              : 'Follow'}
-          </button>
+          <FollowButtonContainer {...{ setUserInfo, userInfo }} />
         )}
       </div>
     </div>
