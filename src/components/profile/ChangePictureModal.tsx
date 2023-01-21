@@ -23,8 +23,11 @@ export default function ChangePictureModal({
   const userContext = useUserContext();
 
   return (
-    <div className={`change-photo ${showModal ? 'active' : ''}`}>
-      <div>
+    <div
+      className={`change-photo ${showModal ? 'active' : ''}`}
+      onClick={() => setShowModal(false)}
+    >
+      <div onClick={(e) => e.stopPropagation()}>
         <h2>Change Profile Photo</h2>
 
         {image ? (
