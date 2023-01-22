@@ -9,7 +9,6 @@ export default function useUpdateProfilePicture() {
   const userContext = useUserContext();
 
   const updateProfilePicture = async (newImage: string) => {
-    console.log(newImage);
     try {
       setIsLoading(true);
       const { message, updatedUser } = await fetcher(

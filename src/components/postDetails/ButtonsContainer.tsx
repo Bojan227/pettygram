@@ -16,7 +16,6 @@ export default function ButtonsContainer({
   const userContext = useUserContext();
   const { updateLike } = useUpdateLike();
 
-  console.log(_id);
   return (
     <div className="buttons-section-details">
       <LikeButton

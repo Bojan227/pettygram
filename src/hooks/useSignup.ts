@@ -31,7 +31,6 @@ export default function useSignup() {
     const reader: any = new FileReader();
     reader.readAsDataURL(image);
     reader.onloadend = () => {
-      console.log(reader.result);
       uploadWithImage(reader.result);
     };
 

@@ -23,7 +23,6 @@ export const useGetPosts = () => {
       });
       setPosts(json);
     } catch (error) {
-      console.log(error);
       if (error instanceof Error) {
         setError(error.message);
       }

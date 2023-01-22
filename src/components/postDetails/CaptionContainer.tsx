@@ -12,7 +12,6 @@ export default function CaptionContainer({
   commentMessage: string;
   setCommentMessage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  console.log(commentMessage);
   return (
     <div className="caption-comments">
       <div className="caption-section">

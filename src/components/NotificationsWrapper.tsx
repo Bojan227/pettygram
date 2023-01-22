@@ -21,7 +21,6 @@ export default function NotificationsWrapper({
 
   useEffect(() => {
     socket.on('receive_notification', (data: Notification) => {
-      console.log(data);
       addNotification(data);
     });
 

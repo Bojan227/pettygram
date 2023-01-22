@@ -7,7 +7,6 @@ export default function useGetNotificationsData() {
   const [error, setError] = useState('');
 
   const getNotificationsByReceiverId = async (receiverId: string) => {
-    console.log(receiverId);
     try {
       const notifications = await fetcher(
         `http://localhost:4000/notifications?receiverId=${receiverId}`

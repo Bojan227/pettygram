@@ -9,7 +9,6 @@ export default function useDeleteProfilePicture() {
   const userContext = useUserContext();
 
   const deleteProfilePicture = async (pictureId: string) => {
-    console.log(pictureId);
     try {
       setIsLoading(true);
       const { message, updatedUser } = await fetcher(
@@ -30,7 +29,7 @@ export default function useDeleteProfilePicture() {
           }),
         }
       );
-      console.log(updatedUser);
+
       setDeleteMessage(message);
       userContext?.dispatch({ type: 'LOGIN', payload: updatedUser });
       localStorage.setItem('user', JSON.stringify(updatedUser));

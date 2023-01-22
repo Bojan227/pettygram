@@ -27,6 +27,7 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
             },
           }
         );
+
         setData(data);
       } catch (error) {
         if (error instanceof Error) {

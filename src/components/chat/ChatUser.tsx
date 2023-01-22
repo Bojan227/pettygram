@@ -31,7 +31,7 @@ export default function ChatUser({
       socket.off('getOnlineusers');
     };
   }, [socket, selectedUser?._id]);
-  console.log(imageUrl);
+
   return (
     <div
       className={`user-card ${
