@@ -10,10 +10,23 @@ export const useGetPosts = () => {
   const getPosts = async () => {
     setIsLoading(true);
     try {
-      const json = await fetcher('http://localhost:4000/posts/');
+      const json = await fetcher('http://localhost:4000/posts/', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${
+            document.cookie
+              ?.split('; ')
+              ?.find((value) => value?.includes('token'))
+              ?.split('=')[1]
+          }`,
+        },
+      });
       setPosts(json);
     } catch (error) {
-      setError('No posts available');
+      console.log(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      }
     } finally {
       setIsLoading(false);
     }
