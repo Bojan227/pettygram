@@ -17,6 +17,7 @@ export default function ChatUser({
   const [onlineUsers, setOnlineUsers] = useState<OnlineUsersData[]>([]);
   const newMessages = useNewMessages();
   const deleteNewMessages = useDeleteNotificationMessages();
+
   useEffect(() => {
     socket.emit('getOnlineUsers');
   }, [socket, selectedUser?._id]);
@@ -30,7 +31,7 @@ export default function ChatUser({
       socket.off('getOnlineusers');
     };
   }, [socket, selectedUser?._id]);
-
+  console.log(imageUrl);
   return (
     <div
       className={`user-card ${
@@ -41,7 +42,7 @@ export default function ChatUser({
         deleteNewMessages(_id!);
       }}
     >
-      <img src={imageUrl || default_insta} />
+      <img src={imageUrl || default_insta} alt="user" />
       <div>
         <div>
           <p>{firstName}</p>
