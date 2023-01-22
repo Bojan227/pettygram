@@ -5,7 +5,7 @@ export default function ExploreCard({
   imageUrl,
   _id,
 }: {
-  imageUrl: string;
+  imageUrl: string[];
   _id: string;
 }) {
   return (
