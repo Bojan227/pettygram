@@ -9,19 +9,23 @@ import { useNavigate } from 'react-router-dom';
 import CarouselSlider from '../feed/CarouselSlider';
 import CaptionContainer from './CaptionContainer';
 import ButtonsContainer from './ButtonsContainer';
-import { usePostsStore } from '../../store/postsStore';
+import { useGetData } from '../../hooks/useGetData';
 
 export const PostDetails = () => {
-  const { id } = useParams();
-  const [post, setPost] = useState<Post | undefined>(undefined);
+  const [post, setPost] = useState<Post>();
   const [commentMessage, setCommentMessage] = useState('');
-
+  const { id } = useParams();
+  const { getData } = useGetData();
   const navigate = useNavigate();
-  const { posts } = usePostsStore();
 
   useEffect(() => {
-    setPost(posts?.find((post) => post._id === id));
-  }, [posts]);
+    if (id) {
+      getData({
+        url: `http://localhost:4000/posts/p/${id}`,
+        setState: setPost,
+      });
+    }
+  }, []);
 
   return (
     <div className="post-details">
@@ -36,7 +40,7 @@ export const PostDetails = () => {
       </section>
       <section className="details-info-section">
         <div>
-          <Link to={`/profile/${post?.createdBy._id}`}>
+          <Link to={`/profile/${post?.createdBy?._id}`}>
             <div className="user-section-details">
               <img src={post?.createdBy.imageUrl || default_insta} />
               <h2>{post?.createdBy.username}</h2>
