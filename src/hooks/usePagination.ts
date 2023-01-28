@@ -5,7 +5,7 @@ import { usePostsStore } from '../store/postsStore';
 export default function usePagination() {
   const [isLoadingPagination, setIsLoadingPagination] = useState(false);
   const [errorPagination, setErrorPagination] = useState('');
-  const { pagination } = usePostsStore();
+  const { pagination, setNumberOfPosts } = usePostsStore();
 
   const getPosts = async (page: number) => {
     console.log(page);
@@ -25,6 +25,7 @@ export default function usePagination() {
           },
         }
       );
+      setNumberOfPosts(numberOfPosts);
       pagination(posts);
     } catch (error) {
       if (error instanceof Error) {
