@@ -29,5 +29,5 @@ export type CommentsCardProps = {
   createdAt: string;
   likes: string[];
   _id: string;
-  setComments: Dispatch<SetStateAction<Comments[] | undefined>>;
+  setComments: Dispatch<SetStateAction<Comments[]>>;
 };
