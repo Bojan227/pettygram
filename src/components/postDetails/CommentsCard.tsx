@@ -5,6 +5,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { CommentsCardProps } from './types';
 import default_insta from '../../assets/default_insta.jpg';
+import useUserContext from '../../hooks/useUserContext';
 
 export const CommentsCard = ({
   createdBy,
@@ -15,6 +16,7 @@ export const CommentsCard = ({
   setComments,
 }: CommentsCardProps) => {
   const { updateLike } = useUpdateLike();
+  const userContext = useUserContext();
 
   return (
     <div className="commments-card">
@@ -31,12 +33,28 @@ export const CommentsCard = ({
         <LikeButton
           {...{
             likes,
-            updateLike: () =>
+            updateLike: () => {
               updateLike({
                 url: 'http://localhost:4000/comments/',
-                setState: setComments,
                 _id,
               }),
+                setComments((prevComments) =>
+                  prevComments?.map((comments) =>
+                    comments._id === _id
+                      ? {
+                          ...comments,
+                          likes: comments.likes.find(
+                            (like) => like === userContext?.user._id
+                          )
+                            ? comments.likes.filter(
+                                (like) => like !== userContext?.user._id
+                              )
+                            : [...comments.likes, userContext?.user._id!],
+                        }
+                      : comments
+                  )
+                );
+            },
           }}
         />
       </section>

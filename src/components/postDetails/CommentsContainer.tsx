@@ -8,7 +8,7 @@ export const CommentsContainer = ({
   commentMessage,
 }: CommentsContainerProps) => {
   const { id } = useParams();
-  const [comments, setComments] = useState<Comments[] | undefined>([]);
+  const [comments, setComments] = useState<Comments[]>([]);
 
   useEffect(() => {
     const getComments = async () => {
