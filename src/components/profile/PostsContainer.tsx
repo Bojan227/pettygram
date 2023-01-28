@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Post } from '../feed/types/feedTypes';
 import fetcher from '../../api/fetcher';
 import ImageOverlay from './ImageOverlay';
+import { v4 as uuidv4 } from 'uuid';
 
 export const PostsContainer = ({ tab }: { tab: string }) => {
   const [data, setData] = useState<Post[] | null>([]);
@@ -49,7 +50,7 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
       {data &&
         data.map(({ imageUrl, likes, _id }, i) => {
           return (
-            <Link key={i} to={`/p/${_id}`}>
+            <Link key={uuidv4()} to={`/p/${_id}`}>
               <div
                 className="profile-post-image"
                 onMouseEnter={() => setShowOverlay(true)}

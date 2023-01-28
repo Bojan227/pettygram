@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 10%;
-  margin-left: 10%;
+  margin-left: 40%;
   width: 60%;
   min-height: 100vh;
   position: relative;
@@ -15,7 +15,7 @@
   border-radius: 8px;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  width: 100%;
+  width: 50%;
 }
 .card > a {
   padding: 0;
@@ -43,8 +43,11 @@
 
 .description-section {
   display: flex;
+  flex-direction: column;
   gap: 15px;
-  align-items: center;
+}
+.description-section > a {
+  padding: 0;
 }
 .description-section > a > div {
   display: flex;
@@ -118,8 +121,9 @@ section {
 }
 
 .carousel-slider > img {
-  width: 700px;
-  height: 350px;
+  object-fit: fill;
+  width: 100%;
+  height: 450px;
 }
 
 .carousel-slider > :nth-child(2) {
@@ -171,7 +175,7 @@ section {
   }
 
   .card {
-    width: 65%;
+    width: 50%;
   }
 }
 

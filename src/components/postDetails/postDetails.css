@@ -45,7 +45,7 @@
   width: 50%;
 }
 .details-images-section > div > img {
-  height: 100%;
+  height: 82vh;
   width: 100%;
 }
 
@@ -63,16 +63,18 @@
   flex: 1;
 }
 .comment-form {
-  height: 8%;
   width: 100%;
 }
 
 .caption-section {
   display: flex;
-  gap: 15px;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px;
   margin-bottom: 30px;
+}
+.caption-section > a {
+  padding: 0;
 }
 
 .caption-info {
@@ -130,6 +132,9 @@
   .details-info-section {
     width: 45%;
     margin-left: 2px;
+  }
+  .details-images-section > div > img {
+    height: 62vh;
   }
 }
 

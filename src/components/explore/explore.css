@@ -36,6 +36,7 @@
   object-fit: cover;
   height: 85%;
   border-radius: var(--card_border_radius);
+  max-width: 100%;
 }
 .card_small {
   grid-row-end: span var(--card_small);
