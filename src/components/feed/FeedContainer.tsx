@@ -6,14 +6,14 @@ import './feed.css';
 import { FeedContainerProps } from './types/feedTypes';
 import { UserCard } from '../UserCard';
 import { socket } from '../../constants/socket';
+import { usePostsStore } from '../../store/postsStore';
+import { useGetPosts } from '../../hooks/useGetPosts';
 
-export const FeedContainer = ({
-  posts,
-  setPosts,
-  error,
-}: FeedContainerProps) => {
+export const FeedContainer = () => {
   const { getUsers, isLoading, users } = useGetUsers();
   const userContext = useUserContext();
+  const { posts, addPost } = usePostsStore();
+  const { isLoadingState, error } = useGetPosts();
 
   useEffect(() => {
     getUsers();
@@ -33,10 +33,23 @@ export const FeedContainer = ({
       )
   );
 
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        console.log("you're at the bottom of the page");
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  if (isLoadingState) return <h1>Loading....</h1>;
+
   return (
     <main className="feed-container">
+      {error && <h1>{error}</h1>}
       {posts?.map((post, i) => (
-        <PostCard key={i} {...post} setPosts={setPosts} />
+        <PostCard key={i} {...post} setPosts={addPost} />
       ))}
       {filteredUsers?.length === 0 ? null : (
         <div className="suggested-users">

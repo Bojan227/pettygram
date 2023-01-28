@@ -1,39 +1,27 @@
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { LikeButton, Details } from '../feed/SvgsContainer';
 import { CommentForm } from '../feed/CommentForm';
-import { PostDetailsProps } from './types';
 import { Post } from '../feed/types/feedTypes';
-import useUpdateLike from '../../hooks/useUpdateLike';
 import { formatDistanceToNow } from 'date-fns';
-import { Bookmark } from '../feed/SvgsContainer';
-import useUserContext from '../../hooks/useUserContext';
 import './postDetails.css';
 import default_insta from '../../assets/default_insta.jpg';
 import { useNavigate } from 'react-router-dom';
 import CarouselSlider from '../feed/CarouselSlider';
 import CaptionContainer from './CaptionContainer';
 import ButtonsContainer from './ButtonsContainer';
+import { usePostsStore } from '../../store/postsStore';
 
-export const PostDetails = ({
-  posts,
-  setPosts,
-  isLoading,
-}: PostDetailsProps) => {
+export const PostDetails = () => {
   const { id } = useParams();
-  const { updateLike } = useUpdateLike();
   const [post, setPost] = useState<Post | undefined>(undefined);
   const [commentMessage, setCommentMessage] = useState('');
-  const userContext = useUserContext();
+
   const navigate = useNavigate();
+  const { posts } = usePostsStore();
 
   useEffect(() => {
     setPost(posts?.find((post) => post._id === id));
   }, [posts]);
-
-  if (isLoading) {
-    return <h1>Loading .....</h1>;
-  }
 
   return (
     <div className="post-details">
@@ -60,7 +48,7 @@ export const PostDetails = ({
             {...{ ...post, commentMessage, setCommentMessage }}
           />
         )}
-        {post && <ButtonsContainer {...{ ...post!, id, setPosts }} />}
+        {post && <ButtonsContainer {...{ ...post!, id }} />}
         <section className="likes-info">
           {`${post?.likes.length} ${
             post?.likes.length === 1 ? 'like' : 'likes'

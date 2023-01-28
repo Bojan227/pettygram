@@ -11,11 +11,9 @@ import { CreatePost } from './CreatePost';
 import NotificationsContainer from '../notifications/NotificationsContainer';
 
 export const NavigationBar = ({
-  setPosts,
   toggleNotifications,
   setToggleNotifications,
 }: {
-  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
   toggleNotifications: boolean;
   setToggleNotifications: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -61,7 +59,7 @@ export const NavigationBar = ({
         </div>
         <FooterMenu toggleMore={toggleMore} />
       </section>
-      <CreatePost {...{ toggleCreatePost, setToggleCreatePost, setPosts }} />
+      <CreatePost {...{ toggleCreatePost, setToggleCreatePost }} />
       <NotificationsContainer {...{ toggleNotifications }} />
     </nav>
   );

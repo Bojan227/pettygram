@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { Dispatch, SetStateAction } from 'react';
-import { Post } from '../feed/types/feedTypes';
 import DropFileContainer from './DropFileContainer';
 import ImagesContainer from './ImagesContainer';
 import CaptionContainer from './CaptionContainer';
@@ -8,13 +6,11 @@ import CaptionContainer from './CaptionContainer';
 interface CreatePostProps {
   toggleCreatePost: boolean;
   setToggleCreatePost: (toggleCreatePost: boolean) => void;
-  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
 }
 
 export const CreatePost = ({
   toggleCreatePost,
   setToggleCreatePost,
-  setPosts,
 }: CreatePostProps) => {
   const [files, setFiles] = useState<File[]>([]);
 
@@ -46,7 +42,7 @@ export const CreatePost = ({
           <ImagesContainer
             {...{ files, handleImageUpload, handleRemoveFile }}
           />
-          <CaptionContainer {...{ files, setPosts }} />
+          <CaptionContainer {...{ files }} />
         </div>
       )}
     </div>

@@ -36,7 +36,6 @@ export const PostCard = ({
           updateLike={() =>
             updateLike({
               url: 'http://localhost:4000/posts/',
-              setState: setPosts,
               _id,
             })
           }

@@ -6,12 +6,10 @@ import { Post } from '../feed/types/feedTypes';
 export default function ButtonsContainer({
   likes,
   createdBy,
-  setPosts,
   _id,
   id,
 }: Pick<Post, '_id' | 'createdBy' | 'likes'> & {
   id: string | undefined;
-  setPosts: React.Dispatch<React.SetStateAction<Post[] | undefined>>;
 }) {
   const userContext = useUserContext();
   const { updateLike } = useUpdateLike();
@@ -24,7 +22,6 @@ export default function ButtonsContainer({
         updateLike={() =>
           updateLike({
             url: 'http://localhost:4000/posts/',
-            setState: setPosts,
             _id: id!,
           })
         }

@@ -2,24 +2,16 @@ import { useState } from 'react';
 import { ShareButton } from '../buttons/ShareButton';
 import useUserContext from '../../hooks/useUserContext';
 import useCreatePost from '../../hooks/useCreatePost';
-import { Dispatch, SetStateAction } from 'react';
-import { Post } from '../feed/types/feedTypes';
 import { Navigate } from 'react-router-dom';
 
-export default function CaptionContainer({
-  files,
-  setPosts,
-}: {
-  files: File[];
-  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
-}) {
+export default function CaptionContainer({ files }: { files: File[] }) {
   const [caption, setCaption] = useState('');
   const userContext = useUserContext();
   const { createPost, isLoading, message, error } = useCreatePost();
 
   const handleSubmit = async () => {
     if (files) {
-      await createPost(caption, files, setPosts);
+      await createPost(caption, files);
       setCaption('');
     }
   };

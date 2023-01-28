@@ -10,7 +10,7 @@ export type PostCardProps = {
   imageUrl: [string];
   text: string;
   createdAt: string;
-  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
+  setPosts: (post: Post) => void;
   _id: string;
 };
 

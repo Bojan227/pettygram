@@ -31,9 +31,3 @@ export type CommentsCardProps = {
   _id: string;
   setComments: Dispatch<SetStateAction<Comments[] | undefined>>;
 };
-
-export interface PostDetailsProps {
-  posts: Post[];
-  setPosts: Dispatch<SetStateAction<Post[] | undefined>>;
-  isLoading: boolean;
-}
