@@ -99,6 +99,9 @@ li:hover,
 .drop-div > :nth-child(1) {
   flex: 0.5;
 }
+.drop-div > .file-input {
+  margin-top: 10px;
+}
 
 .share-container {
   display: flex;
@@ -114,6 +117,13 @@ li:hover,
   gap: 10px;
 }
 
+.images-container > div {
+  height: 250px;
+}
+.images-container > div > img {
+  object-fit: fill;
+}
+
 .caption-container {
   display: flex;
   flex-direction: column;
@@ -124,7 +134,7 @@ li:hover,
 
 .images-container .file-input {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 

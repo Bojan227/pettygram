@@ -11,12 +11,10 @@ export default function ImageCard({
   const [showRemove, setShowRemove] = useState<boolean>(false);
   return (
     <RemoveImageWrapper {...{ showRemove, setShowRemove, removeFile }}>
-      <div className="image-card">
-        <img
-          onMouseEnter={() => setShowRemove(true)}
-          src={URL.createObjectURL(file)}
-        />
-      </div>
+      <img
+        onMouseEnter={() => setShowRemove(true)}
+        src={URL.createObjectURL(file)}
+      />
     </RemoveImageWrapper>
   );
 }
