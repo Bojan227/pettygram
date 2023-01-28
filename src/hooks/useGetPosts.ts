@@ -1,11 +1,15 @@
-import { useState } from 'react';
-import { Post } from '../components/feed/types/feedTypes';
+import { useEffect, useState } from 'react';
 import fetcher from '../api/fetcher';
+import { usePostsStore } from '../store/postsStore';
 
 export const useGetPosts = () => {
-  const [posts, setPosts] = useState<Post[] | undefined>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingState, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { load } = usePostsStore();
+
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   const getPosts = async () => {
     setIsLoading(true);
@@ -21,7 +25,7 @@ export const useGetPosts = () => {
           }`,
         },
       });
-      setPosts(json);
+      load(json);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -31,5 +35,5 @@ export const useGetPosts = () => {
     }
   };
 
-  return { posts, isLoading, error, getPosts, setPosts };
+  return { isLoadingState, error };
 };

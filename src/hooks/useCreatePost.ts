@@ -2,17 +2,15 @@ import { useState, Dispatch, SetStateAction } from 'react';
 import { Post } from '../components/feed/types/feedTypes';
 import fetcher from '../api/fetcher';
 import { fileReader } from '../utils/fileReader';
+import { usePostsStore } from '../store/postsStore';
 
 export default function useCreatePost() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const { addPost } = usePostsStore();
 
-  const createPost = async (
-    text: string,
-    files: File[],
-    setPosts: Dispatch<SetStateAction<Post[] | undefined>>
-  ) => {
+  const createPost = async (text: string, files: File[]) => {
     setIsLoading(true);
     try {
       const images = await fileReader(files);
@@ -33,7 +31,7 @@ export default function useCreatePost() {
         }),
       });
 
-      setPosts((prevPosts) => [...prevPosts!, post]);
+      addPost(post);
     } catch (err) {
       setError('Something went wrong');
     } finally {

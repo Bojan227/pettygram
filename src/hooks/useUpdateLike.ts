@@ -1,14 +1,16 @@
 import { Dispatch, SetStateAction } from 'react';
 import fetcher from '../api/fetcher';
+import { usePostsStore } from '../store/postsStore';
 
 interface updateLikeProps {
   url: string;
-  setState: Dispatch<SetStateAction<any[] | undefined>>;
   _id: string;
 }
 
 export default function useUpdateLike() {
-  const updateLike = async ({ url, setState, _id }: updateLikeProps) => {
+  const { changeLikeState } = usePostsStore();
+
+  const updateLike = async ({ url, _id }: updateLikeProps) => {
     try {
       const json = await fetcher(url, {
         method: 'PUT',
@@ -26,19 +28,9 @@ export default function useUpdateLike() {
         }),
       });
 
-      setState((prevState) => {
-        return prevState?.map((state) => {
-          if (state._id === json.post._id) {
-            return {
-              ...json.post,
-            };
-          } else {
-            return state;
-          }
-        });
-      });
+      changeLikeState(json.post);
     } catch (error) {
-      console.log(error);
+      error;
     }
   };
 
