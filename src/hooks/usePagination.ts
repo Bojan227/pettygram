@@ -1,14 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import fetcher from '../api/fetcher';
 import { usePostsStore } from '../store/postsStore';
 
 export default function usePagination() {
+  const [page, setPage] = useState(0);
   const [isLoadingPagination, setIsLoadingPagination] = useState(false);
   const [errorPagination, setErrorPagination] = useState('');
-  const { pagination, setNumberOfPosts } = usePostsStore();
+  const { pagination, setNumberOfPosts, posts, numberOfPosts } =
+    usePostsStore();
 
-  const getPosts = async (page: number) => {
-    console.log(page);
+  useEffect(() => {
+    if (page > 0) {
+      getPosts();
+    }
+  }, [page]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        console.log("you're at the bottom of the page");
+        if (posts.length === numberOfPosts) return;
+        if (numberOfPosts < page * 5) return;
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [posts.length]);
+
+  const getPosts = async () => {
     setIsLoadingPagination(true);
     try {
       const { posts, numberOfPosts } = await fetcher(

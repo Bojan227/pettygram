@@ -1,19 +1,20 @@
 import { PostCard } from './PostCard';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetUsers } from '../../hooks/useGetUsers';
 import useUserContext from '../../hooks/useUserContext';
 import './feed.css';
-import { FeedContainerProps } from './types/feedTypes';
 import { UserCard } from '../UserCard';
 import { socket } from '../../constants/socket';
 import { usePostsStore } from '../../store/postsStore';
 import { useGetPosts } from '../../hooks/useGetPosts';
+import usePagination from '../../hooks/usePagination';
 
 export const FeedContainer = () => {
   const { getUsers, isLoading, users } = useGetUsers();
   const userContext = useUserContext();
   const { posts, addPost } = usePostsStore();
   const { isLoadingState, error } = useGetPosts();
+  const { isLoadingPagination, errorPagination } = usePagination();
 
   useEffect(() => {
     getUsers();
@@ -33,17 +34,7 @@ export const FeedContainer = () => {
       )
   );
 
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log("you're at the bottom of the page");
-      }
-    };
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  if (isLoadingState) return <h1>Loading....</h1>;
+  if (isLoadingState || isLoading) return <h1>Loading....</h1>;
 
   return (
     <main className="feed-container">
@@ -61,6 +52,8 @@ export const FeedContainer = () => {
           ))}
         </div>
       )}
+      {isLoadingPagination && <h1>Loading....</h1>}
+      {errorPagination && <h1>{errorPagination}</h1>}
     </main>
   );
 };

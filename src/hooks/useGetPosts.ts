@@ -28,7 +28,6 @@ export const useGetPosts = () => {
           },
         }
       );
-      console.log(numberOfPosts);
       setNumberOfPosts(numberOfPosts);
       load(posts);
     } catch (error) {
