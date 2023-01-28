@@ -14,7 +14,7 @@ export const useGetPosts = () => {
   const getPosts = async () => {
     setIsLoading(true);
     try {
-      const json = await fetcher('http://localhost:4000/posts/', {
+      const json = await fetcher(`http://localhost:4000/posts/?page=${0}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${
