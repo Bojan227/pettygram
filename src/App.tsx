@@ -1,10 +1,9 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FeedContainer } from './components/feed/FeedContainer';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { NavigationBar } from './components/navigation/NavigationBar';
 import { Profile } from './components/profile/Profile';
-import { useGetPosts } from './hooks/useGetPosts';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import useUserContenxt from './hooks/useUserContext';
@@ -12,26 +11,18 @@ import { PostsContainer } from './components/profile/PostsContainer';
 import { PostDetails } from './components/postDetails/PostDetails';
 import { EditInfo } from './components/profile/EditUserInfo';
 import ChatContainer from './components/chat/ChatContainer';
-import NotificationsContainer from './components/notifications/NotificationsContainer';
 import NotificationMessagesWrapper from './components/NotificationMessagesWrapper';
 import NotificationsWrapper from './components/NotificationsWrapper';
 import ExploreContainer from './components/explore/ExploreContainer';
 
 function App() {
-  const userContext = useUserContenxt();
-  const { posts, getPosts, error, isLoading, setPosts } = useGetPosts();
   const [toggleNotifications, setToggleNotifications] = useState(false);
-
-  useEffect(() => {
-    getPosts();
-  }, [userContext?.user?.username]);
+  const userContext = useUserContenxt();
 
   return (
     <div onClick={() => setToggleNotifications(false)}>
       {userContext?.user && (
-        <NavigationBar
-          {...{ setPosts, toggleNotifications, setToggleNotifications }}
-        />
+        <NavigationBar {...{ toggleNotifications, setToggleNotifications }} />
       )}
 
       <Routes>
@@ -39,13 +30,11 @@ function App() {
           path="/"
           element={
             userContext?.user ? (
-              posts && (
-                <NotificationsWrapper>
-                  <NotificationMessagesWrapper>
-                    <FeedContainer {...{ posts, setPosts, error }} />
-                  </NotificationMessagesWrapper>
-                </NotificationsWrapper>
-              )
+              <NotificationsWrapper>
+                <NotificationMessagesWrapper>
+                  <FeedContainer />
+                </NotificationMessagesWrapper>
+              </NotificationsWrapper>
             ) : (
               <Signup />
             )
@@ -78,20 +67,13 @@ function App() {
             element={<PostsContainer tab="tagged" />}
           />
         </Route>
-
-        {posts && (
-          <Route
-            path="/p/:id"
-            element={<PostDetails {...{ posts, setPosts, isLoading }} />}
-          />
-        )}
+        <Route path="/p/:id" element={<PostDetails />} />
         <Route path="/edit" element={<EditInfo />} />
         {userContext?.user && (
           <Route path="/inbox" element={<ChatContainer />} />
         )}
-        {posts && (
-          <Route path="/explore" element={<ExploreContainer posts={posts} />} />
-        )}
+
+        <Route path="/explore" element={<ExploreContainer />} />
       </Routes>
     </div>
   );

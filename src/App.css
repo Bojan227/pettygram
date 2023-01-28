@@ -3,3 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.primary-btn {
+  padding: 10px 45px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
