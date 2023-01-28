@@ -6,6 +6,7 @@ type PostsStore = {
   addPost: (post: Post) => void;
   load: (posts: Post[]) => void;
   changeLikeState: (post: Post) => void;
+  pagination: (posts: Post[]) => void;
 };
 
 export const usePostsStore = create<PostsStore>((set) => ({
@@ -24,8 +25,8 @@ export const usePostsStore = create<PostsStore>((set) => ({
         prevPost._id === post._id ? post : prevPost
       ),
     })),
+  pagination: (posts) =>
+    set((state) => ({
+      posts: [...state.posts, ...posts],
+    })),
 }));
-
-// export const { addPost } = usePosts();
-// export const { posts } = usePosts();
-// export const { load } = usePosts();
