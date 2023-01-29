@@ -15,7 +15,7 @@
   border-radius: 8px;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  width: 50%;
+  width: 48%;
 }
 .card > a {
   padding: 0;
@@ -139,6 +139,18 @@ section {
   cursor: pointer;
 }
 
+@media (max-width: 1500px) {
+  .card {
+    width: 55%;
+  }
+}
+
+@media (max-width: 1250px) {
+  .card {
+    width: 58%;
+  }
+}
+
 @media (max-width: 1156px) {
   .suggested-users {
     top: -200px;
@@ -175,7 +187,12 @@ section {
   }
 
   .card {
-    width: 50%;
+    width: 48%;
+  }
+}
+@media (max-width: 960px) {
+  .card {
+    width: 60%;
   }
 }
 
@@ -200,6 +217,11 @@ section {
   }
 
   .card {
+    width: 65%;
+  }
+}
+@media (max-width: 610px) {
+  .card {
     width: 70%;
   }
 }
@@ -218,7 +240,12 @@ section {
     align-items: center;
   }
   .card {
-    width: 90%;
+    width: 80%;
+  }
+}
+@media (max-width: 480px) {
+  .card {
+    width: 85%;
   }
 }
 
@@ -232,6 +259,6 @@ section {
   }
 
   .card {
-    width: 90%;
+    width: 95%;
   }
 }
