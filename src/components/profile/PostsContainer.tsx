@@ -9,7 +9,6 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
   const [data, setData] = useState<Post[] | null>([]);
   const [error, setError] = useState('');
   const { userId } = useParams();
-  const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
     const getDataByUserId = async () => {
@@ -48,19 +47,13 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
       )}
 
       {data &&
-        data.map(({ imageUrl, likes, _id }, i) => {
-          return (
-            <Link key={uuidv4()} to={`/p/${_id}`}>
-              <div
-                className="profile-post-image"
-                onMouseEnter={() => setShowOverlay(true)}
-              >
-                <img src={imageUrl[0]} alt="user-image" />
-                <ImageOverlay {...{ showOverlay, setShowOverlay, likes }} />
-              </div>
-            </Link>
-          );
-        })}
+        data.map(({ imageUrl, likes, _id }) => (
+          <Link key={uuidv4()} to={`/p/${_id}`}>
+            <ImageOverlay {...{ likes }}>
+              <img src={imageUrl[0]} alt="user-image" />
+            </ImageOverlay>
+          </Link>
+        ))}
       {error && <h1>{error}</h1>}
     </div>
   );

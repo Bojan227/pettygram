@@ -1,22 +1,26 @@
-import React from 'react';
+import { useState } from 'react';
 import { HeartIcon } from '@heroicons/react/24/solid';
 
 export default function ImageOverlay({
-  showOverlay,
   likes,
-  setShowOverlay,
+  children,
 }: {
-  showOverlay: boolean;
   likes: string[];
-  setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
+  children: React.ReactNode;
 }) {
+  const [showOverlay, setShowOverlay] = useState(false);
+
   return (
     <div
+      className="profile-post-image"
+      onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
-      className={`image-overlay ${showOverlay ? 'show-overlay' : ''}`}
     >
-      <HeartIcon fill="white" width="42px" />
-      <h3>{likes.length}</h3>
+      <div className={`image-overlay ${showOverlay ? 'show-overlay' : ''}`}>
+        <HeartIcon fill="white" width="42px" />
+        <h3>{likes.length}</h3>
+      </div>
+      {children}
     </div>
   );
 }

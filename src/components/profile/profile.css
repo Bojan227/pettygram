@@ -155,11 +155,11 @@ a {
 .profile-post-image {
   position: relative;
   height: 100%;
-  border: 2px solid black;
 }
 .profile-post-image > img {
   max-width: 100%;
   height: 100%;
+  width: 100%;
 }
 .image-overlay {
   display: none;
