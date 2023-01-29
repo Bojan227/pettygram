@@ -61,7 +61,11 @@ a {
 }
 
 .posts-container .active {
-  border-top: 2px solid black;
+  border-top: 2 px solid black;
+}
+.posts-container > a {
+  height: 85%;
+  width: 100%;
 }
 
 .info-followers {
@@ -151,6 +155,7 @@ a {
 .profile-post-image {
   position: relative;
   height: 100%;
+  border: 2px solid black;
 }
 .profile-post-image > img {
   max-width: 100%;
@@ -246,6 +251,12 @@ a {
   .edit-form {
     width: 40%;
   }
+  .posts-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
+  }
+  .posts-container > a {
+    height: 90%;
+  }
 }
 
 @media (max-width: 753px) {
@@ -281,6 +292,13 @@ a {
   .edit-form {
     width: 70%;
   }
+  .posts-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 0.5fr));
+    width: 90%;
+  }
+  .posts-container > a {
+    height: 95%;
+  }
 }
 
 @media (max-width: 450px) {
@@ -294,8 +312,20 @@ a {
     width: 100%;
   }
 
+  .info-followers {
+    flex-direction: column;
+  }
+  .profile-card {
+    justify-content: space-between;
+  }
+
   .posts-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 0.5fr));
     justify-content: center;
+    width: 100%;
+  }
+  .posts-container > a {
+    height: 100%;
   }
 
   .users-list-content {
