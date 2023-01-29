@@ -1,10 +1,10 @@
 :root {
-  --card_width: 450px;
+  --card_width: 300px;
   --row_increment: 100px;
   --card_border_radius: 16px;
   --card_small: 26;
   --card_med: 33;
-  --card_large: 44;
+  --card_large: 42;
 }
 
 .explore-container {
@@ -17,7 +17,6 @@
   align-items: right;
   min-height: 100vh;
   background-color: #e5e5e5;
-
   justify-content: center;
   overflow-y: auto;
 }
@@ -52,8 +51,9 @@
 
 @media (max-width: 1150px) {
   .explore-container {
-    margin-left: 12%;
+    margin-left: 14%;
     padding: 20px;
+    grid-template-columns: repeat(auto-fill, 180px);
   }
 }
 
@@ -64,22 +64,28 @@
     margin-left: 0;
     padding: 0;
     margin-bottom: 10%;
-    grid-template-columns: repeat(auto-fill, 350px);
+    grid-template-columns: repeat(auto-fill, 180px);
   }
 }
 
 @media (max-width: 570px) {
   .explore-container {
     margin-top: 25%;
-    grid-template-columns: repeat(auto-fill, 280px);
+
+    grid-template-columns: repeat(auto-fill, 150px);
   }
 }
 
 @media (max-width: 450px) {
   .explore-container {
     margin-top: 32%;
+    grid-template-columns: repeat(auto-fill, 120px);
+    padding-top: 40px;
   }
   .card-explore > a > img {
     height: 75%;
+  }
+  .card-explore {
+    margin: 0px 6px;
   }
 }
