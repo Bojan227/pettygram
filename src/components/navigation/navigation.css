@@ -106,22 +106,28 @@ li:hover,
 .share-container {
   display: flex;
   width: 85%;
-  height: 65%;
+  height: 85%;
   background-color: #f8fafc;
 }
 .images-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: 250px 250px 250px;
   padding: 15px;
   width: 60%;
-  gap: 10px;
+  gap: 5px;
+  background-color: black;
+  overflow-y: auto;
 }
 
 .images-container > div {
+  width: 100%;
   height: 250px;
 }
 .images-container > div > img {
   object-fit: fill;
+  height: 100%;
+  width: 100%;
 }
 
 .caption-container {
@@ -129,21 +135,25 @@ li:hover,
   flex-direction: column;
   flex: 1;
   padding: 10px;
-  gap: 10px;
+  gap: 20px;
 }
 
 .images-container .file-input {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid white;
 }
 
 .share-container > div > textarea {
-  padding: 5px;
-  max-height: 60%;
+  padding: 8px;
+  max-height: 40%;
   width: 100%;
   flex: 1;
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 1px solid black;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 .user-info {
   display: flex;
@@ -157,13 +167,18 @@ li:hover,
   height: 50px;
   border-radius: 50%;
 }
+.user-info > h4 {
+  flex: 1;
+}
 .share-btn {
   font-size: 1.1rem;
-
-  border: 1px solid gray;
+  background-color: #67e8f9;
   border-radius: 8px;
-  padding: 8px;
+  padding: 8px 35px;
   cursor: pointer;
+}
+.share-btn:disabled {
+  cursor: not-allowed;
 }
 #actual-btn {
   display: none;
@@ -240,6 +255,16 @@ label {
     top: -70px;
     left: 80px;
   }
+  .share-container {
+    width: 95%;
+  }
+  .images-container {
+    width: 65%;
+  }
+  .caption-container {
+    width: 45%;
+    flex: none;
+  }
 }
 
 @media (max-width: 752px) {
@@ -310,17 +335,22 @@ label {
     width: 100%;
     height: 75%;
   }
-  .share-container > div {
-    height: 85%;
-  }
-  .share-container > div > div > img {
-    width: 45x;
-    height: 50px;
-    border-radius: 50%;
-  }
+
   .profile-link > li > img {
     width: 32px;
     height: 32px;
+  }
+  .images-container {
+    height: 75%;
+    width: 100%;
+  }
+  .caption-container {
+    height: 35%;
+    width: 100%;
+  }
+  .share-container > div > textarea {
+    max-height: none;
+    flex: 1;
   }
 }
 

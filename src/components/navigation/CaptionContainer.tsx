@@ -24,21 +24,19 @@ export default function CaptionContainer({ files }: { files: File[] }) {
           alt={userContext?.user.username}
         />
         <h4>{userContext?.user.username}</h4>
+        <ShareButton
+          disabled={caption ? false : true}
+          onClick={handleSubmit}
+          className="share-btn"
+        >
+          {isLoading ? 'Loading...' : 'Share'}
+        </ShareButton>
       </div>
-
       <textarea
         value={caption}
         onChange={(e) => setCaption(() => e.target.value)}
         placeholder="Write a caption..."
       />
-
-      <ShareButton
-        disabled={caption ? false : true}
-        onClick={handleSubmit}
-        className="share-btn"
-      >
-        {isLoading ? 'Loading...' : 'Share'}
-      </ShareButton>
       {message && <Navigate to="/" />}
       {error && <h2>{error}</h2>}
     </div>
