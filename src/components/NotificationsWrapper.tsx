@@ -30,7 +30,7 @@ export default function NotificationsWrapper({
   }, []);
 
   return (
-    <main className="flex bg-stone-50 justify-center min-h-screen">
+    <main>
       {error && error}
       {children}
     </main>

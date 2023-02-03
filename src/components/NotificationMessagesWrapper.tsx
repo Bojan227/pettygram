@@ -19,9 +19,5 @@ export default function NotificationMessagesWrapper({
     };
   }, []);
 
-  return (
-    <main className="flex bg-stone-50 justify-center min-h-screen">
-      {children}
-    </main>
-  );
+  return <main>{children}</main>;
 }
