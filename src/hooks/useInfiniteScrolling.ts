@@ -2,32 +2,16 @@ import { useEffect, useState } from 'react';
 import fetcher from '../api/fetcher';
 import { usePostsStore } from '../store/postsStore';
 
-export default function usePagination() {
-  const [page, setPage] = useState(0);
+export default function useInfiniteScrolling(page: number) {
   const [isLoadingPagination, setIsLoadingPagination] = useState(false);
   const [errorPagination, setErrorPagination] = useState('');
-  const { pagination, setNumberOfPosts, posts, numberOfPosts } =
-    usePostsStore();
+  const { pagination, setNumberOfPosts } = usePostsStore();
 
   useEffect(() => {
     if (page > 0) {
       getPosts();
     }
   }, [page]);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log("you're at the bottom of the page");
-        if (posts.length === numberOfPosts) return;
-        if (numberOfPosts < page * 5) return;
-        setPage((prevPage) => prevPage + 1);
-      }
-    };
-    window.addEventListener('scroll', onScroll);
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [posts.length]);
 
   const getPosts = async () => {
     setIsLoadingPagination(true);
