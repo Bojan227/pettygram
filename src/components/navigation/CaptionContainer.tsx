@@ -4,7 +4,13 @@ import useUserContext from '../../hooks/useUserContext';
 import useCreatePost from '../../hooks/useCreatePost';
 import { Navigate } from 'react-router-dom';
 
-export default function CaptionContainer({ files }: { files: File[] }) {
+export default function CaptionContainer({
+  files,
+  setToggleCreatePost,
+}: {
+  files: File[];
+  setToggleCreatePost: (toggleCreatePost: boolean) => void;
+}) {
   const [caption, setCaption] = useState('');
   const userContext = useUserContext();
   const { createPost, isLoading, message, error } = useCreatePost();
@@ -13,6 +19,7 @@ export default function CaptionContainer({ files }: { files: File[] }) {
     if (files) {
       await createPost(caption, files);
       setCaption('');
+      setToggleCreatePost(false);
     }
   };
 

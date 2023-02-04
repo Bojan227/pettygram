@@ -42,7 +42,7 @@ export const CreatePost = ({
           <ImagesContainer
             {...{ files, handleImageUpload, handleRemoveFile }}
           />
-          <CaptionContainer {...{ files }} />
+          <CaptionContainer {...{ files, setToggleCreatePost }} />
         </div>
       )}
     </div>
