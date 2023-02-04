@@ -28,8 +28,6 @@ export default function ChangePictureModal({
       onClick={() => setShowModal(false)}
     >
       <div onClick={(e) => e.stopPropagation()}>
-        <h2>Change Profile Photo</h2>
-
         {image ? (
           <h3 onClick={() => setImage(undefined)}>Remove Image</h3>
         ) : (
