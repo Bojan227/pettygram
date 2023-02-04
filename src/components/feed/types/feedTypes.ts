@@ -10,8 +10,9 @@ export type PostCardProps = {
   imageUrl: [string];
   text: string;
   createdAt: string;
-  setPosts: (post: Post) => void;
   _id: string;
+  index: number;
+  listRef: (node: HTMLDivElement | null) => void;
 };
 
 export interface FeedContainerProps {

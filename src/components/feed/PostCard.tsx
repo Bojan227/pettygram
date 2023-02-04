@@ -1,4 +1,5 @@
 import { LikeButton, Details, Bookmark } from './SvgsContainer';
+import { useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentForm';
 import useUpdateLike from '../../hooks/useUpdateLike';
@@ -7,6 +8,10 @@ import { formatDistanceToNow } from 'date-fns';
 import useUserContext from '../../hooks/useUserContext';
 import default_insta from '../../assets/default_insta.jpg';
 import CarouselSlider from './CarouselSlider';
+import InfiniteScroll from 'react-infinite-scroller';
+import usePagination from '../../hooks/useInfiniteScrolling';
+import LoadingSpinner from '../LoadingSpinner';
+import { usePostsStore } from '../../store/postsStore';
 
 export const PostCard = ({
   createdBy,
@@ -15,13 +20,15 @@ export const PostCard = ({
   text,
   createdAt,
   _id,
-  setPosts,
+  index,
+  listRef,
 }: PostCardProps): JSX.Element => {
   const { updateLike } = useUpdateLike();
   const userContext = useUserContext();
+  const { posts } = usePostsStore();
 
   return (
-    <div className="card">
+    <div className="card" ref={index === posts.length - 1 ? listRef : null}>
       <Link to={`/profile/${createdBy._id}`}>
         <section className="user-section">
           <img src={createdBy.imageUrl || default_insta} />

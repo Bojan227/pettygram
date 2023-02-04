@@ -1,5 +1,5 @@
 import { PostCard } from './PostCard';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback, ReactElement } from 'react';
 import { useGetUsers } from '../../hooks/useGetUsers';
 import useUserContext from '../../hooks/useUserContext';
 import './feed.css';
@@ -7,16 +7,35 @@ import { UserCard } from '../UserCard';
 import { socket } from '../../constants/socket';
 import { usePostsStore } from '../../store/postsStore';
 import { useGetPosts } from '../../hooks/useGetPosts';
-import usePagination from '../../hooks/usePagination';
 import LoadingSpinner from '../LoadingSpinner';
+import useInfiniteScrolling from '../../hooks/useInfiniteScrolling';
 
 export const FeedContainer = () => {
   const { getUsers, isLoading, users } = useGetUsers();
   const userContext = useUserContext();
-  const { posts, addPost } = usePostsStore();
+  const { posts, numberOfPosts } = usePostsStore();
   const { isLoadingState, error } = useGetPosts();
-  const { isLoadingPagination, errorPagination } = usePagination();
+  const [page, setPage] = useState(0);
+  const { isLoadingPagination, errorPagination } = useInfiniteScrolling(page);
 
+  console.log(page);
+  let observer = useRef<IntersectionObserver | null>(null);
+  let listRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (isLoadingPagination) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && numberOfPosts > posts.length) {
+          console.log('update');
+          setPage((page) => page + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [numberOfPosts > posts.length]
+  );
+
+  console.log(posts);
   useEffect(() => {
     getUsers();
   }, []);
@@ -41,7 +60,7 @@ export const FeedContainer = () => {
     <main className="feed-container">
       {error && <h1>{error}</h1>}
       {posts?.map((post, i) => (
-        <PostCard key={i} {...post} setPosts={addPost} />
+        <PostCard key={i} {...post} index={i} {...{ listRef }} />
       ))}
       {filteredUsers?.length === 0 ? null : isLoading ? (
         <LoadingSpinner />
