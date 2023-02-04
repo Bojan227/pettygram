@@ -18,7 +18,6 @@ export const FeedContainer = () => {
   const [page, setPage] = useState(0);
   const { isLoadingPagination, errorPagination } = useInfiniteScrolling(page);
 
-  console.log(page);
   let observer = useRef<IntersectionObserver | null>(null);
   let listRef = useCallback(
     (node: HTMLDivElement | null) => {
@@ -26,7 +25,6 @@ export const FeedContainer = () => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && numberOfPosts > posts.length) {
-          console.log('update');
           setPage((page) => page + 1);
         }
       });
@@ -35,7 +33,6 @@ export const FeedContainer = () => {
     [numberOfPosts > posts.length]
   );
 
-  console.log(posts);
   useEffect(() => {
     getUsers();
   }, []);
