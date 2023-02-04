@@ -5,6 +5,7 @@ import useEditInfo from '../../hooks/useEditInfo';
 import { Link, Navigate } from 'react-router-dom';
 import Button from '../buttons/Button';
 import UploadProfilePicture from './UpdateProfilePicture';
+import LoadingSpinner from '../LoadingSpinner';
 
 export const EditInfo = () => {
   const [username, setUsername] = useState('');
@@ -24,7 +25,7 @@ export const EditInfo = () => {
     e.preventDefault();
     await editInfo(username, firstName, lastName);
   }
-  if (isLoading) <h1>Loading....</h1>;
+  if (isLoading) <LoadingSpinner />;
 
   return (
     <div className="edit-container">

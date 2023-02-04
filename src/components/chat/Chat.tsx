@@ -9,6 +9,7 @@ import useGetChatHistory from '../../hooks/useGetChatHistory';
 import Message from './Message';
 import { ChatType } from '../../context/chatDataContext';
 import { socket } from '../../constants/socket';
+import LoadingSpinner from '../LoadingSpinner';
 
 export default function Chat({
   selectedUser,
@@ -17,14 +18,7 @@ export default function Chat({
 }) {
   const chatData = useChatData();
   const addMessage = useAddMessage();
-  const userContext = useUserContext();
   const { isLoading, error } = useGetChatHistory(selectedUser);
-
-  // useEffect(() => {
-  //   if (userContext?.user._id) {
-  //     socket.emit('add_user', { userId: userContext?.user?._id });
-  //   }
-  // }, []);
 
   useEffect(() => {
     socket.off('notification_message');
@@ -36,7 +30,7 @@ export default function Chat({
     };
   }, [socket, selectedUser?._id]);
 
-  if (isLoading) return <h1>Loading.....</h1>;
+  if (isLoading) return <LoadingSpinner />;
 
   return selectedUser ? (
     <div className={`chat ${selectedUser._id ? 'activated' : ''} `}>

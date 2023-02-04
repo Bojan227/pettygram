@@ -4,6 +4,7 @@ import default_insta from '../../assets/default_insta.jpg';
 import useDeleteProfilePicture from '../../hooks/useDeleteProfilePicture';
 import useUpdateProfilePicture from '../../hooks/useUpdateProfilePicture';
 import ChangePictureModal from './ChangePictureModal';
+import LoadingSpinner from '../LoadingSpinner';
 
 export default function UploadProfilePicture() {
   const userContext = useUserContext();
@@ -32,7 +33,7 @@ export default function UploadProfilePicture() {
     <div className="profile-image">
       {isLoading ||
         (isLoadingDeleteState ? (
-          <h1>Loading....</h1>
+          <LoadingSpinner />
         ) : (
           <img
             src={

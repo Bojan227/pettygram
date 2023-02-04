@@ -8,6 +8,7 @@ import { socket } from '../../constants/socket';
 import { usePostsStore } from '../../store/postsStore';
 import { useGetPosts } from '../../hooks/useGetPosts';
 import usePagination from '../../hooks/usePagination';
+import LoadingSpinner from '../LoadingSpinner';
 
 export const FeedContainer = () => {
   const { getUsers, isLoading, users } = useGetUsers();
@@ -34,7 +35,7 @@ export const FeedContainer = () => {
       )
   );
 
-  if (isLoadingState || isLoading) return <h1>Loading....</h1>;
+  if (isLoadingState) return <LoadingSpinner />;
 
   return (
     <main className="feed-container">
@@ -42,7 +43,9 @@ export const FeedContainer = () => {
       {posts?.map((post, i) => (
         <PostCard key={i} {...post} setPosts={addPost} />
       ))}
-      {filteredUsers?.length === 0 ? null : (
+      {filteredUsers?.length === 0 ? null : isLoading ? (
+        <LoadingSpinner />
+      ) : (
         <div className="suggested-users">
           <div className="suggested-header">
             <h1>Discover People</h1>
@@ -52,7 +55,7 @@ export const FeedContainer = () => {
           ))}
         </div>
       )}
-      {isLoadingPagination && <h1>Loading....</h1>}
+      {isLoadingPagination && <LoadingSpinner />}
       {errorPagination && <h1>{errorPagination}</h1>}
     </main>
   );
