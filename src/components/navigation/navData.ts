@@ -8,8 +8,8 @@ export const navData = [
   { title: 'Home', url: home, link: '/' },
   { title: 'Explore', url: magnify, link: 'explore' },
   { title: 'Messages', url: send, link: 'inbox' },
-  { title: 'Notifications', url: notifications, link: 'notifications' },
-  { title: 'Create', url: create, link: '/' },
+  { title: 'Notifications', url: notifications, link: '' },
+  { title: 'Create', url: create, link: '' },
   {
     title: 'Profile',
     url: 'profile',

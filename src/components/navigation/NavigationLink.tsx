@@ -33,7 +33,8 @@ export const NavigationLink = ({
         (title === 'Profile' ? 'profile-link' : '')
       }
       onClick={(e) =>
-        (title === 'Create' && toggleCreatePost()) ||
+        (title === 'Create' &&
+          (toggleCreatePost(), e.stopPropagation(), e.preventDefault())) ||
         (title === 'Notifications' &&
           (filterNotifications(),
           updateNotifications(userContext?.user._id!),
