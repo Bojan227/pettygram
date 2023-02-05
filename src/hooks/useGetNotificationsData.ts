@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import fetcher from '../api/fetcher';
 import { useAddNotifications } from '../context/notificationsContext';
+import { url } from '../constants/api';
 
 export default function useGetNotificationsData() {
   const addNotifications = useAddNotifications();
@@ -9,7 +10,7 @@ export default function useGetNotificationsData() {
   const getNotificationsByReceiverId = async (receiverId: string) => {
     try {
       const notifications = await fetcher(
-        `http://localhost:4000/notifications?receiverId=${receiverId}`
+        `${url}/notifications?receiverId=${receiverId}`
       );
 
       addNotifications(notifications);

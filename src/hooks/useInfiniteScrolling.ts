@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import fetcher from '../api/fetcher';
 import { usePostsStore } from '../store/postsStore';
+import { url } from '../constants/api';
 
 export default function useInfiniteScrolling(page: number) {
   const [isLoadingPagination, setIsLoadingPagination] = useState(false);
@@ -17,7 +18,7 @@ export default function useInfiniteScrolling(page: number) {
     setIsLoadingPagination(true);
     try {
       const { posts, numberOfPosts } = await fetcher(
-        `http://localhost:4000/posts/?page=${page}`,
+        `${url}/posts/?page=${page}`,
         {
           headers: {
             'Content-Type': 'application/json',

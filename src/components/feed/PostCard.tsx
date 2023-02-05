@@ -1,5 +1,5 @@
 import { LikeButton, Details, Bookmark } from './SvgsContainer';
-import { useState, useRef, useCallback } from 'react';
+import { url } from '../../constants/api';
 import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentForm';
 import useUpdateLike from '../../hooks/useUpdateLike';
@@ -8,9 +8,6 @@ import { formatDistanceToNow } from 'date-fns';
 import useUserContext from '../../hooks/useUserContext';
 import default_insta from '../../assets/default_insta.jpg';
 import CarouselSlider from './CarouselSlider';
-import InfiniteScroll from 'react-infinite-scroller';
-import usePagination from '../../hooks/useInfiniteScrolling';
-import LoadingSpinner from '../LoadingSpinner';
 import { usePostsStore } from '../../store/postsStore';
 
 export const PostCard = ({
@@ -42,7 +39,7 @@ export const PostCard = ({
           receiverId={createdBy._id}
           updateLike={() =>
             updateLike({
-              url: 'http://localhost:4000/posts/',
+              url: `${url}/posts/`,
               _id,
             })
           }

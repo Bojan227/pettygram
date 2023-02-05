@@ -2,6 +2,7 @@ import { LikeButton, Details, Bookmark } from '../feed/SvgsContainer';
 import useUserContext from '../../hooks/useUserContext';
 import useUpdateLike from '../../hooks/useUpdateLike';
 import { Post } from '../feed/types/feedTypes';
+import { url } from '../../constants/api';
 
 export default function ButtonsContainer({
   likes,
@@ -21,7 +22,7 @@ export default function ButtonsContainer({
         receiverId={createdBy._id!}
         updateLike={() =>
           updateLike({
-            url: 'http://localhost:4000/posts/',
+            url: `${url}/posts/`,
             _id: id!,
           })
         }

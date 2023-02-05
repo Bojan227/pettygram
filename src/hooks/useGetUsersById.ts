@@ -2,6 +2,7 @@ import fetcher from '../api/fetcher';
 import { useState, useEffect } from 'react';
 import useUserContext from './useUserContext';
 import { UserType } from '../context/userContext';
+import { url } from '../constants/api';
 
 export default function useGetUsersById() {
   const userContext = useUserContext();
@@ -14,7 +15,7 @@ export default function useGetUsersById() {
   const getUsers = async () => {
     const users = await Promise.all(
       [...userContext?.user.following!].map((user) =>
-        fetcher(`http://localhost:4000/user/${user?._id}`)
+        fetcher(`${url}/user/${user?._id}`)
       )
     );
     setUsers(users);

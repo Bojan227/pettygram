@@ -50,9 +50,6 @@ export default function Login() {
           Log In
         </button>
       </form>
-      {/* {error && <h5>{error}</h5>}
-      {message && <h5>{message}</h5>} */}
-
       <footer className="border-solid border-t-2 border-white  p-5 w-full text-center">
         <h1>
           Don't have an account?<Link to="/">Sign up.</Link>

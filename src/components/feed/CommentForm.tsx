@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CommentButton } from '../buttons/CommentButton';
+import { url } from '../../constants/api';
 
 interface CommentFormProps {
   postId: string;
@@ -16,7 +17,7 @@ export const CommentForm = ({
   const createComment = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:4000/comments/', {
+      const res = await fetch(`${url}/comments/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

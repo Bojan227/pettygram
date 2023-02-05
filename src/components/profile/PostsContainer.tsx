@@ -4,6 +4,7 @@ import { Post } from '../feed/types/feedTypes';
 import fetcher from '../../api/fetcher';
 import ImageOverlay from './ImageOverlay';
 import { v4 as uuidv4 } from 'uuid';
+import { url } from '../../constants/api';
 
 export const PostsContainer = ({ tab }: { tab: string }) => {
   const [data, setData] = useState<Post[] | null>([]);
@@ -14,7 +15,7 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
     const getDataByUserId = async () => {
       try {
         const data = await fetcher(
-          `http://localhost:4000/${tab}/${tab === 'saved' ? '' : userId}`,
+          `${url}/${tab}/${tab === 'saved' ? '' : userId}`,
           {
             headers: {
               'Content-Type': 'application/json',

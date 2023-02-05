@@ -10,6 +10,7 @@ import CarouselSlider from '../feed/CarouselSlider';
 import CaptionContainer from './CaptionContainer';
 import ButtonsContainer from './ButtonsContainer';
 import { useGetData } from '../../hooks/useGetData';
+import { url } from '../../constants/api';
 
 export const PostDetails = () => {
   const [post, setPost] = useState<Post>();
@@ -21,7 +22,7 @@ export const PostDetails = () => {
   useEffect(() => {
     if (id) {
       getData({
-        url: `http://localhost:4000/posts/p/${id}`,
+        url: `${url}/posts/p/${id}`,
         setState: setPost,
       });
     }

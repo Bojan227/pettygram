@@ -1,2 +1,3 @@
+import { url } from './api';
 import socketClient from 'socket.io-client';
-export const socket: any = socketClient('http://localhost:4000/');
+export const socket: any = socketClient(`${url}/`);

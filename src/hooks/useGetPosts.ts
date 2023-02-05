@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import fetcher from '../api/fetcher';
 import { usePostsStore } from '../store/postsStore';
+import { url } from '../constants/api';
 
 export const useGetPosts = () => {
   const [isLoadingState, setIsLoading] = useState(false);
@@ -15,7 +16,7 @@ export const useGetPosts = () => {
     setIsLoading(true);
     try {
       const { posts, numberOfPosts } = await fetcher(
-        `http://localhost:4000/posts/?page=${0}`,
+        `${url}/posts/?page=${0}`,
         {
           headers: {
             'Content-Type': 'application/json',

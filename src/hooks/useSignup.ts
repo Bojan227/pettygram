@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import fetcher from '../api/fetcher';
+import { url } from '../constants/api';
 
 type SignupProps = {
   username: string;
@@ -36,7 +37,7 @@ export default function useSignup() {
 
     const uploadWithImage = async (img: string) => {
       try {
-        const json = await fetcher('http://localhost:4000/user/signup', {
+        const json = await fetcher(`${url}/user/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

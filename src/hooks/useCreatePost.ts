@@ -1,5 +1,5 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import { Post } from '../components/feed/types/feedTypes';
+import { url } from '../constants/api';
 import fetcher from '../api/fetcher';
 import { fileReader } from '../utils/fileReader';
 import { usePostsStore } from '../store/postsStore';
@@ -14,7 +14,7 @@ export default function useCreatePost() {
     setIsLoading(true);
     try {
       const images = await fileReader(files);
-      const post = await fetcher('http://localhost:4000/posts/', {
+      const post = await fetcher(`${url}/posts/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

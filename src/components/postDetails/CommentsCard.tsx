@@ -1,4 +1,3 @@
-// import { LikeButton } from './feed/SvgContainer';
 import useUpdateLike from '../../hooks/useUpdateLike';
 import { LikeButton } from '../feed/SvgsContainer';
 import { formatDistanceToNow } from 'date-fns';
@@ -6,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { CommentsCardProps } from './types';
 import default_insta from '../../assets/default_insta.jpg';
 import useUserContext from '../../hooks/useUserContext';
+import { url } from '../../constants/api';
 
 export const CommentsCard = ({
   createdBy,
@@ -35,7 +35,7 @@ export const CommentsCard = ({
             likes,
             updateLike: () => {
               updateLike({
-                url: 'http://localhost:4000/comments/',
+                url: `${url}/comments/`,
                 _id,
               }),
                 setComments((prevComments) =>

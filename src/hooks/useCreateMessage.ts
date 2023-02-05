@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { ChatType } from '../context/chatDataContext';
+import { url } from '../constants/api';
+
 export default function useCreateMessage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const createMessage = async (messageData: ChatType) => {
     try {
-      await fetch('http://localhost:4000/chat', {
+      await fetch(`${url}/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -8,6 +8,7 @@ import { Edit } from '../feed/SvgsContainer';
 import { Post } from '../feed/types/feedTypes';
 import default_insta from '../../assets/default_insta.jpg';
 import FollowButtonContainer from './FollowButtonContainer';
+import { url } from '../../constants/api';
 
 export const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState<UserType>();
@@ -21,11 +22,11 @@ export const ProfileCard = () => {
 
   useEffect(() => {
     getData({
-      url: `http://localhost:4000/user/${userId}`,
+      url: `${url}/user/${userId}`,
       setState: setUserInfo,
     });
     getData({
-      url: `http://localhost:4000/posts/${userId}`,
+      url: `${url}/posts/${userId}`,
       setState: setUserPosts,
     });
   }, [userId, userContext?.user.following?.length]);

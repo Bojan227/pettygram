@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import fetcher from '../api/fetcher';
 import useUserContenxt from './useUserContext';
+import { url } from '../constants/api';
 
 export default function useEditInfo() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +16,7 @@ export default function useEditInfo() {
   ) => {
     setIsLoading(true);
     try {
-      const updatedUser = await fetcher('http://localhost:4000/user/edit', {
+      const updatedUser = await fetcher(`${url}/user/edit`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import useUserContext from './useUserContext';
 import { UserType } from '../context/userContext';
 import { useEffect, useState } from 'react';
 import { useAddChatData } from '../context/chatDataContext';
+import { url } from '../constants/api';
 
 export default function useGetChatHistory(selectedUser: UserType | undefined) {
   const userContext = useUserContext();
@@ -21,7 +22,7 @@ export default function useGetChatHistory(selectedUser: UserType | undefined) {
     setIsLoading(true);
     try {
       const chatData = await fetcher(
-        `http://localhost:4000/chat?author=${userContext?.user?._id}&receiver=${selectedUser?._id}`,
+        `${url}/chat?author=${userContext?.user?._id}&receiver=${selectedUser?._id}`,
         {
           headers: {
             'Content-Type': 'application/json',

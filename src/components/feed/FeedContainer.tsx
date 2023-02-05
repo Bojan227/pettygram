@@ -9,6 +9,7 @@ import { usePostsStore } from '../../store/postsStore';
 import { useGetPosts } from '../../hooks/useGetPosts';
 import LoadingSpinner from '../LoadingSpinner';
 import useInfiniteScrolling from '../../hooks/useInfiniteScrolling';
+import { ArrowUpCircleIcon } from '@heroicons/react/24/solid';
 
 export const FeedContainer = () => {
   const { getUsers, isLoading, users } = useGetUsers();
@@ -17,6 +18,15 @@ export const FeedContainer = () => {
   const { isLoadingState, error } = useGetPosts();
   const [page, setPage] = useState(0);
   const { isLoadingPagination, errorPagination } = useInfiniteScrolling(page);
+  const [isBottom, setIsBottom] = useState(false);
+
+  // const handleScroll = (e: Event) => {
+  //   const bottom =
+  //     e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+  //   if (bottom) {
+  //     console.log('bottom');
+  //   }
+  // };
 
   let observer = useRef<IntersectionObserver | null>(null);
   let listRef = useCallback(

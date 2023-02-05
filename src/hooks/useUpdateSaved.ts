@@ -1,5 +1,6 @@
 import fetcher from '../api/fetcher';
 import useUserContext from './useUserContext';
+import { url } from '../constants/api';
 
 interface updateSavedProps {
   postId: string;
@@ -10,7 +11,7 @@ export default function useUpdateSaved() {
 
   const updateSaved = async ({ postId }: updateSavedProps) => {
     try {
-      const { user, post } = await fetcher('http://localhost:4000/saved/', {
+      const { user, post } = await fetcher(`${url}/saved/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

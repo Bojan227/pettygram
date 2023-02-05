@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CommentsCard } from './CommentsCard';
 import { Comments, CommentsContainerProps } from './types';
+import { url } from '../../constants/api';
 
 export const CommentsContainer = ({
   commentNotification,
@@ -13,7 +14,7 @@ export const CommentsContainer = ({
   useEffect(() => {
     const getComments = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/posts/${id}/comments`);
+        const res = await fetch(`${url}/posts/${id}/comments`);
         const json = await res.json();
 
         setComments([...json]);
