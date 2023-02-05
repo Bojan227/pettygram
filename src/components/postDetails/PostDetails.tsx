@@ -11,12 +11,13 @@ import CaptionContainer from './CaptionContainer';
 import ButtonsContainer from './ButtonsContainer';
 import { useGetData } from '../../hooks/useGetData';
 import { url } from '../../constants/api';
+import LoadingSpinner from '../LoadingSpinner';
 
 export const PostDetails = () => {
   const [post, setPost] = useState<Post>();
   const [commentMessage, setCommentMessage] = useState('');
   const { id } = useParams();
-  const { getData } = useGetData();
+  const { getData, isLoading } = useGetData();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +28,8 @@ export const PostDetails = () => {
       });
     }
   }, []);
+
+  if (!isLoading) return <LoadingSpinner />;
 
   return (
     <div className="post-details">

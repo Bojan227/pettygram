@@ -138,6 +138,11 @@ section {
   cursor: pointer;
 }
 
+main > .spinner-container {
+  position: fixed;
+  top: 25%;
+  left: 55%;
+}
 @media (max-width: 1500px) {
   .card {
     width: 35%;
@@ -217,6 +222,10 @@ section {
 
   .card {
     width: 65%;
+  }
+  main > .spinner-container {
+    top: 35%;
+    left: 45%;
   }
 }
 @media (max-width: 610px) {

@@ -5,6 +5,7 @@
   min-height: 100vh;
   padding: 45px;
   width: 100%;
+  position: absolute;
 }
 a {
   text-decoration: none;
@@ -241,6 +242,12 @@ a {
   background-color: #e0f2fe;
 }
 
+.profile-container .spinner-container {
+  position: absolute;
+  top: 35%;
+  right: 35%;
+}
+
 @media (max-width: 1150px) {
   .users-list-content {
     width: 40%;
@@ -299,6 +306,10 @@ a {
   .posts-container > a {
     height: 95%;
   }
+  .profile-container .spinner-container {
+    top: 45%;
+    right: 50%;
+  }
 }
 
 @media (max-width: 450px) {
@@ -337,5 +348,8 @@ a {
   }
   .edit-form > div {
     flex-direction: column;
+  }
+  .profile-container .spinner-container {
+    top: 65%;
   }
 }

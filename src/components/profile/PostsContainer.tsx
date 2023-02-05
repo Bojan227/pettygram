@@ -5,14 +5,17 @@ import fetcher from '../../api/fetcher';
 import ImageOverlay from './ImageOverlay';
 import { v4 as uuidv4 } from 'uuid';
 import { url } from '../../constants/api';
+import LoadingSpinner from '../LoadingSpinner';
 
 export const PostsContainer = ({ tab }: { tab: string }) => {
   const [data, setData] = useState<Post[] | null>([]);
   const [error, setError] = useState('');
   const { userId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getDataByUserId = async () => {
+      setIsLoading(true);
       try {
         const data = await fetcher(
           `${url}/${tab}/${tab === 'saved' ? '' : userId}`,
@@ -34,11 +37,15 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
         if (error instanceof Error) {
           setError(error.message);
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
     getDataByUserId();
   }, [tab, userId]);
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="posts-container">

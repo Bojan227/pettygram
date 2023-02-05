@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import fetcher from '../api/fetcher';
 
 interface UseGetDataProps {
@@ -6,10 +7,15 @@ interface UseGetDataProps {
 }
 
 export const useGetData = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const getData = async ({ url, setState }: UseGetDataProps) => {
+    setIsLoading(true);
     const json = await fetcher(url);
+    if (json) {
+      setIsLoading(false);
+    }
     setState(json);
   };
 
-  return { getData };
+  return { getData, isLoading };
 };
