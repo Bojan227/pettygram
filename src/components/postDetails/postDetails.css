@@ -116,10 +116,36 @@
   height: 42px;
   border-radius: 50%;
 }
+.comments-info > svg {
+  align-self: flex-start;
+}
+.comments-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.comment {
+  display: flex;
+  gap: 10px;
+}
+.comment > button {
+  cursor: pointer;
+}
 
 .comment-card-info {
   display: flex;
   gap: 10px;
+  align-items: center;
+}
+.comment-card-info > svg {
+  cursor: pointer;
+}
+
+.edit-comment-input {
+  border: 1px solid black;
+  padding: 5px 5px;
+  border-radius: 8px;
+  color: black;
 }
 
 @media (max-width: 920px) {

@@ -29,7 +29,7 @@ export const PostDetails = () => {
     }
   }, []);
 
-  if (!isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="post-details">
