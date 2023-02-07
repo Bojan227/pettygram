@@ -21,7 +21,12 @@ export const CommentForm = ({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${document.cookie.split('=')[1]}`,
+          Authorization: `Bearer ${
+            document.cookie
+              ?.split('; ')
+              ?.find((value) => value?.includes('token'))
+              ?.split('=')[1]
+          }`,
         },
         body: JSON.stringify({
           comment,
