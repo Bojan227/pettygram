@@ -51,8 +51,11 @@ export default function useSignup() {
           }),
         });
 
+        if (json.error) {
+          setError(json.error);
+        }
+
         setMessage(json.message);
-        setError('');
       } catch (err) {
         setError('Something went wrong');
         setMessage('');

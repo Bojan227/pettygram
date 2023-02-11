@@ -1,11 +1,15 @@
 import fetcher from '../api/fetcher';
 import useUserContenxt from './useUserContext';
 import { url } from '../constants/api';
+import { useState } from 'react';
 
 export default function useLogin() {
   const userContext = useUserContenxt();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const login = async (username: string, password: string) => {
+    setIsLoading(true);
     try {
       const json = await fetcher(`${url}/user/login`, {
         method: 'POST',
@@ -18,13 +22,21 @@ export default function useLogin() {
         }),
       });
 
+      if (json.error) {
+        setError(json.error);
+      }
+
       userContext?.dispatch({ type: 'LOGIN', payload: json.user });
       localStorage.setItem('user', JSON.stringify(json.user));
       document.cookie = 'token' + '=' + (json.token || '') + '; path=/';
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { login };
+  return { login, isLoading, error };
 }
