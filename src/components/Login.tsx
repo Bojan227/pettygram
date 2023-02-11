@@ -3,9 +3,10 @@ import { useState } from 'react';
 import useLogin from '../hooks/useLogin';
 import instagramLogo from './navigation/images/instagram-text-icon.png';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
 
 export default function Login() {
-  const { login } = useLogin();
+  const { login, isLoading, error } = useLogin();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -39,7 +40,7 @@ export default function Login() {
         />
         <button
           type="submit"
-          disabled={!username || !password ? true : false}
+          disabled={!username || !password}
           style={{
             color: `${
               !username || !password ? 'rgba(255,255,255, 0.3)' : 'white'
@@ -49,6 +50,8 @@ export default function Login() {
         >
           Log In
         </button>
+        {isLoading && <LoadingSpinner />}
+        {error && <h2>{error}</h2>}
       </form>
       <footer className="border-solid border-t-2 border-white  p-5 w-full text-center">
         <h1>

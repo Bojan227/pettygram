@@ -2,6 +2,7 @@ import TextField from './TextField';
 import useSignup from '../hooks/useSignup';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
 
 export default function Signup() {
   const { signup, isLoading, error, message } = useSignup();
@@ -22,14 +23,10 @@ export default function Signup() {
     }
   };
 
-  if (isLoading) {
-    return <h1>Spinner .......</h1>;
-  }
-
   return (
     <div
       className="flex flex-col items-center justify-center min-h-screen 
-      bg-gradient-to-b from-[#405DE6] via-[#5851DB] to-[#FD1D1D] "
+      bg-gradient-to-b from-[#405DE6] via-[#5851DB] to-[#FD1D1D]"
     >
       <form
         onSubmit={handleSubmit}
@@ -73,11 +70,7 @@ export default function Signup() {
         </label>
         <button
           type="submit"
-          disabled={
-            !username || !password || !firstName || !lastName || !image
-              ? true
-              : false
-          }
+          disabled={!username || !password || !firstName || !lastName || !image}
           style={{
             color: `${
               !username || !password || !firstName || !lastName || !image
@@ -90,9 +83,9 @@ export default function Signup() {
           Register
         </button>
       </form>
-      {error && <h5>{error}</h5>}
-      {message && <h5>{message}</h5>}
-
+      {error && <h2 className="error-signup">{error}</h2>}
+      {message && <h2>{message}</h2>}
+      {isLoading && <LoadingSpinner className="signup-spinner" />}
       <footer className="border-solid border-t-2 border-white  p-5 w-full text-center text-white">
         <h1>
           Already have an account{' '}
