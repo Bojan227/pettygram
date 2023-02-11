@@ -29,10 +29,14 @@ export const PostDetails = () => {
     }
   }, []);
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner className="post-details-spinner" />;
 
   return (
-    <div className="post-details">
+    <div
+      tabIndex={0}
+      className="post-details"
+      onKeyDown={(e) => e.key === 'Escape' && navigate(-1)}
+    >
       <section
         className="details-images-section"
         style={{

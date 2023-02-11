@@ -8,6 +8,7 @@ import useUserContext from '../../hooks/useUserContext';
 import { url } from '../../constants/api';
 import { PencilSquareIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
+import EditComment from './EditComment';
 
 export const CommentsCard = ({
   createdBy,
@@ -19,10 +20,9 @@ export const CommentsCard = ({
 }: CommentsCardProps) => {
   const { updateLike } = useUpdateLike();
   const userContext = useUserContext();
-  const [editComment, setEditComment] = useState<{
-    _id: string;
-    comment: string;
-  }>({ _id: '', comment: '' });
+  const [selectedComment, setSelectedComment] = useState<string | undefined>(
+    undefined
+  );
 
   return (
     <div className="commments-card">
@@ -35,22 +35,10 @@ export const CommentsCard = ({
             </div>
           </Link>
 
-          {editComment._id === _id ? (
-            <div className="comment">
-              <input
-                className="edit-comment-input"
-                value={editComment.comment}
-                onChange={(e) =>
-                  setEditComment((prevComment) => ({
-                    ...prevComment,
-                    comment: e.target.value,
-                  }))
-                }
-              />
-              <button onClick={() => setEditComment({ _id: '', comment: '' })}>
-                Save edit
-              </button>
-            </div>
+          {selectedComment ? (
+            <EditComment
+              {...{ setComments, selectedComment, setSelectedComment }}
+            />
           ) : (
             <p>{comment}</p>
           )}
@@ -90,14 +78,9 @@ export const CommentsCard = ({
         <p>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'} `}</p>
         {userContext?.user._id === createdBy._id ? (
           <PencilSquareIcon
-            onClick={() =>
-              setEditComment(() => ({
-                _id,
-                comment,
-              }))
-            }
-            width="24px"
-            height="24px"
+            onClick={() => setSelectedComment(_id)}
+            width="20px"
+            height="20px"
           />
         ) : null}
       </section>
