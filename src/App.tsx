@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FeedContainer } from './components/feed/FeedContainer';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { NavigationBar } from './components/navigation/NavigationBar';
@@ -25,11 +25,13 @@ function App() {
   const addLocation = useAddLocation();
   const removeLocation = useRemoveLocation();
 
-  if (location.pathname.split('/').includes('profile')) {
-    addLocation(location.pathname);
-  } else if (!location.pathname.split('/').includes('p')) {
-    removeLocation();
-  }
+  useEffect(() => {
+    if (location.pathname.split('/').includes('profile')) {
+      addLocation(location.pathname);
+    } else if (!location.pathname.split('/').includes('p')) {
+      removeLocation();
+    }
+  }, [location.pathname]);
 
   return (
     <div onClick={() => setToggleNotifications(false)}>
