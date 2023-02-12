@@ -6,19 +6,16 @@
   flex-direction: column;
   border-right: 1px solid gray;
   min-height: 100vh;
-  padding: 1.3rem;
-  width: 20%;
+  padding: 1.5rem;
   justify-content: space-between;
   background-color: white;
-  align-items: center;
   z-index: 100;
 }
 
 a {
   text-decoration: none;
 }
-li,
-.footer-nav {
+li {
   display: flex;
   align-items: center;
   gap: 25px;
@@ -29,6 +26,13 @@ li,
   border-radius: 15px;
   cursor: pointer;
 }
+
+.footer-nav {
+  display: flex;
+  padding: 10px 10px;
+  border-radius: 15px;
+}
+
 li:hover,
 .footer-nav:hover {
   background-color: grey;
@@ -38,7 +42,6 @@ li:hover,
   display: flex;
   flex-direction: column;
   gap: 55px;
-  align-items: flex-start;
   justify-content: center;
 }
 
@@ -228,6 +231,7 @@ label {
 @media (max-width: 1150px) {
   .main-navigation {
     width: 150px;
+    align-items: center;
   }
   .header-nav {
     align-items: center;

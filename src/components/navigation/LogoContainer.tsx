@@ -9,14 +9,14 @@ export default function LogoContainer() {
         <img
           src={instagram}
           alt="instagram-logo"
-          style={{ maxWidth: '160px', padding: '10px' }}
+          style={{ maxWidth: '160px' }}
         />
       </Link>
       <Link className="logo-mobile" to="/">
         <img
           src={instagramMobile}
           alt="instagram-logo"
-          style={{ maxWidth: '120px', padding: '10px' }}
+          style={{ maxWidth: '120px' }}
         />
       </Link>
     </section>
