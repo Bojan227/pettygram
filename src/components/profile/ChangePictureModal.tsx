@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import FileInput from '../FileInput';
 import useDeleteProfilePicture from '../../hooks/useDeleteProfilePicture';
 import useUserContext from '../../hooks/useUserContext';
 
@@ -45,10 +43,12 @@ export default function ChangePictureModal({
             setShowModal(false);
           }}
         >
-          Remove Current Photo
+          {isLoadingDeleteState ? 'Deleting...' : 'Remove Current Photo'}
         </h4>
         <p onClick={() => setShowModal(false)}>Cancel</p>
       </div>
+      {errorMessage && <p>{errorMessage}</p>}
+      {deleteMessage && <p>{deleteMessage}</p>}
     </div>
   );
 }
