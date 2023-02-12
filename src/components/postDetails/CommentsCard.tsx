@@ -7,6 +7,9 @@ import { PencilSquareIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
 import EditComment from './EditComment';
 import LikeComment from './LikeComment';
+import { TrashIcon } from '@heroicons/react/20/solid';
+import useDeleteComment from '../../hooks/useDeleteComment';
+import LoadingSpinner from '../LoadingSpinner';
 
 export const CommentsCard = ({
   createdBy,
@@ -17,9 +20,17 @@ export const CommentsCard = ({
   setComments,
 }: CommentsCardProps) => {
   const userContext = useUserContext();
-  const [selectedComment, setSelectedComment] = useState<string | undefined>(
-    undefined
-  );
+  const { isDeleting, deleteComment, errorMsg } = useDeleteComment();
+  const [selectedCommentId, setSelectedCommentId] = useState<
+    string | undefined
+  >(undefined);
+
+  const handleDeleteComment = () => {
+    deleteComment(_id);
+    setComments((prevComments) =>
+      prevComments.filter((comment) => comment._id !== _id)
+    );
+  };
 
   return (
     <div className="commments-card">
@@ -32,9 +43,14 @@ export const CommentsCard = ({
             </div>
           </Link>
 
-          {selectedComment ? (
+          {selectedCommentId ? (
             <EditComment
-              {...{ setComments, selectedComment, setSelectedComment }}
+              {...{
+                setComments,
+                _id,
+                comment,
+                setSelectedCommentId,
+              }}
             />
           ) : (
             <p>{comment}</p>
@@ -48,13 +64,25 @@ export const CommentsCard = ({
         )}
         <p>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'} `}</p>
         {userContext?.user._id === createdBy._id ? (
-          <PencilSquareIcon
-            onClick={() => setSelectedComment(_id)}
-            width="20px"
-            height="20px"
-          />
+          <>
+            <PencilSquareIcon
+              onClick={() => setSelectedCommentId(_id)}
+              width="20px"
+              height="20px"
+            />
+            {isDeleting ? (
+              <LoadingSpinner />
+            ) : (
+              <TrashIcon
+                onClick={handleDeleteComment}
+                width="20px"
+                height="20px"
+              />
+            )}
+          </>
         ) : null}
       </section>
+      {errorMsg && <p>{errorMsg}</p>}
     </div>
   );
 };

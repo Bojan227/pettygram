@@ -12,6 +12,8 @@ import ButtonsContainer from './ButtonsContainer';
 import { useGetData } from '../../hooks/useGetData';
 import { url } from '../../constants/api';
 import LoadingSpinner from '../LoadingSpinner';
+import { usePrevLocation } from '../../hooks/usePrevLocation';
+import { useLocation } from 'react-router-dom';
 
 export const PostDetails = () => {
   const [post, setPost] = useState<Post>();
@@ -19,6 +21,8 @@ export const PostDetails = () => {
   const { id } = useParams();
   const { getData, isLoading } = useGetData();
   const navigate = useNavigate();
+  const location = useLocation();
+  const prevLocation = usePrevLocation(location);
 
   useEffect(() => {
     if (id) {

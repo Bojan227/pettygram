@@ -4,18 +4,20 @@ import useEditComment from '../../hooks/useEditComment';
 
 export default function EditComment({
   setComments,
-  selectedComment,
-  setSelectedComment,
+  _id,
+  comment,
+  setSelectedCommentId,
 }: {
+  comment: string;
   setComments: Dispatch<SetStateAction<Comments[]>>;
-  selectedComment: string;
-  setSelectedComment: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setSelectedCommentId: Dispatch<SetStateAction<string | undefined>>;
+  _id: string;
 }) {
   const { editComment, isLoading } = useEditComment();
-  const [comment, setComment] = useState('');
+  const [commentInput, setComment] = useState(comment);
 
   const handleEditComment = async () => {
-    const newComment = await editComment(selectedComment, comment);
+    const newComment = await editComment(_id, commentInput);
 
     setComments((prevComments) =>
       prevComments.map((comment) =>
@@ -24,14 +26,14 @@ export default function EditComment({
           : comment
       )
     );
-    setSelectedComment(undefined);
+    setSelectedCommentId(undefined);
   };
 
   return (
     <div className="comment">
       <input
         className="edit-comment-input"
-        value={comment}
+        value={commentInput}
         onChange={(e) => setComment(e.target.value)}
       />
       <button onClick={() => handleEditComment()}>
