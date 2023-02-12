@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import useUserContext from '../../hooks/useUserContext';
 import TextField from '../TextField';
 import useEditInfo from '../../hooks/useEditInfo';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Button from '../buttons/Button';
 import UploadProfilePicture from './UpdateProfilePicture';
 import LoadingSpinner from '../LoadingSpinner';
