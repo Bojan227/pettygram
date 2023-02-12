@@ -16,7 +16,7 @@ export default function PostsViewer({
 }) {
   const locationContext = useCurrentLocation();
   const [posts, setPosts] = useState<Post[]>([]);
-  const { getData } = useGetData();
+  const { getData, isLoading } = useGetData();
 
   useEffect(() => {
     if (locationContext.split('/').includes('profile')) {
@@ -54,7 +54,7 @@ export default function PostsViewer({
     );
   };
 
-  return locationContext.split('/').includes('profile') ? (
+  return !isLoading && locationContext.split('/').includes('profile') ? (
     <>
       <ArrowLeftCircleIcon className="left-arrow" onClick={previousPost} />
       <ArrowRightCircleIcon className="right-arrow" onClick={nextPost} />

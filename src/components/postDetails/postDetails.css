@@ -17,14 +17,14 @@
   cursor: pointer;
 }
 .left-arrow {
-  top: 0;
+  top: 10px;
   left: 25px;
   width: 48px;
   height: 38px;
   fill: white;
 }
 .right-arrow {
-  top: 0;
+  top: 10px;
   right: 25px;
   width: 48px;
   height: 38px;
