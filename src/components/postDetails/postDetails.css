@@ -12,12 +12,34 @@
   z-index: 10000;
 }
 
+.post-details > svg {
+  position: absolute;
+  cursor: pointer;
+}
+.left-arrow {
+  top: 0;
+  left: 25px;
+  width: 48px;
+  height: 38px;
+  fill: white;
+}
+.right-arrow {
+  top: 0;
+  right: 25px;
+  width: 48px;
+  height: 38px;
+  fill: white;
+}
+
 .details-info-section {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 35%;
   background-color: white;
+}
+.details-info-section > * {
+  padding: 8px 12px;
 }
 
 .post-details > * {
@@ -43,6 +65,8 @@
   align-items: center;
   justify-content: center;
   width: 50%;
+  padding: 15px 0px;
+  background-color: black;
 }
 .details-images-section > div > img {
   height: 82vh;
@@ -105,6 +129,12 @@
 .commments-card {
   display: flex;
   flex-direction: column;
+}
+
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 .comments-info {
   display: flex;

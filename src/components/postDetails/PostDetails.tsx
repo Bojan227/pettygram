@@ -12,8 +12,7 @@ import ButtonsContainer from './ButtonsContainer';
 import { useGetData } from '../../hooks/useGetData';
 import { url } from '../../constants/api';
 import LoadingSpinner from '../LoadingSpinner';
-import { usePrevLocation } from '../../hooks/usePrevLocation';
-import { useLocation } from 'react-router-dom';
+import PostsViewer from './PostsViewer';
 
 export const PostDetails = () => {
   const [post, setPost] = useState<Post>();
@@ -21,8 +20,6 @@ export const PostDetails = () => {
   const { id } = useParams();
   const { getData, isLoading } = useGetData();
   const navigate = useNavigate();
-  const location = useLocation();
-  const prevLocation = usePrevLocation(location);
 
   useEffect(() => {
     if (id) {
@@ -41,13 +38,7 @@ export const PostDetails = () => {
       className="post-details"
       onKeyDown={(e) => e.key === 'Escape' && navigate(-1)}
     >
-      <section
-        className="details-images-section"
-        style={{
-          padding: '15px 0px',
-          backgroundColor: 'black',
-        }}
-      >
+      <section className="details-images-section">
         {post && <CarouselSlider {...{ images: post?.imageUrl }} />}
       </section>
       <section className="details-info-section">
@@ -79,6 +70,7 @@ export const PostDetails = () => {
       <h3 onClick={() => navigate(-1)} className="back-btn">
         X
       </h3>
+      <PostsViewer {...{ post, setPost }} />
     </div>
   );
 };
