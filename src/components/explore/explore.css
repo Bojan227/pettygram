@@ -9,12 +9,11 @@
 
 .explore-container {
   padding: 0;
-  margin-left: 20%;
+  margin-left: 10%;
   gap: 2px;
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--card_width));
   grid-auto-rows: var(10px);
-  align-items: right;
   min-height: 100vh;
   background-color: #e5e5e5;
   justify-content: center;
@@ -48,18 +47,23 @@
 .card_large {
   grid-row-end: span var(--card_large);
 }
+@media (max-width: 1510px) {
+  .explore-container {
+    margin-left: 11%;
+  }
+}
 
 @media (max-width: 1150px) {
   .explore-container {
-    margin-left: 14%;
     padding: 20px;
     grid-template-columns: repeat(auto-fill, 180px);
+    justify-content: center;
   }
 }
 
 @media (max-width: 750px) {
   .explore-container {
-    margin-top: 18%;
+    margin-top: 15%;
     width: 100%;
     margin-left: 0;
     padding: 0;
@@ -70,7 +74,7 @@
 
 @media (max-width: 570px) {
   .explore-container {
-    margin-top: 25%;
+    margin-top: 20%;
 
     grid-template-columns: repeat(auto-fill, 150px);
   }
@@ -78,7 +82,7 @@
 
 @media (max-width: 450px) {
   .explore-container {
-    margin-top: 32%;
+    margin-top: 28%;
     grid-template-columns: repeat(auto-fill, 120px);
     padding-top: 40px;
   }
