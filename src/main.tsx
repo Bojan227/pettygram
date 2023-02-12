@@ -5,6 +5,7 @@ import { UserContextProvider } from './context/userContext';
 import { ChatDataProvider } from './context/chatDataContext';
 import { NotificationMessagesProvider } from './context/notificationsMessagesContext';
 import { NotificationsProvider } from './context/notificationsContext';
+import LocationProvider from './context/locationContext';
 
 import App from './App';
 import './index.css';
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <NotificationMessagesProvider initialNotificationsData={[]}>
           <ChatDataProvider initialChatData={[]}>
             <UserContextProvider>
-              <App />
+              <LocationProvider initialLocation="/">
+                <App />
+              </LocationProvider>
             </UserContextProvider>
           </ChatDataProvider>
         </NotificationMessagesProvider>
