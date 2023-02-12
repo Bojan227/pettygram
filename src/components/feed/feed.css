@@ -17,6 +17,11 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   width: 25%;
 }
+.card > a > section,
+.card > section {
+  padding: 8px 12px;
+}
+
 .card > a {
   padding: 0;
 }
@@ -81,9 +86,6 @@
 }
 p {
   color: #475569;
-}
-section {
-  padding: 8px 12px;
 }
 
 .suggested-users {

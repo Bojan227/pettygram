@@ -52,8 +52,6 @@ export const FeedContainer = () => {
       )
   );
 
-  console.log(filteredUsers);
-
   if (isLoadingState) return <LoadingSpinner />;
 
   return (
@@ -65,7 +63,7 @@ export const FeedContainer = () => {
       {filteredUsers?.length === 0 ? null : (
         <div className="suggested-users">
           <div className="suggested-header">
-            <h1>Discover People</h1>
+            <h1>Suggestions for you</h1>
           </div>
           {filteredUsers?.map(({ imageUrl, firstName, lastName, _id }) => (
             <UserCard key={_id} {...{ imageUrl, firstName, lastName, _id }} />
