@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import fetcher from '../api/fetcher';
 import { url } from '../constants/api';
-import { Comments } from '../components/postDetails/types';
 
 export default function useEditComment() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [newComment, setNewComment] = useState<Comments>();
 
   const editComment = async (commentId: string, comment: string) => {
     setIsLoading(true);
@@ -28,7 +26,7 @@ export default function useEditComment() {
         }),
       });
 
-      setNewComment(newComment);
+      return newComment;
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -38,5 +36,5 @@ export default function useEditComment() {
     }
   };
 
-  return { editComment, error, isLoading, newComment };
+  return { editComment, error, isLoading };
 }
