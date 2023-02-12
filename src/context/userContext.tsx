@@ -83,13 +83,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
   useEffect(() => {
     const userState = JSON.parse(`${localStorage.getItem('user')}`);
-    // const index = document.cookie
-    //   ?.split('; ')
-    //   ?.findIndex((value) => value?.includes('token'));
 
-    // const token = `Bearer ${
-    //   document?.cookie?.split('; ')[index]?.split('=')[1] || undefined
-    // }`;
     if (
       !document.cookie
         ?.split('; ')
