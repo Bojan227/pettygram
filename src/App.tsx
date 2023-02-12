@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import { FeedContainer } from './components/feed/FeedContainer';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { NavigationBar } from './components/navigation/NavigationBar';
 import { Profile } from './components/profile/Profile';
 import Signup from './components/Signup';
@@ -14,10 +14,22 @@ import ChatContainer from './components/chat/ChatContainer';
 import NotificationMessagesWrapper from './components/NotificationMessagesWrapper';
 import NotificationsWrapper from './components/NotificationsWrapper';
 import ExploreContainer from './components/explore/ExploreContainer';
+import { useRemoveLocation } from './context/locationContext';
+import { useAddLocation } from './context/locationContext';
 
 function App() {
   const [toggleNotifications, setToggleNotifications] = useState(false);
   const userContext = useUserContenxt();
+  const location = useLocation();
+
+  const addLocation = useAddLocation();
+  const removeLocation = useRemoveLocation();
+
+  if (location.pathname.split('/').includes('profile')) {
+    addLocation(location.pathname);
+  } else if (!location.pathname.split('/').includes('p')) {
+    removeLocation();
+  }
 
   return (
     <div onClick={() => setToggleNotifications(false)}>

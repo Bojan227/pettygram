@@ -31,5 +31,10 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  height: 350px;
+}
+
+.signup-spinner,
+.error-signup {
+  margin-bottom: 18px;
+  color: white;
 }

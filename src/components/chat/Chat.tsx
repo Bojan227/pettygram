@@ -19,6 +19,7 @@ export default function Chat({
   const chatData = useChatData();
   const addMessage = useAddMessage();
   const { isLoading, error } = useGetChatHistory(selectedUser);
+  const userContext = useUserContext();
 
   useEffect(() => {
     socket.off('notification_message');
@@ -29,6 +30,13 @@ export default function Chat({
       socket.off('receive_message');
     };
   }, [socket, selectedUser?._id]);
+
+  useEffect(() => {
+    socket.emit('remove_user', { userId: userContext?.user?._id });
+    socket.emit('add_user', { userId: userContext?.user?._id });
+
+    return () => socket.emit('remove_user', { userId: userContext?.user?._id });
+  }, []);
 
   if (isLoading) return <LoadingSpinner />;
 

@@ -1,6 +1,6 @@
 import useUserContext from '../../hooks/useUserContext';
 import { UserType } from '../../context/userContext';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Chat from './Chat';
 import './chat.css';
 import ChatHeader from './ChatHeader';
