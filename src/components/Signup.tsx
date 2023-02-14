@@ -3,6 +3,7 @@ import useSignup from '../hooks/useSignup';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
+import instagramLogo from './navigation/images/instagram-text-icon.png';
 
 export default function Signup() {
   const { signup, isLoading, error, message } = useSignup();
@@ -26,34 +27,43 @@ export default function Signup() {
   return (
     <div
       className="flex flex-col items-center justify-center min-h-screen 
-      bg-gradient-to-b from-[#405DE6] via-[#5851DB] to-[#FD1D1D]"
+      bg-gradient-to-b from-[#405DE6] via-[#5851DB] to-[#FD1D1D] "
     >
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col w-1/3 justify-center items-center gap-6 grow text-white"
+        className="flex flex-col  w-4/5 justify-center items-center text-white gap-2 grow"
       >
+        <img src={instagramLogo} className="my-8" />
         Username
         <TextField
-          className={'bg-[#e1306c] rounded-lg p-2  w-full'}
+          className={
+            'bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5'
+          }
           value={username}
           onChange={(username) => setUsername(username)}
         />
         Password
         <input
           type="password"
-          className={'bg-[#e1306c] rounded-lg p-2 w-full'}
+          className={
+            'bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5'
+          }
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         First Name
         <TextField
-          className={'bg-[#e1306c] rounded-lg p-2  w-full'}
+          className={
+            'bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5'
+          }
           value={firstName}
           onChange={(firstname) => setFirstName(firstname)}
         />
         Last Name
         <TextField
-          className={'bg-[#e1306c] rounded-lg p-2  w-full'}
+          className={
+            'bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5'
+          }
           value={lastName}
           onChange={(lastName) => setLastName(lastName)}
         />
@@ -78,7 +88,7 @@ export default function Signup() {
                 : 'white'
             }`,
           }}
-          className="border border-white  w-full p-2 my-4 rounded-lg"
+          className="border border-white w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5 p-2 my-4 rounded-lg"
         >
           Register
         </button>

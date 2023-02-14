@@ -109,7 +109,7 @@ li:hover,
 .share-container {
   display: flex;
   width: 85%;
-  height: 85%;
+  height: 75%;
   background-color: #f8fafc;
 }
 .images-container {
@@ -333,6 +333,8 @@ label {
 
   .share-container {
     flex-direction: column;
+    width: 95%;
+    height: 90%;
   }
 
   .share-container > img {
@@ -345,12 +347,13 @@ label {
     height: 32px;
   }
   .images-container {
-    height: 75%;
+    height: 85%;
     width: 100%;
   }
   .caption-container {
-    height: 35%;
+    height: 45%;
     width: 100%;
+    padding: 25px;
   }
   .share-container > div > textarea {
     max-height: none;
@@ -361,6 +364,9 @@ label {
 @media (max-width: 370px) {
   .logo-desktop {
     display: block;
+  }
+  .caption-container {
+    padding: 5px;
   }
   .logo-mobile {
     display: none;
@@ -373,5 +379,15 @@ label {
   }
   li:hover {
     background-color: #f8fafc;
+  }
+}
+
+@media (max-width: 280px) {
+  .caption-container > .user-info {
+    flex-direction: column;
+  }
+  .images-container {
+    align-items: center;
+    padding: 10px;
   }
 }

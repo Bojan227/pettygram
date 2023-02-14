@@ -64,8 +64,8 @@
 
 @media (max-width: 755px) {
   .notifications-container {
-    transform: translateX(-1300px);
-    transition: transform 1.5s ease-out;
+    transform: translateX(100%);
+    transition: transform 1.5s ease-in-out;
   }
   .notifications-container.active {
     top: 0;

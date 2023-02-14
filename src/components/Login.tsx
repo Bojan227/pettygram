@@ -53,9 +53,9 @@ export default function Login() {
         {isLoading && <LoadingSpinner />}
         {error && <h2>{error}</h2>}
       </form>
-      <footer className="border-solid border-t-2 border-white  p-5 w-full text-center">
+      <footer className="border-solid border-t-2 border-white  p-5 w-full text-center text-white">
         <h1>
-          Don't have an account?<Link to="/">Sign up.</Link>
+          Don't have an account?<Link to="/">Sign up</Link>
         </h1>
       </footer>
     </div>
