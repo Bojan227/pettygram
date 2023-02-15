@@ -9,6 +9,8 @@ import { Post } from '../feed/types/feedTypes';
 import default_insta from '../../assets/default_insta.jpg';
 import FollowButtonContainer from './FollowButtonContainer';
 import { url } from '../../constants/api';
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/20/solid';
+import Logout from '../../hooks/useLogout';
 
 export const ProfileCard = () => {
   const [userInfo, setUserInfo] = useState<UserType>();
@@ -19,6 +21,7 @@ export const ProfileCard = () => {
 
   const { userId } = useParams();
   const { getData } = useGetData();
+  const { logout } = Logout();
 
   useEffect(() => {
     getData({
@@ -62,9 +65,12 @@ export const ProfileCard = () => {
             {userInfo?.following?.length} following
           </h4>
           {userContext?.user._id === userInfo?._id && (
-            <Link to={`/edit`}>
-              <Edit />
-            </Link>
+            <div>
+              <Link to={`/edit`}>
+                <Edit />
+              </Link>
+              <ArrowLeftOnRectangleIcon onClick={logout} />
+            </div>
           )}
         </div>
         <h2>{userInfo?.firstName + ' ' + userInfo?.lastName}</h2>

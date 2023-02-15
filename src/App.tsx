@@ -61,10 +61,12 @@ function App() {
         <Route
           path="profile/:userId/"
           element={
-            userContext?.user && (
+            userContext?.user ? (
               <NotificationMessagesWrapper>
                 <Profile />
               </NotificationMessagesWrapper>
+            ) : (
+              <Login />
             )
           }
         >
@@ -76,18 +78,13 @@ function App() {
             path="/profile/:userId/saved"
             element={<PostsContainer tab="saved" />}
           />
-          <Route
-            path="/profile/:userId/tagged"
-            element={<PostsContainer tab="tagged" />}
-          />
         </Route>
-        <Route path="/p/:id" element={<PostDetails />} />
+        <Route path="p/:id" element={<PostDetails />} />
         <Route path="/edit" element={<EditInfo />} />
         {userContext?.user && (
-          <Route path="/inbox" element={<ChatContainer />} />
+          <Route path="inbox" element={<ChatContainer />} />
         )}
-
-        <Route path="/explore" element={<ExploreContainer />} />
+        <Route path="explore" element={<ExploreContainer />} />
       </Routes>
     </div>
   );

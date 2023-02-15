@@ -82,6 +82,17 @@ a {
   text-align: center;
   cursor: pointer;
 }
+.info-followers > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.info-followers > div svg {
+  width: 28px;
+  height: 28px;
+}
 
 .users-container-list {
   position: fixed;
@@ -329,6 +340,9 @@ a {
 
   .info-followers {
     flex-direction: column;
+  }
+  .info-followers > div {
+    flex-direction: row;
   }
 
   .posts-container {
