@@ -8,7 +8,7 @@ export default function ChatHeader({
   setSelectedUser: React.Dispatch<React.SetStateAction<UserType | undefined>>;
 }) {
   return (
-    <div className="private-chat-header">
+    <div className={`private-chat-header ${selectedUser ? 'activated' : ''}`}>
       {selectedUser && (
         <>
           <button

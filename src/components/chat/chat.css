@@ -67,12 +67,12 @@
 
 .user-card {
   display: flex;
-  gap: 15px;
+  gap: 5px;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid #d1d5db;
   border-radius: 8px;
-  padding: 15px 25px;
+  padding: 5px 10px;
+  border: 1px solid #d1d5db;
 }
 
 .user-card:hover {
@@ -163,28 +163,33 @@
 @media (max-width: 1250px) {
   .chat-container {
     margin-left: 25%;
-    width: 80vh;
+    width: 85vh;
   }
 }
 
 @media (max-width: 1010px) {
   .chat-container {
-    margin-left: 20%;
-    width: 75vh;
+    margin-left: 18%;
+    width: 85vh;
   }
 }
 @media (max-width: 880px) {
   .chat-container {
     margin-left: 20%;
-    width: 70vh;
+    width: 75vh;
+    font-size: 1.1rem;
+  }
+  .user-card.active {
+    padding: 0;
+    gap: 0;
   }
 }
 
 @media (max-width: 770px) {
   .chat-container {
-    margin-left: 22%;
+    margin-left: 20%;
     font-size: 1rem;
-    width: 62vh;
+    width: 70vh;
   }
 }
 
@@ -196,16 +201,21 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 20%;
-    margin-top: 20%;
+    margin-top: 15%;
     border: 0;
   }
-  .chat-header {
+  .chat-header,
+  .private-chat-header {
     display: none;
   }
 
   .private-chat-header > button.activated {
     display: block;
     font-size: 1.8rem;
+  }
+
+  .private-chat-header.activated {
+    display: flex;
   }
 
   .chat {
