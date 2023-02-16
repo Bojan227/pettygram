@@ -9,7 +9,7 @@
 
 .explore-container {
   padding: 0;
-  margin-left: 10%;
+  margin-left: 12%;
   gap: 2px;
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--card_width));
@@ -49,15 +49,25 @@
 }
 @media (max-width: 1510px) {
   .explore-container {
-    margin-left: 11%;
+    margin-left: 13%;
   }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1010px) {
   .explore-container {
-    padding: 20px;
+    padding: 10px;
+    grid-template-columns: repeat(auto-fill, 225px);
+    justify-content: center;
+    margin-left: 10%;
+  }
+}
+
+@media (max-width: 880px) {
+  .explore-container {
+    padding: 18px;
     grid-template-columns: repeat(auto-fill, 180px);
     justify-content: center;
+    margin-left: 16%;
   }
 }
 
@@ -76,15 +86,15 @@
   .explore-container {
     margin-top: 20%;
 
-    grid-template-columns: repeat(auto-fill, 150px);
+    grid-template-columns: repeat(auto-fill, 200px);
   }
 }
 
 @media (max-width: 450px) {
   .explore-container {
-    margin-top: 28%;
-    grid-template-columns: repeat(auto-fill, 120px);
-    padding-top: 40px;
+    margin-top: 26%;
+    grid-template-columns: repeat(auto-fill, 250px);
+    padding-top: 10px;
   }
   .card-explore > a > img {
     height: 75%;
