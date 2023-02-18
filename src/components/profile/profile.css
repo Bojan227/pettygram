@@ -31,11 +31,16 @@ a {
   border-radius: 50%;
   width: 125px;
   height: 125px;
+  border: 1px solid #cbd5e1;
+  object-fit: cover;
 }
 .info-profile {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+.info-profile > h2 {
+  font-weight: 700;
 }
 
 .info-profile > div {
@@ -223,6 +228,8 @@ a {
   border-radius: 50%;
   width: 48px;
   height: 48px;
+  border: 1px solid #cbd5e1;
+  object-fit: cover;
 }
 .profile-image > div > :nth-child(2) {
   color: #22d3ee;
