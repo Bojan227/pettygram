@@ -28,8 +28,8 @@ export const UserCard = ({
       <Link to={`/profile/${_id}`}>
         <div className="flex items-center gap-1">
           <img src={imageUrl} />
-          <h4>{firstName}</h4>
-          <h4>{lastName}</h4>
+          <p>{firstName}</p>
+          <p>{lastName}</p>
         </div>
       </Link>
       {userContext?.user._id === _id ? null : (

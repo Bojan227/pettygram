@@ -147,11 +147,6 @@ a {
   overflow-y: auto;
 }
 
-.users-container-profile > a > div > img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-}
 .users-container-profile {
   display: flex;
   align-items: center;
