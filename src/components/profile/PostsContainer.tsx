@@ -6,12 +6,15 @@ import ImageOverlay from './ImageOverlay';
 import { v4 as uuidv4 } from 'uuid';
 import { url } from '../../constants/api';
 import LoadingSpinner from '../LoadingSpinner';
+import useUserContext from '../../hooks/useUserContext';
+import EmptyState from './EmptyState';
 
 export const PostsContainer = ({ tab }: { tab: string }) => {
   const [data, setData] = useState<Post[] | null>([]);
   const [error, setError] = useState('');
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const userContext = useUserContext();
 
   useEffect(() => {
     const getDataByUserId = async () => {
@@ -48,11 +51,17 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="posts-container">
-      {data?.length === 0 && tab !== 'saved' && <h1>Create your first post</h1>}
+    <div
+      className={`${
+        data?.length === 0 ? 'empty-container' : 'posts-container'
+      }`}
+    >
       {data?.length === 0 && tab === 'saved' && (
-        <h1>You haven't saved any post</h1>
+        <p>Only you can see what you've saved</p>
       )}
+      {data?.length === 0 && tab !== 'saved' ? (
+        <EmptyState {...{ isLoggedUser: userContext?.user._id === userId }} />
+      ) : null}
 
       {data &&
         data.map(({ imageUrl, likes, _id }) => (
