@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { NavigationLinkProps } from './types';
+import { Dispatch, SetStateAction } from 'react';
 import useUserContext from '../../hooks/useUserContext';
 import MessagesNavContainer from './MessagesNavContainer';
 import NotificaitonsNavContainer from './NotificationsNavContainer';
@@ -6,20 +8,15 @@ import { useFilterNotifications } from '../../context/notificationsContext';
 import useUpdateNotifications from '../../hooks/useUpdateNotifications';
 import default_insta from '../../assets/default_insta.jpg';
 
-type NavigationLinkProps = {
-  title: string;
-  link: string;
-  url: string | undefined;
-  toggleCreatePost: () => void;
-  toggleNotifications: () => void;
-};
-
 export const NavigationLink = ({
   title,
   link,
   url,
   toggleCreatePost,
   toggleNotifications,
+  index,
+  setSelectedIndex,
+  selectedIndex,
 }: NavigationLinkProps): JSX.Element => {
   const userContext = useUserContext();
   const filterNotifications = useFilterNotifications();
@@ -32,18 +29,19 @@ export const NavigationLink = ({
         (title === 'Notifications' ? 'notification-link' : '') ||
         (title === 'Profile' ? 'profile-link' : '')
       }
-      onClick={(e) =>
+      onClick={(e) => {
         (title === 'Create' &&
           (toggleCreatePost(), e.stopPropagation(), e.preventDefault())) ||
-        (title === 'Notifications' &&
-          (filterNotifications(),
-          updateNotifications(userContext?.user._id!),
-          toggleNotifications(),
-          e.stopPropagation(),
-          e.preventDefault()))
-      }
+          (title === 'Notifications' &&
+            (filterNotifications(),
+            updateNotifications(userContext?.user._id!),
+            toggleNotifications(),
+            e.stopPropagation(),
+            e.preventDefault()));
+        setSelectedIndex(index);
+      }}
     >
-      <li>
+      <li className={selectedIndex === index ? 'active' : ''}>
         <div>
           <img
             src={`${

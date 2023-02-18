@@ -1,6 +1,6 @@
 import { NavigationLink } from './NavigationLink';
 import { Dispatch, SetStateAction } from 'react';
-import { Post } from '../feed/types/feedTypes';
+import { NavigationBarProps } from './types';
 import { navData } from './navData';
 import menu from './images/menu.png';
 import LogoContainer from './LogoContainer';
@@ -13,12 +13,11 @@ import NotificationsContainer from '../notifications/NotificationsContainer';
 export const NavigationBar = ({
   toggleNotifications,
   setToggleNotifications,
-}: {
-  toggleNotifications: boolean;
-  setToggleNotifications: Dispatch<SetStateAction<boolean>>;
-}) => {
+}: NavigationBarProps) => {
   const [toggleMore, setToggleMore] = useState(false);
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  console.log(selectedIndex);
 
   return (
     <nav
@@ -32,9 +31,16 @@ export const NavigationBar = ({
         <LogoContainer />
         <section>
           <ul className="links-section">
-            {navData.map(({ title, url, link }) => (
+            {navData.map(({ title, url, link }, i) => (
               <NavigationLink
-                {...{ title, url, link }}
+                {...{
+                  title,
+                  url,
+                  link,
+                  setSelectedIndex,
+                  index: i,
+                  selectedIndex,
+                }}
                 key={title}
                 toggleCreatePost={() => setToggleCreatePost(!toggleCreatePost)}
                 toggleNotifications={() =>
