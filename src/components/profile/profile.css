@@ -51,11 +51,21 @@ a {
   background-color: #f8fafc;
   width: 70%;
   margin-bottom: 10px;
-  border-top: 1px solid grey;
+  border-top: 1px solid #cbd5e1;
+  height: 5vh;
 }
-.profile-nav > a {
-  width: 100%;
-  text-align: center;
+.profile-nav > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.profile-nav .active {
+  border-top: 2px solid #475569;
 }
 
 .posts-container {
