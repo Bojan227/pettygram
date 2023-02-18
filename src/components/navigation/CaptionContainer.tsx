@@ -3,14 +3,12 @@ import { ShareButton } from '../buttons/ShareButton';
 import useUserContext from '../../hooks/useUserContext';
 import useCreatePost from '../../hooks/useCreatePost';
 import { Navigate } from 'react-router-dom';
+import { CaptionContainerProps } from './types';
 
 export default function CaptionContainer({
   files,
   setToggleCreatePost,
-}: {
-  files: File[];
-  setToggleCreatePost: (toggleCreatePost: boolean) => void;
-}) {
+}: CaptionContainerProps) {
   const [caption, setCaption] = useState('');
   const userContext = useUserContext();
   const { createPost, isLoading, message, error } = useCreatePost();

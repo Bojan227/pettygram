@@ -2,11 +2,7 @@ import { useState } from 'react';
 import DropFileContainer from './DropFileContainer';
 import ImagesContainer from './ImagesContainer';
 import CaptionContainer from './CaptionContainer';
-
-interface CreatePostProps {
-  toggleCreatePost: boolean;
-  setToggleCreatePost: (toggleCreatePost: boolean) => void;
-}
+import { CreatePostProps } from './types';
 
 export const CreatePost = ({
   toggleCreatePost,

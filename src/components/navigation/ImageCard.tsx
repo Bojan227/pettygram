@@ -1,13 +1,8 @@
 import { useState } from 'react';
 import RemoveImageWrapper from '../RemoveImageWrapper';
+import { ImageCardProps } from './types';
 
-export default function ImageCard({
-  file,
-  removeFile,
-}: {
-  file: File;
-  removeFile: () => void;
-}) {
+export default function ImageCard({ file, removeFile }: ImageCardProps) {
   const [showRemove, setShowRemove] = useState<boolean>(false);
   return (
     <RemoveImageWrapper {...{ showRemove, setShowRemove, removeFile }}>

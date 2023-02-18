@@ -1,14 +1,11 @@
 import { DragEvent } from 'react';
-import { Dispatch, SetStateAction } from 'react';
 import FileInput from '../FileInput';
+import { DropFileContainerProps } from './types';
 
 export default function DropFileContainer({
   handleImageUpload,
   setFiles,
-}: {
-  handleImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  setFiles: Dispatch<SetStateAction<File[]>>;
-}) {
+}: DropFileContainerProps) {
   const onDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.stopPropagation();
     e.preventDefault();

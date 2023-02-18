@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import useLogout from '../../hooks/useLogout';
 import useUserContext from '../../hooks/useUserContext';
-type FooterMenuProps = { toggleMore?: boolean };
 
-export function FooterMenu({ toggleMore }: FooterMenuProps): JSX.Element {
+export function FooterMenu({
+  toggleMore,
+}: {
+  toggleMore?: boolean;
+}): JSX.Element {
   const { logout } = useLogout();
   const userContext = useUserContext();
   return (
