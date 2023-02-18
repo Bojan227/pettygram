@@ -9,7 +9,7 @@ export default function ImageOverlay({
   children: React.ReactNode;
 }) {
   const [showOverlay, setShowOverlay] = useState(false);
-
+  console.log(likes);
   return (
     <div
       className="profile-post-image"
@@ -18,7 +18,7 @@ export default function ImageOverlay({
     >
       <div className={`image-overlay ${showOverlay ? 'show-overlay' : ''}`}>
         <HeartIcon fill="white" width="42px" />
-        <h3>{likes.length}</h3>
+        <h1>{likes.length}</h1>
       </div>
       {children}
     </div>

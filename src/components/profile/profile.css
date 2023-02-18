@@ -193,9 +193,14 @@ a {
   justify-content: center;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   backdrop-filter: blur(6px);
   color: white;
+}
+
+.image-overlay.show-overlay > h1 {
+  font-weight: 900;
+  font-size: 1.5rem;
 }
 
 .profile-image {
