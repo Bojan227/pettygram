@@ -5,10 +5,12 @@ import { url } from '../constants/api';
 
 export const useFollow = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const userContext = useUserContext();
 
   const changeFollowStatus = async (userId: string) => {
+    setIsLoading(true);
     const { user, updatedUser, error } = await fetcher(`${url}/user/`, {
       method: 'PUT',
       headers: {
@@ -31,10 +33,11 @@ export const useFollow = () => {
         payload: { userId, updatedUser },
       });
       localStorage.setItem('user', JSON.stringify(user));
+      setIsLoading(false);
     } else {
       setErrorMessage(error);
     }
   };
 
-  return { changeFollowStatus, errorMessage };
+  return { changeFollowStatus, errorMessage, isLoading };
 };

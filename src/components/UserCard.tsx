@@ -17,7 +17,7 @@ export const UserCard = ({
   lastName,
   imageUrl,
 }: UserCardProps) => {
-  const { changeFollowStatus } = useFollow();
+  const { changeFollowStatus, isLoading } = useFollow();
   const userContext = useUserContext();
   const isFollowed = userContext?.user?.following?.find(
     (user) => user?._id === _id
@@ -34,8 +34,10 @@ export const UserCard = ({
       </Link>
       {userContext?.user._id === _id ? null : (
         <FollowButton
+          {...{ isLoading }}
           onClick={(e: MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
+
             changeFollowStatus(_id!);
             socket.emit('send_notification', {
               senderId: userContext?.user._id,

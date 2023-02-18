@@ -55,6 +55,10 @@ li:hover,
   width: 34px;
   height: 34px;
 }
+.links-section > :last-child > li > div > img {
+  border: 1px solid #18181b;
+  object-fit: cover;
+}
 
 .footer-menu-section {
   display: none;
