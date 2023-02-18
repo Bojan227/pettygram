@@ -2,7 +2,7 @@
   display: flex;
   background-color: white;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
   min-height: 100vh;
   max-height: 100vh;
   margin-left: 30%;
@@ -35,20 +35,27 @@
   padding: 5px;
   gap: 10px;
   width: 100%;
+  cursor: pointer;
 }
 
 .notification-card:hover {
   background-color: #f3f4f6;
-  cursor: pointer;
 }
 
 .notification-card > img {
-  width: 48px;
-  height: 48px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
 }
+
 .notification-content {
   width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.notification-content > a {
+  padding: 0;
 }
 @media (max-width: 1350px) {
   .notifications-container.active {

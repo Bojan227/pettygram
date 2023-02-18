@@ -26,7 +26,9 @@ export default function NotificationCard({
           <p>
             {`${username} ${message} ${
               createdAt
-                ? formatDistanceToNow(new Date(createdAt).getTime())
+                ? formatDistanceToNow(new Date(createdAt).getTime(), {
+                    addSuffix: true,
+                  })
                 : ''
             }`}
           </p>

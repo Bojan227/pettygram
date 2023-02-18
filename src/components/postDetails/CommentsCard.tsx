@@ -60,7 +60,11 @@ export const CommentsCard = ({
       </section>
       <section className="comment-card-info">
         {createdAt && (
-          <h5>{formatDistanceToNow(new Date(createdAt).getTime())}</h5>
+          <h5>
+            {formatDistanceToNow(new Date(createdAt).getTime(), {
+              addSuffix: true,
+            })}
+          </h5>
         )}
         <p>{`${likes.length} ${likes.length === 1 ? 'like' : 'likes'} `}</p>
         {userContext?.user._id === createdBy._id ? (

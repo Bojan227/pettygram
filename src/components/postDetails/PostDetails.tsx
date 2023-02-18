@@ -61,7 +61,11 @@ export const PostDetails = () => {
             post?.likes.length === 1 ? 'like' : 'likes'
           } `}
           {post && (
-            <h5>{formatDistanceToNow(new Date(post?.createdAt).getTime())}</h5>
+            <h5>
+              {formatDistanceToNow(new Date(post?.createdAt).getTime(), {
+                addSuffix: true,
+              })}
+            </h5>
           )}
         </section>
         <CommentForm postId={id!} commentNotification={setCommentMessage} />

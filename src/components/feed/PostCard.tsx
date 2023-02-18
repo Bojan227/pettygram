@@ -73,7 +73,11 @@ export const PostCard = ({
 
       <section>
         {createdAt && (
-          <h5>{formatDistanceToNow(new Date(createdAt).getTime())}</h5>
+          <h5>
+            {formatDistanceToNow(new Date(createdAt).getTime(), {
+              addSuffix: true,
+            })}
+          </h5>
         )}
       </section>
       <CommentForm {...{ postId: _id }} />
