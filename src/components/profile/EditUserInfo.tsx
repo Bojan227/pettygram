@@ -56,7 +56,9 @@ export const EditInfo = () => {
             onChange={(lastName) => setLastName(lastName)}
           />
         </div>
-        <Button className="primary-btn">Submit</Button>
+        <Button className="primary-btn">
+          {isLoading ? 'Loading...' : 'Submit'}
+        </Button>
       </form>
       {message && <Navigate to={`/profile/${userContext?.user._id}`} />}
     </div>
