@@ -78,12 +78,22 @@ li:hover,
   z-index: 1000;
   border: 1px solid #e4e4e7;
 }
-.footer-menu-section > a {
+.footer-menu-section > a,
+.footer-menu-section > div {
   width: 100%;
   height: 30%;
   border-bottom: 1px solid #e4e4e7;
+  padding: 2px;
+  cursor: pointer;
 }
-.footer-menu-section > a:hover {
+.footer-menu-section > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.footer-menu-section > a:hover,
+.footer-menu-section > div:hover {
   background-color: #e4e4e7;
 }
 .drop-container {

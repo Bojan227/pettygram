@@ -16,11 +16,13 @@ import NotificationsWrapper from './components/NotificationsWrapper';
 import ExploreContainer from './components/explore/ExploreContainer';
 import { useRemoveLocation } from './context/locationContext';
 import { useAddLocation } from './context/locationContext';
+import { useCurrentTheme } from './context/themeContext';
 
 function App() {
   const [toggleNotifications, setToggleNotifications] = useState(false);
   const userContext = useUserContenxt();
   const location = useLocation();
+  const currentTheme = useCurrentTheme();
 
   const addLocation = useAddLocation();
   const removeLocation = useRemoveLocation();
@@ -34,7 +36,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div onClick={() => setToggleNotifications(false)}>
+    <div id={currentTheme} onClick={() => setToggleNotifications(false)}>
       {userContext?.user && (
         <NavigationBar {...{ toggleNotifications, setToggleNotifications }} />
       )}

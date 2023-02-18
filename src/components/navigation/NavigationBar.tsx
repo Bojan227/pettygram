@@ -17,7 +17,6 @@ export const NavigationBar = ({
   const [toggleMore, setToggleMore] = useState(false);
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  console.log(selectedIndex);
 
   return (
     <nav
