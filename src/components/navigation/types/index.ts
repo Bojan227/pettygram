@@ -1,9 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
+import { HomeIcon } from '@heroicons/react/24/solid';
 
 export type NavigationLinkProps = {
   title: string;
   link: string;
-  url: string | undefined;
+  url?: string;
+  SvgIcon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   toggleCreatePost: () => void;
   toggleNotifications: () => void;
   index: number;

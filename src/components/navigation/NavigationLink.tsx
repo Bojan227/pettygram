@@ -17,6 +17,7 @@ export const NavigationLink = ({
   index,
   setSelectedIndex,
   selectedIndex,
+  SvgIcon,
 }: NavigationLinkProps): JSX.Element => {
   const userContext = useUserContext();
   const filterNotifications = useFilterNotifications();
@@ -43,14 +44,11 @@ export const NavigationLink = ({
     >
       <li className={selectedIndex === index ? 'active' : ''}>
         <div>
-          <img
-            src={`${
-              url === 'profile'
-                ? userContext?.user.imageUrl || default_insta
-                : url
-            }`}
-            alt="img"
-          />
+          {title === 'Profile' ? (
+            <img src={userContext?.user.imageUrl || default_insta} />
+          ) : (
+            SvgIcon && <SvgIcon width="32px" height="32px" />
+          )}
           {title === 'Messages' && <MessagesNavContainer />}
           {title === 'Notifications' && <NotificaitonsNavContainer />}
         </div>

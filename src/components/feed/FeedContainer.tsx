@@ -57,9 +57,6 @@ export const FeedContainer = () => {
   return (
     <main className="feed-container">
       {error && <h1>{error}</h1>}
-      {posts?.map((post, i) => (
-        <PostCard key={i} {...post} index={i} {...{ listRef }} />
-      ))}
       {filteredUsers?.length === 0 ? null : (
         <div className="suggested-users">
           <div className="suggested-header">
@@ -70,6 +67,10 @@ export const FeedContainer = () => {
           ))}
         </div>
       )}
+      {posts?.map((post, i) => (
+        <PostCard key={i} {...post} index={i} {...{ listRef }} />
+      ))}
+
       {isLoadingPagination && <LoadingSpinner />}
       {errorPagination && <h1>{errorPagination}</h1>}
     </main>

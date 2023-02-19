@@ -41,6 +41,10 @@
 .details-info-section > * {
   padding: 8px 12px;
 }
+#dark .details-info-section {
+  background-color: black;
+  border: 1px solid white;
+}
 
 .post-details > * {
   z-index: 10000;
@@ -71,6 +75,10 @@
 .details-images-section > div > img {
   height: 82vh;
   width: 100%;
+}
+
+#dark .details-images-section {
+  border: 1px solid white;
 }
 
 .back-btn {

@@ -3,6 +3,41 @@
   margin: 0;
   box-sizing: border-box;
 }
+#dark {
+  background-color: black;
+}
+#dark > * {
+  background-color: black;
+  color: white;
+}
+
+#dark .card {
+  background-color: black;
+  color: white;
+}
+#dark input {
+  background-color: black;
+  color: white;
+}
+
+#dark p {
+  color: white;
+}
+#dark .footer-menu-section {
+  background-color: black;
+  color: white;
+}
+#dark .notifications-container {
+  background-color: black;
+  color: white;
+}
+
+#dark .profile-container {
+  background-color: black;
+}
+#dark .profile-nav {
+  background-color: black;
+}
 
 a {
   padding: 10px;

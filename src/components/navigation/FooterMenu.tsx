@@ -26,7 +26,7 @@ export function FooterMenu({
       </Link>
       <div onClick={toggleMode}>
         <h4>Switch appearance</h4>
-        <MoonIcon width="34px" height="34px" />
+        <MoonIcon width="28px" height="28px" />
       </div>
     </div>
   );

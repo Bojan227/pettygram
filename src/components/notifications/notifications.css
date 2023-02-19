@@ -32,14 +32,18 @@
 .notification-card {
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 5px 25px;
   gap: 10px;
   width: 100%;
   cursor: pointer;
 }
 
 .notification-card:hover {
-  background-color: #f3f4f6;
+  background-color: #c084fc;
+}
+
+#dark .notification-card:hover {
+  background-color: #312e81;
 }
 
 .notification-card > img {

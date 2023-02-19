@@ -1,7 +1,7 @@
 .feed-container {
   display: flex;
   flex-direction: column;
-  margin-top: 10%;
+  padding-top: 40px;
   margin-left: 32%;
   min-height: 100vh;
   width: 100%;
@@ -174,8 +174,7 @@ main > .spinner-container {
 
 @media (max-width: 1156px) {
   .suggested-users {
-    top: -140px;
-    left: 240px;
+    left: 0;
     flex-direction: row;
     min-height: 12vh;
     width: 55%;
@@ -184,6 +183,7 @@ main > .spinner-container {
     overflow-x: auto;
     border: 0;
     gap: 8px;
+    position: relative;
   }
   .suggested-header {
     display: none;
@@ -221,8 +221,6 @@ main > .spinner-container {
   .feed-container {
     width: 100%;
     margin-left: 10%;
-    margin-top: 20%;
-
     align-items: center;
   }
 
@@ -233,7 +231,7 @@ main > .spinner-container {
 
 @media (max-width: 990px) {
   .suggested-users {
-    left: 200px;
+    left: 2px;
   }
 }
 
@@ -241,21 +239,11 @@ main > .spinner-container {
   .card {
     width: 45%;
   }
-  .suggested-users {
-    left: 185px;
-  }
-}
-@media (max-width: 880px) {
-  .suggested-users {
-    left: 170px;
-  }
 }
 
 @media (max-width: 752px) {
   .suggested-users {
-    top: -150px;
-    left: 30px;
-
+    left: 2px;
     width: 90%;
   }
 
@@ -266,7 +254,7 @@ main > .spinner-container {
   .feed-container {
     width: 100%;
     margin-left: 0;
-    margin-top: 45%;
+    padding-top: 150px;
     align-items: center;
     padding-bottom: 20px;
   }
@@ -283,22 +271,16 @@ main > .spinner-container {
   .card {
     width: 70%;
   }
-  .feed-container {
-    margin-top: 50%;
-  }
 }
 
 @media (max-width: 545px) {
   .suggested-users {
-    left: 10px;
-
     width: 95%;
   }
 
   .feed-container {
     width: 100%;
     margin-left: 0;
-    margin-top: 60%;
     align-items: center;
   }
   .card {
@@ -309,33 +291,21 @@ main > .spinner-container {
   .card {
     width: 85%;
   }
-  .feed-container {
-    margin-top: 70%;
-  }
 }
 
 @media (max-width: 395px) {
   .feed-container {
     width: 100%;
     margin-left: 0;
-    margin-top: 80%;
     margin-bottom: 20%;
     align-items: center;
   }
 
+  .suggested-users {
+    width: 100%;
+    padding: 0;
+  }
   .card {
     width: 100%;
-  }
-}
-
-@media (max-width: 345px) {
-  .feed-container {
-    margin-top: 95%;
-  }
-}
-
-@media (max-width: 295px) {
-  .feed-container {
-    margin-top: 105%;
   }
 }

@@ -1,14 +1,15 @@
 import { NavigationLink } from './NavigationLink';
-import { Dispatch, SetStateAction } from 'react';
 import { NavigationBarProps } from './types';
 import { navData } from './navData';
-import menu from './images/menu.png';
+import { Bars3Icon } from '@heroicons/react/24/outline';
+import { MoonIcon } from '@heroicons/react/24/solid';
 import LogoContainer from './LogoContainer';
 import './navigation.css';
 import { useState } from 'react';
 import { FooterMenu } from './FooterMenu';
 import { CreatePost } from './CreatePost';
 import NotificationsContainer from '../notifications/NotificationsContainer';
+import { useToggleMode } from '../../context/themeContext';
 
 export const NavigationBar = ({
   toggleNotifications,
@@ -17,6 +18,7 @@ export const NavigationBar = ({
   const [toggleMore, setToggleMore] = useState(false);
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const toggleMode = useToggleMode();
 
   return (
     <nav
@@ -30,7 +32,7 @@ export const NavigationBar = ({
         <LogoContainer />
         <section>
           <ul className="links-section">
-            {navData.map(({ title, url, link }, i) => (
+            {navData.map(({ title, url, link, SvgIcon }, i) => (
               <NavigationLink
                 {...{
                   title,
@@ -39,6 +41,7 @@ export const NavigationBar = ({
                   setSelectedIndex,
                   index: i,
                   selectedIndex,
+                  SvgIcon,
                 }}
                 key={title}
                 toggleCreatePost={() => setToggleCreatePost(!toggleCreatePost)}
@@ -47,6 +50,7 @@ export const NavigationBar = ({
                 }
               />
             ))}
+            <MoonIcon onClick={toggleMode} width="32px" height="32px" />
           </ul>
         </section>
       </div>
@@ -59,7 +63,7 @@ export const NavigationBar = ({
         }}
       >
         <div className="flex items-center gap-8">
-          <img src={menu} alt="menu" />
+          <Bars3Icon width="32px" height="32px" />
           <h3>More</h3>
         </div>
         <FooterMenu toggleMore={toggleMore} />

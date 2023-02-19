@@ -73,6 +73,10 @@ a {
   border-top: 2px solid #475569;
 }
 
+#dark .profile-nav .active {
+  border-top: 2px solid white;
+}
+
 .posts-container {
   display: grid;
   width: 70%;
@@ -188,6 +192,10 @@ a {
 .edit-form > div > input {
   padding: 10px 15px;
   border: 1px solid black;
+  border-radius: 12px;
+}
+#dark .edit-form > div > input {
+  border-color: white;
 }
 
 .image-overlay {
@@ -243,7 +251,7 @@ a {
   width: 100%;
   height: 100%;
   background-color: black;
-  opacity: 0.9;
+
   top: 0;
   bottom: 0;
   left: 0;
@@ -274,9 +282,17 @@ a {
 }
 
 .change-photo.active > div > *:hover {
-  background-color: #e0f2fe;
+  background-color: #c084fc;
 }
 
+#dark .change-photo.active > div > *:hover {
+  background-color: #312e81;
+}
+
+#dark .change-photo.active > div {
+  background-color: black;
+  color: white;
+}
 .profile-container .spinner-container {
   position: absolute;
   align-items: center;
@@ -302,6 +318,10 @@ a {
   padding: 15px;
   border: 4px solid black;
 }
+
+#dark .empty-state > svg {
+  border-color: white;
+}
 .empty-state > h1 {
   font-weight: 900;
   font-size: 1.5rem;
@@ -323,18 +343,14 @@ a {
   .posts-container > a {
     height: 90%;
   }
-
-  .profile-container {
-    margin-top: 10%;
-  }
 }
 
 @media (max-width: 750px) {
   .profile-container {
     display: flex;
     align-items: center;
-    margin-top: 40%;
-    padding: 0;
+    padding: 170px 0 0 0;
+
     width: 100%;
     min-height: 60vh;
   }
@@ -365,6 +381,7 @@ a {
   .posts-container {
     grid-template-columns: repeat(auto-fit, minmax(150px, 0.5fr));
     width: 90%;
+    padding-bottom: 100px;
   }
   .posts-container > a {
     height: 95%;

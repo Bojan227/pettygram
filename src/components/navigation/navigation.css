@@ -11,7 +11,23 @@
   background-color: white;
   z-index: 100;
 }
+.links-section {
+  align-items: center;
+}
 
+#dark .links-section {
+  background-color: black;
+}
+
+.links-section > svg {
+  display: none;
+  cursor: pointer;
+}
+
+#dark .logo-mobile > svg,
+#dark .logo-desktop > svg {
+  fill: white;
+}
 a {
   text-decoration: none;
 }
@@ -29,19 +45,25 @@ li {
 
 .footer-nav {
   display: flex;
-  padding: 10px 10px;
+  padding: 8px 10px;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 li:hover,
 .footer-nav:hover {
-  background-color: grey;
+  background-color: #c084fc;
+}
+
+#dark li:hover,
+#dark .footer-nav:hover {
+  background-color: #312e81;
 }
 
 .header-nav {
   display: flex;
   flex-direction: column;
-  gap: 55px;
+  gap: 20px;
   justify-content: center;
 }
 
@@ -63,6 +85,19 @@ li:hover,
 .links-section > a > li.active {
   font-weight: 900;
 }
+.links-section > a > li.active > div > svg {
+  fill: none;
+  stroke: black;
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+}
+
+#dark .links-section > a > li.active > div > svg {
+  fill: none;
+  stroke: white;
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+}
 
 .footer-menu-section {
   display: none;
@@ -70,22 +105,36 @@ li:hover,
   flex-direction: column;
   background-color: white;
   color: black;
-  top: -120px;
+  top: -115px;
   left: 0;
   width: 200px;
-  border-radius: 12px;
+  border-radius: 8px;
   text-align: center;
   z-index: 1000;
   border: 1px solid #e4e4e7;
+  cursor: pointer;
 }
 .footer-menu-section > a,
 .footer-menu-section > div {
   width: 100%;
-  height: 30%;
   border-bottom: 1px solid #e4e4e7;
-  padding: 2px;
+  padding: 4px;
   cursor: pointer;
 }
+
+.footer-menu-section > :first-child {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.footer-menu-section > :last-child {
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.footer-menu-section > div:last-child {
+  border-bottom: none;
+}
+
 .footer-menu-section > div {
   display: flex;
   align-items: center;
@@ -94,8 +143,13 @@ li:hover,
 
 .footer-menu-section > a:hover,
 .footer-menu-section > div:hover {
-  background-color: #e4e4e7;
+  background-color: #c084fc;
 }
+#dark .footer-menu-section > a:hover,
+#dark .footer-menu-section > div:hover {
+  background-color: #312e81;
+}
+
 .drop-container {
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -108,20 +162,24 @@ li:hover,
   height: 100%;
   z-index: 10000;
 }
+
 .drop-div {
-  background-color: white !important;
+  background-color: white;
   display: flex;
   width: 55%;
   height: 65%;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   z-index: 10000 !important;
 }
-.drop-div > :nth-child(1) {
-  flex: 0.5;
-}
+
 .drop-div > .file-input {
   margin-top: 10px;
+}
+#dark .drop-div {
+  background-color: black;
+  border: 1px solid white;
 }
 
 .share-container {
@@ -129,6 +187,7 @@ li:hover,
   width: 85%;
   height: 75%;
   background-color: #f8fafc;
+  border: 1px solid white;
 }
 .images-container {
   display: grid;
@@ -158,6 +217,14 @@ li:hover,
   padding: 10px;
   gap: 20px;
 }
+#dark .caption-container {
+  background-color: black;
+  color: white;
+}
+
+#dark .user-info {
+  color: white;
+}
 
 .images-container .file-input {
   display: flex;
@@ -175,6 +242,11 @@ li:hover,
   border: 1px solid black;
   font-size: 1.2rem;
   font-weight: 600;
+}
+#dark .share-container > div > textarea {
+  background-color: black;
+  color: white;
+  border-color: white;
 }
 .user-info {
   display: flex;
@@ -261,7 +333,12 @@ label {
   }
   li:hover,
   .footer-nav:hover {
-    background-color: white;
+    background-color: #c084fc;
+  }
+
+  #dark li:hover,
+  #dark .footer-nav:hover {
+    background-color: #312e81;
   }
   h3 {
     display: none;
@@ -299,6 +376,17 @@ label {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
       rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   }
+  .links-section > svg {
+    display: block;
+  }
+
+  #dark .main-navigation {
+    border-bottom: 1px solid white;
+  }
+
+  #dark .links-section {
+    border-top: 1px solid white;
+  }
   .logo-desktop {
     display: block;
   }
@@ -332,13 +420,16 @@ label {
 
   .notification-link {
     position: fixed;
-    top: 4%;
+    top: 5.5%;
     right: 0;
     padding: 0;
   }
 
   li:hover {
-    background-color: #f8fafc;
+    background-color: #c084fc;
+  }
+  #dark li:hover {
+    background-color: #312e81;
   }
 
   .drop-container {
@@ -396,7 +487,10 @@ label {
     padding: 1px;
   }
   li:hover {
-    background-color: #f8fafc;
+    background-color: #c084fc;
+  }
+  #dark li:hover {
+    background-color: #312e81;
   }
 }
 

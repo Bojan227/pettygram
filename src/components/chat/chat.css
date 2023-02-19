@@ -76,8 +76,11 @@
 }
 
 .user-card:hover {
-  background-color: #d1d5db;
+  background-color: #c084fc;
   cursor: pointer;
+}
+#dark .user-card:hover {
+  background-color: #312e81;
 }
 .user-card.active {
   background-color: #d1d5db;
