@@ -82,7 +82,7 @@ function App() {
           />
         </Route>
         <Route path="p/:id" element={<PostDetails />} />
-        <Route path="/edit" element={<EditInfo />} />
+        {userContext?.user && <Route path="/edit" element={<EditInfo />} />}
         {userContext?.user && (
           <Route path="inbox" element={<ChatContainer />} />
         )}

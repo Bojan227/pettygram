@@ -400,8 +400,9 @@ label {
   .header-nav {
     width: 100%;
     flex-direction: row;
+    height: 5vh;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
   }
   .links-section {
     display: flex;
@@ -420,8 +421,8 @@ label {
 
   .notification-link {
     position: fixed;
-    top: 5.5%;
-    right: 0;
+    top: 2.5%;
+    right: 45px;
     padding: 0;
   }
 

@@ -15,7 +15,7 @@
   grid-template-columns: repeat(auto-fill, var(--card_width));
   grid-auto-rows: var(10px);
   min-height: 100vh;
-  background-color: #e5e5e5;
+
   justify-content: center;
   overflow-y: auto;
 }
