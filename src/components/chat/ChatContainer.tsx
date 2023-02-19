@@ -15,18 +15,20 @@ export default function ChatContainer() {
 
   return (
     <div className="chat-container">
-      <div className="chat-header">{userContext?.user?.username}</div>
-      <div className={`chat-users ${selectedUser?._id ? 'disabled' : ''}`}>
-        {users?.map((user) => (
-          <ChatUser
-            key={uuidv4()}
-            {...{ ...user, selectedUser }}
-            setSelectedUser={() => setSelectedUser(user)}
-          />
-        ))}
+      <div>
+        <div className="chat-header">{userContext?.user?.username}</div>
+        <div className={`chat-users ${selectedUser?._id ? 'disabled' : ''}`}>
+          {users?.map((user) => (
+            <ChatUser
+              key={uuidv4()}
+              {...{ ...user, selectedUser }}
+              setSelectedUser={() => setSelectedUser(user)}
+            />
+          ))}
+        </div>
+        <ChatHeader {...{ selectedUser, setSelectedUser }} />
+        {selectedUser && <Chat {...{ selectedUser }} />}
       </div>
-      <ChatHeader {...{ selectedUser, setSelectedUser }} />
-      {selectedUser && <Chat {...{ selectedUser }} />}
     </div>
   );
 }
