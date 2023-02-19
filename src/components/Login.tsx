@@ -22,7 +22,7 @@ export default function Login() {
     >
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center items-center text-white gap-2 grow"
+        className="flex flex-col justify-center items-center text-white gap-2 grow login-form"
       >
         <img src={instagramLogo} className="my-8" />
         <h1>Username</h1>

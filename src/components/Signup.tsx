@@ -31,7 +31,7 @@ export default function Signup() {
     >
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col  w-4/5 justify-center items-center text-white gap-2 grow"
+        className="flex flex-col  w-4/5 justify-center items-center text-white gap-2 grow register-form"
       >
         <img src={instagramLogo} className="my-8" />
         Username

@@ -39,6 +39,11 @@
   background-color: black;
 }
 
+#dark .login-form > input,
+#dark .register-form > input {
+  background-color: #e1306c;
+}
+
 a {
   padding: 10px;
 }
