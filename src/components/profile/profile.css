@@ -94,7 +94,10 @@ a {
 .profile-post-image {
   position: relative;
 }
-.profile-post-image > img {
+.profile-post-image > span {
+  width: 100%;
+}
+.profile-post-image > span > img {
   object-fit: cover;
   height: 300px;
   width: 100%;
@@ -214,6 +217,7 @@ a {
   gap: 10px;
   backdrop-filter: blur(6px);
   color: white;
+  z-index: 10;
 }
 
 .image-overlay.show-overlay > h1 {

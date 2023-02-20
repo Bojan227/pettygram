@@ -8,6 +8,8 @@ import { url } from '../../constants/api';
 import LoadingSpinner from '../LoadingSpinner';
 import useUserContext from '../../hooks/useUserContext';
 import EmptyState from './EmptyState';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export const PostsContainer = ({ tab }: { tab: string }) => {
   const [data, setData] = useState<Post[] | null>([]);
@@ -67,7 +69,8 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
         data.map(({ imageUrl, likes, _id }) => (
           <Link key={uuidv4()} to={`/p/${_id}`}>
             <ImageOverlay {...{ likes }}>
-              <img src={imageUrl[0]} alt="user-image" />
+              {/* <img src={imageUrl[0]} alt="user-image" /> */}
+              <LazyLoadImage src={imageUrl[0]} effect="blur" />
             </ImageOverlay>
           </Link>
         ))}
