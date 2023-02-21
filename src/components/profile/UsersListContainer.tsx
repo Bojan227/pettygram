@@ -17,11 +17,10 @@ export const UsersListContainer = ({
           <h1>{title}</h1>
           <h1>X</h1>
         </header>
-        <div>
-          {users?.map((user) => (
-            <UserCard key={user?._id} {...user} />
-          ))}
-        </div>
+
+        {users?.map((user) => (
+          <UserCard key={user?._id} {...user} />
+        ))}
       </div>
     </div>
   );

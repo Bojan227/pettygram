@@ -61,7 +61,7 @@
   gap: 15px;
   align-items: center;
 }
-.description-section > a > div > img {
+.description-section > a > img {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -109,7 +109,7 @@ p {
 .users-container-profile {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 5px;
   padding: 5px;
 }
 
@@ -122,6 +122,8 @@ p {
   border-radius: 50%;
   border: 1px solid #cbd5e1;
   object-fit: cover;
+  border: 3px solid #8b5cf6;
+  padding: 1px;
 }
 
 .suggested-header {

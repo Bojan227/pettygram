@@ -158,7 +158,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px;
 }
 
 .users-list-content {
@@ -331,6 +330,11 @@ a {
   font-size: 1.5rem;
 }
 
+#dark .profile-container .users-list-content {
+  background-color: black;
+  color: white;
+}
+
 @media (max-width: 1150px) {
   .users-list-content {
     width: 40%;
@@ -346,6 +350,15 @@ a {
   }
   .posts-container > a {
     height: 90%;
+  }
+
+  .profile-container .users-container-profile > a > div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .profile-container .users-container-profile > button {
+    display: block;
   }
 }
 
@@ -450,5 +463,12 @@ a {
 @media (max-width: 350px) {
   .posts-container {
     grid-template-columns: repeat(auto-fit, minmax(100px, 0.5fr));
+  }
+  .users-container-profile {
+    font-size: 0.9rem;
+  }
+  .users-container-profile > a > div > img {
+    width: 42px;
+    height: 42px;
   }
 }
