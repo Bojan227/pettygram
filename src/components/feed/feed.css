@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   padding-top: 40px;
+  padding-bottom: 120px;
   margin-left: 32%;
   min-height: 100vh;
   width: 100%;
   position: relative;
   gap: 25px;
-  margin-bottom: 10%;
 }
 
 .card {
@@ -154,6 +154,11 @@ p {
   cursor: pointer;
 }
 
+#dark main {
+  min-height: 100vh;
+  background-color: black;
+}
+
 main > .spinner-container {
   position: fixed;
   top: 25%;
@@ -258,7 +263,6 @@ main > .spinner-container {
     margin-left: 0;
     padding-top: 150px;
     align-items: center;
-    padding-bottom: 20px;
   }
 
   .card {
@@ -299,7 +303,6 @@ main > .spinner-container {
   .feed-container {
     width: 100%;
     margin-left: 0;
-    margin-bottom: 20%;
     align-items: center;
   }
 
