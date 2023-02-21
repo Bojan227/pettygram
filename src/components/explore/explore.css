@@ -15,7 +15,6 @@
   grid-template-columns: repeat(auto-fill, var(--card_width));
   grid-auto-rows: var(10px);
   min-height: 100vh;
-
   justify-content: center;
   overflow-y: auto;
 }
@@ -73,28 +72,23 @@
 
 @media (max-width: 750px) {
   .explore-container {
-    margin-top: 15%;
     width: 100%;
     margin-left: 0;
-    padding: 0;
-    margin-bottom: 10%;
+    padding: 100px 0 40px 0;
     grid-template-columns: repeat(auto-fill, 180px);
+    height: 100%;
   }
 }
 
 @media (max-width: 570px) {
   .explore-container {
-    margin-top: 20%;
-
     grid-template-columns: repeat(auto-fill, 200px);
   }
 }
 
 @media (max-width: 450px) {
   .explore-container {
-    margin-top: 26%;
     grid-template-columns: repeat(auto-fill, 250px);
-    padding-top: 10px;
   }
   .card-explore > a > img {
     height: 75%;
