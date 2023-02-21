@@ -69,7 +69,6 @@ export const PostsContainer = ({ tab }: { tab: string }) => {
         data.map(({ imageUrl, likes, _id }) => (
           <Link key={uuidv4()} to={`/p/${_id}`}>
             <ImageOverlay {...{ likes }}>
-              {/* <img src={imageUrl[0]} alt="user-image" /> */}
               <LazyLoadImage src={imageUrl[0]} effect="blur" />
             </ImageOverlay>
           </Link>
