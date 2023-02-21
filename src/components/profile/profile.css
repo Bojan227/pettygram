@@ -302,6 +302,7 @@ a {
   align-items: center;
   top: 45%;
   width: 65%;
+  min-height: 100vh;
 }
 
 .empty-state {
@@ -314,6 +315,7 @@ a {
   text-align: center;
   padding: 10px;
   margin-bottom: 20%;
+  min-height: 100vh;
 }
 .empty-state > svg {
   width: 72px;
@@ -353,7 +355,7 @@ a {
   .profile-container {
     display: flex;
     align-items: center;
-    padding: 170px 0 0 0;
+    padding: 120px 0 0 0;
 
     width: 100%;
     min-height: 60vh;
@@ -405,7 +407,9 @@ a {
     gap: 25px;
     justify-content: space-around;
   }
-
+  .profile-container {
+    padding-top: 60px;
+  }
   .profile-nav {
     width: 100%;
   }
@@ -418,7 +422,7 @@ a {
   }
 
   .posts-container {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 0.5fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 0.5fr));
     justify-content: center;
     width: 100%;
     padding: 10px;
@@ -428,7 +432,7 @@ a {
     height: 140px;
   }
 
-  .profile-post-image > img {
+  .profile-post-image > span > img {
     height: 140px;
   }
 
