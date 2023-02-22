@@ -9,7 +9,6 @@ export default function ImageOverlay({
   children: React.ReactNode;
 }) {
   const [showOverlay, setShowOverlay] = useState(false);
-  console.log(likes);
   return (
     <div
       className="profile-post-image"
