@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { useCurrentLocation } from '../../context/locationContext';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
 import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
@@ -54,7 +53,9 @@ export default function PostsViewer({
     );
   };
 
-  return !isLoading && locationContext.split('/').includes('profile') ? (
+  return !isLoading &&
+    locationContext.split('/').includes('profile') &&
+    posts.length > 1 ? (
     <>
       <ArrowLeftCircleIcon className="left-arrow" onClick={previousPost} />
       <ArrowRightCircleIcon className="right-arrow" onClick={nextPost} />

@@ -13,11 +13,13 @@ import { useGetData } from '../../hooks/useGetData';
 import { url } from '../../constants/api';
 import LoadingSpinner from '../LoadingSpinner';
 import PostsViewer from './PostsViewer';
+import useUserContext from '../../hooks/useUserContext';
 
 export const PostDetails = () => {
   const [post, setPost] = useState<Post>();
   const [commentMessage, setCommentMessage] = useState('');
   const { id } = useParams();
+  const userContext = useUserContext();
   const { getData, isLoading } = useGetData();
   const navigate = useNavigate();
 
@@ -29,6 +31,19 @@ export const PostDetails = () => {
       });
     }
   }, []);
+
+  const updatePost = () => {
+    if (post?._id) {
+      setPost({
+        ...post,
+        likes: post.likes.find((like) => like === userContext?.user._id)
+          ? (post.likes.filter(
+              (like) => like !== userContext?.user._id
+            ) as string[])
+          : ([...post.likes, userContext?.user._id] as string[]),
+      });
+    }
+  };
 
   if (isLoading) return <LoadingSpinner className="post-details-spinner" />;
 
@@ -55,7 +70,7 @@ export const PostDetails = () => {
             {...{ ...post, commentMessage, setCommentMessage }}
           />
         )}
-        {post && <ButtonsContainer {...{ ...post, id }} />}
+        {post && <ButtonsContainer {...{ ...post!, id, updatePost }} />}
         <section className="likes-info">
           {`${post?.likes.length} ${
             post?.likes.length === 1 ? 'like' : 'likes'

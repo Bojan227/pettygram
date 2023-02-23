@@ -1,6 +1,4 @@
 import { SetStateAction, Dispatch } from 'react';
-import { Post } from '../../feed/types/feedTypes';
-
 export type CommentsContainerProps = {
   commentNotification: (value: string) => void;
   commentMessage: string;

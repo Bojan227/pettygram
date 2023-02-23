@@ -11,6 +11,7 @@ export const LikeButton = ({
   likes,
   receiverId,
   updateComments = () => {},
+  updatePost = () => {},
   url,
 }: LikeButtonProps) => {
   const userContext = useUserContenxt();
@@ -36,6 +37,7 @@ export const LikeButton = ({
           message: `${isLiked ? 'disliked' : 'liked'} your post!`,
         });
         updateComments();
+        updatePost();
       }}
     >
       <path

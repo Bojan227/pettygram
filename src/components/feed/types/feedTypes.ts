@@ -27,7 +27,7 @@ export interface Post {
   imageUrl: [string];
   imageId: [string];
   createdAt: string;
-  likes: [string];
+  likes: string[];
   createdBy: {
     imageUrl: string;
     username: string;
@@ -35,9 +35,10 @@ export interface Post {
   };
 }
 export type LikeButtonProps = {
-  likes: String[];
+  likes: string[];
   receiverId?: string;
   postId: string;
   updateComments?: () => void;
+  updatePost?: () => void;
   url: string;
 };
