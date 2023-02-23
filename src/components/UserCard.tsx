@@ -4,6 +4,8 @@ import useUserContext from '../hooks/useUserContext';
 import { FollowButton } from './buttons/FollowButton';
 import { MouseEvent } from 'react';
 import { socket } from '../constants/socket';
+import default_insta from '../../assets/default_insta.jpg';
+
 interface UserCardProps {
   _id?: string | undefined;
   firstName?: string | undefined;
@@ -27,7 +29,7 @@ export const UserCard = ({
     <div className="users-container-profile" key={_id}>
       <Link to={`/profile/${_id}`}>
         <div className="flex items-center gap-1">
-          <img src={imageUrl} />
+          <img src={imageUrl || default_insta} />
           <p>{firstName}</p>
           <p>{lastName}</p>
         </div>
