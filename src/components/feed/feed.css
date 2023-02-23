@@ -164,6 +164,15 @@ main > .spinner-container {
   top: 25%;
   left: 55%;
 }
+
+.buttons-section .loading-spinner {
+  width: 32px;
+  height: 32px;
+}
+#dark .buttons-section:nth-child(3) .active {
+  fill: white;
+}
+
 @media (max-width: 1500px) {
   .card {
     width: 35%;

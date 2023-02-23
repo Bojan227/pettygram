@@ -1,5 +1,5 @@
 import { PostCard } from './PostCard';
-import { useEffect, useState, useRef, useCallback, ReactElement } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useGetUsers } from '../../hooks/useGetUsers';
 import useUserContext from '../../hooks/useUserContext';
 import './feed.css';
@@ -25,13 +25,13 @@ export const FeedContainer = () => {
       if (isLoadingPagination) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && numberOfPosts > posts.length) {
+        if (entries[0].isIntersecting && numberOfPosts > posts?.length) {
           setPage((page) => page + 1);
         }
       });
       if (node) observer.current.observe(node);
     },
-    [numberOfPosts > posts.length]
+    [numberOfPosts > posts?.length]
   );
 
   useEffect(() => {
@@ -67,9 +67,11 @@ export const FeedContainer = () => {
           ))}
         </div>
       )}
-      {posts?.map((post, i) => (
-        <PostCard key={i} {...post} index={i} {...{ listRef }} />
-      ))}
+      {posts
+        ? posts?.map((post, i) => (
+            <PostCard key={i} {...post} index={i} {...{ listRef }} />
+          ))
+        : null}
 
       {isLoadingPagination && <LoadingSpinner />}
       {errorPagination && <h1>{errorPagination}</h1>}

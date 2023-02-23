@@ -1,14 +1,13 @@
 import { LikeButton, Details, Bookmark } from './SvgsContainer';
-import { url } from '../../constants/api';
 import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentForm';
-import useUpdateLike from '../../hooks/useUpdateLike';
 import { PostCardProps } from './types/feedTypes';
 import { formatDistanceToNow } from 'date-fns';
 import useUserContext from '../../hooks/useUserContext';
 import default_insta from '../../assets/default_insta.jpg';
 import CarouselSlider from './CarouselSlider';
 import { usePostsStore } from '../../store/postsStore';
+import { url } from '../../constants/api';
 
 export const PostCard = ({
   createdBy,
@@ -20,7 +19,6 @@ export const PostCard = ({
   index,
   listRef,
 }: PostCardProps): JSX.Element => {
-  const { updateLike } = useUpdateLike();
   const userContext = useUserContext();
   const { posts } = usePostsStore();
 
@@ -37,12 +35,8 @@ export const PostCard = ({
         <LikeButton
           likes={likes}
           receiverId={createdBy._id}
-          updateLike={() =>
-            updateLike({
-              url: `${url}/posts/`,
-              _id,
-            })
-          }
+          postId={_id}
+          url={`${url}/posts/`}
         />
         <Details postId={_id} />
         {userContext?.user._id !== createdBy._id ? (

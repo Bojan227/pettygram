@@ -6,10 +6,12 @@ import { url } from '../constants/api';
 export const useGetPosts = () => {
   const [isLoadingState, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { load, setNumberOfPosts } = usePostsStore();
+  const { load, setNumberOfPosts, posts } = usePostsStore();
 
   useEffect(() => {
-    getPosts();
+    if (posts.length === 0) {
+      getPosts();
+    }
   }, []);
 
   const getPosts = async () => {
@@ -29,6 +31,10 @@ export const useGetPosts = () => {
           },
         }
       );
+      if (posts.error) {
+        setError(posts.error);
+      }
+
       setNumberOfPosts(numberOfPosts);
       load(posts);
     } catch (error) {

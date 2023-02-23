@@ -1,16 +1,19 @@
-import { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import fetcher from '../api/fetcher';
 import { usePostsStore } from '../store/postsStore';
 
 interface updateLikeProps {
   url: string;
-  _id: string;
+  postId: string;
 }
 
 export default function useUpdateLike() {
   const { changeLikeState } = usePostsStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const updateLike = async ({ url, _id }: updateLikeProps) => {
+  const updateLike = async ({ url, postId }: updateLikeProps) => {
+    setIsLoading(true);
     try {
       const json = await fetcher(url, {
         method: 'PUT',
@@ -24,15 +27,18 @@ export default function useUpdateLike() {
           }`,
         },
         body: JSON.stringify({
-          postId: _id,
+          postId,
         }),
       });
-
       changeLikeState(json.post);
     } catch (error) {
-      error;
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { updateLike };
+  return { updateLike, isLoading };
 }

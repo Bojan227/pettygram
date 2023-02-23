@@ -55,7 +55,7 @@ export const PostDetails = () => {
             {...{ ...post, commentMessage, setCommentMessage }}
           />
         )}
-        {post && <ButtonsContainer {...{ ...post!, id }} />}
+        {post && <ButtonsContainer {...{ ...post, id }} />}
         <section className="likes-info">
           {`${post?.likes.length} ${
             post?.likes.length === 1 ? 'like' : 'likes'

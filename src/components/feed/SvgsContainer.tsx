@@ -1,18 +1,25 @@
 import useUserContenxt from '../../hooks/useUserContext';
 import { Link } from 'react-router-dom';
 import useUpdateSaved from '../../hooks/useUpdateSaved';
+import useUpdateLike from '../../hooks/useUpdateLike';
 import { LikeButtonProps } from './types/feedTypes';
 import { socket } from '../../constants/socket';
+import LoadingSpinner from '../LoadingSpinner';
 
 export const LikeButton = ({
-  updateLike,
+  postId,
   likes,
   receiverId,
+  updateComments = () => {},
+  url,
 }: LikeButtonProps) => {
   const userContext = useUserContenxt();
+  const { updateLike, isLoading } = useUpdateLike();
   const isLiked = likes?.find((id) => id === userContext?.user._id);
 
-  return (
+  return isLoading ? (
+    <LoadingSpinner />
+  ) : (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill={`${isLiked ? 'red' : 'none'}`}
@@ -21,13 +28,14 @@ export const LikeButton = ({
       stroke="currentColor"
       style={{ width: '32px', cursor: 'pointer' }}
       onClick={() => {
-        updateLike();
+        updateLike({ url, postId });
         socket.emit('send_notification', {
           senderId: userContext?.user._id,
           action: 'like',
           receiverId,
           message: `${isLiked ? 'disliked' : 'liked'} your post!`,
         });
+        updateComments();
       }}
     >
       <path
@@ -62,14 +70,16 @@ export const Details = ({ postId }: { postId?: string }) => {
 
 export const Bookmark = ({ postId }: { postId: string }) => {
   const userContext = useUserContenxt();
-  const { updateSaved } = useUpdateSaved();
+  const { updateSaved, isLoading } = useUpdateSaved();
 
-  return (
+  return isLoading ? (
+    <LoadingSpinner />
+  ) : (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={`${
+      className={`${
         userContext?.user?.saved?.find(({ _id }) => _id === postId)
-          ? 'black'
+          ? 'active'
           : 'none'
       }`}
       viewBox="0 0 24 24"

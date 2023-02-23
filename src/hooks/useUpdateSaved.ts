@@ -1,6 +1,7 @@
 import fetcher from '../api/fetcher';
 import useUserContext from './useUserContext';
 import { url } from '../constants/api';
+import { useState } from 'react';
 
 interface updateSavedProps {
   postId: string;
@@ -8,8 +9,10 @@ interface updateSavedProps {
 
 export default function useUpdateSaved() {
   const userContext = useUserContext();
+  const [isLoading, setIsLoading] = useState(false);
 
   const updateSaved = async ({ postId }: updateSavedProps) => {
+    setIsLoading(true);
     try {
       const { user, post } = await fetcher(`${url}/saved/`, {
         method: 'PUT',
@@ -37,8 +40,10 @@ export default function useUpdateSaved() {
       localStorage.setItem('user', JSON.stringify(user));
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { updateSaved };
+  return { updateSaved, isLoading };
 }

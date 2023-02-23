@@ -134,6 +134,11 @@
 .buttons-section-details > :nth-child(2) {
   flex: 1;
 }
+
+.buttons-section-details .loading-spinner {
+  width: 32px;
+  height: 32px;
+}
 .commments-card {
   display: flex;
   flex-direction: column;
@@ -164,6 +169,11 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.comments-info .loading-spinner {
+  width: 32px;
+  height: 32px;
 }
 .comment {
   display: flex;
