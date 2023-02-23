@@ -81,3 +81,20 @@ a {
   margin-bottom: 18px;
   color: white;
 }
+.password-modal {
+  position: absolute;
+  top: 120%;
+  background-color: white;
+  border: 1px solid #ef4444;
+  padding: 10px;
+}
+.password-modal > h1 {
+  color: #ef4444;
+}
+.password-modal > ul {
+  list-style-type: circle;
+  list-style-position: outside;
+}
+.password-modal > ul > * {
+  color: black;
+}

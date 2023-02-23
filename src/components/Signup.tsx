@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
 import instagramLogo from './navigation/images/instagram-text-icon.png';
+import PasswordContainer from './PasswordContainer';
 
 export default function Signup() {
   const { signup, isLoading, error, message } = useSignup();
@@ -42,15 +43,7 @@ export default function Signup() {
           value={username}
           onChange={(username) => setUsername(username)}
         />
-        Password
-        <input
-          type="password"
-          className={
-            'bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5'
-          }
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <PasswordContainer {...{ password, setPassword }} />
         First Name
         <TextField
           className={
