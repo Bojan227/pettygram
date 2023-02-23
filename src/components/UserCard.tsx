@@ -4,7 +4,7 @@ import useUserContext from '../hooks/useUserContext';
 import { FollowButton } from './buttons/FollowButton';
 import { MouseEvent } from 'react';
 import { socket } from '../constants/socket';
-import default_insta from '../../assets/default_insta.jpg';
+import default_insta from '../assets/default_insta.jpg';
 
 interface UserCardProps {
   _id?: string | undefined;
