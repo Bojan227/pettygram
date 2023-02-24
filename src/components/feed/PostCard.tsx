@@ -30,7 +30,9 @@ export const PostCard = ({
           <h2>{createdBy.username}</h2>
         </section>
       </Link>
-      <CarouselSlider {...{ images: imageUrl }} />
+      <Link to={`/p/${_id}`}>
+        <CarouselSlider {...{ images: imageUrl }} />
+      </Link>
       <section className="buttons-section">
         <LikeButton
           likes={likes}
