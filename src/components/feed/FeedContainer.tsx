@@ -62,8 +62,8 @@ export const FeedContainer = () => {
           <div className="suggested-header">
             <h1>Suggestions for you</h1>
           </div>
-          {filteredUsers?.map(({ imageUrl, firstName, lastName, _id }) => (
-            <UserCard key={_id} {...{ imageUrl, firstName, lastName, _id }} />
+          {filteredUsers?.map(({ imageUrl, username, _id }) => (
+            <UserCard key={_id} {...{ imageUrl, username, _id }} />
           ))}
         </div>
       )}

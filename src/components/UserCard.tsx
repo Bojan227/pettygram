@@ -8,16 +8,15 @@ import default_insta from '../assets/default_insta.jpg';
 
 interface UserCardProps {
   _id?: string | undefined;
-  firstName?: string | undefined;
-  lastName?: string | undefined;
+  username?: string | undefined;
   imageUrl?: string | undefined;
 }
 
 export const UserCard = ({
   _id,
-  firstName,
-  lastName,
+
   imageUrl,
+  username,
 }: UserCardProps) => {
   const { changeFollowStatus, isLoading } = useFollow();
   const userContext = useUserContext();
@@ -30,8 +29,7 @@ export const UserCard = ({
       <Link to={`/profile/${_id}`}>
         <div className="flex items-center gap-1">
           <img src={imageUrl || default_insta} />
-          <p>{firstName}</p>
-          <p>{lastName}</p>
+          <p>{username}</p>
         </div>
       </Link>
       {userContext?.user._id === _id ? null : (
