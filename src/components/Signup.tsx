@@ -3,7 +3,6 @@ import useSignup from '../hooks/useSignup';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
-import instagramLogo from './navigation/images/instagram-text-icon.png';
 import PasswordContainer from './PasswordContainer';
 
 export default function Signup() {
@@ -34,7 +33,7 @@ export default function Signup() {
         onSubmit={handleSubmit}
         className="flex flex-col  w-4/5 justify-center items-center text-white gap-2 grow register-form"
       >
-        <img src={instagramLogo} className="my-8" />
+        <h1>Pettygram</h1>
         Username
         <TextField
           className={

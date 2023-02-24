@@ -1,7 +1,6 @@
 import TextField from './TextField';
 import { useState } from 'react';
 import useLogin from '../hooks/useLogin';
-import instagramLogo from './navigation/images/instagram-text-icon.png';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
 
@@ -24,7 +23,7 @@ export default function Login() {
         onSubmit={handleSubmit}
         className="flex flex-col justify-center items-center text-white gap-2 grow login-form"
       >
-        <img src={instagramLogo} className="my-8" />
+        <h1>Pettygram</h1>
         <h1>Username</h1>
         <TextField
           className={'bg-[#e1306c] rounded-lg p-2 sm:w-3/5 w-5/6'}

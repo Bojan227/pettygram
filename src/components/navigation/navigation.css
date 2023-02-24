@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 .main-navigation {
   display: flex;
   position: fixed;
@@ -22,6 +24,11 @@
 .links-section > svg {
   display: none;
   cursor: pointer;
+}
+.logo-desktop {
+  font-family: 'Lobster', cursive;
+  font-size: 2rem;
+  text-align: center;
 }
 
 #dark .logo-mobile > svg,
@@ -63,7 +70,6 @@ li:hover,
 .header-nav {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   justify-content: center;
 }
 

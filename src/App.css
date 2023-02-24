@@ -98,3 +98,39 @@ a {
 .password-modal > ul > * {
   color: black;
 }
+
+.register-form > h1,
+.login-form :nth-child(1) {
+  font-size: 120px;
+  margin-bottom: 20px;
+  color: black;
+  font-family: Roboto;
+}
+
+@media (max-width: 540px) {
+  .register-form > h1,
+  .login-form :nth-child(1) {
+    font-size: 90px;
+  }
+}
+
+@media (max-width: 540px) {
+  .register-form > h1,
+  .login-form :nth-child(1) {
+    font-size: 90px;
+  }
+}
+
+@media (max-width: 400px) {
+  .register-form > h1,
+  .login-form :nth-child(1) {
+    font-size: 70px;
+  }
+}
+
+@media (max-width: 295px) {
+  .register-form > h1,
+  .login-form :nth-child(1) {
+    font-size: 65px;
+  }
+} ;
