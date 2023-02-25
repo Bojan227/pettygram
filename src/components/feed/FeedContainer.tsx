@@ -11,6 +11,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import useInfiniteScrolling from '../../hooks/useInfiniteScrolling';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/solid';
 import FactContainer from './FactContainer';
+import RecipeModal from './RecipeModal';
 
 export const FeedContainer = () => {
   const { getUsers, isLoading, users } = useGetUsers();
@@ -19,6 +20,7 @@ export const FeedContainer = () => {
   const { isLoadingState, error } = useGetPosts();
   const [page, setPage] = useState(0);
   const { isLoadingPagination, errorPagination } = useInfiniteScrolling(page);
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
 
   let observer = useRef<IntersectionObserver | null>(null);
   let listRef = useCallback(
@@ -56,7 +58,10 @@ export const FeedContainer = () => {
   if (isLoadingState) return <LoadingSpinner />;
 
   return (
-    <main className="feed-container">
+    <main
+      className="feed-container"
+      onClick={() => setIsRecipeModalOpen(false)}
+    >
       {error && <h1>{error}</h1>}
       {filteredUsers?.length === 0 ? null : (
         <div className="suggested-users">
@@ -69,6 +74,17 @@ export const FeedContainer = () => {
         </div>
       )}
       <FactContainer />
+      <div
+        className="recipe-toggle"
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsRecipeModalOpen(true);
+        }}
+      >
+        <h2>Pettygram Recipe of the Day</h2>
+        <p>Author: Unknown</p>
+      </div>
+      <RecipeModal {...{isRecipeModalOpen}}  /> 
       {posts
         ? posts?.map((post, i) => (
             <PostCard key={i} {...post} index={i} {...{ listRef }} />

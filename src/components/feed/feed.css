@@ -106,6 +106,23 @@ p {
   overflow-y: auto;
 }
 
+.recipe-toggle {
+  position: absolute;
+  top: 13%;
+  width: 22%;
+  left: 40%;
+  border: 1px solid #8b5cf6;
+  padding: 15px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .fact-container {
   position: absolute;
   top: 8%;
@@ -114,10 +131,10 @@ p {
   border: 1px solid #8b5cf6;
   padding: 15px;
   border-radius: 10px;
+  text-align: center;
 }
 
 .fact-container > h1 {
-  text-align: center;
   padding-bottom: 10px;
   font-size: 1.3rem;
   font-weight: 600;
@@ -194,6 +211,52 @@ main > .spinner-container {
 #dark .buttons-section:nth-child(3) .active {
   fill: white;
 }
+#dark .recipe-modal {
+  background-color: black;
+  border: 2px solid white;
+}
+.recipe-modal {
+  position: fixed;
+  top: 8%;
+  left: 25%;
+  border: 2px solid black;
+  width: 60%;
+  z-index: 10000;
+  background-color: white;
+  transform: translateY(-150%);
+  transition: transform 1.5s ease-in-out;
+}
+.recipe-modal.active {
+  transform: translateY(0%);
+  transition: transform 1.2s ease-out;
+}
+
+.recipe-modal h2,
+.recipe-modal h3 {
+  font-weight: 700;
+}
+
+.recipe-modal > div {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+.recipe-modal > div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.recipe-modal ul {
+  text-decoration: dotted;
+  list-style-type: circle;
+}
+.recipe-modal h1 {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
 
 @media (max-width: 1500px) {
   .card {
@@ -205,7 +268,9 @@ main > .spinner-container {
   .card {
     width: 38%;
   }
-  .suggested-users {
+  .suggested-users,
+  .fact-container,
+  .recipe-toggle {
     width: 25%;
   }
 }
@@ -223,6 +288,11 @@ main > .spinner-container {
     gap: 8px;
     position: relative;
   }
+  .fact-container,
+  .recipe-toggle {
+    display: none;
+  }
+
   .suggested-header {
     display: none;
     border: 0;
