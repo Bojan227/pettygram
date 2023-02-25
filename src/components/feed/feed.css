@@ -108,7 +108,7 @@ p {
 
 .recipe-toggle {
   position: absolute;
-  top: 13%;
+  top: 14%;
   width: 22%;
   left: 40%;
   border: 1px solid #8b5cf6;
@@ -125,7 +125,7 @@ p {
 
 .fact-container {
   position: absolute;
-  top: 8%;
+  top: 10%;
   width: 22%;
   left: 40%;
   border: 1px solid #8b5cf6;
