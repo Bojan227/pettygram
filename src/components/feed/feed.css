@@ -223,12 +223,12 @@ main > .spinner-container {
   width: 60%;
   z-index: 10000;
   background-color: white;
-  transform: translateY(-150%);
-  transition: transform 1.5s ease-in-out;
+  transform: translateY(-1200px);
+  transition: transform 1.2s ease-in-out;
 }
 .recipe-modal.active {
   transform: translateY(0%);
-  transition: transform 1.2s ease-out;
+  transition: transform 1.4s ease-out;
 }
 
 .recipe-modal h2,

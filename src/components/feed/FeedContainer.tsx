@@ -84,7 +84,7 @@ export const FeedContainer = () => {
         <h2>Pettygram Recipe of the Day</h2>
         <p>Author: Unknown</p>
       </div>
-      <RecipeModal {...{isRecipeModalOpen}}  /> 
+      <RecipeModal {...{ isRecipeModalOpen }} />
       {posts
         ? posts?.map((post, i) => (
             <PostCard key={i} {...post} index={i} {...{ listRef }} />
