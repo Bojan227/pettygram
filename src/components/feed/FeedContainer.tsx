@@ -10,6 +10,7 @@ import { useGetPosts } from '../../hooks/useGetPosts';
 import LoadingSpinner from '../LoadingSpinner';
 import useInfiniteScrolling from '../../hooks/useInfiniteScrolling';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/solid';
+import FactContainer from './FactContainer';
 
 export const FeedContainer = () => {
   const { getUsers, isLoading, users } = useGetUsers();
@@ -67,6 +68,7 @@ export const FeedContainer = () => {
           ))}
         </div>
       )}
+      <FactContainer />
       {posts
         ? posts?.map((post, i) => (
             <PostCard key={i} {...post} index={i} {...{ listRef }} />

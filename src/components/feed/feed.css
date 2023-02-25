@@ -106,6 +106,28 @@ p {
   overflow-y: auto;
 }
 
+.fact-container {
+  position: absolute;
+  top: 8%;
+  width: 22%;
+  left: 40%;
+  border: 1px solid #8b5cf6;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.fact-container > h1 {
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.fact-container > p {
+  font-size: 20px;
+  font-weight: 400;
+}
+
 .users-container-profile {
   display: flex;
   align-items: center;
