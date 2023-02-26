@@ -9,9 +9,9 @@ import { usePostsStore } from '../../store/postsStore';
 import { useGetPosts } from '../../hooks/useGetPosts';
 import LoadingSpinner from '../LoadingSpinner';
 import useInfiniteScrolling from '../../hooks/useInfiniteScrolling';
-import { ArrowUpCircleIcon } from '@heroicons/react/24/solid';
 import FactContainer from './FactContainer';
 import RecipeModal from './RecipeModal';
+import ProfileCard from './ProfileCard';
 
 export const FeedContainer = () => {
   const { getUsers, isLoading, users } = useGetUsers();
@@ -63,7 +63,9 @@ export const FeedContainer = () => {
       onClick={() => setIsRecipeModalOpen(false)}
     >
       {error && <h1>{error}</h1>}
-      {filteredUsers?.length === 0 ? null : (
+      {filteredUsers?.length !== 0 ? (
+        <ProfileCard />
+      ) : (
         <div className="suggested-users">
           <div className="suggested-header">
             <h1>Suggestions for you</h1>
