@@ -9,7 +9,7 @@ export default function ProfileCard() {
       <div className="banner"></div>
       <div className="info-section">
         <Link to={`profile/${userContext?.user._id}`}>
-          <h4>{userContext?.user.username}</h4>
+          <h1>{userContext?.user.username}</h1>
         </Link>
         <img src={userContext?.user.imageUrl} className="info-profile-img" />
       </div>

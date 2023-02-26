@@ -140,7 +140,7 @@ p {
   padding: 5px;
   border: 3px solid white;
 }
-.info-section h4:hover {
+.info-section h1:hover {
   text-decoration: underline;
   text-decoration-color: #8b5cf6;
 }
