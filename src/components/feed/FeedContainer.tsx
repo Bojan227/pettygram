@@ -63,7 +63,7 @@ export const FeedContainer = () => {
       onClick={() => setIsRecipeModalOpen(false)}
     >
       {error && <h1>{error}</h1>}
-      {filteredUsers?.length !== 0 ? (
+      {filteredUsers?.length === 0 ? (
         <ProfileCard />
       ) : (
         <div className="suggested-users">
