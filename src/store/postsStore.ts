@@ -17,7 +17,7 @@ export const usePostsStore = create<PostsStore>((set) => ({
   addPost: (post) =>
     set((state) => ({
       ...state,
-      posts: [...state.posts, post],
+      posts: [post, ...state.posts],
     })),
   load: (posts) =>
     set((state) => ({
