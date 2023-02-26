@@ -21,14 +21,20 @@ export default function CarouselSlider({ images }: { images: string[] }) {
       {images.length > 1 && (
         <ArrowLeftCircleIcon
           color="#d1d5db"
-          onClick={() => previousImage()}
+          onClick={(e) => {
+            e.preventDefault();
+            previousImage();
+          }}
           width="32px"
         />
       )}
       {images.length > 1 && (
         <ArrowRightCircleIcon
           color="#d1d5db"
-          onClick={() => nextImage()}
+          onClick={(e) => {
+            e.preventDefault();
+            nextImage();
+          }}
           width="32px"
         />
       )}
