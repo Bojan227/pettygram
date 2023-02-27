@@ -261,6 +261,19 @@ main > .spinner-container {
   width: 32px;
   height: 32px;
 }
+
+.buttons-section:nth-child(3) {
+  fill: white;
+}
+
+#light .buttons-section:nth-child(3) .active {
+  fill: black;
+}
+
+#dark .buttons-section:nth-child(3) {
+  fill: black;
+}
+
 #dark .buttons-section:nth-child(3) .active {
   fill: white;
 }

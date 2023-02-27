@@ -73,7 +73,7 @@ export const Details = ({ postId }: { postId?: string }) => {
 export const Bookmark = ({ postId }: { postId: string }) => {
   const userContext = useUserContenxt();
   const { updateSaved, isLoading } = useUpdateSaved();
-
+  console.log(userContext?.user.saved);
   return isLoading ? (
     <LoadingSpinner />
   ) : (
@@ -82,7 +82,7 @@ export const Bookmark = ({ postId }: { postId: string }) => {
       className={`${
         userContext?.user?.saved?.find(({ _id }) => _id === postId)
           ? 'active'
-          : 'none'
+          : ''
       }`}
       viewBox="0 0 24 24"
       strokeWidth="1.5"
