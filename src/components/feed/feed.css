@@ -345,18 +345,27 @@ main > .spinner-container {
   .suggested-users {
     left: 0;
     flex-direction: row;
+    align-items: center;
     min-height: 12vh;
-    width: 55%;
+    width: 60%;
     padding: 0px 15px;
     overflow-y: none;
     overflow-x: auto;
     border: 0;
-    gap: 8px;
     position: relative;
   }
   .fact-container,
-  .recipe-toggle {
+  .recipe-toggle,
+  .recipe-modal {
     display: none;
+  }
+
+  .ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 90px; /* this could be defined on any parent */
   }
 
   .suggested-header {
@@ -375,13 +384,13 @@ main > .spinner-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
 
   .users-container-profile > a > div > img {
     width: 56px;
     height: 56px;
     border: 3px solid #8b5cf6;
-
     padding: 1px;
   }
   .users-container-profile > a > div > img:hover {
@@ -418,7 +427,7 @@ main > .spinner-container {
 @media (max-width: 752px) {
   .suggested-users {
     left: 2px;
-    width: 90%;
+    width: 80%;
   }
 
   .users-container-profile > button {
@@ -448,7 +457,11 @@ main > .spinner-container {
 
 @media (max-width: 545px) {
   .suggested-users {
-    width: 95%;
+    width: 100%;
+  }
+
+  .ellipsis {
+    width: 75px;
   }
 
   .feed-container {
