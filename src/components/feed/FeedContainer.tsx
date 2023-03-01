@@ -63,35 +63,40 @@ export const FeedContainer = () => {
       onClick={() => setIsRecipeModalOpen(false)}
     >
       {error && <h1>{error}</h1>}
-      {filteredUsers?.length === 0 ? (
-        <ProfileCard />
-      ) : (
-        <div className="suggested-users">
-          <div className="suggested-header">
-            <h1>Suggestions for you</h1>
+      <section>
+        {filteredUsers?.length === 0 ? (
+          <ProfileCard />
+        ) : (
+          <div className="suggested-users">
+            <div className="suggested-header">
+              <h1>Suggestions for you</h1>
+            </div>
+            {filteredUsers?.map(({ imageUrl, username, _id }) => (
+              <UserCard key={_id} {...{ imageUrl, username, _id }} />
+            ))}
           </div>
-          {filteredUsers?.map(({ imageUrl, username, _id }) => (
-            <UserCard key={_id} {...{ imageUrl, username, _id }} />
-          ))}
+        )}
+        <FactContainer />
+        <div
+          className="recipe-toggle"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsRecipeModalOpen(true);
+          }}
+        >
+          <h2>Pettygram Recipe of the Day</h2>
+          <p>Author: Unknown</p>
         </div>
-      )}
-      <FactContainer />
-      <div
-        className="recipe-toggle"
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsRecipeModalOpen(true);
-        }}
-      >
-        <h2>Pettygram Recipe of the Day</h2>
-        <p>Author: Unknown</p>
+        <RecipeModal {...{ isRecipeModalOpen }} />
+      </section>
+
+      <div>
+        {posts
+          ? posts?.map((post, i) => (
+              <PostCard key={i} {...post} index={i} {...{ listRef }} />
+            ))
+          : null}
       </div>
-      <RecipeModal {...{ isRecipeModalOpen }} />
-      {posts
-        ? posts?.map((post, i) => (
-            <PostCard key={i} {...post} index={i} {...{ listRef }} />
-          ))
-        : null}
 
       {isLoadingPagination && <LoadingSpinner />}
       {errorPagination && <h1>{errorPagination}</h1>}

@@ -1,13 +1,27 @@
 .feed-container {
-  display: flex;
-  flex-direction: column;
-  padding-top: 40px;
-  padding-bottom: 120px;
   margin-left: 32%;
   min-height: 100vh;
-  width: 100%;
-  position: relative;
-  gap: 25px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr 0.5fr;
+  padding-top: 40px;
+  padding-bottom: 120px;
+  padding-right: 25px;
+}
+
+.feed-container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.feed-container > section {
+  grid-column: 2/2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .card {
@@ -15,7 +29,7 @@
   border-radius: 8px;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  width: 25%;
+  width: 60%;
 }
 .card > a > section,
 .card > section {
@@ -93,15 +107,15 @@ p {
 }
 
 .profile-feed-card {
-  position: absolute;
   display: flex;
   flex-direction: column;
-  left: 40%;
   border: 1px dashed gray;
-  width: 22%;
+  width: 100%;
   border-radius: 20px;
   min-height: 25vh;
   max-height: 25vh;
+  grid-column: 2/2;
+  grid-row: 1;
 }
 
 .banner {
@@ -146,41 +160,32 @@ p {
 }
 
 .suggested-users {
-  position: absolute;
   display: flex;
   flex-direction: column;
-  left: 40%;
   border: 1px solid grey;
   min-height: 40vh;
   max-height: 40vh;
   border-radius: 10px;
-  width: 22%;
+  width: 100%;
   gap: 4px;
   overflow-y: auto;
 }
 
 .recipe-toggle {
-  position: absolute;
-  top: 13%;
-  width: 22%;
-  left: 40%;
+  width: 100%;
   border: 1px solid #8b5cf6;
   padding: 15px 25px;
   border-radius: 10px;
   cursor: pointer;
   text-align: center;
   font-size: 1.4rem;
-
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
 .fact-container {
-  position: absolute;
-  top: 9%;
-  width: 22%;
-  left: 40%;
+  width: 100%;
   border: 1px solid #8b5cf6;
   padding: 15px;
   border-radius: 10px;
@@ -326,33 +331,22 @@ main > .spinner-container {
 
 @media (max-width: 1500px) {
   .card {
-    width: 35%;
-  }
-}
-
-@media (max-width: 1250px) {
-  .card {
-    width: 38%;
-  }
-  .suggested-users,
-  .fact-container,
-  .recipe-toggle {
-    width: 25%;
+    width: 68%;
   }
 }
 
 @media (max-width: 1156px) {
   .suggested-users {
-    left: 0;
     flex-direction: row;
     align-items: center;
+    left: -8%;
     min-height: 12vh;
-    width: 60%;
+    width: 55%;
     padding: 0px 15px;
     overflow-y: none;
     overflow-x: auto;
     border: 0;
-    position: relative;
+    position: absolute;
   }
   .fact-container,
   .recipe-toggle,
@@ -403,22 +397,30 @@ main > .spinner-container {
 
   .feed-container {
     width: 100%;
-    margin-left: 10%;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    padding-bottom: 120px;
+    min-height: 100vh;
+    gap: 25px;
+    position: relative;
+    padding-right: 0;
+  }
+
+  .feed-container > div {
+    padding-top: 120px;
   }
 
   .card {
-    width: 45%;
-  }
-}
-
-@media (max-width: 990px) {
-  .suggested-users {
-    left: 2px;
+    width: 40%;
   }
 }
 
 @media (max-width: 960px) {
+  .suggested-users {
+    left: -5%;
+  }
   .card {
     width: 45%;
   }
@@ -426,8 +428,8 @@ main > .spinner-container {
 
 @media (max-width: 752px) {
   .suggested-users {
-    left: 2px;
-    width: 80%;
+    width: 75%;
+    left: 10%;
   }
 
   .users-container-profile > button {
@@ -438,6 +440,9 @@ main > .spinner-container {
     width: 100%;
     margin-left: 0;
     padding-top: 150px;
+    align-items: center;
+  }
+  .feed-container > div {
     align-items: center;
   }
 
@@ -458,6 +463,7 @@ main > .spinner-container {
 @media (max-width: 545px) {
   .suggested-users {
     width: 100%;
+    left: 0;
   }
 
   .ellipsis {
