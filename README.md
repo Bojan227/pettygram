@@ -1,6 +1,6 @@
 # Pettygram
 
-Main page for my Project **Link to Project:**: https://instagram-clone-bojan227.vercel.app/
+Main page for my Project **Link to Project:**: https://pettygram.vercel.app/
 
 Welcome to Pettygram, the social media platform for pets! In this project, I utilized React and Typescript for the frontend, as well as Express and Typescript for the backend. I also integrated Cloudinary, a cloud-based image and video management solution, for storing and serving images.
 
