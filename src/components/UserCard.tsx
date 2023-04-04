@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { useFollow } from '../hooks/useFollow';
-import useUserContext from '../hooks/useUserContext';
-import { FollowButton } from './buttons/FollowButton';
-import { MouseEvent } from 'react';
-import { socket } from '../constants/socket';
-import default_insta from '../assets/default_insta.jpg';
+import { Link } from "react-router-dom";
+import { useFollow } from "../hooks/useFollow";
+import useUserContext from "../hooks/useUserContext";
+import { FollowButton } from "./buttons/FollowButton";
+import { MouseEvent } from "react";
+import { socket } from "../constants/socket";
+import default_insta from "../assets/default_insta.jpg";
 
 interface UserCardProps {
   _id?: string | undefined;
@@ -12,12 +12,7 @@ interface UserCardProps {
   imageUrl?: string | undefined;
 }
 
-export const UserCard = ({
-  _id,
-
-  imageUrl,
-  username,
-}: UserCardProps) => {
+export const UserCard = ({ _id, imageUrl, username }: UserCardProps) => {
   const { changeFollowStatus, isLoading } = useFollow();
   const userContext = useUserContext();
   const isFollowed = userContext?.user?.following?.find(
@@ -25,9 +20,9 @@ export const UserCard = ({
   );
 
   return (
-    <div className="users-container-profile" key={_id}>
+    <div className="users-container-profile">
       <Link to={`/profile/${_id}`}>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-3">
           <img src={imageUrl || default_insta} />
           <p className="ellipsis">{username}</p>
         </div>
@@ -39,14 +34,14 @@ export const UserCard = ({
             e.stopPropagation();
 
             changeFollowStatus(_id!);
-            socket.emit('send_notification', {
+            socket.emit("send_notification", {
               senderId: userContext?.user._id,
-              action: 'follow',
+              action: "follow",
               receiverId: _id,
               message: `${
                 isFollowed
-                  ? 'is not following you anymore!'
-                  : 'started following you!'
+                  ? "is not following you anymore!"
+                  : "started following you!"
               }`,
             });
           }}
@@ -54,8 +49,8 @@ export const UserCard = ({
           {userContext?.user?.following?.find(
             (userToFollow) => userToFollow?._id === _id!
           )
-            ? 'Unfollow'
-            : 'Follow'}
+            ? "Unfollow"
+            : "Follow"}
         </FollowButton>
       )}
     </div>

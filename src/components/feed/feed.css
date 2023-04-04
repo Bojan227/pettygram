@@ -329,6 +329,49 @@ main > .spinner-container {
   font-weight: 600;
 }
 
+/* skeleton for suggested users */
+.user-skeleton-container {
+  display: flex;
+  align-items: center;
+  animation: scale 4s infinite;
+  padding: 5px;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.user-skeleton-container > div {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.skeleton-avatar {
+  background: #e5e4e2;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.skeleton-author {
+  background: #e5e4e2;
+  height: 30px;
+  width: 100px;
+  margin-left: 1rem;
+  border-radius: 6px;
+}
+
+.skeleton-button {
+  background: #e5e4e2;
+  padding: 18px 35px;
+  border-radius: 20px;
+}
+
 @media (max-width: 1500px) {
   .card {
     width: 68%;
@@ -348,6 +391,25 @@ main > .spinner-container {
     border: 0;
     position: absolute;
   }
+
+  .user-skeleton-container > div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .skeleton-author {
+    background: #e5e4e2;
+    height: 20px;
+    width: 80px;
+    margin-left: 0;
+    border-radius: 6px;
+  }
+
+  .skeleton-button {
+    display: none;
+  }
+
   .fact-container,
   .recipe-toggle,
   .recipe-modal {
