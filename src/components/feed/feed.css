@@ -559,6 +559,10 @@ main > .spinner-container {
     padding: 0;
   }
   .card {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 0;
     width: 100%;
   }
 }
