@@ -1,16 +1,16 @@
-import TextField from './TextField';
-import useSignup from '../hooks/useSignup';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import LoadingSpinner from './LoadingSpinner';
-import PasswordContainer from './PasswordContainer';
+import TextField from "./TextField";
+import useSignup from "../hooks/useSignup";
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
+import PasswordContainer from "./PasswordContainer";
 
 export default function Signup() {
   const { signup, isLoading, error, message } = useSignup();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [image, setImage] = useState<File | null>(null);
 
   const handleSubmit = async (e: any) => {
@@ -37,7 +37,7 @@ export default function Signup() {
         Username
         <TextField
           className={
-            'bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5'
+            "bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5"
           }
           value={username}
           onChange={(username) => setUsername(username)}
@@ -46,7 +46,7 @@ export default function Signup() {
         First Name
         <TextField
           className={
-            'bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5'
+            "bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5"
           }
           value={firstName}
           onChange={(firstname) => setFirstName(firstname)}
@@ -54,7 +54,7 @@ export default function Signup() {
         Last Name
         <TextField
           className={
-            'bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5'
+            "bg-[#e1306c] rounded-lg p-2 w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5"
           }
           value={lastName}
           onChange={(lastName) => setLastName(lastName)}
@@ -65,7 +65,7 @@ export default function Signup() {
           type="file"
           name="img"
           id="actual-btn"
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
         />
         <label htmlFor="actual-btn" className="bg-[#405de6]">
           Choose Image
@@ -76,8 +76,8 @@ export default function Signup() {
           style={{
             color: `${
               !username || !password || !firstName || !lastName || !image
-                ? 'rgba(255,255,255, 0.3)'
-                : 'white'
+                ? "rgba(255,255,255, 0.3)"
+                : "white"
             }`,
           }}
           className="border border-white w-5/6 sm:w-3/5 md:w-2/5 2xl:w-1/5 p-2 my-4 rounded-lg"
@@ -86,11 +86,11 @@ export default function Signup() {
         </button>
       </form>
       {error && <h2 className="error-signup">{error}</h2>}
-      {message && <h2>{message}</h2>}
+      {message && <Navigate to="/login" />}
       {isLoading && <LoadingSpinner className="signup-spinner" />}
       <footer className="border-solid border-t-2 border-white  p-5 w-full text-center text-white">
         <h1>
-          Already have an account{' '}
+          Already have an account{" "}
           <Link to="login">
             <span>Sign in</span>
           </Link>

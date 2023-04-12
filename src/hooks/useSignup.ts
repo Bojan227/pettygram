@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import fetcher from '../api/fetcher';
-import { url } from '../constants/api';
+import { useState } from "react";
+import fetcher from "../api/fetcher";
+import { url } from "../constants/api";
 
 type SignupProps = {
   username: string;
@@ -12,8 +12,8 @@ type SignupProps = {
 
 export default function useSignup() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const signup = async ({
     username,
@@ -25,7 +25,7 @@ export default function useSignup() {
     setIsLoading(true);
 
     if (!image) {
-      setError('You must provide an image');
+      setError("You must provide an image");
       return;
     }
 
@@ -38,9 +38,9 @@ export default function useSignup() {
     const uploadWithImage = async (img: string) => {
       try {
         const json = await fetcher(`${url}/user/signup`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             username,
@@ -53,12 +53,11 @@ export default function useSignup() {
 
         if (json.error) {
           setError(json.error);
+        } else {
+          setMessage(json.message);
         }
-
-        setMessage(json.message);
       } catch (err) {
-        setError('Something went wrong');
-        setMessage('');
+        setError("Something went wrong");
       } finally {
         setIsLoading(false);
       }
