@@ -1,16 +1,24 @@
-import { createContext, useCallback, useReducer, useContext } from 'react';
-import { UserType } from './userContext';
+import {
+  createContext,
+  useCallback,
+  useReducer,
+  useContext,
+  useEffect,
+} from "react";
+import { UserType } from "./userContext";
+import { socket } from "../constants/socket";
+import { useCookies } from "react-cookie";
 
 type ActionType =
-  | { type: 'ADD_NOTIFICATIONS'; payload: Notification[] }
-  | { type: 'ADD_NOTIFICATION'; payload: Notification }
-  | { type: 'FILTER_NOTIFICATIONS' };
+  | { type: "ADD_NOTIFICATIONS"; payload: Notification[] }
+  | { type: "ADD_NOTIFICATION"; payload: Notification }
+  | { type: "FILTER_NOTIFICATIONS" };
 
 export interface Notification {
   sender: UserType;
   message: string;
   receiver: string;
-  action: 'like' | 'follow';
+  action: "like" | "follow";
   read: boolean;
   createdAt: string;
 }
@@ -33,11 +41,11 @@ function notificationsManager(initialData: Notification[]): {
   const [notifications, dispatch] = useReducer(
     (state: Notification[], action: ActionType) => {
       switch (action.type) {
-        case 'ADD_NOTIFICATIONS':
+        case "ADD_NOTIFICATIONS":
           return action.payload;
-        case 'ADD_NOTIFICATION':
+        case "ADD_NOTIFICATION":
           return [...state, action.payload];
-        case 'FILTER_NOTIFICATIONS':
+        case "FILTER_NOTIFICATIONS":
           return state.map((notification) => ({ ...notification, read: true }));
         default:
           return state;
@@ -46,15 +54,15 @@ function notificationsManager(initialData: Notification[]): {
     initialData
   );
   const addNotifications = useCallback((notifications: Notification[]) => {
-    dispatch({ type: 'ADD_NOTIFICATIONS', payload: notifications });
+    dispatch({ type: "ADD_NOTIFICATIONS", payload: notifications });
   }, []);
 
   const addNotification = useCallback((notification: Notification) => {
-    dispatch({ type: 'ADD_NOTIFICATION', payload: notification });
+    dispatch({ type: "ADD_NOTIFICATION", payload: notification });
   }, []);
 
   const filterNotifications = useCallback(() => {
-    dispatch({ type: 'FILTER_NOTIFICATIONS' });
+    dispatch({ type: "FILTER_NOTIFICATIONS" });
   }, []);
 
   return {
@@ -69,6 +77,16 @@ export const NotificationsProvider: React.FunctionComponent<{
   initialNotificationsData: Notification[];
   children: React.ReactNode;
 }> = ({ initialNotificationsData, children }) => {
+  const [cookies] = useCookies();
+
+  useEffect(() => {
+    if (cookies?.user?.id) {
+      socket.emit("add_user", { userId: cookies?.user?.id });
+    }
+
+    return () => socket.emit("remove_user", { userId: cookies?.user?.id });
+  }, [cookies?.user?.id]);
+
   return (
     <NotificationsContext.Provider
       value={notificationsManager(initialNotificationsData)}
@@ -83,19 +101,19 @@ export const useNotifications = (): Notification[] => {
 };
 
 export const useAddNotifications =
-  (): NotificationsManagerResult['addNotifications'] => {
+  (): NotificationsManagerResult["addNotifications"] => {
     const { addNotifications } = useContext(NotificationsContext);
     return addNotifications;
   };
 
 export const useAddNotification =
-  (): NotificationsManagerResult['addNotification'] => {
+  (): NotificationsManagerResult["addNotification"] => {
     const { addNotification } = useContext(NotificationsContext);
     return addNotification;
   };
 
 export const useFilterNotifications =
-  (): NotificationsManagerResult['filterNotifications'] => {
+  (): NotificationsManagerResult["filterNotifications"] => {
     const { filterNotifications } = useContext(NotificationsContext);
     return filterNotifications;
   };

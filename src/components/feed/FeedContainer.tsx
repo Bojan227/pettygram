@@ -42,12 +42,6 @@ export const FeedContainer = () => {
     getUsers();
   }, []);
 
-  useEffect(() => {
-    if (userContext?.user._id) {
-      socket.emit("add_user", { userId: userContext?.user?._id });
-    }
-  }, []);
-
   const filteredUsers = users?.filter(
     (user) =>
       user._id !== userContext?.user._id &&
