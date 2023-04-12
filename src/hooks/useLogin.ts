@@ -26,12 +26,12 @@ export default function useLogin() {
 
       if (json.error) {
         setError(json.error);
+      } else {
+        userContext?.dispatch({ type: "LOGIN", payload: json.user });
+        localStorage.setItem("user", JSON.stringify(json.user));
+        setCookies("user", json.user, { path: "/", secure: true });
+        document.cookie = "token" + "=" + (json.token || "") + "; path=/";
       }
-
-      userContext?.dispatch({ type: "LOGIN", payload: json.user });
-      localStorage.setItem("user", JSON.stringify(json.user));
-      setCookies("user", json.user, { path: "/", secure: true });
-      document.cookie = "token" + "=" + (json.token || "") + "; path=/";
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
