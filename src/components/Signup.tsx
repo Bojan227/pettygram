@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 import PasswordContainer from "./PasswordContainer";
+import { TrashIcon } from "@heroicons/react/20/solid";
 
 export default function Signup() {
   const { signup, isLoading, error, message } = useSignup();
@@ -13,6 +14,7 @@ export default function Signup() {
   const [lastName, setLastName] = useState("");
   const [image, setImage] = useState<File | null>(null);
 
+  console.log(image);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     await signup({ username, password, firstName, lastName, image });
@@ -70,6 +72,12 @@ export default function Signup() {
         <label htmlFor="actual-btn" className="bg-[#405de6]">
           Choose Image
         </label>
+        {image ? (
+          <div className="current-image">
+            <p>Current Image: {image.name}</p>
+            <TrashIcon onClick={() => setImage(null)} width={20} height={20} />
+          </div>
+        ) : null}
         <button
           type="submit"
           disabled={!username || !password || !firstName || !lastName || !image}

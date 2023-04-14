@@ -107,6 +107,15 @@ a {
   font-family: Roboto;
 }
 
+.current-image {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.current-image > svg {
+  cursor: pointer;
+}
+
 @media (max-width: 540px) {
   .register-form > h1,
   .login-form :nth-child(1) {
@@ -125,6 +134,10 @@ a {
   .register-form > h1,
   .login-form :nth-child(1) {
     font-size: 70px;
+  }
+  .current-image > svg {
+    width: 28px;
+    height: 28px;
   }
 }
 
