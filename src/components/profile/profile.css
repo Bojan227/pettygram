@@ -267,11 +267,12 @@ a {
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   border: 2px solid white;
   align-items: center;
   background-color: #f4f4f5;
   color: black;
+  height: 40%;
   font-weight: 900;
   width: 30%;
   z-index: 10000;
@@ -360,6 +361,9 @@ a {
   .profile-container .users-container-profile > button {
     display: block;
   }
+  .change-photo.active > div {
+    width: 50%;
+  }
 }
 
 @media (max-width: 750px) {
@@ -406,6 +410,11 @@ a {
   }
   .profile-nav {
     width: 100%;
+  }
+
+  .change-photo.active > div {
+    width: 60%;
+    height: 350px;
   }
 }
 
@@ -457,6 +466,11 @@ a {
   }
   .profile-container .spinner-container {
     top: 95%;
+  }
+
+  .change-photo.active > div {
+    width: 80%;
+    height: 350px;
   }
 }
 
