@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
-import { HomeIcon } from '@heroicons/react/24/solid';
+import { Dispatch, SetStateAction } from "react";
 
 export type NavigationLinkProps = {
   title: string;
@@ -32,6 +31,8 @@ export type ImageCardProps = {
 export type DropFileContainerProps = {
   handleImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setFiles: Dispatch<SetStateAction<File[]>>;
+  message: string;
+  setMessage: Dispatch<SetStateAction<string>>;
 };
 
 export type CreatePostProps = {

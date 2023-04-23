@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { ShareButton } from '../buttons/ShareButton';
-import useUserContext from '../../hooks/useUserContext';
-import useCreatePost from '../../hooks/useCreatePost';
-import { Navigate } from 'react-router-dom';
-import { CaptionContainerProps } from './types';
+import { useState } from "react";
+import { ShareButton } from "../buttons/ShareButton";
+import useUserContext from "../../hooks/useUserContext";
+import useCreatePost from "../../hooks/useCreatePost";
+import { Navigate } from "react-router-dom";
+import { CaptionContainerProps } from "./types";
 
 export default function CaptionContainer({
   files,
   setToggleCreatePost,
 }: CaptionContainerProps) {
-  const [caption, setCaption] = useState('');
+  const [caption, setCaption] = useState("");
   const userContext = useUserContext();
   const { createPost, isLoading, message, error } = useCreatePost();
 
   const handleSubmit = async () => {
     if (files) {
       await createPost(caption, files);
-      setCaption('');
+      setCaption("");
       setToggleCreatePost(false);
     }
   };
@@ -34,7 +34,7 @@ export default function CaptionContainer({
           onClick={handleSubmit}
           className="share-btn"
         >
-          {isLoading ? 'Loading...' : 'Share'}
+          {isLoading ? "Loading..." : "Share"}
         </ShareButton>
       </div>
       <textarea

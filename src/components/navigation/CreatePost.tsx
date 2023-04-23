@@ -1,18 +1,26 @@
-import { useState } from 'react';
-import DropFileContainer from './DropFileContainer';
-import ImagesContainer from './ImagesContainer';
-import CaptionContainer from './CaptionContainer';
-import { CreatePostProps } from './types';
+import { useState } from "react";
+import DropFileContainer from "./DropFileContainer";
+import ImagesContainer from "./ImagesContainer";
+import CaptionContainer from "./CaptionContainer";
+import { CreatePostProps } from "./types";
 
 export const CreatePost = ({
   toggleCreatePost,
   setToggleCreatePost,
 }: CreatePostProps) => {
   const [files, setFiles] = useState<File[]>([]);
+  const [message, setMessage] = useState("");
 
   const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
     if (evt.target.files != null) {
-      setFiles((prevFiles) => [...prevFiles!, ...evt.target.files!]);
+      const typeOfFile = evt.target.files[0].type.split("/")[0];
+
+      console.log(typeOfFile);
+      if (typeOfFile === "video") {
+        setMessage("Videos are not allowed");
+      } else {
+        setFiles((prevFiles) => [...prevFiles!, ...evt.target.files!]);
+      }
     }
   };
 
@@ -23,15 +31,18 @@ export const CreatePost = ({
   return (
     <div
       className="drop-container"
-      style={{ display: `${!toggleCreatePost ? 'none' : ''}` }}
+      style={{ display: `${!toggleCreatePost ? "none" : ""}` }}
       onClick={(e) => {
         e.stopPropagation();
         setToggleCreatePost(false);
         setFiles([]);
+        setMessage("");
       }}
     >
       {files.length === 0 && (
-        <DropFileContainer {...{ handleImageUpload, setFiles }} />
+        <DropFileContainer
+          {...{ handleImageUpload, setFiles, message, setMessage }}
+        />
       )}
       {files.length !== 0 && (
         <div className="share-container" onClick={(e) => e.stopPropagation()}>

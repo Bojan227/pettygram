@@ -1,10 +1,12 @@
-import { DragEvent } from 'react';
-import FileInput from '../FileInput';
-import { DropFileContainerProps } from './types';
+import { DragEvent, useEffect, useState } from "react";
+import FileInput from "../FileInput";
+import { DropFileContainerProps } from "./types";
 
 export default function DropFileContainer({
   handleImageUpload,
   setFiles,
+  message,
+  setMessage,
 }: DropFileContainerProps) {
   const onDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -19,7 +21,13 @@ export default function DropFileContainer({
     e.preventDefault();
     e.stopPropagation();
 
-    setFiles([...e.dataTransfer.files]);
+    const typeOfFile = e.dataTransfer.files[0].type.split("/")[0];
+
+    if (typeOfFile === "video") {
+      setMessage("Videos are not allowed");
+    } else {
+      setFiles([...e.dataTransfer.files]);
+    }
   };
 
   return (
@@ -31,8 +39,9 @@ export default function DropFileContainer({
       onClick={(e) => e.stopPropagation()}
     >
       <h1 className="p-4">Create new post</h1>
-      <h1>Drag Photos and videos here</h1>
-      <FileInput {...{ handleImageUpload, title: 'Choose File' }} />
+      <h1>Drag Photos here</h1>
+      <FileInput {...{ handleImageUpload, title: "Choose File" }} />
+      {message && <p>{message}</p>}
     </div>
   );
 }

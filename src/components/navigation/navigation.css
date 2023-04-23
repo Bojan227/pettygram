@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
 .main-navigation {
   display: flex;
@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 .logo-desktop {
-  font-family: 'Lobster', cursive;
+  font-family: "Lobster", cursive;
   font-size: 2rem;
   text-align: center;
 }
@@ -179,6 +179,11 @@ li:hover,
   align-items: center;
   justify-content: center;
   z-index: 10000 !important;
+  gap: 15px;
+}
+
+.drop-div p {
+  color: red;
 }
 
 .drop-div > .file-input {
