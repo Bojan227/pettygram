@@ -1,10 +1,10 @@
-import useUserContenxt from '../../hooks/useUserContext';
-import { Link } from 'react-router-dom';
-import useUpdateSaved from '../../hooks/useUpdateSaved';
-import useUpdateLike from '../../hooks/useUpdateLike';
-import { LikeButtonProps } from './types/feedTypes';
-import { socket } from '../../constants/socket';
-import LoadingSpinner from '../LoadingSpinner';
+import useUserContenxt from "../../hooks/useUserContext";
+import { Link } from "react-router-dom";
+import useUpdateSaved from "../../hooks/useUpdateSaved";
+import useUpdateLike from "../../hooks/useUpdateLike";
+import { LikeButtonProps } from "./types/feedTypes";
+import { socket } from "../../constants/socket";
+import LoadingSpinner from "../LoadingSpinner";
 
 export const LikeButton = ({
   postId,
@@ -23,18 +23,18 @@ export const LikeButton = ({
   ) : (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={`${isLiked ? 'red' : 'none'}`}
+      fill={`${isLiked ? "red" : "none"}`}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      style={{ width: '32px', cursor: 'pointer' }}
+      style={{ width: "32px", cursor: "pointer" }}
       onClick={() => {
         updateLike({ url, postId });
-        socket.emit('send_notification', {
+        socket.emit("send_notification", {
           senderId: userContext?.user._id,
-          action: 'like',
+          action: "like",
           receiverId,
-          message: `${isLiked ? 'disliked' : 'liked'} your post!`,
+          message: `${isLiked ? "disliked" : "liked"} your post!`,
         });
         updateComments();
         updatePost();
@@ -58,7 +58,7 @@ export const Details = ({ postId }: { postId?: string }) => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        style={{ width: '32px', cursor: 'pointer' }}
+        style={{ width: "32px", cursor: "pointer" }}
       >
         <path
           strokeLinecap="round"
@@ -73,7 +73,7 @@ export const Details = ({ postId }: { postId?: string }) => {
 export const Bookmark = ({ postId }: { postId: string }) => {
   const userContext = useUserContenxt();
   const { updateSaved, isLoading } = useUpdateSaved();
-  console.log(userContext?.user.saved);
+
   return isLoading ? (
     <LoadingSpinner />
   ) : (
@@ -81,13 +81,13 @@ export const Bookmark = ({ postId }: { postId: string }) => {
       xmlns="http://www.w3.org/2000/svg"
       className={`${
         userContext?.user?.saved?.find(({ _id }) => _id === postId)
-          ? 'active'
-          : ''
+          ? "active"
+          : ""
       }`}
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      style={{ width: '32px', cursor: 'pointer' }}
+      style={{ width: "32px", cursor: "pointer" }}
       onClick={() => updateSaved({ postId })}
     >
       <path

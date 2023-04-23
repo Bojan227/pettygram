@@ -14,7 +14,6 @@ export default function Signup() {
   const [lastName, setLastName] = useState("");
   const [image, setImage] = useState<File | null>(null);
 
-  console.log(image);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     await signup({ username, password, firstName, lastName, image });

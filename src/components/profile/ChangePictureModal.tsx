@@ -1,5 +1,5 @@
-import useDeleteProfilePicture from '../../hooks/useDeleteProfilePicture';
-import useUserContext from '../../hooks/useUserContext';
+import useDeleteProfilePicture from "../../hooks/useDeleteProfilePicture";
+import useUserContext from "../../hooks/useUserContext";
 
 export default function ChangePictureModal({
   showModal,
@@ -22,7 +22,7 @@ export default function ChangePictureModal({
 
   return (
     <div
-      className={`change-photo ${showModal ? 'active' : ''}`}
+      className={`change-photo ${showModal ? "active" : ""}`}
       onClick={() => setShowModal(false)}
     >
       <div onClick={(e) => e.stopPropagation()}>
@@ -43,7 +43,7 @@ export default function ChangePictureModal({
             setShowModal(false);
           }}
         >
-          {isLoadingDeleteState ? 'Deleting...' : 'Remove Current Photo'}
+          {isLoadingDeleteState ? "Deleting..." : "Remove Current Photo"}
         </h4>
         <p onClick={() => setShowModal(false)}>Cancel</p>
       </div>
