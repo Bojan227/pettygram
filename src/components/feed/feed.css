@@ -83,6 +83,14 @@
   object-fit: cover;
 }
 
+#light .comment-form > button {
+  color: black;
+}
+
+#light .comment-form > button:disabled {
+  opacity: 0.1;
+}
+
 .comment-form {
   border-top: 1px solid #e2e8f0;
   display: flex;

@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { CommentButton } from '../buttons/CommentButton';
-import { url } from '../../constants/api';
+import { useState } from "react";
+import { CommentButton } from "../buttons/CommentButton";
+import { url } from "../../constants/api";
 
 interface CommentFormProps {
   postId: string;
@@ -11,21 +11,21 @@ export const CommentForm = ({
   postId,
   commentNotification,
 }: CommentFormProps) => {
-  const [comment, setComment] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [comment, setComment] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const createComment = async (e: any) => {
     e.preventDefault();
     try {
       const res = await fetch(`${url}/comments/`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${
             document.cookie
-              ?.split('; ')
-              ?.find((value) => value?.includes('token'))
-              ?.split('=')[1]
+              ?.split("; ")
+              ?.find((value) => value?.includes("token"))
+              ?.split("=")[1]
           }`,
         },
         body: JSON.stringify({
@@ -42,7 +42,7 @@ export const CommentForm = ({
     } catch (error) {
       console.log(error);
     } finally {
-      setComment('');
+      setComment("");
     }
   };
 
@@ -56,7 +56,7 @@ export const CommentForm = ({
       />
       <CommentButton
         disabled={comment ? false : true}
-        className={comment ? 'text-zinc-900' : 'text-slate-300'}
+        className={comment ? "text-indigo-300" : "text-slate-900"}
       >
         Post
       </CommentButton>

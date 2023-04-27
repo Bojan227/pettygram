@@ -15,7 +15,7 @@ export const CreatePost = ({
     if (evt.target.files != null) {
       const typeOfFile = evt.target.files[0].type.split("/")[0];
 
-      console.log(typeOfFile);
+  
       if (typeOfFile === "video") {
         setMessage("Videos are not allowed");
       } else {
