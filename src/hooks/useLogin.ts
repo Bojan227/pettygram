@@ -8,7 +8,7 @@ export default function useLogin() {
   const userContext = useUserContenxt();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [cookies, setCookies] = useCookies(["user"]);
+  const [_, setCookie] = useCookies(["token", "user"]);
 
   const login = async (username: string, password: string) => {
     setIsLoading(true);
@@ -29,8 +29,8 @@ export default function useLogin() {
       } else {
         userContext?.dispatch({ type: "LOGIN", payload: json.user });
         localStorage.setItem("user", JSON.stringify(json.user));
-        setCookies("user", json.user, { path: "/", secure: true });
-        document.cookie = "token" + "=" + (json.token || "") + "; path=/";
+        setCookie("token", json.token, { path: "/", secure: true });
+        setCookie("user", json.user._id, { path: "/", secure: true });
       }
     } catch (error) {
       if (error instanceof Error) {
