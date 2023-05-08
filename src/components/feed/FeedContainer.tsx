@@ -67,7 +67,9 @@ export const FeedContainer = () => {
               <h1>Suggestions for you</h1>
             </div>
             {isLoading
-              ? [1, 2, 3, 4, 5, 6].map(() => <SuggestedUserSkeleton />)
+              ? [1, 2, 3, 4, 5, 6].map((key) => (
+                  <SuggestedUserSkeleton key={key} />
+                ))
               : filteredUsers?.map(({ imageUrl, username, _id }) => (
                   <UserCard key={_id} {...{ imageUrl, username, _id }} />
                 ))}
