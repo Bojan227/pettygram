@@ -19,7 +19,6 @@ export default function Chat({
   const chatData = useChatData();
   const addMessage = useAddMessage();
   const { isLoading, error } = useGetChatHistory(selectedUser);
-  const userContext = useUserContext();
 
   useEffect(() => {
     socket.off("notification_message");

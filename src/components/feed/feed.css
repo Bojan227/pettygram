@@ -177,6 +177,7 @@ p {
   width: 100%;
   gap: 4px;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .recipe-toggle {
