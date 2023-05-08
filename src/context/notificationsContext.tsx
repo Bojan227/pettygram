@@ -78,9 +78,6 @@ export const NotificationsProvider: React.FunctionComponent<{
   children: React.ReactNode;
 }> = ({ initialNotificationsData, children }) => {
   const [cookies] = useCookies(["user"]);
-
-  console.log(cookies);
-
   useEffect(() => {
     if (cookies?.user) {
       socket.emit("add_user", { userId: cookies?.user });
