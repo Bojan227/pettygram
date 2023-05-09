@@ -1,9 +1,9 @@
-import { FollowButton } from '../buttons/FollowButton';
-import { socket } from '../../constants/socket';
-import useUserContext from '../../hooks/useUserContext';
-import { UserType } from '../../context/userContext';
-import { useFollow } from '../../hooks/useFollow';
-import { useParams } from 'react-router-dom';
+import { FollowButton } from "../buttons/FollowButton";
+import { socket } from "../../constants/socket";
+import useUserContext from "../../hooks/useUserContext";
+import { UserType } from "../../context/userContext";
+import { useFollow } from "../../hooks/useFollow";
+import { useParams } from "react-router-dom";
 
 export default function FollowButtonContainer({
   userInfo,
@@ -16,16 +16,16 @@ export default function FollowButtonContainer({
   const isFollowed = userContext?.user?.following?.find(
     (user) => user?._id === userInfo?._id
   );
-  const { changeFollowStatus } = useFollow();
+  const { changeFollowStatus, isLoading } = useFollow();
   const { userId } = useParams();
 
   const sendNotification = () => {
-    socket.emit('send_notification', {
+    socket.emit("send_notification", {
       senderId: userContext?.user._id,
-      action: 'follow',
+      action: "follow",
       receiverId: userInfo?._id,
       message: `${
-        isFollowed ? 'is not following you anymore!' : 'started following you!'
+        isFollowed ? "is not following you anymore!" : "started following you!"
       }`,
     });
   };
@@ -53,11 +53,13 @@ export default function FollowButtonContainer({
         sendNotification();
       }}
     >
-      {userContext?.user?.following?.find(
-        (userToFollow) => userToFollow?._id === userId!
-      )
-        ? 'Unfollow'
-        : 'Follow'}
+      {isLoading
+        ? "Loading..."
+        : userContext?.user?.following?.find(
+            (userToFollow) => userToFollow?._id === userId!
+          )
+        ? "Unfollow"
+        : "Follow"}
     </FollowButton>
   );
 }
